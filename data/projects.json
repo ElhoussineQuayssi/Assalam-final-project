@@ -1,498 +1,970 @@
 [
   {
-    "id": "17596772831488hxiglsr0",
-    "slug": "Nadi",
-    "title": "Nadi Assalam",
-    "excerpt": "Centre social et culturel offrant des activités éducatives, sportives et artistiques pour la communauté",
-    "image": "/nadi-center.jpg",
+    "title": "Centre Himaya pour les Femmes et Enfants en Situation Difficile",
+    "excerpt": "Centre pluridisciplinaire de soutien aux femmes et enfants victimes de violence ou en situation de précarité.",
     "categories": [
-      "Éducation",
-      "Culture",
-      "Social"
+      "Protection sociale",
+      "Lutte contre la violence",
+      "Accompagnement psychologique"
     ],
-    "startDate": "2015",
-    "location": "Casablanca Anfa",
-    "peopleHelped": "300+",
-    "status": "Actif",
     "content": [
       {
-        "id": "nadi-content-1",
+        "id": "17603719845032pyjot8zg",
         "type": "text",
         "content": {
-          "heading": "Notre mission",
-          "text": "Créer un espace communautaire dynamique où les jeunes et les familles peuvent développer leurs compétences, renforcer leurs liens sociaux et contribuer au développement de leur quartier."
+          "title": "Présentation générale",
+          "text": "Fondation Assalam pour le Développement Social - Section Casablanca Anfa\n\nCentre inauguré le 27 février en partenariat avec le Ministère de la Femme et de la Solidarité Sociale et la Direction Provinciale de Casablanca Anfa."
         }
       },
       {
-        "id": "nadi-content-2",
+        "id": "1760371984503nk4i86ftd",
         "type": "text",
         "content": {
-          "heading": "Nos activités",
-          "text": "Le centre propose une variété d'activités incluant des cours de langues, des ateliers artistiques, des activités sportives et des événements culturels tout au long de l'année."
-        }
-      }
-    ],
-    "goals": [
-      "Promouvoir l'éducation et la culture",
-      "Renforcer la cohésion sociale",
-      "Développer les compétences des jeunes",
-      "Créer des opportunités de loisirs sains"
-    ],
-    "gallery": ["/nadi-1.jpg", "/nadi-2.jpg", "/nadi-3.jpg"],
-    "createdAt": "2025-10-05T15:14:43.149Z"
-  },
-  {
-    "id": "center-himaya-001",
-    "slug": "Center",
-    "title": "Centre Himaya",
-    "excerpt": "Centre pluridisciplinaire de soutien aux femmes et enfants en situation difficile",
-    "image": "/women-center.jpg",
-    "categories": [
-      "Femmes",
-      "Enfants",
-      "Soutien social"
-    ],
-    "startDate": "Février 2022",
-    "location": "Casablanca Anfa",
-    "peopleHelped": "500+",
-    "status": "Actif",
-    "content": [
-      {
-        "id": "center-content-1",
-        "type": "text",
-        "content": {
-          "heading": "Objectif général",
+          "title": "Mission principale",
           "text": "Développer les capacités personnelles et les compétences des femmes et des filles victimes de violences sous toutes leurs formes, ainsi que des femmes et des enfants en situation difficile."
         }
       },
       {
-        "id": "center-content-2",
-        "type": "text",
+        "id": "1760371984504ig66okjcv",
+        "type": "services",
         "content": {
-          "heading": "Notre approche",
-          "text": "Nous offrons un accompagnement holistique incluant soutien psychologique, conseil juridique, formation professionnelle et médiation familiale pour permettre une réintégration socio-économique complète."
-        }
-      }
-    ],
-    "goals": [
-      "Garantir des services d'accueil, d'écoute et d'orientation",
-      "Offrir des consultations psychologiques et juridiques",
-      "Assurer une formation professionnelle adaptée",
-      "Sensibiliser sur les droits des femmes",
-      "Faciliter la réintégration socio-économique",
-      "Lutter contre le décrochage scolaire"
-    ],
-    "gallery": ["/centre-himaya-1.jpg", "/centre-himaya-2.jpg", "/centre-himaya-3.jpg"],
-    "createdAt": "2024-01-15T10:00:00.000Z"
-  },
-  {
-    "id": "fataer-albaraka-001",
-    "slug": "Fataer",
-    "title": "Fataer Al Baraka",
-    "excerpt": "Centre de formation en pâtisserie marocaine pour femmes en situation précaire",
-    "image": "/pastry-center.jpg",
-    "categories": [
-      "Formation",
-      "Autonomisation",
-      "Cuisine"
-    ],
-    "startDate": "2018",
-    "location": "Casablanca",
-    "peopleHelped": "60",
-    "status": "Actif",
-    "content": [
-      {
-        "id": "fataer-content-1",
-        "type": "text",
-        "content": {
-          "heading": "Notre mission",
-          "text": "Offrir un tremplin vers l'autonomie et l'épanouissement personnel pour des femmes en situation précaire à travers la maîtrise de l'art de la pâtisserie marocaine traditionnelle."
-        }
-      }
-    ],
-    "goals": [
-      "Offrir une formation professionnelle de qualité",
-      "Contribuer à l'autonomisation économique",
-      "Préserver le patrimoine culinaire marocain",
-      "Développer des compétences entrepreneuriales"
-    ],
-    "gallery": ["/pastry-1.jpg", "/pastry-2.jpg", "/pastry-3.jpg"],
-    "createdAt": "2024-01-15T10:00:00.000Z"
-  },
-  {
-    "id": "imtiaz-project-001",
-    "slug": "Imtiaz",
-    "title": "Projet Imtiaz",
-    "excerpt": "Parrainage des étudiants brillants issus de milieux défavorisés en situation précaire",
-    "image": "/education-project.jpg",
-    "categories": [
-      "Éducation",
-      "Parrainage",
-      "Excellence académique"
-    ],
-    "startDate": "2018",
-    "location": "Casablanca",
-    "peopleHelped": "45",
-    "status": "Actif",
-    "content": [
-      {
-        "id": "imtiaz-content-1",
-        "type": "text",
-        "content": {
-          "heading": "Notre mission",
-          "text": "Identifier et accompagner les étudiants les plus méritants issus de milieux défavorisés pour leur permettre de poursuivre leurs études supérieures et réaliser leur potentiel."
-        }
-      },
-      {
-        "id": "imtiaz-content-2",
-        "type": "text",
-        "content": {
-          "heading": "Critères de sélection",
-          "text": "Les étudiants sont sélectionnés sur la base de leur excellence académique, leur motivation et leur situation socio-économique difficile."
-        }
-      }
-    ],
-    "goals": [
-      "Permettre l'accès à l'enseignement supérieur",
-      "Accompagner les étudiants vers la réussite",
-      "Créer des modèles de réussite inspirants",
-      "Contribuer à l'égalité des chances"
-    ],
-    "gallery": ["/imtiaz-1.jpg", "/imtiaz-2.jpg", "/imtiaz-3.jpg"],
-    "createdAt": "2024-01-15T10:00:00.000Z"
-  },
-  {
-    "id": "kafala-project-001",
-    "slug": "Kafala",
-    "title": "Programme Kafala",
-    "excerpt": "Système de parrainage pour enfants orphelins et enfants issus de familles démunies",
-    "image": "/kafala-program.jpg",
-    "categories": [
-      "Enfance",
-      "Parrainage",
-      "Protection sociale"
-    ],
-    "startDate": "2016",
-    "location": "Casablanca et région",
-    "peopleHelped": "200+",
-    "status": "Actif",
-    "content": [
-      {
-        "id": "kafala-content-1",
-        "type": "text",
-        "content": {
-          "heading": "Le système de Kafala",
-          "text": "Le programme Kafala offre un soutien complet aux enfants orphelins et aux enfants issus de familles en difficulté, incluant le parrainage financier, éducatif et émotionnel."
-        }
-      },
-      {
-        "id": "kafala-content-2",
-        "type": "text",
-        "content": {
-          "heading": "Notre approche",
-          "text": "Nous assurons le suivi personnalisé de chaque enfant parrainé, en collaboration avec les familles d'accueil et les institutions éducatives partenaires."
-        }
-      }
-    ],
-    "goals": [
-      "Assurer la protection et le bien-être des enfants",
-      "Garantir l'accès à l'éducation",
-      "Faciliter l'intégration sociale",
-      "Accompagner vers l'autonomie"
-    ],
-    "gallery": ["/kafala-1.jpg", "/kafala-2.jpg", "/kafala-3.jpg"],
-    "createdAt": "2024-01-15T10:00:00.000Z"
-  },
-  {
-    "id": "rayhana-preschool-001",
-    "slug": "Rayhana",
-    "title": "Jardin d'Enfants Rihana As-Salam",
-    "excerpt": "Environnement éducatif et pédagogique sûr pour les enfants d'âge préscolaire",
-    "image": "/preschool.jpg",
-    "categories": [
-      "Éducation",
-      "Enfance",
-      "Développement précoce"
-    ],
-    "startDate": "2013",
-    "location": "Casablanca-Anfa",
-    "peopleHelped": "120",
-    "status": "Actif",
-    "content": [
-      {
-        "id": "rayhana-content-1",
-        "type": "text",
-        "content": {
-          "heading": "Notre mission",
-          "text": "Fournir un environnement éducatif et pédagogique sûr et inspirant pour les enfants d'âge préscolaire, tout en mettant l'accent sur le développement des compétences sociales, cognitives et émotionnelles."
-        }
-      }
-    ],
-    "goals": [
-      "Développer les compétences linguistiques et mathématiques",
-      "Renforcer la coopération et le travail en équipe",
-      "Encourager la pensée critique et la créativité",
-      "Améliorer la préparation à l'école primaire",
-      "Favoriser les relations sociales entre enfants",
-      "Découvrir les talents spécifiques des enfants"
-    ],
-    "gallery": ["/rayhana-1.jpg", "/rayhana-2.jpg", "/rayhana-3.jpg"],
-    "createdAt": "2024-01-15T10:00:00.000Z"
-  },
-  {
-    "id": "17596772831488hxiglsr0",
-    "slug": "test",
-    "title": "Test",
-    "excerpt": "TTTTETETETETE",
-    "image": "",
-    "categories": [
-      "CICO"
-    ],
-    "startDate": "2020",
-    "location": "CAsablnca",
-    "peopleHelped": "150",
-    "status": "Actif",
-    "content": [
-      {
-        "id": "1759677204967",
-        "type": "text",
-        "content": {
-          "heading": "daaaaaaaa",
-          "text": "dddd"
-        }
-      },
-      {
-        "id": "1759677253492",
-        "type": "image",
-        "content": {
-          "src": "",
-          "alt": "",
-          "caption": ""
-        }
-      },
-      {
-        "id": "1759677209441",
-        "type": "award",
-        "content": {
-          "title": "",
-          "description": "",
-          "issuer": "",
-          "year": "",
-          "image": ""
-        }
-      },
-      {
-        "id": "1759677211879",
-        "type": "cta",
-        "content": {
-          "title": "",
-          "description": "",
-          "buttonText": "",
-          "buttonUrl": ""
-        }
-      },
-      {
-        "id": "1759677217406",
-        "type": "map",
-        "content": {
-          "title": "",
-          "address": "",
-          "embedUrl": ""
-        }
-      },
-      {
-        "id": "1759677243033",
-        "type": "quote",
-        "content": {
-          "text": "ddddd",
-          "author": "dd"
-        }
-      },
-      {
-        "id": "1759677261244",
-        "type": "stats",
-        "content": {
-          "title": "",
-          "stats": [
+          "title": "Services offerts",
+          "categories": [
             {
-              "label": "",
-              "value": ""
+              "name": "Accueil et écoute",
+              "services": [
+                {
+                  "name": "Service d'accueil continu",
+                  "description": "De 9h00 à 16h30 avec diagnostic des problèmes"
+                },
+                {
+                  "name": "Écoute active quotidienne",
+                  "description": "Permettre aux bénéficiaires d'exprimer leurs difficultés"
+                },
+                {
+                  "name": "Orientation personnalisée",
+                  "description": "Vers les services spécialisés appropriés"
+                }
+              ]
+            },
+            {
+              "name": "Soutien psychologique et social",
+              "services": [
+                {
+                  "name": "Consultations psychologiques individuelles",
+                  "description": "4 cas par semaine avec suivi adapté"
+                },
+                {
+                  "name": "Soutien psychosocial",
+                  "description": "Accompagnement dans la reconstruction personnelle"
+                },
+                {
+                  "name": "Médiation familiale",
+                  "description": "Résolution des conflits familiaux"
+                }
+              ]
+            },
+            {
+              "name": "Conseil juridique",
+              "services": [
+                {
+                  "name": "Consultations juridiques",
+                  "description": "Deux fois par mois avec une avocate spécialisée"
+                },
+                {
+                  "name": "Ateliers de sensibilisation juridique",
+                  "description": "Droits des femmes et des filles"
+                },
+                {
+                  "name": "Accompagnement légal",
+                  "description": "Dans les procédures de protection"
+                }
+              ]
+            },
+            {
+              "name": "Formation et développement",
+              "services": [
+                {
+                  "name": "Formation professionnelle",
+                  "description": "Développement des compétences techniques"
+                },
+                {
+                  "name": "Ateliers de développement personnel",
+                  "description": "Renforcement de la confiance en soi"
+                },
+                {
+                  "name": "Alphabétisation",
+                  "description": "Classes d'alphabétisation pour adultes"
+                }
+              ]
+            },
+            {
+              "name": "Services éducatifs",
+              "services": [
+                {
+                  "name": "Soutien scolaire",
+                  "description": "Préparation aux examens régionaux et nationaux"
+                },
+                {
+                  "name": "Éducation non formelle",
+                  "description": "Lutte contre le décrochage scolaire"
+                },
+                {
+                  "name": "Cellule de veille éducative",
+                  "description": "À l'École Elbachiri"
+                }
+              ]
+            },
+            {
+              "name": "Santé et prévention",
+              "services": [
+                {
+                  "name": "Caravanes médicales",
+                  "description": "Dépistage cancer du sein et col de l'utérus"
+                },
+                {
+                  "name": "Campagnes de sensibilisation",
+                  "description": "Diabète, tuberculose, maladies respiratoires"
+                },
+                {
+                  "name": "Santé dentaire des enfants",
+                  "description": "Prévention et soins dentaires"
+                }
+              ]
             }
           ]
         }
-      }
-    ],
-    "goals": [
-      "d",
-      "ddd"
-    ],
-    "gallery": [],
-    "createdAt": "2025-10-05T15:14:43.149Z"
-  },
-  {
-    "id": "17596778323599g52mgq3r",
-    "slug": "ttest",
-    "title": "TTest",
-    "excerpt": "ajkbcimbmvycejavcaevifvbc",
-    "image": "https://www.ntaskmanager.com/wp-content/uploads/2020/02/What-is-a-Project-1-scaled.jpg",
-    "categories": [
-      "a",
-      "v"
-    ],
-    "startDate": "2012",
-    "location": "Casablnca",
-    "peopleHelped": "150000",
-    "status": "Actif",
-    "content": [
+      },
       {
-        "id": "1759677787082",
-        "type": "image",
+        "id": "17603719845047zn2oazac",
+        "type": "text",
         "content": {
-          "src": "https://www.ntaskmanager.com/wp-content/uploads/2020/02/What-is-a-Project-1-scaled.jpg",
-          "alt": "",
-          "caption": ""
+          "title": "Public cible",
+          "text": "### Population principale\n- Femmes et filles victimes de violence\n- Femmes et enfants en situation difficile\n- Veuves et orphelins bénéficiaires des services\n\n### Population secondaire\n- Familles et proches des bénéficiaires directs\n- Personnel des centres d'écoute\n- Intervenants dans le domaine de la lutte contre la violence"
         }
       },
       {
-        "id": "1759677795384",
+        "id": "1760371984504cwipkrimv",
+        "type": "team",
+        "content": {
+          "title": "Équipe professionnelle",
+          "members": [
+            {
+              "role": "Coordinatrice",
+              "responsibilities": ["Gestion globale du centre", "Supervision des équipes"]
+            },
+            {
+              "role": "Assistantes sociales",
+              "responsibilities": ["Accueil personnalisé", "Diagnostic social", "Accompagnement des bénéficiaires"]
+            },
+            {
+              "role": "Psychologues",
+              "responsibilities": ["Soutien psychologique individuel", "Thérapie de groupe", "Reconstruction personnelle"]
+            },
+            {
+              "role": "Avocate",
+              "responsibilities": ["Consultations juridiques", "Sensibilisation aux droits", "Accompagnement légal"]
+            },
+            {
+              "role": "Spécialistes en conseil familial",
+              "responsibilities": ["Médiation familiale", "Conseil conjugal", "Résolution de conflits"]
+            },
+            {
+              "role": "Formateurs en développement personnel",
+              "responsibilities": ["Ateliers de compétences", "Renforcement des capacités", "Autonomisation"]
+            }
+          ]
+        }
+      },
+      {
+        "id": "1760371984505c6wst6q8t",
+        "type": "stats",
+        "content": {
+          "title": "Chiffres clés",
+          "stats": [
+            {
+              "label": "Cas accueillis par jour",
+              "value": "10"
+            },
+            {
+              "label": "Sections de la Fondation",
+              "value": "36"
+            },
+            {
+              "label": "Consultations psychologiques/semaine",
+              "value": "4"
+            }
+          ]
+        }
+      },
+      {
+        "id": "1760371984505dc786s8ea",
+        "type": "impact",
+        "content": {
+          "title": "Impact social",
+          "impacts": [
+            {
+              "description": "Autonomisation socioéconomique des femmes",
+              "value": "Formation et insertion"
+            },
+            {
+              "description": "Protection des enfants en situation difficile",
+              "value": "Accompagnement global"
+            },
+            {
+              "description": "Lutte contre les violences faites aux femmes",
+              "value": "Prévention et prise en charge"
+            }
+          ],
+          "sdgs": ["ODD 5: Égalité entre les sexes", "ODD 10: Inégalités réduites", "ODD 16: Paix, justice et institutions efficaces"]
+        }
+      }
+    ],
+    "goals": [
+      "Développer les capacités personnelles des femmes et enfants",
+      "Garantir des services d'accueil et d'écoute",
+      "Faciliter la réintégration socio-économique",
+      "Lutter contre toutes les formes de violence"
+    ],
+    "gallery": [],
+    "slug": "centre-himaya",
+    "id": "1760371984506j57xxmes8",
+    "status": "Actif",
+    "createdAt": "2025-10-13T16:13:04.506Z"
+  },
+  {
+    "title": "Fataer Al Baraka : Centre de Formation en Pâtisserie Marocaine",
+    "excerpt": "Centre de formation transformant la passion pour la pâtisserie marocaine en opportunité d'autonomie pour les femmes vulnérables.",
+    "categories": [
+      "Formation professionnelle",
+      "Autonomisation des femmes",
+      "Patrimoine culinaire"
+    ],
+    "content": [
+      {
+        "id": "1760371984508rncf4e6a8",
+        "type": "text",
+        "content": {
+          "title": "Présentation du projet",
+          "text": "Fataer Al Baraka est un centre de formation dans la production de pâtisserie et gâteaux marocains, conçu comme un tremplin vers l'autonomie et l'épanouissement personnel pour des femmes en situation précaire."
+        }
+      },
+      {
+        "id": "1760371984508th8iynr6c",
         "type": "list",
         "content": {
-          "title": "Title",
+          "title": "Mission et objectifs",
           "items": [
-            "a",
-            "b",
-            "c"
+            "Offrir une formation professionnelle de qualité en pâtisserie marocaine",
+            "Contribuer à l'autonomisation économique des femmes en difficulté",
+            "Préserver et valoriser l'art culinaire marocain traditionnel"
           ]
         }
       },
       {
-        "id": "1759677812107",
-        "type": "gallery",
+        "id": "1760371984508cxzy7xwja",
+        "type": "programme",
         "content": {
-          "title": "",
-          "images": [
-            ""
-          ]
-        }
-      },
-      {
-        "id": "1759677816483",
-        "type": "video",
-        "content": {
-          "url": "https://youtu.be/cMMqFvvEFR8?si=ainLSvZTYADmu7T0",
-          "title": "TItre Video",
-          "description": "Desc video"
-        }
-      },
-      {
-        "id": "1759677819102",
-        "type": "testimonial",
-        "content": {
-          "name": "Temoin",
-          "role": "Role",
-          "content": "Temoignage",
-          "image": ""
-        }
-      },
-      {
-        "id": "1759677820015",
-        "type": "stats",
-        "content": {
-          "title": "Stat",
-          "stats": [
+          "title": "Programme de formation",
+          "duration": "9 mois",
+          "modules": [
             {
-              "label": "LIB1",
-              "value": "152"
+              "title": "Techniques de base en pâtisserie marocaine",
+              "description": "Apprentissage des fondamentaux de la pâtisserie traditionnelle",
+              "duration": "4 mois"
             },
             {
-              "label": "LIB2",
-              "value": "125"
+              "title": "Techniques avancées et spécialisations",
+              "description": "Perfectionnement et techniques complexes de pâtisserie",
+              "duration": "3 mois"
             },
             {
-              "label": "LIB3",
-              "value": "215"
+              "title": "Gestion et entrepreneuriat",
+              "description": "Compétences en gestion de projet et développement d'activité",
+              "duration": "2 mois"
             }
+          ],
+          "certification": "Diplôme certifié et officiellement reconnu en partenariat avec l'Entraide Nationale"
+        }
+      },
+      {
+        "id": "1760371984508g65kjuv3k",
+        "type": "list",
+        "content": {
+          "title": "Débouchés professionnels",
+          "items": [
+            "Création de coopératives dans le secteur culinaire",
+            "Lancement de projets individuels à domicile",
+            "Production pour particuliers et professionnels",
+            "Entrepreneuriat dans la pâtisserie traditionnelle"
           ]
         }
       },
       {
-        "id": "1759677820689",
-        "type": "timeline",
+        "id": "176037198450892eut9o13",
+        "type": "text",
         "content": {
-          "title": "Chronologie",
-          "events": [
+          "title": "Public cible",
+          "text": "### Bénéficiaires principales\n- Femmes veuves\n- Femmes en situation précaire\n- Femmes vulnérables cherchant à acquérir une autonomie économique\n\n### Profil des participantes\n- Motivation pour la pâtisserie traditionnelle\n- Désir d'indépendance financière\n- Engagement dans un processus de formation de 9 mois"
+        }
+      },
+      {
+        "id": "17603719845083dhhep68c",
+        "type": "impact",
+        "content": {
+          "title": "Impact social et économique",
+          "impacts": [
             {
-              "year": "1999",
-              "title": "aa",
-              "description": "des"
+              "description": "Autonomisation économique des femmes",
+              "value": "Revenus stables grâce à l'activité"
             },
             {
-              "year": "2001",
-              "title": "bb",
-              "description": "desb"
-            }
-          ]
-        }
-      },
-      {
-        "id": "1759677821604",
-        "type": "faq",
-        "content": {
-          "title": "FAQ",
-          "questions": [
+              "description": "Lutte contre la précarité féminine",
+              "value": "Insertion professionnelle durable"
+            },
             {
-              "question": "Q",
-              "answer": "R"
+              "description": "Préservation du patrimoine culinaire",
+              "value": "Transmission des savoir-faire traditionnels"
             }
-          ]
+          ],
+          "sdgs": ["ODD 5: Égalité entre les sexes", "ODD 8: Travail décent et croissance économique", "ODD 10: Inégalités réduites"]
         }
       },
       {
-        "id": "1759677822209",
-        "type": "cta",
+        "id": "1760371984508z11wgb9av",
+        "type": "quote",
         "content": {
-          "title": "APPel",
-          "description": "NNN",
-          "buttonText": "GO",
-          "buttonUrl": "https://www.google.com"
-        }
-      },
-      {
-        "id": "1759677822917",
-        "type": "file",
-        "content": {
-          "title": "Fichier",
-          "description": "desc fichier",
-          "fileUrl": "https://www.irit.fr/~Chihab.Hanachi/Cours/SMA/CoursAgentsI.pdf",
-          "fileName": "PDF"
-        }
-      },
-      {
-        "id": "1759677823531",
-        "type": "map",
-        "content": {
-          "title": "Carte",
-          "address": "Adrees",
-          "embedUrl": "https://maps.app.goo.gl/i8TBwEr3LpNaLoPP6"
-        }
-      },
-      {
-        "id": "1759677824188",
-        "type": "award",
-        "content": {
-          "title": "Reco",
-          "description": "ds reco",
-          "issuer": "Emettrur",
-          "year": "1999",
-          "image": ""
+          "text": "Fataer Al Baraka transforme les défis en opportunités et redonne espoir à des femmes qui aspirent à une vie meilleure.",
+          "author": "Équipe de direction"
         }
       }
     ],
     "goals": [
-      "ccc",
-      "cccccc"
+      "Former 50 femmes par an en pâtisserie marocaine",
+      "Créer 20 projets entrepreneuriaux annuels",
+      "Préserver 30 recettes traditionnelles marocaines",
+      "Assurer l'autonomie économique de 70% des diplômées"
     ],
     "gallery": [],
-    "updatedAt": "2025-10-05T15:56:40.730Z"
+    "slug": "fataer-al-baraka",
+    "id": "17603719845082gb43ihc8",
+    "status": "Actif",
+    "createdAt": "2025-10-13T16:13:04.508Z"
+  },
+  {
+    "title": "Projet de Parrainage d'Orphelins (Kafala)",
+    "excerpt": "Programme complet de prise en charge des orphelins au sein de leurs familles avec formules de parrainage adaptées.",
+    "categories": [
+      "Protection de l'enfance",
+      "Solidarité sociale",
+      "Aide aux familles"
+    ],
+    "content": [
+      {
+        "id": "17603719845080w9pevaai",
+        "type": "text",
+        "content": {
+          "title": "Contexte et justification",
+          "text": "Face à la pauvreté et à l'orphelinat, causes principales de la déviation, délinquance et criminalité infantile, la Fondation Assalam a développé un programme de parrainage complet pour les orphelins."
+        }
+      },
+      {
+        "id": "1760371984508zxh3ovk7e",
+        "type": "text",
+        "content": {
+          "title": "Objectif général",
+          "text": "Offrir une prise en charge globale aux orphelins au sein de leurs familles à travers une assistance sociale, éducative, psychique et médicale."
+        }
+      },
+      {
+        "id": "17603719845087nn62tgvs",
+        "type": "list",
+        "content": {
+          "title": "Objectifs spécifiques",
+          "items": [
+            "Fournir une assistance complète permettant l'épanouissement dans l'environnement familial naturel",
+            "Maintenir la stabilité familiale et prévenir l'abandon scolaire",
+            "Offrir un soutien adapté aux besoins de chaque orphelin"
+          ]
+        }
+      },
+      {
+        "id": "1760371984508s8dh9ij69",
+        "type": "sponsorship",
+        "content": {
+          "title": "Formules de parrainage permanentes",
+          "options": [
+            {
+              "name": "Parrainage Global",
+              "description": "Prise en charge complète des besoins de l'orphelin",
+              "benefits": ["Besoins de base + besoins ponctuels", "Suivi personnalisé régulier", "Accompagnement global"]
+            },
+            {
+              "name": "Parrainage de Base",
+              "description": "Couverture des besoins fondamentaux",
+              "benefits": ["Nourriture, éducation et santé", "Soutien éducatif de base", "Suivi médical essentiel"]
+            },
+            {
+              "name": "Parrainage Scolaire",
+              "description": "Focus sur l'excellence éducative",
+              "benefits": ["Scolarité en école privée", "Fournitures scolaires complètes", "Soutien pédagogique renforcé"]
+            },
+            {
+              "name": "Parrainage Famille",
+              "description": "Aide aux familles avec multiple orphelins",
+              "benefits": ["Prise en charge de 2 orphelins ou plus", "Soutien familial global", "Accompagnement personnalisé"]
+            }
+          ]
+        }
+      },
+      {
+        "id": "1760371984508klr3bpmgz",
+        "type": "sponsorship",
+        "content": {
+          "title": "Parrainage Ponctuel - Projets Spéciaux",
+          "options": [
+            {
+              "name": "Rentrée Scolaire",
+              "description": "Achat de fournitures scolaires complètes",
+              "benefits": ["Cartables et manuels", "Matériel pédagogique", "Tenues scolaires"]
+            },
+            {
+              "name": "Eid Al Adha",
+              "description": "Achat de mouton pour le sacrifice",
+              "benefits": ["Mouton de qualité", "Cérémonie traditionnelle", "Partage communautaire"]
+            },
+            {
+              "name": "Eid Al Fitr",
+              "description": "Achat de vêtements neufs",
+              "benefits": ["Tenues de fête complètes", "Chaussures neuves", "Accessoires festifs"]
+            },
+            {
+              "name": "Camp d'Été",
+              "description": "Séjour éducatif de 10 jours",
+              "benefits": ["Activités récréatives", "Apprentissage par le jeu", "Développement social"]
+            },
+            {
+              "name": "Panier du Ramadan",
+              "description": "Aide alimentaire pour le mois sacré",
+              "valeur": "500 Dhs",
+              "benefits": ["Produits alimentaires de base", "Denrées pour tout le mois", "Soutien nutritionnel"]
+            }
+          ]
+        }
+      },
+      {
+        "id": "1760371984508pljb0qe71",
+        "type": "timeline",
+        "content": {
+          "title": "Projets Annexes Annuels",
+          "events": [
+            {
+              "year": "Septembre",
+              "title": "Rentrée Scolaire",
+              "description": "Distribution de cartables et lutte contre le décrochage scolaire"
+            },
+            {
+              "year": "Ramadan",
+              "title": "Panier du Ramadan",
+              "description": "Aide alimentaire pour les familles pendant le mois sacré"
+            },
+            {
+              "year": "Été",
+              "title": "Campings d'Été",
+              "description": "Vacances organisées pour orphelins et enfants démunis"
+            },
+            {
+              "year": "Aid El Fitr",
+              "title": "Farhat Al Aid",
+              "description": "Vêtements neufs pour permettre aux enfants de fêter dignement"
+            },
+            {
+              "year": "Aid El Adha",
+              "title": "Farhat Aid El Adha",
+              "description": "Aide à l'acquisition du mouton de sacrifice"
+            }
+          ]
+        }
+      },
+      {
+        "id": "1760371984508ln518lid0",
+        "type": "impact",
+        "content": {
+          "title": "Impact Social du Programme",
+          "impacts": [
+            {
+              "description": "Orphelins maintenus dans leur environnement familial",
+              "value": "Préservation des liens familiaux"
+            },
+            {
+              "description": "Enfants scolarisés régulièrement",
+              "value": "Lutte contre l'abandon scolaire"
+            },
+            {
+              "description": "Familles soutenues dans leur rôle éducatif",
+              "value": "Renforcement des capacités parentales"
+            }
+          ],
+          "sdgs": ["ODD 1: Pas de pauvreté", "ODD 4: Éducation de qualité", "ODD 10: Inégalités réduites"]
+        }
+      }
+    ],
+    "goals": [
+      "Parrainer 500 orphelins annuellement",
+      "Maintenir 95% des enfants dans leur famille",
+      "Assurer la scolarisation de 100% des orphelins",
+      "Développer 5 projets annexes par an"
+    ],
+    "gallery": [],
+    "slug": "kafala",
+    "id": "1760371984509lmu8ztwp2",
+    "status": "Actif",
+    "createdAt": "2025-10-13T16:13:04.509Z"
+  },
+  {
+    "title": "Nadi Assalam : Centre de Formation en Couture Traditionnelle et Moderne",
+    "excerpt": "Formation professionnelle en couture mêlant traditions marocaines et techniques modernes pour l'autonomisation des femmes.",
+    "categories": [
+      "Formation professionnelle",
+      "Artisanat traditionnel",
+      "Autonomisation des femmes"
+    ],
+    "content": [
+      {
+        "id": "1760371984509xfmryx52d",
+        "type": "text",
+        "content": {
+          "title": "Vision du projet",
+          "text": "Nadi Assalam offre bien plus qu'une formation : il permet aux femmes de se réinventer, de retrouver une autonomie économique et de devenir actrices de leur propre avenir."
+        }
+      },
+      {
+        "id": "17603719845092tjep477x",
+        "type": "list",
+        "content": {
+          "title": "Mission et objectifs",
+          "items": [
+            "Transmettre un savoir-faire en couture mêlant traditions marocaines et techniques modernes",
+            "Favoriser l'autonomisation des femmes en difficulté grâce à une formation professionnalisante",
+            "Contribuer à l'épanouissement personnel et professionnel des participantes",
+            "Valoriser le patrimoine vestimentaire marocain"
+          ]
+        }
+      },
+      {
+        "id": "176037198450932e1jlxda",
+        "type": "programme",
+        "content": {
+          "title": "Programme de Formation Complète",
+          "duration": "9 mois",
+          "modules": [
+            {
+              "title": "Couture Traditionnelle Marocaine",
+              "description": "Apprentissage des techniques de confection de caftans, djellabas et takchitas",
+              "duration": "4 mois"
+            },
+            {
+              "title": "Couture Moderne et Contemporaine",
+              "description": "Techniques de prêt-à-porter et création d'accessoires modernes",
+              "duration": "3 mois"
+            },
+            {
+              "title": "Design et Entrepreneuriat",
+              "description": "Notions de design, gestion d'entreprise et développement de projet",
+              "duration": "2 mois"
+            }
+          ],
+          "certification": "Diplôme officiel reconnu supervisé par l'Entraide Nationale"
+        }
+      },
+      {
+        "id": "1760371984509g8d72oy1z",
+        "type": "list",
+        "content": {
+          "title": "Débouchés Professionnels",
+          "items": [
+            "Création de coopératives de production artisanale",
+            "Lancement de services de couture à domicile",
+            "Développement de marques de vêtements traditionnels",
+            "Prestation de services pour particuliers et professionnels"
+          ]
+        }
+      },
+      {
+        "id": "1760371984509zv1ovok3a",
+        "type": "text",
+        "content": {
+          "title": "Public Bénéficiaire",
+          "text": "### Profil des participantes\n- Femmes veuves ou en situation précaire\n- Femmes cherchant une reconversion professionnelle\n- Artisanes souhaitant perfectionner leurs compétences\n\n### Critères d'admission\n- Motivation pour les métiers de la couture\n- Situation socio-économique précaire\n- Engagement dans la formation de 9 mois"
+        }
+      },
+      {
+        "id": "1760371984509cixi3rxup",
+        "type": "impact",
+        "content": {
+          "title": "Impact Social et Économique",
+          "impacts": [
+            {
+              "description": "Autonomie économique des femmes formées",
+              "value": "Revenus stables grâce à l'activité de couture"
+            },
+            {
+              "description": "Préservation du patrimoine artisanal",
+              "value": "Transmission des savoir-faire traditionnels"
+            },
+            {
+              "description": "Création d'emplois locaux",
+              "value": "Développement économique communautaire"
+            }
+          ],
+          "sdgs": ["ODD 5: Égalité entre les sexes", "ODD 8: Travail décent et croissance économique", "ODD 11: Villes et communautés durables"]
+        }
+      },
+      {
+        "id": "1760371984509onffzjs2j",
+        "type": "quote",
+        "content": {
+          "text": "Chaque femme formée devient une ambassadrice de la tradition et de la modernité, mais surtout, une actrice de changement.",
+          "author": "Équipe pédagogique"
+        }
+      }
+    ],
+    "goals": [
+      "Former 60 femmes annuellement en couture",
+      "Créer 25 entreprises individuelles par an",
+      "Développer 5 coopératives artisanales",
+      "Préserver 15 techniques de couture traditionnelle"
+    ],
+    "gallery": [],
+    "slug": "nadi-assalam",
+    "id": "1760371984509ctj6kbq30",
+    "status": "Actif",
+    "createdAt": "2025-10-13T16:13:04.509Z"
+  },
+  {
+    "title": "Projet Imtiaz : Parrainage des Étudiants Brillants Issus de Milieux Défavorisés",
+    "excerpt": "Programme d'accompagnement des étudiants méritants jusqu'à leur insertion professionnelle avec soutien académique, matériel et psychologique.",
+    "categories": [
+      "Éducation supérieure",
+      "Égalité des chances",
+      "Développement du leadership"
+    ],
+    "content": [
+      {
+        "id": "1760371984510reyx2yc46",
+        "type": "text",
+        "content": {
+          "title": "Vision du Projet",
+          "text": "Élaborer le leader de demain : un leader missionnaire engagé avec une bonne moralité, l'excellence académique, une bonne santé et une efficacité au sein de la famille et de la société."
+        }
+      },
+      {
+        "id": "1760371984510foku1x092",
+        "type": "text",
+        "content": {
+          "title": "Objectif Général",
+          "text": "Accompagner les étudiants les plus brillants vivant en situation difficile ou issus de milieux défavorisés jusqu'à leur insertion professionnelle."
+        }
+      },
+      {
+        "id": "1760371984510oz3xvjv32",
+        "type": "list",
+        "content": {
+          "title": "Objectifs Spécifiques",
+          "items": [
+            "Développer le niveau éducatif et l'aspect éthique des jeunes",
+            "Inculquer les plus hautes valeurs humaines",
+            "Développer les compétences éducatives, comportementales et relationnelles",
+            "Enseigner les compétences de gestion de plan de vie",
+            "Autonomiser les jeunes à travers le coaching individuel"
+          ]
+        }
+      },
+      {
+        "id": "1760371984510qtvtqhlj9",
+        "type": "services",
+        "content": {
+          "title": "Engagements du Programme",
+          "categories": [
+            {
+              "name": "Soutien Académique",
+              "services": [
+                {
+                  "name": "Rencontres d'information et d'orientation",
+                  "description": "Pour les candidats au Baccalauréat"
+                },
+                {
+                  "name": "Plan de formation annuel",
+                  "description": "Sur les différents axes de la roue de la vie"
+                },
+                {
+                  "name": "Mise à niveau linguistique",
+                  "description": "Renforcement des compétences en langues"
+                }
+              ]
+            },
+            {
+              "name": "Soutien Matériel et Financier",
+              "services": [
+                {
+                  "name": "Bourse mensuelle",
+                  "description": "Pour les besoins minimaux (transport, nourriture)"
+                },
+                {
+                  "name": "Équipement informatique",
+                  "description": "PC, imprimantes, connexion Internet selon disponibilités"
+                },
+                {
+                  "name": "Aide au logement",
+                  "description": "En cas de problèmes majeurs de logement"
+                }
+              ]
+            },
+            {
+              "name": "Accompagnement Personnalisé",
+              "services": [
+                {
+                  "name": "Coaching psychologique",
+                  "description": "Par des professionnels"
+                },
+                {
+                  "name": "Renforcement du Leadership",
+                  "description": "Développement des capacités de leadership"
+                },
+                {
+                  "name": "Aide à la recherche de stage et d'emplois",
+                  "description": "Accompagnement vers l'insertion professionnelle"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "1760371984510b6gm50wj6",
+        "type": "programme",
+        "content": {
+          "title": "Critères d'Éligibilité et de Sélection",
+          "modules": [
+            {
+              "title": "Critère Académique",
+              "description": "Basé sur la note, la filière et le projet de vie",
+              "duration": ""
+            },
+            {
+              "title": "Critère Social",
+              "description": "Orphelins, étudiants démunis, situations familiales difficiles",
+              "duration": ""
+            }
+          ],
+          "certification": "Processus de sélection rigoureux basé sur le mérite et les besoins sociaux"
+        }
+      },
+      {
+        "id": "1760371984510f0rysg6t8",
+        "type": "timeline",
+        "content": {
+          "title": "Parcours d'Accompagnement",
+          "events": [
+            {
+              "year": "Phase 1",
+              "title": "Sélection et Intégration",
+              "description": "Identification des talents et intégration dans le programme"
+            },
+            {
+              "year": "Phase 2",
+              "title": "Formation et Développement",
+              "description": "Formations continues et accompagnement personnalisé"
+            },
+            {
+              "year": "Phase 3",
+              "title": "Insertion Professionnelle",
+              "description": "Aide à la recherche d'emploi et suivi post-formation"
+            },
+            {
+              "year": "Phase 4",
+              "title": "Réseau des Anciens",
+              "description": "Intégration dans le réseau des diplômés Imtiaz"
+            }
+          ]
+        }
+      },
+      {
+        "id": "1760371984510x5xz6l0lh",
+        "type": "impact",
+        "content": {
+          "title": "Impact et Retombées",
+          "impacts": [
+            {
+              "description": "Étudiants accompagnés jusqu'à l'insertion professionnelle",
+              "value": "Suivi personnalisé complet"
+            },
+            {
+              "description": "Développement du leadership et de l'initiative",
+              "value": "Formation de leaders engagés"
+            },
+            {
+              "description": "Réduction des inégalités éducatives",
+              "value": "Égalité des chances pour tous les talents"
+            }
+          ],
+          "sdgs": ["ODD 4: Éducation de qualité", "ODD 8: Travail décent et croissance économique", "ODD 10: Inégalités réduites"]
+        }
+      }
+    ],
+    "goals": [
+      "Accompagner 100 étudiants brillants annuellement",
+      "Assurer l'insertion professionnelle de 80% des diplômés",
+      "Développer un réseau de 500 anciens étudiants",
+      "Promouvoir l'excellence académique dans 10 filières prioritaires"
+    ],
+    "gallery": [],
+    "slug": "projet-imtiaz",
+    "id": "17603719845103ae5fgmwb",
+    "status": "Actif",
+    "createdAt": "2025-10-13T16:13:04.510Z"
+  },
+  {
+    "title": "Jardin d'Enfants Rihana As-Salam",
+    "excerpt": "Établissement préscolaire offrant un environnement éducatif sûr et inspirant pour le développement global des enfants de 4 à 5 ans.",
+    "categories": [
+      "Éducation préscolaire",
+      "Développement de l'enfant",
+      "Préparation scolaire"
+    ],
+    "content": [
+      {
+        "id": "17603719845107ik9zwy33",
+        "type": "text",
+        "content": {
+          "title": "Présentation Générale",
+          "text": "Affilié à la Fondation Assalam pour le Développement Social, section Casablanca-Anfa, inauguré en 2013 en partenariat avec la Direction Régionale d'Anfa à l'école El Bachiri."
+        }
+      },
+      {
+        "id": "176037198451001vc5sli1",
+        "type": "text",
+        "content": {
+          "title": "Mission Éducative",
+          "text": "Fournir un environnement éducatif et pédagogique sûr et inspirant pour les enfants d'âge préscolaire, avec accent sur le développement des compétences sociales, cognitives et émotionnelles."
+        }
+      },
+      {
+        "id": "17603719845111j3qlhcc2",
+        "type": "list",
+        "content": {
+          "title": "Objectifs Pédagogiques",
+          "items": [
+            "Développer les compétences en langage, mathématiques et arts",
+            "Renforcer les compétences de coopération et travail d'équipe",
+            "Encourager la pensée critique et la créativité",
+            "Améliorer le niveau d'apprentissage avant l'entrée en primaire",
+            "Découvrir les talents et compétences spécifiques des enfants"
+          ]
+        }
+      },
+      {
+        "id": "1760371984511o5srxpq3u",
+        "type": "programme",
+        "content": {
+          "title": "Programme Éducatif Complet",
+          "modules": [
+            {
+              "title": "Activités Cognitives",
+              "description": "Apprentissage des lettres, chiffres, couleurs et résolution de problèmes",
+              "duration": "Quotidien"
+            },
+            {
+              "title": "Activités Récréatives et Artistiques",
+              "description": "Dessin, musique, théâtre et expression créative",
+              "duration": "Quotidien"
+            },
+            {
+              "title": "Activités Physiques et Sportives",
+              "description": "Jeux collectifs et exercices pour le développement moteur",
+              "duration": "Quotidien"
+            },
+            {
+              "title": "Développement Socio-émotionnel",
+              "description": "Renforcement des compétences de communication et valeurs sociales",
+              "duration": "Intégré dans toutes les activités"
+            }
+          ],
+          "certification": "Préparation optimale à l'entrée en école primaire"
+        }
+      },
+      {
+        "id": "1760371984511c01pxe205",
+        "type": "team",
+        "content": {
+          "title": "Équipe Pédagogique Qualifiée",
+          "members": [
+            {
+              "role": "Deux enseignantes formées",
+              "responsibilities": ["Éducation et enseignement préscolaire", "Animation des activités pédagogiques"]
+            },
+            {
+              "role": "Une assistante pédagogique",
+              "responsibilities": ["Aide aux enfants dans les activités quotidiennes", "Soutien individualisé"]
+            }
+          ]
+        }
+      },
+      {
+        "id": "1760371984511pknl7fwxp",
+        "type": "text",
+        "content": {
+          "title": "Infrastructure et Capacité",
+          "text": "### Environnement d'apprentissage\n- Deux salles équipées spécialement aménagées\n- Espaces adaptés aux différentes activités\n- Matériel pédagogique moderne et sécurisé\n\n### Capacité d'accueil\n- Enfants âgés de 4 à 5 ans\n- Groupes de taille adaptée pour un suivi personnalisé\n- Environnement sécurisé et stimulant"
+        }
+      },
+      {
+        "id": "1760371984511vldhxlnn9",
+        "type": "list",
+        "content": {
+          "title": "Méthodes Pédagogiques",
+          "items": [
+            "Apprentissage par le jeu et l'expérimentation",
+            "Approche individualisée selon le rythme de chaque enfant",
+            "Développement de l'autonomie et de la confiance en soi",
+            "Socialisation progressive et encadrée",
+            "Stimulation de la curiosité naturelle"
+          ]
+        }
+      },
+      {
+        "id": "17603719845111ngqe8j16",
+        "type": "impact",
+        "content": {
+          "title": "Impact sur le Développement de l'Enfant",
+          "impacts": [
+            {
+              "description": "Enfants préparés à l'entrée en primaire",
+              "value": "Transition scolaire harmonieuse"
+            },
+            {
+              "description": "Développement global harmonieux",
+              "value": "Épanouissement complet de l'enfant"
+            },
+            {
+              "description": "Socialisation précoce réussie",
+              "value": "Intégration sociale facilitée"
+            }
+          ],
+          "sdgs": ["ODD 4: Éducation de qualité", "ODD 10: Inégalités réduites", "ODD 11: Villes et communautés durables"]
+        }
+      }
+    ],
+    "goals": [
+      "Accueillir 50 enfants de 4-5 ans annuellement",
+      "Assurer une transition réussie vers le primaire pour 95% des enfants",
+      "Développer les compétences clés chez 100% des enfants",
+      "Maintenir un environnement sécurisé et stimulant"
+    ],
+    "gallery": [],
+    "slug": "rayhanat-assalam",
+    "id": "1760371984511oum0481id",
+    "status": "Actif",
+    "createdAt": "2025-10-13T16:13:04.511Z"
   }
 ]

@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev ",
     "build": "next build",
+    "postbuild": "node init-database.mjs",
     "start": "next start",
     "lint": "next lint",
     "add-admin": "node add-admin.mjs"

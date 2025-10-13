@@ -1,0 +1,10 @@
+{
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "functions": {
+    "init-database.mjs": {
+      "runtime": "nodejs20.x"
+    }
+  }
+}
