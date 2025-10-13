@@ -65,36 +65,40 @@ export default function AdminSidebar({ user }) {
   });
 
   return (
-    <aside className="w-64 bg-white shadow-md h-screen">
-      <div className="p-6 border-b border-gray-200">
-        <Link href="/admin/dashboard" className="text-xl font-bold text-gray-800">
+    <aside className="w-64 bg-[var(--surface)] shadow-[var(--shadow-md)] h-screen sticky top-0 border-r border-[var(--border)]">
+      <div className="p-8 border-b border-[var(--border)] bg-[var(--bg)]">
+        <Link href="/admin/dashboard" className="text-2xl font-bold text-[var(--text)] hover:text-[var(--color-primary)] transition-colors">
           Admin Assalam
         </Link>
       </div>
-      <nav className="mt-6">
-        <ul className="space-y-2 px-2">
+      <nav className="mt-8">
+        <ul className="space-y-1 px-4">
           {filteredNavItems.map((item) => (
             <li key={item.name}>
               <Link
                 href={item.href}
-                className={`flex items-center px-4 py-3 rounded-lg transition-colors ${
+                className={`group flex items-center px-4 py-4 rounded-lg transition-all duration-200 font-medium ${
                   pathname === item.href
-                    ? "bg-blue-700 text-white"
-                    : "text-gray-700 hover:bg-gray-100"
+                    ? "bg-[var(--color-primary)] text-white shadow-[var(--shadow-sm)]"
+                    : "text-[var(--text)] hover:bg-[var(--surface)] hover:shadow-[var(--shadow-sm)] hover:translate-x-1"
                 }`}
               >
-                <span className="mr-3">{item.icon}</span>
-                <span>{item.name}</span>
+                <span className={`mr-4 transition-transform ${
+                  pathname === item.href ? "text-white" : "text-[var(--color-primary)] group-hover:scale-110"
+                }`}>
+                  {item.icon}
+                </span>
+                <span className="text-base">{item.name}</span>
               </Link>
             </li>
           ))}
-          <li className="pt-8">
+          <li className="pt-12 border-t border-[var(--border)] mt-8">
             <Link
               href="/"
-              className="flex items-center px-4 py-3 text-blue-600 hover:text-blue-800 rounded-lg transition-colors"
+              className="group flex items-center px-4 py-4 text-[var(--color-secondary)] hover:text-[var(--color-primary)] hover:bg-[var(--surface)] rounded-lg transition-all duration-200 font-medium hover:shadow-[var(--shadow-sm)] hover:translate-x-1"
             >
-              <Home className="h-5 w-5 mr-3" />
-              <span>Retour à l'accueil</span>
+              <Home className={`h-5 w-5 mr-4 transition-transform group-hover:scale-110`} />
+              <span className="text-base">Retour à l'accueil</span>
             </Link>
           </li>
         </ul>
