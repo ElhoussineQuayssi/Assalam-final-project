@@ -1,0 +1,498 @@
+[
+  {
+    "id": "17596772831488hxiglsr0",
+    "slug": "Nadi",
+    "title": "Nadi Assalam",
+    "excerpt": "Centre social et culturel offrant des activités éducatives, sportives et artistiques pour la communauté",
+    "image": "/nadi-center.jpg",
+    "categories": [
+      "Éducation",
+      "Culture",
+      "Social"
+    ],
+    "startDate": "2015",
+    "location": "Casablanca Anfa",
+    "peopleHelped": "300+",
+    "status": "Actif",
+    "content": [
+      {
+        "id": "nadi-content-1",
+        "type": "text",
+        "content": {
+          "heading": "Notre mission",
+          "text": "Créer un espace communautaire dynamique où les jeunes et les familles peuvent développer leurs compétences, renforcer leurs liens sociaux et contribuer au développement de leur quartier."
+        }
+      },
+      {
+        "id": "nadi-content-2",
+        "type": "text",
+        "content": {
+          "heading": "Nos activités",
+          "text": "Le centre propose une variété d'activités incluant des cours de langues, des ateliers artistiques, des activités sportives et des événements culturels tout au long de l'année."
+        }
+      }
+    ],
+    "goals": [
+      "Promouvoir l'éducation et la culture",
+      "Renforcer la cohésion sociale",
+      "Développer les compétences des jeunes",
+      "Créer des opportunités de loisirs sains"
+    ],
+    "gallery": ["/nadi-1.jpg", "/nadi-2.jpg", "/nadi-3.jpg"],
+    "createdAt": "2025-10-05T15:14:43.149Z"
+  },
+  {
+    "id": "center-himaya-001",
+    "slug": "Center",
+    "title": "Centre Himaya",
+    "excerpt": "Centre pluridisciplinaire de soutien aux femmes et enfants en situation difficile",
+    "image": "/women-center.jpg",
+    "categories": [
+      "Femmes",
+      "Enfants",
+      "Soutien social"
+    ],
+    "startDate": "Février 2022",
+    "location": "Casablanca Anfa",
+    "peopleHelped": "500+",
+    "status": "Actif",
+    "content": [
+      {
+        "id": "center-content-1",
+        "type": "text",
+        "content": {
+          "heading": "Objectif général",
+          "text": "Développer les capacités personnelles et les compétences des femmes et des filles victimes de violences sous toutes leurs formes, ainsi que des femmes et des enfants en situation difficile."
+        }
+      },
+      {
+        "id": "center-content-2",
+        "type": "text",
+        "content": {
+          "heading": "Notre approche",
+          "text": "Nous offrons un accompagnement holistique incluant soutien psychologique, conseil juridique, formation professionnelle et médiation familiale pour permettre une réintégration socio-économique complète."
+        }
+      }
+    ],
+    "goals": [
+      "Garantir des services d'accueil, d'écoute et d'orientation",
+      "Offrir des consultations psychologiques et juridiques",
+      "Assurer une formation professionnelle adaptée",
+      "Sensibiliser sur les droits des femmes",
+      "Faciliter la réintégration socio-économique",
+      "Lutter contre le décrochage scolaire"
+    ],
+    "gallery": ["/centre-himaya-1.jpg", "/centre-himaya-2.jpg", "/centre-himaya-3.jpg"],
+    "createdAt": "2024-01-15T10:00:00.000Z"
+  },
+  {
+    "id": "fataer-albaraka-001",
+    "slug": "Fataer",
+    "title": "Fataer Al Baraka",
+    "excerpt": "Centre de formation en pâtisserie marocaine pour femmes en situation précaire",
+    "image": "/pastry-center.jpg",
+    "categories": [
+      "Formation",
+      "Autonomisation",
+      "Cuisine"
+    ],
+    "startDate": "2018",
+    "location": "Casablanca",
+    "peopleHelped": "60",
+    "status": "Actif",
+    "content": [
+      {
+        "id": "fataer-content-1",
+        "type": "text",
+        "content": {
+          "heading": "Notre mission",
+          "text": "Offrir un tremplin vers l'autonomie et l'épanouissement personnel pour des femmes en situation précaire à travers la maîtrise de l'art de la pâtisserie marocaine traditionnelle."
+        }
+      }
+    ],
+    "goals": [
+      "Offrir une formation professionnelle de qualité",
+      "Contribuer à l'autonomisation économique",
+      "Préserver le patrimoine culinaire marocain",
+      "Développer des compétences entrepreneuriales"
+    ],
+    "gallery": ["/pastry-1.jpg", "/pastry-2.jpg", "/pastry-3.jpg"],
+    "createdAt": "2024-01-15T10:00:00.000Z"
+  },
+  {
+    "id": "imtiaz-project-001",
+    "slug": "Imtiaz",
+    "title": "Projet Imtiaz",
+    "excerpt": "Parrainage des étudiants brillants issus de milieux défavorisés en situation précaire",
+    "image": "/education-project.jpg",
+    "categories": [
+      "Éducation",
+      "Parrainage",
+      "Excellence académique"
+    ],
+    "startDate": "2018",
+    "location": "Casablanca",
+    "peopleHelped": "45",
+    "status": "Actif",
+    "content": [
+      {
+        "id": "imtiaz-content-1",
+        "type": "text",
+        "content": {
+          "heading": "Notre mission",
+          "text": "Identifier et accompagner les étudiants les plus méritants issus de milieux défavorisés pour leur permettre de poursuivre leurs études supérieures et réaliser leur potentiel."
+        }
+      },
+      {
+        "id": "imtiaz-content-2",
+        "type": "text",
+        "content": {
+          "heading": "Critères de sélection",
+          "text": "Les étudiants sont sélectionnés sur la base de leur excellence académique, leur motivation et leur situation socio-économique difficile."
+        }
+      }
+    ],
+    "goals": [
+      "Permettre l'accès à l'enseignement supérieur",
+      "Accompagner les étudiants vers la réussite",
+      "Créer des modèles de réussite inspirants",
+      "Contribuer à l'égalité des chances"
+    ],
+    "gallery": ["/imtiaz-1.jpg", "/imtiaz-2.jpg", "/imtiaz-3.jpg"],
+    "createdAt": "2024-01-15T10:00:00.000Z"
+  },
+  {
+    "id": "kafala-project-001",
+    "slug": "Kafala",
+    "title": "Programme Kafala",
+    "excerpt": "Système de parrainage pour enfants orphelins et enfants issus de familles démunies",
+    "image": "/kafala-program.jpg",
+    "categories": [
+      "Enfance",
+      "Parrainage",
+      "Protection sociale"
+    ],
+    "startDate": "2016",
+    "location": "Casablanca et région",
+    "peopleHelped": "200+",
+    "status": "Actif",
+    "content": [
+      {
+        "id": "kafala-content-1",
+        "type": "text",
+        "content": {
+          "heading": "Le système de Kafala",
+          "text": "Le programme Kafala offre un soutien complet aux enfants orphelins et aux enfants issus de familles en difficulté, incluant le parrainage financier, éducatif et émotionnel."
+        }
+      },
+      {
+        "id": "kafala-content-2",
+        "type": "text",
+        "content": {
+          "heading": "Notre approche",
+          "text": "Nous assurons le suivi personnalisé de chaque enfant parrainé, en collaboration avec les familles d'accueil et les institutions éducatives partenaires."
+        }
+      }
+    ],
+    "goals": [
+      "Assurer la protection et le bien-être des enfants",
+      "Garantir l'accès à l'éducation",
+      "Faciliter l'intégration sociale",
+      "Accompagner vers l'autonomie"
+    ],
+    "gallery": ["/kafala-1.jpg", "/kafala-2.jpg", "/kafala-3.jpg"],
+    "createdAt": "2024-01-15T10:00:00.000Z"
+  },
+  {
+    "id": "rayhana-preschool-001",
+    "slug": "Rayhana",
+    "title": "Jardin d'Enfants Rihana As-Salam",
+    "excerpt": "Environnement éducatif et pédagogique sûr pour les enfants d'âge préscolaire",
+    "image": "/preschool.jpg",
+    "categories": [
+      "Éducation",
+      "Enfance",
+      "Développement précoce"
+    ],
+    "startDate": "2013",
+    "location": "Casablanca-Anfa",
+    "peopleHelped": "120",
+    "status": "Actif",
+    "content": [
+      {
+        "id": "rayhana-content-1",
+        "type": "text",
+        "content": {
+          "heading": "Notre mission",
+          "text": "Fournir un environnement éducatif et pédagogique sûr et inspirant pour les enfants d'âge préscolaire, tout en mettant l'accent sur le développement des compétences sociales, cognitives et émotionnelles."
+        }
+      }
+    ],
+    "goals": [
+      "Développer les compétences linguistiques et mathématiques",
+      "Renforcer la coopération et le travail en équipe",
+      "Encourager la pensée critique et la créativité",
+      "Améliorer la préparation à l'école primaire",
+      "Favoriser les relations sociales entre enfants",
+      "Découvrir les talents spécifiques des enfants"
+    ],
+    "gallery": ["/rayhana-1.jpg", "/rayhana-2.jpg", "/rayhana-3.jpg"],
+    "createdAt": "2024-01-15T10:00:00.000Z"
+  },
+  {
+    "id": "17596772831488hxiglsr0",
+    "slug": "test",
+    "title": "Test",
+    "excerpt": "TTTTETETETETE",
+    "image": "",
+    "categories": [
+      "CICO"
+    ],
+    "startDate": "2020",
+    "location": "CAsablnca",
+    "peopleHelped": "150",
+    "status": "Actif",
+    "content": [
+      {
+        "id": "1759677204967",
+        "type": "text",
+        "content": {
+          "heading": "daaaaaaaa",
+          "text": "dddd"
+        }
+      },
+      {
+        "id": "1759677253492",
+        "type": "image",
+        "content": {
+          "src": "",
+          "alt": "",
+          "caption": ""
+        }
+      },
+      {
+        "id": "1759677209441",
+        "type": "award",
+        "content": {
+          "title": "",
+          "description": "",
+          "issuer": "",
+          "year": "",
+          "image": ""
+        }
+      },
+      {
+        "id": "1759677211879",
+        "type": "cta",
+        "content": {
+          "title": "",
+          "description": "",
+          "buttonText": "",
+          "buttonUrl": ""
+        }
+      },
+      {
+        "id": "1759677217406",
+        "type": "map",
+        "content": {
+          "title": "",
+          "address": "",
+          "embedUrl": ""
+        }
+      },
+      {
+        "id": "1759677243033",
+        "type": "quote",
+        "content": {
+          "text": "ddddd",
+          "author": "dd"
+        }
+      },
+      {
+        "id": "1759677261244",
+        "type": "stats",
+        "content": {
+          "title": "",
+          "stats": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ]
+        }
+      }
+    ],
+    "goals": [
+      "d",
+      "ddd"
+    ],
+    "gallery": [],
+    "createdAt": "2025-10-05T15:14:43.149Z"
+  },
+  {
+    "id": "17596778323599g52mgq3r",
+    "slug": "ttest",
+    "title": "TTest",
+    "excerpt": "ajkbcimbmvycejavcaevifvbc",
+    "image": "https://www.ntaskmanager.com/wp-content/uploads/2020/02/What-is-a-Project-1-scaled.jpg",
+    "categories": [
+      "a",
+      "v"
+    ],
+    "startDate": "2012",
+    "location": "Casablnca",
+    "peopleHelped": "150000",
+    "status": "Actif",
+    "content": [
+      {
+        "id": "1759677787082",
+        "type": "image",
+        "content": {
+          "src": "https://www.ntaskmanager.com/wp-content/uploads/2020/02/What-is-a-Project-1-scaled.jpg",
+          "alt": "",
+          "caption": ""
+        }
+      },
+      {
+        "id": "1759677795384",
+        "type": "list",
+        "content": {
+          "title": "Title",
+          "items": [
+            "a",
+            "b",
+            "c"
+          ]
+        }
+      },
+      {
+        "id": "1759677812107",
+        "type": "gallery",
+        "content": {
+          "title": "",
+          "images": [
+            ""
+          ]
+        }
+      },
+      {
+        "id": "1759677816483",
+        "type": "video",
+        "content": {
+          "url": "https://youtu.be/cMMqFvvEFR8?si=ainLSvZTYADmu7T0",
+          "title": "TItre Video",
+          "description": "Desc video"
+        }
+      },
+      {
+        "id": "1759677819102",
+        "type": "testimonial",
+        "content": {
+          "name": "Temoin",
+          "role": "Role",
+          "content": "Temoignage",
+          "image": ""
+        }
+      },
+      {
+        "id": "1759677820015",
+        "type": "stats",
+        "content": {
+          "title": "Stat",
+          "stats": [
+            {
+              "label": "LIB1",
+              "value": "152"
+            },
+            {
+              "label": "LIB2",
+              "value": "125"
+            },
+            {
+              "label": "LIB3",
+              "value": "215"
+            }
+          ]
+        }
+      },
+      {
+        "id": "1759677820689",
+        "type": "timeline",
+        "content": {
+          "title": "Chronologie",
+          "events": [
+            {
+              "year": "1999",
+              "title": "aa",
+              "description": "des"
+            },
+            {
+              "year": "2001",
+              "title": "bb",
+              "description": "desb"
+            }
+          ]
+        }
+      },
+      {
+        "id": "1759677821604",
+        "type": "faq",
+        "content": {
+          "title": "FAQ",
+          "questions": [
+            {
+              "question": "Q",
+              "answer": "R"
+            }
+          ]
+        }
+      },
+      {
+        "id": "1759677822209",
+        "type": "cta",
+        "content": {
+          "title": "APPel",
+          "description": "NNN",
+          "buttonText": "GO",
+          "buttonUrl": "https://www.google.com"
+        }
+      },
+      {
+        "id": "1759677822917",
+        "type": "file",
+        "content": {
+          "title": "Fichier",
+          "description": "desc fichier",
+          "fileUrl": "https://www.irit.fr/~Chihab.Hanachi/Cours/SMA/CoursAgentsI.pdf",
+          "fileName": "PDF"
+        }
+      },
+      {
+        "id": "1759677823531",
+        "type": "map",
+        "content": {
+          "title": "Carte",
+          "address": "Adrees",
+          "embedUrl": "https://maps.app.goo.gl/i8TBwEr3LpNaLoPP6"
+        }
+      },
+      {
+        "id": "1759677824188",
+        "type": "award",
+        "content": {
+          "title": "Reco",
+          "description": "ds reco",
+          "issuer": "Emettrur",
+          "year": "1999",
+          "image": ""
+        }
+      }
+    ],
+    "goals": [
+      "ccc",
+      "cccccc"
+    ],
+    "gallery": [],
+    "updatedAt": "2025-10-05T15:56:40.730Z"
+  }
+]
