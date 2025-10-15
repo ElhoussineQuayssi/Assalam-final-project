@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
 import {
   Users,
   FileText,
@@ -17,10 +18,23 @@ import { useStats } from "hooks/use-admin";
 import { useAuth } from "hooks/use-project";
 import { useToast } from "hooks/use-toast";
 import Alert from "@/components/Alert/Alert";
-import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
-import AdminPageHeader from "@/components/AdminPageHeader/AdminPageHeader";
-import ScrollReveal from "@/components/ScrollReveal/ScrollReveal";
-import AdminStatsCard from "@/components/AdminStatsCard/AdminStatsCard";
+
+// Dynamically import heavy components with loading spinners
+const LoadingSpinner = dynamic(() => import("@/components/LoadingSpinner/LoadingSpinner"), {
+  loading: () => <div className="flex justify-center items-center h-32"><Loader2 className="h-8 w-8 animate-spin" style={{ color: '#6495ED' }} /></div>
+});
+
+const AdminPageHeader = dynamic(() => import("@/components/AdminPageHeader/AdminPageHeader"), {
+  loading: () => <div className="flex justify-center py-8"><Loader2 className="h-8 w-8 animate-spin" style={{ color: '#6495ED' }} /></div>
+});
+
+const ScrollReveal = dynamic(() => import("@/components/ScrollReveal/ScrollReveal"), {
+  loading: () => null
+});
+
+const AdminStatsCard = dynamic(() => import("@/components/AdminStatsCard/AdminStatsCard"), {
+  loading: () => <div className="bg-gray-100 p-6 rounded-2xl shadow-xl animate-pulse"><div className="h-16 bg-gray-200 rounded mb-4"></div><div className="h-8 bg-gray-200 rounded"></div></div>
+});
 // --- Design System Configuration ---
 const ACCENT = '#6495ED';        // Cornflower Blue
 const PRIMARY_LIGHT = '#B0E0E6'; // Powder Blue

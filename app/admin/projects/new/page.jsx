@@ -1,49 +1,62 @@
 "use client";
 
-import {
-    Plus,
-    Trash2,
-    Move,
-    Image,
-    Type,
-    List,
-    Quote,
-    AlertTriangle,
-    Save,
-    Eye,
-    Loader2,
-    Settings,
-    Play,
-    Users,
-    BarChart3,
-    Calendar,
-    HelpCircle,
-    Target,
-    FileText,
-    MapPin,
-    Award,
-    BookOpen,
-    Heart,
-    UserCheck,
-    TrendingUp,
-    Briefcase,
-    X, // Added for close/remove
-    ChevronDown, // Added for select/accordion
-} from "lucide-react";
-
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import {
+  Plus,
+  Trash2,
+  Move,
+  Image,
+  Type,
+  List,
+  Quote,
+  AlertTriangle,
+  Save,
+  Eye,
+  Loader2,
+  Settings,
+  Play,
+  Users,
+  BarChart3,
+  Calendar,
+  HelpCircle,
+  Target,
+  FileText,
+  MapPin,
+  Award,
+  BookOpen,
+  Heart,
+  UserCheck,
+  TrendingUp,
+  Briefcase,
+  X, // Added for close/remove
+  ChevronDown, // Added for select/accordion
+} from "lucide-react";
 
 // --- Design System Configuration ---
 const ACCENT = '#6495ED';        // Cornflower Blue
 const PRIMARY_LIGHT = '#B0E0E6'; // Powder Blue
 const DARK_TEXT = '#333333';     // Dark Gray
 const BACKGROUND = '#FAFAFA';    // Off-White
-import BasicInformationBlock from "@/components/blocks/BasicInformationBlock";
-import ContentBuilderBlock from "@/components/blocks/ContentBuilderBlock";
-import SidebarBlocks from "@/components/blocks/SidebarBlocks";
-import ContentBlock from "@/components/blocks/ContentBlock";
+
+// Dynamically import heavy components
+const BasicInformationBlock = dynamic(() => import("@/components/blocks/BasicInformationBlock"), {
+  loading: () => <div className="bg-gray-100 p-8 rounded-xl animate-pulse"><div className="h-8 bg-gray-200 rounded mb-4"></div><div className="space-y-4"><div className="h-12 bg-gray-200 rounded"></div><div className="h-12 bg-gray-200 rounded"></div><div className="h-12 bg-gray-200 rounded"></div></div></div>
+});
+
+const ContentBuilderBlock = dynamic(() => import("@/components/blocks/ContentBuilderBlock"), {
+  loading: () => <div className="bg-gray-100 p-8 rounded-xl animate-pulse"><div className="h-8 bg-gray-200 rounded mb-4"></div><div className="h-32 bg-gray-200 rounded"></div></div>
+});
+
+const SidebarBlocks = dynamic(() => import("@/components/blocks/SidebarBlocks"), {
+  loading: () => <div className="bg-gray-100 p-8 rounded-xl animate-pulse"><div className="h-8 bg-gray-200 rounded mb-4"></div><div className="space-y-4"><div className="h-12 bg-gray-200 rounded"></div><div className="h-12 bg-gray-200 rounded"></div><div className="h-32 bg-gray-200 rounded"></div></div></div>
+});
+
+const ContentBlock = dynamic(() => import("@/components/blocks/ContentBlock"), {
+  loading: () => <div className="bg-gray-50 p-4 rounded-lg animate-pulse"><div className="h-6 bg-gray-200 rounded mb-2"></div><div className="h-16 bg-gray-200 rounded"></div></div>
+});
 // --- Design System Utility Components ---
 
 

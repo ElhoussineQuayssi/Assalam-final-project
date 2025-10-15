@@ -1,12 +1,26 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { updateProject } from "lib/actions";
-import BasicInformationBlock from "@/components/blocks/BasicInformationBlock";
-import ContentBuilderBlock from "@/components/blocks/ContentBuilderBlock";
-import SidebarBlocks from "@/components/blocks/SidebarBlocks";
-import ContentBlock from "@/components/blocks/ContentBlock";
+
+// Dynamically import heavy components
+const BasicInformationBlock = dynamic(() => import("@/components/blocks/BasicInformationBlock"), {
+  loading: () => <div className="bg-gray-100 p-8 rounded-xl animate-pulse"><div className="h-8 bg-gray-200 rounded mb-4"></div><div className="space-y-4"><div className="h-12 bg-gray-200 rounded"></div><div className="h-12 bg-gray-200 rounded"></div><div className="h-12 bg-gray-200 rounded"></div></div></div>
+});
+
+const ContentBuilderBlock = dynamic(() => import("@/components/blocks/ContentBuilderBlock"), {
+  loading: () => <div className="bg-gray-100 p-8 rounded-xl animate-pulse"><div className="h-8 bg-gray-200 rounded mb-4"></div><div className="h-32 bg-gray-200 rounded"></div></div>
+});
+
+const SidebarBlocks = dynamic(() => import("@/components/blocks/SidebarBlocks"), {
+  loading: () => <div className="bg-gray-100 p-8 rounded-xl animate-pulse"><div className="h-8 bg-gray-200 rounded mb-4"></div><div className="space-y-4"><div className="h-12 bg-gray-200 rounded"></div><div className="h-12 bg-gray-200 rounded"></div><div className="h-32 bg-gray-200 rounded"></div></div></div>
+});
+
+const ContentBlock = dynamic(() => import("@/components/blocks/ContentBlock"), {
+  loading: () => <div className="bg-gray-50 p-4 rounded-lg animate-pulse"><div className="h-6 bg-gray-200 rounded mb-2"></div><div className="h-16 bg-gray-200 rounded"></div></div>
+});
 import {
   Plus,
   Trash2,

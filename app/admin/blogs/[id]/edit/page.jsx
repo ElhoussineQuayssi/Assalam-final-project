@@ -2,12 +2,18 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
+import dynamic from "next/dynamic";
 import { getBlogById, updateBlog } from "lib/actions";
 import { ShareIcon, AlertTriangle, Loader2 } from "lucide-react";
-import { Editor } from "@tinymce/tinymce-react";
 
 // Import extracted component
 import Alert from '@/components/Alert/Alert.jsx';
+
+// Dynamically import TinyMCE editor with loading spinner
+const Editor = dynamic(() => import("@tinymce/tinymce-react").then(mod => mod.Editor), {
+  loading: () => <div className="flex justify-center items-center h-64 bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg"><Loader2 className="h-8 w-8 animate-spin mr-2" style={{ color: '#6495ED' }} /><span className="text-gray-600">Chargement de l'éditeur...</span></div>,
+  ssr: false
+});
 
 // --- Design System Configuration (Minimalist Light Blue) ---
 const ACCENT = '#6495ED';        // Cornflower Blue
