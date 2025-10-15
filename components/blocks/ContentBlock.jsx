@@ -20,6 +20,11 @@ import {
   TeamBlock,
 } from "./ContentBlockComponents.jsx";
 
+// --- Design System Configuration ---
+const ACCENT = '#6495ED';        // Cornflower Blue
+const DARK_TEXT = '#333333';     // Dark Gray
+const DELETE_COLOR = '#EF4444';  // Standard Red for error/delete
+
 export default function ContentBlock({ block, index, contentTypes, updateContentBlock, removeContentBlock, handleDragStart, handleDragOver, handleDrop }) {
   const Icon = contentTypes.find(type => type.type === block.type)?.icon || Type;
 
@@ -76,24 +81,30 @@ export default function ContentBlock({ block, index, contentTypes, updateContent
     >
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <Icon className="h-5 w-5 text-gray-500" />
-          <span className="font-medium text-gray-700 capitalize">
+          {/* Block Type Icon: Use ACCENT color */}
+          <Icon className="h-5 w-5" style={{ color: ACCENT }} />
+          {/* Block Label: Use DARK_TEXT color */}
+          <span className="font-medium capitalize" style={{ color: DARK_TEXT }}>
             {contentTypes.find(type => type.type === block.type)?.label || block.type}
           </span>
         </div>
         <div className="flex items-center gap-2">
+          {/* Move Button: Gray with ACCENT hover */}
           <button
             type="button"
-            className="text-gray-400 hover:text-gray-600"
-            title="Move"
+            className="text-gray-500 hover:text-accent transition-colors duration-150"
+            style={{ '--tw-text-opacity': 1, color: ACCENT }} // Apply ACCENT color for prominence
+            title="Déplacer"
           >
             <Move className="h-4 w-4" />
           </button>
+          {/* Delete Button: Use specific DELETE_COLOR with hover */}
           <button
             type="button"
             onClick={() => removeContentBlock(block.id)}
-            className="text-red-400 hover:text-red-600"
-            title="Delete"
+            className="hover:text-red-600 transition-colors duration-150"
+            style={{ color: DELETE_COLOR }}
+            title="Supprimer"
           >
             <Trash2 className="h-4 w-4" />
           </button>

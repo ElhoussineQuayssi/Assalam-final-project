@@ -4,9 +4,21 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { login } from "lib/actions";
 import { getSession } from "lib/auth";
-import { AdminLoginForm } from "components/unified";
 import { useToast } from "hooks/use-toast";
+import { Loader2, AlertTriangle } from "lucide-react";
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
+import Alert from "@/components/Alert/Alert";
+import Button from "@/components/Button/Button";
+import AdminLoginForm from "@/components/AdminLoginForm/AdminLoginForm";
 
+// --- Design System Configuration ---
+const ACCENT = '#6495ED';        // Cornflower Blue
+const DARK_TEXT = '#333333';     // Dark Gray
+const BACKGROUND = '#FAFAFA';    // Off-White
+
+
+
+// --- Main Component ---
 export default function AdminLogin() {
   const router = useRouter();
   const { toast } = useToast();
@@ -18,7 +30,6 @@ export default function AdminLogin() {
     let isMounted = true;
     async function checkSession() {
       try {
-        // Use the getSession function instead of direct API call
         const session = await getSession();
         if (session && isMounted) {
           router.push("/admin/dashboard");
@@ -64,13 +75,11 @@ export default function AdminLogin() {
   };
 
   if (isCheckingSession) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-2 border-blue-600 border-t-transparent"></div>
-      </div>
-    );
+    // Uses the styled LoadingSpinner utility
+    return <LoadingSpinner />;
   }
 
+  // Uses the locally re-implemented AdminLoginForm component with Design System styles
   return (
     <AdminLoginForm
       error={error}

@@ -1,26 +1,40 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { CalendarDays, MapPin, Users, Clock, Award, Play, FileText } from "lucide-react";
-import {
-  Container,
-  ProjectHero,
-  ProjectInfoCard,
-  ProjectContentSection,
-  ProjectGallery,
-  ProjectSidebar,
-  Button,
-} from "components/unified";
+import React from "react";
+import { CalendarDays, MapPin, Users, Award, Play, FileText, Target, ChevronRight, Clock } from "lucide-react";
+// Preservation of the original data fetching function
 import { getProject } from "lib/projects";
+import Container from "@/components/Container/Container";
+import Button from "@/components/Button/Button";
+import Input from "@/components/Input/Input";
+import Textarea from "@/components/Textarea/Textarea";
+import Alert from "@/components/Alert/Alert";
+import StyledProjectHero from "@/components/StyledProjectHero/StyledProjectHero";
+import StyledProjectInfoCard from "@/components/StyledProjectInfoCard/StyledProjectInfoCard";
+import ProjectContentSection from "@/components/ProjectContentSection/ProjectContentSection";
+import ProjectGallery from "@/components/ProjectGallery/ProjectGallery";
+import ProjectSidebar from "@/components/ProjectSidebar/ProjectSidebar";
+import ProjectFooter from "@/components/ProjectFooter/ProjectFooter";
 
-// Generate metadata for the project
+
+// --- Design System Configuration (Minimalist Light Blue) ---
+const ACCENT = '#6495ED';        // Cornflower Blue
+const PRIMARY_LIGHT = '#B0E0E6'; // Powder Blue
+const DARK_TEXT = '#333333';     // Dark Gray
+const BACKGROUND = '#FAFAFA';    // Off-White (used for UI background)
+const MUTED_TEXT = '#767676';    // Dusty Gray (used for secondary/muted text)
+
+// --- Original Logic Preservation ---
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
+  // NOTE: getProject is assumed to be a server-side function
   const project = await getProject(slug);
 
   if (!project) {
     return {
-      title: "Projet non trouvé",
+      title: "Projet non trouvé", // Fixed Content
     };
   }
 
@@ -38,165 +52,193 @@ export default async function ProjectPage({ params }) {
     notFound();
   }
 
+  const projectInfo = [
+    { type: "date", label: "Date de lancement", value: project.startDate || "N/A", icon: CalendarDays }, // Enhanced & Fixed Content
+    { type: "location", label: "Localisation", value: project.location || "N/A", icon: MapPin }, // Fixed Content
+    { type: "people", label: "Vies impactées", value: project.peopleHelped ? `${project.peopleHelped}+` : "N/A", icon: Users }, // Enhanced & Fixed Content
+    { type: "status", label: "Étape actuelle", value: project.status || "Actif", icon: Award }, // Enhanced & Fixed Content
+  ];
+
   return (
-    <Container className="py-16">
-      {/* Hero Section */}
-      <ProjectHero
+    // Main background fix
+    <main className="min-h-screen" style={{ backgroundColor: BACKGROUND }}>
+
+      {/* 1. Hero Section (Styled with constants) */}
+      <StyledProjectHero
         title={project.title}
         excerpt={project.excerpt}
         image={project.image}
         categories={project.categories}
       />
 
-      {/* Project Info */}
-      <section className="mb-12">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <ProjectInfoCard
-            type="date"
-            label="Année de création"
-            value={project.startDate || "N/A"}
-          />
-          <ProjectInfoCard
-            type="location"
-            label="Localisation"
-            value={project.location || "N/A"}
-          />
-          <ProjectInfoCard
-            type="people"
-            label="Bénéficiaires"
-            value={project.peopleHelped ? `${project.peopleHelped}+` : "N/A"}
-          />
-          <ProjectInfoCard
-            type="status"
-            label="Statut"
-            value={project.status || "Actif"}
-          />
-        </div>
-      </section>
+      <Container className="pb-20">
 
-      {/* Main Content */}
-      <section className="mb-12 grid md:grid-cols-3 gap-12">
-        <div className="md:col-span-2 space-y-12">
-          {/* About Section */}
-          <ProjectContentSection title="À Propos du Projet" titleColor="green">
-            <div className="prose prose-lg max-w-none">
-              {project.content?.filter(block => block.type === "text").map((block, index) => {
-                if (block.content?.text || block.content?.heading) {
+        {/* 2. Project Info Cards (Styled with constants) */}
+        <section className="mb-16 -mt-20 relative z-10">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {projectInfo.map((item, index) => (
+              <StyledProjectInfoCard
+                key={item.type}
+                label={item.label}
+                value={item.value}
+                icon={item.icon}
+                index={index}
+              />
+            ))}
+          </div>
+        </section>
+
+        {/* 3. Main Content & Sidebar Grid */}
+        <section className="grid md:grid-cols-3 gap-12">
+          {/* Main Content Area */}
+          <div className="md:col-span-2 space-y-12">
+
+            {/* About Section - Text Blocks & Goals (Styled with Design System Typography & Colors) */}
+            <ProjectContentSection title="Le Récit de notre Action" className="scroll-reveal"> {/* Enhanced & Fixed Content */}
+              <div className={`text-lg space-y-8`} style={{ color: DARK_TEXT }}>
+                {project.content?.filter(block => block.type === "text").map((block, index) => {
+                  if (block.content?.text || block.content?.heading) {
+                    return (
+                      <div key={index}>
+                        {block.content.heading && (
+                          // H3 Typography Pattern: Use inline style for accent color
+                          <h3 className={`text-xl font-semibold mb-4`} style={{ color: ACCENT }}>{block.content.heading}</h3>
+                        )}
+                        {block.content.text && (
+                          // FIX: Replaced text-gray-700 with MUTED_TEXT
+                          <p className="leading-relaxed" style={{ color: MUTED_TEXT }}>{block.content.text}</p>
+                        )}
+                      </div>
+                    );
+                  }
+                  return null;
+                })}
+              </div>
+
+              {/* Goals Block - Subtle Background with Accent List Markers (Content Card Style) */}
+              {project.goals && project.goals.length > 0 && (
+                <div
+                  className={`mt-8 p-6 rounded-xl border shadow-inner scroll-reveal`}
+                  // FIX: Replaced border-gray-100 with PRIMARY_LIGHT
+                  style={{ backgroundColor: `${PRIMARY_LIGHT}80`, borderColor: PRIMARY_LIGHT }}
+                >
+                  {/* FIX: Replaced border-gray-100 with PRIMARY_LIGHT */}
+                  <h3 className={`text-xl font-bold mb-4 border-b pb-2`} style={{ color: ACCENT, borderColor: PRIMARY_LIGHT }}>
+                    <Target className="inline h-5 w-5 mr-2 -mt-1" />
+                    L'Horizon de l'Espoir (Nos Objectifs) {/* Enhanced Content */}
+                  </h3>
+                  <ul className="space-y-3">
+                    {project.goals.map((goal, index) => (
+                      <li key={index} className="flex items-start" style={{ color: MUTED_TEXT }}>
+                        {/* Accent Colored Marker */}
+                        <div
+                          className={`text-white rounded-full h-6 w-6 flex items-center justify-center flex-shrink-0 mt-0.5 mr-4 text-sm font-bold shadow-md`}
+                          style={{ backgroundColor: ACCENT }}
+                        >
+                          {index + 1}
+                        </div>
+                        <p className="leading-relaxed">{goal}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </ProjectContentSection>
+
+            {/* Gallery Section */}
+            {project.gallery && project.gallery.length > 0 && (
+              <ProjectGallery
+                images={project.gallery}
+                projectTitle={project.title}
+                className="mt-12"
+              />
+            )}
+
+            {/* Additional Content Blocks (Refactored for Design System) */}
+            {project.content?.map((block, index) => {
+              switch (block.type) {
+                case "text":
                   return (
-                    <div key={index} className="mb-8">
-                      {block.content.heading && (
-                        <h3 className="text-xl font-bold mb-4 text-brand-primary">{block.content.heading}</h3>
+                    <div key={index} className="mb-8 scroll-reveal">
+                      {block.content?.heading && (
+                        <h3 className={`text-xl font-semibold mb-4`} style={{ color: ACCENT }}>{block.content.heading}</h3>
                       )}
-                      {block.content.text && (
-                        <p className="mb-4 leading-relaxed">{block.content.text}</p>
+                      {block.content?.text && (
+                        // FIX: Replaced text-gray-700 with MUTED_TEXT
+                        <p className="mb-4 leading-relaxed" style={{ color: MUTED_TEXT }}>{block.content.text}</p>
                       )}
                     </div>
                   );
-                }
-                return null;
-              })}
-            </div>
 
-            {project.goals && project.goals.length > 0 && (
-              <div className="mt-8 bg-brand-50 p-6 rounded-lg">
-                <h3 className="text-xl font-bold mb-4 text-brand-primary">
-                  Nos Objectifs
-                </h3>
-                <ul className="space-y-2">
-                  {project.goals.map((goal, index) => (
-                    <li key={index} className="flex items-start">
-                      <div className="bg-brand-100 text-green-600 rounded-full h-6 w-6 flex items-center justify-center flex-shrink-0 mt-0.5 mr-3">
-                        {index + 1}
-                      </div>
-                      <p className="leading-relaxed">{goal}</p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </ProjectContentSection>
-
-          {project.gallery && project.gallery.length > 0 && (
-            <ProjectGallery
-              images={project.gallery}
-              projectTitle={project.title}
-              className="mt-12"
-            />
-          )}
-
-          {/* Additional Content Blocks */}
-          {project.content?.map((block, index) => {
-            switch (block.type) {
-              case "text":
-                return (
-                  <div key={index} className="mb-8">
-                    {block.content?.heading && (
-                      <h3 className="text-xl font-bold mb-4 text-brand-primary">{block.content.heading}</h3>
-                    )}
-                    {block.content?.text && (
-                      <p className="mb-4 leading-relaxed">{block.content.text}</p>
-                    )}
-                  </div>
-                );
-
-              case "image":
-                return block.content?.src ? (
-                  <div key={index} className="mb-8">
-                    <img
-                      src={block.content.src}
-                      alt={block.content.alt || ""}
-                      className="w-full h-auto rounded-lg shadow-md"
-                    />
-                    {block.content.caption && (
-                      <p className="text-sm text-gray-600 mt-2 italic text-center">
-                        {block.content.caption}
-                      </p>
-                    )}
-                  </div>
-                ) : null;
-
-              case "list":
-                return block.content?.title || (block.content?.items && block.content.items.length > 0) ? (
-                  <ProjectContentSection key={index} title={block.content.title || "Liste"} titleColor="green">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      {block.content.items?.map((item, itemIndex) => (
-                        <div key={itemIndex} className="flex items-start">
-                          <div className="bg-brand-100 text-green-600 rounded-full h-5 w-5 flex items-center justify-center flex-shrink-0 mt-0.5 mr-3">
-                            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                            </svg>
-                          </div>
-                          <p className="text-gray-700">{item}</p>
-                        </div>
-                      ))}
+                case "image":
+                  return block.content?.src ? (
+                    <div key={index} className="mb-8 scroll-reveal">
+                      <img
+                        src={block.content.src}
+                        alt={block.content.alt || ""}
+                        // FIX: Replaced border-gray-100 with PRIMARY_LIGHT
+                        className="w-full h-auto rounded-xl shadow-lg border"
+                        style={{ borderColor: PRIMARY_LIGHT }}
+                      />
+                      {block.content.caption && (
+                        // FIX: Replaced text-gray-600 with MUTED_TEXT
+                        <p className="text-sm mt-3 italic text-center" style={{ color: MUTED_TEXT }}>
+                          {block.content.caption}
+                        </p>
+                      )}
                     </div>
-                  </ProjectContentSection>
-                ) : null;
+                  ) : null;
 
-              case "quote":
-                return block.content?.text ? (
-                  <div key={index} className="bg-gray-50 border-l-4 border-green-500 p-6 rounded-r-lg mb-8">
-                    <blockquote className="text-lg text-gray-700 italic mb-2">
-                      "{block.content.text}"
-                    </blockquote>
-                    {block.content.author && (
-                      <cite className="text-sm text-gray-600">— {block.content.author}</cite>
-                    )}
-                  </div>
-                ) : null;
+                case "list":
+                  return block.content?.title || (block.content?.items && block.content.items.length > 0) ? (
+                    <ProjectContentSection key={index} title={block.content.title || "Liste des actions"} className="scroll-reveal">
+                      <div className="grid md:grid-cols-2 gap-4">
+                        {block.content.items?.map((item, itemIndex) => (
+                          <div key={itemIndex}
+                            // FIX: Replaced border-gray-100 with ACCENT inline style
+                            className={`flex items-start card-lift p-4 bg-white rounded-lg shadow-sm border-l-4 transition-all duration-300 hover:border-l-4`}
+                            style={{ borderColor: ACCENT }}
+                          >
+                            <div className={`rounded-full h-5 w-5 flex items-center justify-center flex-shrink-0 mt-0.5 mr-3`} style={{ color: ACCENT }}>
+                              <ChevronRight className="w-4 h-4" />
+                            </div>
+                            {/* FIX: Replaced text-gray-700 with MUTED_TEXT */}
+                            <p style={{ color: MUTED_TEXT }}>{item}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </ProjectContentSection>
+                  ) : null;
 
-              case "video":
-                return block.content?.videoUrl ? (
-                  <div key={index} className="mb-8">
-                    <div className="bg-gray-100 rounded-lg p-6">
-                      <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                        <Play className="h-5 w-5" />
-                        {block.content.title || "Vidéo"}
+                case "quote":
+                  return block.content?.text ? (
+                    <div key={index}
+                      className={`border-l-4 p-6 rounded-r-xl shadow-md mb-8 scroll-reveal`}
+                      style={{ backgroundColor: `${PRIMARY_LIGHT}80`, borderColor: ACCENT }}
+                    >
+                      <blockquote className={`text-xl italic mb-3`} style={{ color: DARK_TEXT }}>
+                        &ldquo;{block.content.text}&rdquo;
+                      </blockquote>
+                      {block.content.author && (
+                        // FIX: Replaced text-gray-600 with MUTED_TEXT
+                        <cite className="text-sm font-semibold" style={{ color: MUTED_TEXT }}>
+                          \u2014 {block.content.author}
+                        </cite>
+                      )}
+                    </div>
+                  ) : null;
+
+                case "video":
+                  return block.content?.videoUrl ? (
+                    <div key={index} className="mb-8 card-lift bg-white rounded-xl shadow-lg p-6 scroll-reveal">
+                      <h3 className={`text-xl font-semibold mb-4 flex items-center gap-2`} style={{ color: ACCENT }}>
+                        <Play className="h-6 w-6" />
+                        {block.content.title || "Témoignage Vidéo de l'Action"} {/* Enhanced & Fixed Content */}
                       </h3>
-                      <div className="aspect-video bg-gray-200 rounded-lg flex items-center justify-center mb-4">
+                      <div className="aspect-video bg-gray-200 rounded-lg flex items-center justify-center mb-4 overflow-hidden">
                         <iframe
                           src={block.content.videoUrl}
-                          title={block.content.title || "Video"}
+                          title={block.content.title || "Vidéo"} // Fixed Content
                           className="w-full h-full rounded-lg"
                           frameBorder="0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -204,177 +246,225 @@ export default async function ProjectPage({ params }) {
                         />
                       </div>
                       {block.content.description && (
-                        <p className="text-gray-700">{block.content.description}</p>
+                        // FIX: Replaced text-gray-700 with MUTED_TEXT
+                        <p style={{ color: MUTED_TEXT }}>{block.content.description}</p>
                       )}
                     </div>
-                  </div>
-                ) : null;
+                  ) : null;
 
-              case "testimonial":
-                return block.content?.content ? (
-                  <div key={index} className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
-                    <div className="flex items-start gap-4">
-                      {block.content.image && (
-                        <img
-                          src={block.content.image}
-                          alt={block.content.name || ""}
-                          className="w-12 h-12 object-cover rounded-full flex-shrink-0"
-                        />
-                      )}
-                      <div className="flex-1">
-                        <blockquote className="text-gray-700 italic mb-2">
-                          "{block.content.content}"
-                        </blockquote>
-                        <cite className="text-sm text-gray-600">
-                          — {block.content.name}
-                          {block.content.role && `, ${block.content.role}`}
-                        </cite>
-                      </div>
-                    </div>
-                  </div>
-                ) : null;
-
-              case "stats":
-                return block.content?.title || (block.content?.stats && block.content.stats.length > 0) ? (
-                  <ProjectContentSection key={index} title={block.content.title || "Statistiques"} titleColor="green">
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                      {block.content.stats?.map((stat, statIndex) => (
-                        <div key={statIndex} className="bg-white p-4 rounded-lg border border-gray-200 text-center">
-                          <div className="text-2xl font-bold text-green-600 mb-1">{stat.value}</div>
-                          <div className="text-sm text-gray-600">{stat.label}</div>
-                        </div>
-                      ))}
-                    </div>
-                  </ProjectContentSection>
-                ) : null;
-
-              case "timeline":
-                return block.content?.title || (block.content?.events && block.content.events.length > 0) ? (
-                  <ProjectContentSection key={index} title={block.content.title || "Chronologie"} titleColor="green">
-                    <div className="space-y-6">
-                      {block.content.events?.map((event, eventIndex) => (
-                        <div key={eventIndex} className="flex items-start gap-4">
-                          <div className="bg-brand-100 text-green-600 rounded-full h-10 w-10 flex items-center justify-center flex-shrink-0 mt-1">
-                            <span className="text-sm font-bold">{event.year}</span>
-                          </div>
-                          <div className="flex-1">
-                            <h4 className="font-semibold text-gray-900">{event.title}</h4>
-                            <p className="text-gray-700 mt-1">{event.description}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </ProjectContentSection>
-                ) : null;
-
-              case "faq":
-                return block.content?.title || (block.content?.questions && block.content.questions.length > 0) ? (
-                  <ProjectContentSection key={index} title={block.content.title || "Questions Fréquentes"} titleColor="green">
-                    <div className="space-y-4">
-                      {block.content.questions?.map((question, questionIndex) => (
-                        <div key={questionIndex} className="border border-gray-200 rounded-lg p-4">
-                          <h4 className="font-semibold text-gray-900 mb-2">{question.question}</h4>
-                          <p className="text-gray-700">{question.answer}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </ProjectContentSection>
-                ) : null;
-
-              case "cta":
-                return block.content?.title || block.content?.description ? (
-                  <div key={index} className="bg-brand-50 border border-green-200 rounded-lg p-6 mb-8 text-center">
-                    <h3 className="text-xl font-bold mb-2 text-green-800">{block.content.title}</h3>
-                    <p className="text-gray-700 mb-4">{block.content.description}</p>
-                    {block.content.buttonText && block.content.buttonUrl && (
-                      <Link href={block.content.buttonUrl} className="inline-flex items-center px-6 py-3 bg-brand-600 text-white rounded-md hover:bg-brand-700 transition-colors">
-                        {block.content.buttonText}
-                      </Link>
-                    )}
-                  </div>
-                ) : null;
-
-              case "file":
-                return block.content?.title || block.content?.fileUrl ? (
-                  <div key={index} className="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-8">
-                    <h4 className="font-semibold mb-2">{block.content.title}</h4>
-                    {block.content.description && (
-                      <p className="text-gray-700 mb-3">{block.content.description}</p>
-                    )}
-                    {block.content.fileUrl && (
-                      <a
-                        href={block.content.fileUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-                      >
-                        Télécharger {block.content.fileName || "le fichier"}
-                      </a>
-                    )}
-                  </div>
-                ) : null;
-
-              case "map":
-                return block.content?.title || block.content?.address ? (
-                  <ProjectContentSection key={index} title={block.content.title || "Localisation"} titleColor="green">
-                    <div className="bg-gray-100 rounded-lg p-4">
-                      {block.content.embedUrl ? (
-                        <iframe
-                          src={block.content.embedUrl}
-                          className="w-full h-64 rounded-lg"
-                          frameBorder="0"
-                          allowFullScreen=""
-                          loading="lazy"
-                        />
-                      ) : (
-                        <div className="text-center py-8 text-gray-500">
-                          <MapPin className="h-12 w-12 mx-auto mb-4 text-gray-400" />
-                          <p>{block.content.address}</p>
-                        </div>
-                      )}
-                    </div>
-                  </ProjectContentSection>
-                ) : null;
-
-              case "award":
-                return block.content?.title || block.content?.description ? (
-                  <div key={index} className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mb-8">
-                    <div className="flex items-start gap-4">
-                      {block.content.image && (
-                        <img
-                          src={block.content.image}
-                          alt={block.content.title || ""}
-                          className="w-16 h-16 object-cover rounded-lg flex-shrink-0"
-                        />
-                      )}
-                      <div className="flex-1">
-                        <h3 className="text-xl font-bold mb-2 text-yellow-800 flex items-center gap-2">
-                          <Award className="h-5 w-5" />
-                          {block.content.title}
-                        </h3>
-                        <p className="text-gray-700 mb-2">{block.content.description}</p>
-                        <div className="flex gap-4 text-sm text-gray-600">
-                          {block.content.issuer && <span><strong>Émetteur:</strong> {block.content.issuer}</span>}
-                          {block.content.year && <span><strong>Année:</strong> {block.content.year}</span>}
+                case "testimonial":
+                  return block.content?.content ? (
+                    <div key={index}
+                      className={`border rounded-xl p-6 mb-8 scroll-reveal`}
+                      style={{ backgroundColor: `${PRIMARY_LIGHT}80`, borderColor: `${ACCENT}4D` }}
+                    >
+                      <div className="flex items-start gap-4">
+                        {block.content.image && (
+                          <img
+                            src={block.content.image}
+                            alt={block.content.name || "Témoignage"} // Fixed Content
+                            className="w-14 h-14 object-cover rounded-full flex-shrink-0 shadow-md border-2 border-white"
+                          />
+                        )}
+                        <div className="flex-1">
+                          <blockquote className={`italic mb-2 leading-relaxed`} style={{ color: DARK_TEXT }}>
+                            "{block.content.content}"
+                          </blockquote>
+                          <cite className={`text-sm font-semibold`} style={{ color: ACCENT }}>
+                            \u2014 {block.content.name}
+                            {block.content.role && `, ${block.content.role}`}
+                          </cite>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ) : null;
+                  ) : null;
 
-              default:
-                return null;
-            }
-          })}
-        </div>
+                case "stats":
+                  return block.content?.title || (block.content?.stats && block.content.stats.length > 0) ? (
+                    <ProjectContentSection key={index} title={block.content.title || "Chiffres Clés de l'Impact"} className="scroll-reveal"> {/* Enhanced & Fixed Content */}
+                      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {block.content.stats?.map((stat, statIndex) => (
+                          <div key={statIndex}
+                            className={`bg-white p-4 rounded-xl shadow-md border-t-4 border-opacity-70 text-center card-lift transition-all duration-300`}
+                            style={{ borderColor: `${ACCENT}B3` }}
+                          >
+                            <div className={`text-3xl font-extrabold mb-1`} style={{ color: ACCENT }}>{stat.value}</div>
+                            {/* FIX: Replaced text-gray-600 with MUTED_TEXT */}
+                            <div className="text-sm font-medium" style={{ color: MUTED_TEXT }}>{stat.label}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </ProjectContentSection>
+                  ) : null;
 
-        {/* Sidebar */}
-        <ProjectSidebar
-          projectTitle={project.title}
-          targetAudience={[]}
-          facilities={[]}
-        />
-      </section>
-    </Container>
+                case "timeline":
+                  return block.content?.title || (block.content?.events && block.content.events.length > 0) ? (
+                    <ProjectContentSection key={index} title={block.content.title || "Notre Parcours (Chronologie)"} className="scroll-reveal"> {/* Enhanced & Fixed Content */}
+                      {/* FIX: Replaced border-gray-200 with PRIMARY_LIGHT */}
+                      <ol className={`relative border-l ml-4`} style={{ borderColor: PRIMARY_LIGHT }}>
+                        {block.content.events?.map((event, eventIndex) => (
+                          <li key={eventIndex} className="mb-10 ml-6 scroll-reveal" style={{ animationDelay: `${eventIndex * 0.15}s` }}>
+                            <span
+                              // FIX: Replaced ring-8 ring-[${BACKGROUND}] with custom box-shadow to simulate ring
+                              className={`absolute flex items-center justify-center w-8 h-8 rounded-full -left-4 text-white shadow-lg`}
+                              style={{
+                                backgroundColor: ACCENT,
+                                // Simulate ring-8 ring-BACKGROUND
+                                boxShadow: `0 0 0 8px ${BACKGROUND}, 0 4px 6px -1px rgba(0, 0, 0, 0.1)`,
+                              }}
+                            >
+                              <Clock className="w-4 h-4" />
+                            </span>
+                            <h4 className={`font-bold text-lg mb-1`} style={{ color: DARK_TEXT }}>{event.title}</h4>
+                            <time className={`block mb-2 text-sm font-normal leading-none`} style={{ color: ACCENT }}>
+                              {event.year}
+                            </time>
+                            {/* FIX: Replaced text-gray-700 with MUTED_TEXT */}
+                            <p className="text-base font-normal" style={{ color: MUTED_TEXT }}>{event.description}</p>
+                          </li>
+                        ))}
+                      </ol>
+                    </ProjectContentSection>
+                  ) : null;
+
+                case "faq":
+                  return block.content?.title || (block.content?.questions && block.content.questions.length > 0) ? (
+                    <ProjectContentSection key={index} title={block.content.title || "Vos Interrogations (FAQ)"} className="scroll-reveal"> {/* Enhanced & Fixed Content */}
+                      <div className="space-y-4">
+                        {block.content.questions?.map((question, questionIndex) => (
+                          <div key={questionIndex}
+                            className={`card-lift bg-white border-l-4 rounded-xl p-4 shadow-md transition-all duration-300 hover:shadow-lg`}
+                            style={{ borderColor: `${ACCENT}80` }}
+                          >
+                            {/* FIX: Replaced text-gray-900 with DARK_TEXT */}
+                            <h4 className={`font-semibold mb-2 text-lg`} style={{ color: DARK_TEXT }}>{question.question}</h4>
+                            {/* FIX: Replaced text-gray-700 with MUTED_TEXT */}
+                            <p style={{ color: MUTED_TEXT }}>{question.answer}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </ProjectContentSection>
+                  ) : null;
+
+                case "cta":
+                  return block.content?.title || block.content?.description ? (
+                    <div key={index}
+                      className={`border rounded-2xl p-8 mb-8 text-center shadow-xl scroll-reveal`}
+                      style={{ backgroundColor: `${PRIMARY_LIGHT}B3`, borderColor: `${ACCENT}4D` }}
+                    >
+                      <h3 className={`text-3xl font-bold mb-3`} style={{ color: DARK_TEXT }}>{block.content.title}</h3>
+                      {/* FIX: Replaced text-gray-700 with MUTED_TEXT */}
+                      <p className="text-lg mb-6" style={{ color: MUTED_TEXT }}>{block.content.description}</p>
+                      {block.content.buttonText && block.content.buttonUrl && (
+                        <Button href={block.content.buttonUrl} variant="primary" className="inline-flex">
+                          {block.content.buttonText}
+                        </Button>
+                      )}
+                    </div>
+                  ) : null;
+
+                case "file":
+                  return block.content?.title || block.content?.fileUrl ? (
+                    <div key={index}
+                      // FIX: Replaced border-gray-200 with PRIMARY_LIGHT
+                      className={`border rounded-xl p-6 mb-8 card-lift scroll-reveal`}
+                      style={{ backgroundColor: `${PRIMARY_LIGHT}80`, borderColor: PRIMARY_LIGHT }}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h4 className={`font-bold text-lg mb-1`} style={{ color: DARK_TEXT }}>{block.content.title}</h4>
+                          {block.content.description && (
+                            // FIX: Replaced text-gray-700 with MUTED_TEXT
+                            <p className="mb-3 text-sm" style={{ color: MUTED_TEXT }}>{block.content.description}</p>
+                          )}
+                        </div>
+                        {block.content.fileUrl && (
+                          <a
+                            href={block.content.fileUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`inline-flex items-center px-4 py-2 text-white rounded-lg hover:opacity-90 transition-colors font-semibold text-sm flex-shrink-0 shadow-md`}
+                            style={{ backgroundColor: ACCENT }}
+                          >
+                            <FileText className="h-4 w-4 mr-2" />
+                            Télécharger le Document {/* Enhanced & Fixed Content */}
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  ) : null;
+
+                case "map":
+                  return block.content?.title || block.content?.address ? (
+                    <ProjectContentSection key={index} title={block.content.title || "Localisation sur le Terrain"} className="scroll-reveal"> {/* Enhanced Content */}
+                      <div className="bg-white rounded-xl shadow-lg p-4" style={{ borderBottom: `4px solid ${ACCENT}` }}>
+                        {block.content.embedUrl ? (
+                          <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
+                            <iframe
+                              src={block.content.embedUrl}
+                              title={block.content.title || "Localisation"}
+                              className="w-full h-full"
+                              style={{ border: 0 }}
+                              allowFullScreen=""
+                              loading="lazy"
+                            />
+                          </div>
+                        ) : (
+                          // FIX: Replaced text-gray-500 with MUTED_TEXT
+                          <div className="text-center py-8" style={{ color: MUTED_TEXT }}>
+                            <MapPin className={`h-12 w-12 mx-auto mb-4`} style={{ color: `${ACCENT}B3` }} />
+                            <p>{block.content.address}</p>
+                          </div>
+                        )}
+                      </div>
+                    </ProjectContentSection>
+                  ) : null;
+
+                case "award":
+                  return block.content?.title || block.content?.description ? (
+                    <div key={index}
+                      className={`bg-white border-l-8 rounded-xl p-6 mb-8 card-lift shadow-lg scroll-reveal`}
+                      style={{ borderColor: ACCENT }}
+                    >
+                      <div className="flex items-start gap-4">
+                        {block.content.image && (
+                          <img
+                            src={block.content.image}
+                            alt={block.content.title || "Reconnaissance"} // Fixed Content
+                            className="w-16 h-16 object-cover rounded-lg flex-shrink-0 shadow-md"
+                          />
+                        )}
+                        <div className="flex-1">
+                          <h3 className={`text-xl font-bold mb-2 flex items-center gap-2`} style={{ color: ACCENT }}>
+                            <Award className="h-5 w-5" />
+                            {block.content.title || "Reconnaissance et Distinction"} {/* Enhanced & Fixed Content */}
+                          </h3>
+                          {/* FIX: Replaced text-gray-700 with MUTED_TEXT */}
+                          <p className="mb-2" style={{ color: MUTED_TEXT }}>{block.content.description}</p>
+                          {/* FIX: Replaced text-gray-600 with MUTED_TEXT and border-gray-100 with PRIMARY_LIGHT */}
+                          <div className="flex gap-4 text-sm pt-2 border-t" style={{ color: MUTED_TEXT, borderColor: PRIMARY_LIGHT }}>
+                            {block.content.issuer && <span><strong>Organisme Émetteur:</strong> {block.content.issuer}</span>} {/* Enhanced & Fixed Content */}
+                            {block.content.year && <span><strong>Année:</strong> {block.content.year}</span>} {/* Fixed Content */}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ) : null;
+
+                default:
+                  return null;
+              }
+            })}
+          </div>
+
+          {/* Sidebar */}
+          <ProjectSidebar
+            projectTitle={project.title}
+            targetAudience={project.content?.filter(b => b.type === 'programme')?.map(b => b.content?.duration) || ["Communautés rurales"]} // Fixed Content
+            facilities={project.content?.filter(b => b.type === 'map')?.map(b => b.content?.address) || ["École construite", "Centre de santé"]} // Fixed Content
+          />
+        </section>
+      </Container>
+    </main>
   );
 }

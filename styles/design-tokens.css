@@ -2,40 +2,41 @@
    Enhanced design system with CSS custom properties for consistent styling */
 
 :root {
-  /* Color Palette - Serene Azure Palette */
-  --foundation-blue: #5D8FBD; /* Tranquil Blue */
-  --comfort-slate: #4A4A4A; /* Charcoal Gray */
-  --compassion-red: #A11721; /* Accent Red */
+  /* Color Palette - Foundation Blueprint Design System */
+  --primary: #B0E0E6; /* Powder Blue - Primary color */
+  --accent: #6495ED; /* Cornflower Blue - Accent color */
+  --text: #333333; /* Dark Gray - Text color */
+  --background: #FAFAFA; /* Off-White - Background color */
 
   /* Color Palette - Secondary Colors */
-  --light-gray: #F5F9FC; /* Polar Mist */
-  --medium-gray: #767676; /* Dusty Gray */
-  --dark-gray: #3A6B9B; /* Deep Comfort */
-  --pure-white: #FFF9F0; /* Warm Pearl */
-  --slate-dark: #E1EFF9; /* Soft Sky */
+  --primary-light: #B0E0E6; /* Powder Blue for light backgrounds */
+  --primary-dark: #6495ED; /* Cornflower Blue for darker accents */
+  --text-light: #666666; /* Light gray for secondary text */
+  --surface: #FFFFFF; /* White for card surfaces */
+  --border: #E5E7EB; /* Light border color */
 
   /* Color Palette - Semantic Colors */
-  --success: #5D8FBD;
-  --warning: #f59e0b;
-  --error: var(--compassion-red);
-  --info: #A0C4E1;
+  --success: #10B981; /* Green for success states */
+  --warning: #F59E0B; /* Yellow for warnings */
+  --error: #EF4444; /* Red for errors */
+  --info: var(--accent); /* Accent blue for info */
 
-  /* UI Foundation Colors */
-  --bg: var(--light-gray);
-  --surface: var(--slate-dark);
-  --text: var(--comfort-slate);
-  --muted: var(--medium-gray);
-  --border: #A0C4E1;
+  /* UI Foundation Colors - Blueprint compliant */
+  --bg: var(--background);
+  --surface: var(--surface);
+  --text: var(--text);
+  --muted: var(--text-light);
+  --border: var(--border);
 
-  /* Brand Colors */
-  --color-primary: var(--foundation-blue);
-  --color-primary-dark: var(--dark-gray);
-  --color-primary-light: #A0C4E1;
-  --color-secondary: #A0C4E1;
-  --color-secondary-dark: var(--dark-gray);
-  --color-secondary-light: var(--slate-dark);
-  --color-accent: var(--compassion-red);
-  --color-accent-dark: #711017;
+  /* Brand Colors - Blueprint design system */
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
+  --color-secondary: var(--primary-light);
+  --color-secondary-dark: var(--primary-dark);
+  --color-secondary-light: var(--background);
+  --color-accent: var(--accent);
+  --color-accent-dark: #4B77D1;
 
   /* Typography - Font Families */
   --font-primary: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;

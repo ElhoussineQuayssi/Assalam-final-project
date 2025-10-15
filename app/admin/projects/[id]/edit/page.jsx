@@ -3,10 +3,10 @@
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { updateProject } from "lib/actions";
-import BasicInformationBlock from "components/blocks/BasicInformationBlock";
-import ContentBuilderBlock from "components/blocks/ContentBuilderBlock";
-import SidebarBlocks from "components/blocks/SidebarBlocks";
-import ContentBlock from "components/blocks/ContentBlock";
+import BasicInformationBlock from "@/components/blocks/BasicInformationBlock";
+import ContentBuilderBlock from "@/components/blocks/ContentBuilderBlock";
+import SidebarBlocks from "@/components/blocks/SidebarBlocks";
+import ContentBlock from "@/components/blocks/ContentBlock";
 import {
   Plus,
   Trash2,
@@ -86,7 +86,9 @@ export default function EditProject() {
     { type: "services", label: "Services", icon: Heart },
     { type: "sponsorship", label: "Parrainage", icon: UserCheck },
     { type: "impact", label: "Impact", icon: TrendingUp },
-    { type: "team", label: "Équipe", icon: Briefcase },]
+    { type: "team", label: "Équipe", icon: Briefcase },
+  ];
+
   // Load existing project data
   useEffect(() => {
     const loadProject = async () => {
@@ -319,70 +321,80 @@ export default function EditProject() {
   }
 
   return (
-    <div className="p-8">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Modifier le Projet</h1>
-        <div className="flex gap-2">
-          <button
-            type="button"
-            onClick={() => setShowPreview(!showPreview)}
-            className="flex items-center gap-2 px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50"
+    // Main canvas background - Design System background color
+    <main className="bg-background min-h-screen py-10 px-4 md:px-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex justify-between items-center mb-10 scroll-reveal">
+          {/* H2 Typography Style for Title */}
+          <h1
+            className="text-4xl font-bold text-dark-text pb-2 mb-1"
+            style={{ borderBottom: '3px solid var(--color-accent)' }}
           >
-            <Eye className="h-4 w-4" />
-            {showPreview ? "Modifier" : "Aperçu"}
-          </button>
+            Modifier le Projet
+          </h1>
+          <div className="flex gap-4">
+            <button
+              type="button"
+              onClick={() => setShowPreview(!showPreview)}
+              // Outline Button Pattern
+              className="text-accent border border-accent rounded-lg px-4 py-2 hover:bg-accent hover:text-white transition-all duration-300 flex items-center"
+            >
+              <Eye className="w-5 h-5 mr-2" />
+              {showPreview ? "Modifier" : "Aperçu"}
+            </button>
+          </div>
         </div>
-      </div>
 
-      {formState.status === "error" && (
-        <div className="bg-red-50 border border-red-200 text-red-800 rounded-lg p-4 mb-6 flex items-start">
-          <AlertTriangle className="h-5 w-5 mr-2 mt-0.5 flex-shrink-0" />
-          <p>{formState.message}</p>
-        </div>
-      )}
+        {formState.status === "error" && (
+          <div className="bg-red-50 border border-red-200 text-red-800 rounded-lg p-4 mb-6 flex items-start">
+            <AlertTriangle className="h-5 w-5 mr-2 mt-0.5 flex-shrink-0" />
+            <p>{formState.message}</p>
+          </div>
+        )}
 
-      {formState.status === "success" && (
-        <div className="bg-green-50 border border-green-200 text-green-800 rounded-lg p-4 mb-6">
-          <p>{formState.message}</p>
-        </div>
-      )}
+        {formState.status === "success" && (
+          <div className="bg-green-50 border border-green-200 text-green-800 rounded-lg p-4 mb-6">
+            <p>{formState.message}</p>
+          </div>
+        )}
 
-      <form onSubmit={handleSubmit} className="space-y-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-2">
-            <BasicInformationBlock
+        <form onSubmit={handleSubmit} className="space-y-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Main Content (lg:col-span-2) */}
+            <div className="lg:col-span-2">
+              <BasicInformationBlock
+                projectData={projectData}
+                handleInputChange={handleInputChange}
+              />
+
+              <ContentBuilderBlock
+                projectData={projectData}
+                contentTypes={contentTypes}
+                addContentBlock={addContentBlock}
+                renderContentBlock={renderContentBlock}
+              />
+            </div>
+
+            {/* Sidebar (lg:col-span-1) */}
+            <SidebarBlocks
               projectData={projectData}
-              handleInputChange={handleInputChange}
-            />
-
-            <ContentBuilderBlock
-              projectData={projectData}
-              contentTypes={contentTypes}
-              addContentBlock={addContentBlock}
-              renderContentBlock={renderContentBlock}
+              newCategory={newCategory}
+              setNewCategory={setNewCategory}
+              addCategory={addCategory}
+              removeCategory={removeCategory}
+              newGoal={newGoal}
+              setNewGoal={setNewGoal}
+              addGoal={addGoal}
+              removeGoal={removeGoal}
+              formState={formState}
+              submitButtonText="Mettre à Jour le Projet"
+              onSubmit={handleSubmit}
+              addImage={addImage}
+              removeImage={removeImage}
             />
           </div>
-
-          <SidebarBlocks
-            projectData={projectData}
-            newCategory={newCategory}
-            setNewCategory={setNewCategory}
-            addCategory={addCategory}
-            removeCategory={removeCategory}
-            newGoal={newGoal}
-            setNewGoal={setNewGoal}
-            addGoal={addGoal}
-            removeGoal={removeGoal}
-            formState={formState}
-            submitButtonText="Mettre à Jour le Projet"
-            onSubmit={handleSubmit}
-            addImage={addImage}
-            removeImage={removeImage}
-          />
-        </div>
-      </form>
-    </div>
+        </form>
+      </div>
+    </main>
   );
 }
-

@@ -1,0 +1,360 @@
+<best_practices>
+  <design_system_extraction>
+    <html_blueprint_reference>
+      <file>foundation-blueprint.html</file>
+      <description>This HTML file contains the comprehensive design system that must be extracted and applied to all component transformations</description>
+    </html_blueprint_reference>
+
+    <color_system_extraction>
+      <css_custom_properties>
+        <property name="--color-primary">#B0E0E6 (Powder Blue - Light Blue Main)</property>
+        <property name="--color-accent">#6495ED (Cornflower Blue - Vibrant Accent)</property>
+        <property name="--color-text">#333333 (Dark Gray for Readability)</property>
+        <property name="--color-background">#FAFAFA (Off-White/Light Gray Background)</property>
+      </css_custom_properties>
+
+      <tailwind_extensions>
+        <color name="primary">var(--color-primary)</color>
+        <color name="accent">var(--color-accent)</color>
+        <color name="dark-text">var(--color-text)</color>
+        <color name="background">var(--color-background)</color>
+      </tailwind_extensions>
+
+      <utility_classes>
+        <class>.bg-primary-light { background-color: var(--color-primary); }</class>
+        <class>.bg-accent { background-color: var(--color-accent); }</class>
+        <class>.text-primary { color: var(--color-primary); }</class>
+        <class>.text-accent { color: var(--color-accent); }</class>
+        <class>.text-dark { color: var(--color-text); }</class>
+        <class>.border-accent { border-color: var(--color-accent); }</class>
+      </utility_classes>
+    </color_system_extraction>
+
+    <typography_system_extraction>
+      <font_scale>
+        <heading_sizes>text-5xl, text-4xl, text-xl</heading_sizes>
+        <body_sizes>text-lg, text-sm</body_sizes>
+        <special_sizes>text-2xl (logos, hero text)</special_sizes>
+      </font_scale>
+
+      <font_weights>
+        <weight>font-extrabold: Hero headlines, major headings</weight>
+        <weight>font-bold: Section headers, important CTAs</weight>
+        <weight>font-semibold: Sub-headers, buttons, emphasized text</weight>
+        <weight>font-normal: Body text, regular content</weight>
+      </font_weights>
+    </typography_system_extraction>
+
+    <layout_system_extraction>
+      <container_pattern>
+        <code><![CDATA[<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">]]></code>
+        <description>Standard container pattern used throughout the blueprint</description>
+      </container_pattern>
+
+      <grid_patterns>
+        <pattern>Responsive columns: grid-cols-1 md:grid-cols-3, grid-cols-1 md:grid-cols-2 lg:grid-cols-3</pattern>
+        <pattern>Consistent gap usage: gap-8</pattern>
+      </grid_patterns>
+
+      <spacing_scale>
+        <section_padding>py-12, py-20, py-24</section_padding>
+        <margins>mb-16, mb-20, mt-16</margins>
+        <component_spacing>p-6, p-8</component_spacing>
+      </spacing_scale>
+    </layout_system_extraction>
+
+    <component_patterns_extraction>
+      <hero_section>
+        <structure>Centered text alignment, large headline with accent span, supportive paragraph, CTA button</structure>
+        <styling>py-24 bg-primary-light rounded-2xl</styling>
+        <button_styling>px-8 py-4 rounded-full bg-accent text-white font-bold text-lg shadow-xl hover:shadow-2xl transform hover:scale-105</button_styling>
+      </hero_section>
+
+      <stats_card>
+        <structure>Large numbers, descriptive text, centered layout</structure>
+        <styling>bg-white p-8 rounded-xl shadow-lg border-t-4 border-accent text-center card-lift</styling>
+      </stats_card>
+
+      <content_card>
+        <structure>Image placeholder div, title, description, view button</structure>
+        <styling>card-lift bg-white rounded-xl shadow-lg overflow-hidden</styling>
+        <image_styling>h-48 bg-primary-light/70 flex items-center justify-center text-accent font-bold</image_styling>
+      </content_card>
+
+      <testimonial_card>
+        <structure>Star ratings, italic quote, author name</structure>
+        <styling>card-lift bg-white p-8 rounded-xl shadow-lg border-l-4 border-accent</styling>
+      </testimonial_card>
+
+      <timeline>
+        <structure>Connected dots with line, step number, title, description</structure>
+        <styling>timeline-line (primary color), timeline-dot (accent with primary shadow)</styling>
+      </timeline>
+    </component_patterns_extraction>
+
+    <animation_system_extraction>
+      <keyframes>
+        <fadein_animation>opacity: 0 to 1, translateY: 10px to 0, duration 0.8s ease-out</fadein_animation>
+      </keyframes>
+
+      <hover_effects>
+        <card_lift>transform: translateY(-5px), box-shadow with accent-tinted rgba</card_lift>
+        <button_scale>transform: hover:scale-105, shadow transitions</button_scale>
+      </hover_effects>
+
+      <scroll_reveal>
+        <implementation>IntersectionObserver with threshold 0.1</implementation>
+        <staggering>animationDelay = index * 0.15s</staggering>
+      </scroll_reveal>
+    </animation_system_extraction>
+  </design_system_extraction>
+
+  <general_principles>
+    <principle priority="high">
+      <name>Design System First Approach</name>
+      <description>Always extract and apply comprehensive design systems from foundation-blueprint.html before component transformation</description>
+      <rationale>Consistent design systems ensure professional, cohesive visual results</rationale>
+      <example>
+        <good>Extract colors, typography, layout patterns from foundation-blueprint.html before applying to components</good>
+        <good>Maintain design system consistency across all transformed components</good>
+        <good>Document design decisions and pattern usage from the blueprint</good>
+        <bad>Apply random styling without systematic design extraction</bad>
+        <bad>Ignore established design patterns from the HTML blueprint</bad>
+      </example>
+    </principle>
+
+    <principle priority="high">
+      <name>Functionality Preservation</name>
+      <description>Maintain all original component functionality, props, and state logic</description>
+      <rationale>Visual improvements should never break existing functionality</rationale>
+      <example>
+        <good>Test all props work correctly after transformation</good>
+        <good>Verify state management and event handlers remain intact</good>
+        <good>Maintain component interfaces and API compatibility</good>
+        <bad>Remove or modify props without user approval</bad>
+        <bad>Break existing component behavior during redesign</bad>
+      </example>
+    </principle>
+
+    <principle priority="high">
+      <name>JavaScript/JSX Output Standard</name>
+      <description>All transformed components must be valid JavaScript files with JSX syntax</description>
+      <rationale>Ensures compatibility with Next.js and modern React projects</rationale>
+      <example>
+        <good>Output .js files with proper JSX syntax and imports</good>
+        <good>Use ES6+ features like arrow functions and destructuring</good>
+        <good>Ensure valid JavaScript syntax throughout</good>
+        <bad>Output TypeScript files or other formats</bad>
+        <bad>Use JSX without proper JavaScript file extension</bad>
+      </example>
+    </principle>
+  </general_principles>
+
+  <color_system_principles>
+    <principle>
+      <rule>Extract comprehensive color hierarchies from HTML files</rule>
+      <implementation>
+        <step>Identify CSS custom properties (--color-primary, --color-accent, etc.)</step>
+        <step>Map Tailwind color extensions and theme configurations</step>
+        <step>Document color usage patterns (backgrounds, text, borders, accents)</step>
+        <step>Apply consistent color applications throughout components</step>
+      </implementation>
+    </principle>
+
+    <principle>
+      <rule>Implement proper color application rules</rule>
+      <examples>
+        <pattern>Background combinations: bg-primary-light, bg-accent</pattern>
+        <pattern>Text hierarchy: text-primary, text-accent, text-dark</pattern>
+        <pattern>Border usage: border-accent</pattern>
+        <pattern>Hover state transitions: color transitions with proper contrast</pattern>
+      </examples>
+    </principle>
+  </color_system_principles>
+
+  <typography_system_principles>
+    <principle>
+      <rule>Establish consistent font scale hierarchy</rule>
+      <scale>
+        <level>Headings: text-5xl, text-4xl, text-xl</level>
+        <level>Body text: text-lg, text-sm</level>
+        <level>Special elements: text-2xl (logos, hero text)</level>
+      </scale>
+    </principle>
+
+    <principle>
+      <rule>Apply font weight hierarchy appropriately</rule>
+      <weights>
+        <weight>font-extrabold: Hero headlines, major headings</weight>
+        <weight>font-bold: Section headers, important CTAs</weight>
+        <weight>font-semibold: Sub-headers, buttons, emphasized text</weight>
+        <weight>font-normal: Body text, regular content</weight>
+      </weights>
+    </principle>
+
+    <principle>
+      <rule>Ensure proper text color application</rule>
+      <guidelines>
+        <rule>Use primary accent colors for emphasis and branding</rule>
+        <rule>Maintain dark text for optimal readability</rule>
+        <rule>Apply white text only on colored backgrounds</rule>
+        <rule>Ensure proper contrast ratios for accessibility</rule>
+      </guidelines>
+    </principle>
+  </typography_system_principles>
+
+  <layout_architecture_principles>
+    <principle>
+      <rule>Implement consistent container systems</rule>
+      <pattern>
+        <code><![CDATA[<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">]]></code>
+        <description>Standard container pattern for content sections</description>
+      </pattern>
+    </principle>
+
+    <principle>
+      <rule>Use responsive grid patterns effectively</rule>
+      <examples>
+        <pattern>Responsive columns: grid-cols-1 md:grid-cols-3</pattern>
+        <pattern>Consistent gap usage: gap-8, gap-6</pattern>
+        <pattern>Card grids with hover animations</pattern>
+      </examples>
+    </principle>
+
+    <principle>
+      <rule>Apply spacing scale consistently</rule>
+      <scale>
+        <section_padding>py-12, py-20, py-24</section_padding>
+        <margins>mb-16, mb-20, mt-16</margins>
+        <component_spacing>p-6, p-8</component_spacing>
+      </spacing_scale>
+    </principle>
+  </layout_architecture_principles>
+
+  <component_pattern_library>
+    <pattern name="hero_section">
+      <structure>Centered text alignment, large headline, supportive paragraph, CTA button</structure>
+      <styling>py-24 bg-primary-light rounded-2xl mb-16 scroll-reveal</styling>
+    </pattern>
+
+    <pattern name="stats_card">
+      <structure>Large numbers, border-top accent, centered content</structure>
+      <styling>bg-white p-8 rounded-xl shadow-lg border-t-4 border-accent text-center card-lift scroll-reveal</styling>
+    </pattern>
+
+    <pattern name="content_card">
+      <structure>Image placeholder, hover lift effect, border accents</structure>
+      <styling>card-lift bg-white rounded-xl shadow-lg overflow-hidden scroll-reveal</styling>
+      <image_styling>h-48 bg-primary-light/70 flex items-center justify-center text-accent font-bold</image_styling>
+    </pattern>
+
+    <pattern name="testimonial_card">
+      <structure>Border-left accent, star ratings, italic quotes</structure>
+      <styling>card-lift bg-white p-8 rounded-xl shadow-lg border-l-4 border-accent scroll-reveal</styling>
+    </pattern>
+
+    <pattern name="timeline">
+      <structure>Connected dots with timeline line, step titles and descriptions</structure>
+      <styling>timeline-line (primary color background), timeline-dot (accent with primary shadow)</styling>
+    </pattern>
+  </component_pattern_library>
+
+  <animation_interaction_system>
+    <principle>
+      <rule>Implement smooth CSS animations with fadeIn keyframes</rule>
+      <types>
+        <animation>fadeIn: opacity + translateY transformation, 0.8s ease-out</animation>
+        <animation>card-lift: translateY + box-shadow on hover with accent-tinted shadow</animation>
+        <animation>scroll-reveal: IntersectionObserver triggered with threshold 0.1</animation>
+      </types>
+    </principle>
+
+    <principle>
+      <rule>Use appropriate transition patterns</rule>
+      <patterns>
+        <transition>duration-300 for hover states</transition>
+        <transition>duration-200 for text color changes</transition>
+        <transition>transform properties for scale effects (hover:scale-105)</transition>
+        <transition>box-shadow transitions for elevation changes</transition>
+      </patterns>
+    </principle>
+
+    <principle>
+      <rule>Apply staggered animation timing with scroll reveals</rule>
+      <technique>Animation delays: index * 0.15s for sequential reveals</technique>
+      <technique>IntersectionObserver observes elements with class 'scroll-reveal'</technique>
+    </principle>
+  </animation_interaction_system>
+
+  <transformation_protocol_best_practices>
+    <phase_practice phase="1_analysis_mapping">
+      <practice>Thoroughly analyze component structure and map to design patterns from blueprint</practice>
+      <practice>Document all props, state, and functionality before transformation</practice>
+      <practice>Identify integration points and dependencies</practice>
+    </phase_practice>
+
+    <phase_practice phase="2_systematic_transformation">
+      <practice>Apply layout restructuring with responsive container systems from blueprint</practice>
+      <practice>Implement design system styling with consistent utility classes</practice>
+      <practice>Add interactive enhancements and animations matching blueprint patterns</practice>
+      <practice>Maintain accessibility standards throughout</practice>
+    </phase_practice>
+
+    <phase_practice phase="3_quality_assurance">
+      <practice>Verify all original functionality preserved</practice>
+      <practice>Validate design system compliance against foundation-blueprint.html</practice>
+      <practice>Test responsive behavior and accessibility</practice>
+      <practice>Ensure valid JavaScript/JSX syntax</practice>
+    </phase_practice>
+  </transformation_protocol_best_practices>
+
+  <code_standards>
+    <standard category="file_format">
+      <requirement>All components must be .js files with JSX syntax</requirement>
+      <requirement>Use ES6+ features (arrow functions, destructuring, spread)</requirement>
+      <requirement>Proper import/export statements for Next.js compatibility</requirement>
+    </standard>
+
+    <standard category="styling">
+      <requirement>Complete Tailwind CSS utility class coverage from blueprint patterns</requirement>
+      <requirement>Responsive design with mobile-first breakpoint implementation</requirement>
+      <requirement>Consistent spacing using design system tokens from blueprint</requirement>
+    </standard>
+
+    <standard category="documentation">
+      <requirement>JSDoc comments for component descriptions and props</requirement>
+      <requirement>Inline comments for complex design decisions referencing blueprint</requirement>
+      <requirement>Pattern references and design system documentation</requirement>
+    </standard>
+  </code_standards>
+
+  <quality_assurance_checklist>
+    <category name="functionality">
+      <item>All original props and functionality work correctly</item>
+      <item>Component state management preserved</item>
+      <item>Event handlers and callbacks intact</item>
+      <item>Component API compatibility maintained</item>
+    </category>
+
+    <category name="design_system">
+      <item>Color hierarchy properly applied from foundation-blueprint.html</item>
+      <item>Typography scale consistently used matching blueprint</item>
+      <item>Layout patterns correctly implemented from blueprint</item>
+      <item>Animation system properly integrated with blueprint patterns</item>
+    </category>
+
+    <category name="technical">
+      <item>Valid JavaScript/JSX syntax</item>
+      <item>Proper file extension (.js)</item>
+      <item>ES6+ features used appropriately</item>
+      <item>Imports and exports correctly structured</item>
+    </category>
+
+    <category name="accessibility">
+      <item>ARIA attributes properly implemented</item>
+      <item>Semantic HTML structure maintained</item>
+      <item>Keyboard navigation supported</item>
+      <item>Screen reader compatibility ensured</item>
+    </category>
+  </quality_assurance_checklist>
+</best_practices>

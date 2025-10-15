@@ -1,4 +1,5 @@
 import "./globals.css";
+import ClientWrapper from "./ClientWrapper";
 
 export const metadata = {
   title: "Fondation Assalam",
@@ -8,14 +9,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
+    // FIX: Set language to French for semantic correctness
     <html lang="fr">
-      <head>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-        {metadata.generator && <meta name="generator" content={metadata.generator} />}
-      </head>
       <body className="font-sans">
-        {children}
+        <ClientWrapper>
+          {children}
+        </ClientWrapper>
       </body>
     </html>
   );

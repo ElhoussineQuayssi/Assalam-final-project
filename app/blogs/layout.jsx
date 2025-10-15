@@ -1,5 +1,4 @@
 import "../globals.css";
-import { Layout } from "components/unified";
 
 export const metadata = {
   title: "Fondation Assalam",
@@ -8,5 +7,5 @@ export const metadata = {
 };
 
 export default function BlogsLayout({ children }) {
-  return <Layout metadata={metadata}>{children}</Layout>;
+  return <>{children}</>;
 }

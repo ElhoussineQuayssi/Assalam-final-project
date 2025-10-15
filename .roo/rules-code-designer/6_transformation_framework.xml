@@ -1,0 +1,278 @@
+<transformation_framework>
+  <overview>
+    Detailed framework for systematic component transformation using the extracted design system from foundation-blueprint.html.
+    This framework ensures consistent application of the three-phase transformation protocol.
+  </overview>
+
+  <phase_1_analysis_mapping>
+    <step name="component_structure_analysis">
+      <actions>
+        <action>Read existing component file to understand current implementation</action>
+        <action>Map component hierarchy: identify main container, sections, and child elements</action>
+        <action>Document prop interface: list all props, their types, and default values</action>
+        <action>Identify state management: note useState hooks, state variables, and their purposes</action>
+        <action>Document event handlers: map onClick, onChange, and other interaction handlers</action>
+        <action>Assess current styling: identify existing className patterns and inline styles</action>
+      </actions>
+      <output>Component analysis document with hierarchy map, prop interface, and functionality inventory</output>
+    </step>
+
+    <step name="design_system_alignment">
+      <actions>
+        <action>Reference foundation-blueprint.html for design patterns</action>
+        <action>Match component type to blueprint patterns (hero, card, section, etc.)</action>
+        <action>Identify color system applications: primary, accent, text, background usage</action>
+        <action>Plan typography hierarchy: heading sizes, font weights, text colors</action>
+        <action>Map layout requirements: container system, grid patterns, spacing scale</action>
+        <action>Determine animation needs: scroll-reveal, hover effects, transitions</action>
+      </actions>
+      <output>Design alignment plan mapping existing component to blueprint patterns</output>
+    </step>
+
+    <step name="transformation_planning">
+      <actions>
+        <action>Create transformation roadmap with specific implementation steps</action>
+        <action>Identify required imports (React, components, utilities)</action>
+        <action>Plan className restructuring to use design system utilities</action>
+        <action>Design responsive breakpoint implementation</action>
+        <action>Plan accessibility enhancements (ARIA, semantic HTML)</action>
+        <action>Document fallback strategies for edge cases</action>
+      </actions>
+      <output>Detailed transformation plan with step-by-step implementation guide</output>
+    </step>
+  </phase_1_analysis_mapping>
+
+  <phase_2_systematic_transformation>
+    <step name="layout_restructuring">
+      <actions>
+        <action>Implement container system: max-w-7xl mx-auto px-4 sm:px-6 lg:px-8</action>
+        <action>Apply responsive grid patterns: grid-cols-1 md:grid-cols-3, gap-8</action>
+        <action>Establish spacing rhythm: py-12, py-20, py-24, mb-16, p-6, p-8</action>
+        <action>Restructure component sections to match blueprint layout patterns</action>
+        <action>Ensure mobile-first responsive design implementation</action>
+      </actions>
+      <validation>
+        <check>Container properly constrains content width</check>
+        <check>Grid layouts work across all breakpoints</check>
+        <check>Spacing creates proper visual hierarchy</check>
+        <check>Layout matches blueprint section patterns</check>
+      </validation>
+    </step>
+
+    <step name="styling_application">
+      <actions>
+        <action>Replace existing styles with design system utility classes</action>
+        <action>Apply color hierarchy: bg-primary-light, bg-accent, text-accent, text-dark</action>
+        <action>Implement typography scale: text-5xl, text-4xl, text-xl, font-extrabold, font-bold</action>
+        <action>Add component-specific styling patterns from blueprint</action>
+        <action>Ensure proper contrast ratios for accessibility</action>
+      </actions>
+      <styling_patterns>
+        <hero_section>py-24 bg-primary-light rounded-2xl</hero_section>
+        <stats_card>bg-white p-8 rounded-xl shadow-lg border-t-4 border-accent text-center</stats_card>
+        <content_card>bg-white rounded-xl shadow-lg overflow-hidden</content_card>
+        <testimonial_card>bg-white p-8 rounded-xl shadow-lg border-l-4 border-accent</testimonial_card>
+        <button_primary>px-8 py-4 rounded-full bg-accent text-white font-bold text-lg shadow-xl hover:shadow-2xl transform hover:scale-105</button_primary>
+      </styling_patterns>
+    </step>
+
+    <step name="interactive_enhancement">
+      <actions>
+        <action>Implement card-lift hover effects: transform translateY(-5px) with accent-tinted shadow</action>
+        <action>Add button scale animations: hover:scale-105 with shadow transitions</action>
+        <action>Apply scroll-reveal animations with IntersectionObserver</action>
+        <action>Implement staggered animation delays: index * 0.15s</action>
+        <action>Add proper transition durations: duration-300, duration-200</action>
+        <action>Ensure smooth easing curves for all animations</action>
+      </actions>
+      <animation_implementation>
+        <css_classes>
+          <class>card-lift: transition transform 0.3s ease, box-shadow 0.3s ease</class>
+          <class>animate-fade-in: animation fadeIn 0.8s ease-out forwards</class>
+          <class>scroll-reveal: initial opacity 0, revealed opacity 1</class>
+        </css_classes>
+        <javascript_integration>
+          <observer_setup>IntersectionObserver with threshold 0.1</observer_setup>
+          <stagger_logic>element.style.animationDelay = index * 0.15s</stagger_logic>
+        </javascript_integration>
+      </animation_implementation>
+    </step>
+  </phase_2_systematic_transformation>
+
+  <phase_3_quality_assurance>
+    <step name="functionality_preservation">
+      <actions>
+        <action>Verify all original props work correctly after transformation</action>
+        <action>Test state management and useState hooks remain functional</action>
+        <action>Confirm event handlers (onClick, onChange, etc.) are preserved</action>
+        <action>Validate component API compatibility and prop passing</action>
+        <action>Ensure no breaking changes to parent component integrations</action>
+      </actions>
+      <testing_checklist>
+        <test>Prop destructuring works correctly</test>
+        <test>Default props are properly set</test>
+        <test>Event callbacks execute as expected</test>
+        <test>Component re-renders with state changes</test>
+        <test>Conditional rendering logic intact</test>
+      </testing_checklist>
+    </step>
+
+    <step name="design_system_compliance">
+      <actions>
+        <action>Validate color usage matches foundation-blueprint.html patterns</action>
+        <action>Confirm typography hierarchy follows blueprint scale</action>
+        <action>Check layout implementation against blueprint containers and grids</action>
+        <action>Verify animation patterns match blueprint specifications</action>
+        <action>Ensure component patterns align with blueprint examples</action>
+      </actions>
+      <compliance_checks>
+        <check>CSS custom properties used correctly (--color-primary, --color-accent)</check>
+        <check>Tailwind extensions applied (primary, accent, dark-text)</check>
+        <check>Utility classes match blueprint patterns (.bg-primary-light, .border-accent)</check>
+        <check>Font scale hierarchy maintained (text-5xl, font-extrabold, etc.)</check>
+        <check>Animation system implemented (fadeIn, card-lift, scroll-reveal)</check>
+      </compliance_checks>
+    </step>
+
+    <step name="javascript_jsx_validation">
+      <actions>
+        <action>Verify valid JavaScript syntax throughout component</action>
+        <action>Confirm JSX structure is properly formatted</action>
+        <action>Validate ES6+ features usage (arrow functions, destructuring)</action>
+        <action>Check import/export statements are correct</action>
+        <action>Ensure file extension is .js (not .jsx or .ts)</action>
+      </actions>
+      <syntax_requirements>
+        <requirement>Proper JSX opening and closing tags</requirement>
+        <requirement>className instead of class attributes</requirement>
+        <requirement>Curly braces for JavaScript expressions</requirement>
+        <requirement>Proper key props in map operations</requirement>
+        <requirement>Valid JavaScript file extension (.js)</requirement>
+      </syntax_requirements>
+    </step>
+  </phase_3_quality_assurance>
+
+  <code_generation_standards>
+    <file_structure_template>
+      <imports_section>
+        <code>import React from 'react';</code>
+        <comment>// Add other imports as needed for Next.js compatibility</comment>
+      </imports_section>
+
+      <component_definition>
+        <code>const ComponentName = ({ prop1, prop2 }) => {</code>
+        <comment>// Component logic and state management</comment>
+      </code>
+
+      <return_statement>
+        <code>return (</code>
+        <jsx_template>
+          <container><div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"></container>
+          <content>{/* JSX content with Tailwind classes */}</content>
+          <closing></div></closing>
+        </jsx_template>
+        <code>);</code>
+      </return_statement>
+
+      <export_statement>
+        <code>export default ComponentName;</code>
+        <comment>// Default export for Next.js component imports</comment>
+      </export_statement>
+    </file_structure_template>
+
+    <documentation_standards>
+      <jsdoc_comments>
+        <example>
+          <code>/**</code>
+          <code> * Component description with design system references</code>
+          <code> * @param {Object} props - Component properties</code>
+          <code> * @returns {JSX.Element} Transformed component</code>
+          <code> */</code>
+        </example>
+      </jsdoc_comments>
+
+      <inline_comments>
+        <pattern>// Design system reference: hero section pattern from blueprint</pattern>
+        <pattern>{/* Animation delay for staggered reveal */}</pattern>
+        <pattern>// Color hierarchy: accent for primary actions</pattern>
+      </inline_comments>
+    </documentation_standards>
+  </code_generation_standards>
+
+  <component_specific_transformations>
+    <hero_section_transformation>
+      <pattern_matching>Centered content, large headline, paragraph, CTA button</pattern_matching>
+      <styling_application>
+        <code>py-24 bg-primary-light rounded-2xl mb-16 scroll-reveal</code>
+      </styling_application>
+      <typography>
+        <headline>text-5xl md:text-6xl font-extrabold</headline>
+        <subtext>text-lg md:text-xl text-dark-text</subtext>
+        <accent_text>text-accent within headline span</accent_text>
+      </typography>
+    </hero_section_transformation>
+
+    <card_transformations>
+      <stats_card>
+        <structure>p-8 rounded-xl shadow-lg border-t-4 border-accent text-center</structure>
+        <content>text-5xl font-extrabold text-accent + descriptive text</content>
+        <interaction>card-lift scroll-reveal</interaction>
+      </stats_card>
+
+      <content_card>
+        <structure>rounded-xl shadow-lg overflow-hidden</structure>
+        <image>h-48 bg-primary-light/70 flex items-center justify-center text-accent font-bold</image>
+        <content>p-6 with title, description, button</content>
+        <interaction>card-lift scroll-reveal with animation delays</interaction>
+      </content_card>
+
+      <testimonial_card>
+        <structure>p-8 rounded-xl shadow-lg border-l-4 border-accent</structure>
+        <content>★★★★★ rating + italic quote + author name</content>
+        <interaction>card-lift scroll-reveal</interaction>
+      </testimonial_card>
+    </card_transformations>
+
+    <timeline_transformation>
+      <structure>relative flex justify-between items-start with timeline-line</structure>
+      <elements>timeline-dot w-4 h-4 rounded-full with accent background</elements>
+      <styling>timeline-line primary color, dots with primary shadow</styling>
+    </timeline_transformation>
+  </component_specific_transformations>
+
+  <error_handling_fallbacks>
+    <scenario name="pattern_not_found">
+      <condition>Component doesn't match any blueprint patterns</condition>
+      <fallback>Use modern design principles with color system from blueprint</fallback>
+      <fallback>Maintain layout consistency with container and spacing patterns</fallback>
+    </scenario>
+
+    <scenario name="complex_component">
+      <condition>Component has complex logic or many props</condition>
+      <fallback>Focus transformation on visual layer only</fallback>
+      <fallback>Preserve all existing logic and functionality</fallback>
+      <fallback>Apply design system styling without changing behavior</fallback>
+    </scenario>
+
+    <scenario name="accessibility_conflicts">
+      <condition>Design system pattern conflicts with accessibility requirements</condition>
+      <fallback>Prioritize accessibility standards over visual consistency</fallback>
+      <fallback>Document accessibility decisions with rationale</fallback>
+      <fallback>Find alternative pattern that maintains both design and accessibility</fallback>
+    </scenario>
+  </error_handling_fallbacks>
+
+  <performance_optimization>
+    <animation_performance>
+      <technique>Use transform and opacity for smooth animations</technique>
+      <technique>Avoid animating layout properties (width, height, top, left)</technique>
+      <technique>Use will-change for frequently animated elements</technique>
+    </animation_performance>
+
+    <responsive_optimization>
+      <technique>Mobile-first approach with progressive enhancement</technique>
+      <technique>Use Tailwind responsive prefixes efficiently</technique>
+      <technique>Test on actual devices, not just browser dev tools</technique>
+    </responsive_optimization>
+  </performance_optimization>
+</transformation_framework>

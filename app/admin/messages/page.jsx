@@ -3,15 +3,23 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { getMessages, deleteMessage, markMessageAsRead } from "lib/actions";
-import { Mail, Star, Trash2, Inbox, CheckCircle, Eye } from "lucide-react";
-import {
-  AdminPageHeader,
-  AdminTable,
-  AdminActionButtons,
-  AdminStatsCard,
-  Button,
-} from "components/unified";
+import { Mail, Star, Trash2, Inbox, CheckCircle, Eye, Loader2, AlertTriangle } from "lucide-react";
 
+// Import extracted components
+import AdminPageHeader from '@/components/AdminPageHeader/AdminPageHeader.jsx';
+import AdminStatsCard from '@/components/AdminStatsCard/AdminStatsCard.jsx';
+import AdminActionButtons from '@/components/AdminActionButtons/AdminActionButtons.jsx';
+import AdminTable from '@/components/AdminTable/AdminTable.jsx';
+
+// --- Design System Configuration ---
+const ACCENT = '#6495ED';        // Cornflower Blue
+const PRIMARY_LIGHT = '#B0E0E6'; // Powder Blue
+const DARK_TEXT = '#333333';     // Dark Gray
+const BACKGROUND = '#FAFAFA';    // Off-White
+
+
+
+// --- Main Component ---
 export default function MessagesAdmin() {
   const router = useRouter();
   const [messages, setMessages] = useState([]);
@@ -20,29 +28,31 @@ export default function MessagesAdmin() {
     unread: 0,
     read: 0,
   });
+  const [loading, setLoading] = useState(true);
+
+  const refreshMessages = async () => {
+    setLoading(true);
+    const result = await getMessages();
+    if (result.success) {
+      setMessages(result.data);
+
+      const total = result.data.length;
+      const unread = result.data.filter((m) => m.status === "unread").length;
+      const read = total - unread;
+      setStats({ total, unread, read });
+    }
+    setLoading(false);
+  };
 
   useEffect(() => {
-    async function fetchMessages() {
-      const result = await getMessages();
-      if (result.success) {
-        setMessages(result.data);
-
-        // Calculate stats
-        const total = result.data.length;
-        const unread = result.data.filter((m) => m.status === "unread").length;
-        const read = total - unread;
-        setStats({ total, unread, read });
-      }
-    }
-    fetchMessages();
+    refreshMessages();
   }, []);
 
   const handleDelete = async (id) => {
-    console.log("handleDelete called with id:", id);
+    if (!confirm("Êtes-vous sûr de vouloir supprimer ce message ? Cette action est irréversible.")) return;
+
     const result = await deleteMessage(id);
-    console.log("deleteMessage result:", result);
     if (result.success) {
-      console.log("Delete successful, updating UI");
       // Update local state immediately
       setMessages(messages.filter((m) => m.id !== id));
       setStats((prev) => ({
@@ -53,11 +63,9 @@ export default function MessagesAdmin() {
             ? prev.unread - 1
             : prev.unread,
       }));
-
-      // Refresh the page to ensure fresh data
-      router.refresh();
     } else {
       console.error("Delete failed:", result.message);
+      alert("Erreur lors de la suppression: " + result.message);
     }
   };
 
@@ -72,6 +80,8 @@ export default function MessagesAdmin() {
         unread: prev.unread - 1,
         read: prev.read + 1,
       }));
+    } else {
+      console.error("Mark as read failed:", result.message);
     }
   };
 
@@ -81,7 +91,7 @@ export default function MessagesAdmin() {
       label: "Expéditeur",
       render: (value, item) => (
         <div>
-          <p className="font-medium">{value}</p>
+          <p className={`font-semibold ${item.status === 'unread' ? `text-[${ACCENT}]` : `text-[${DARK_TEXT}]`}`}>{value}</p>
           <p className="text-sm text-gray-500">{item.email}</p>
         </div>
       ),
@@ -94,19 +104,21 @@ export default function MessagesAdmin() {
     {
       key: "type",
       label: "Type",
-      render: (value) => (
-        <span
-          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-            value === "donation"
-              ? "bg-green-100 text-green-800"
-              : value === "volunteer"
-                ? "bg-blue-100 text-blue-800"
-                : "bg-gray-100 text-gray-800"
-          }`}
-        >
-          {value}
-        </span>
-      ),
+      render: (value) => {
+        let typeText = value;
+        if (value === 'donation') typeText = 'Don';
+        if (value === 'volunteer') typeText = 'Bénévole';
+        if (value === 'contact') typeText = 'Contact';
+
+        return (
+          // Unified Accent Badge Style
+          <span
+            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[${ACCENT}/10] text-[${ACCENT}]`}
+          >
+            {typeText}
+          </span>
+        )
+      },
     },
     {
       key: "message",
@@ -127,57 +139,63 @@ export default function MessagesAdmin() {
   const actionButtons = [
     {
       key: "markAsRead",
-      icon: Star,
+      icon: CheckCircle, // Changed icon for 'Mark as Read' to be clearer
       onClick: handleMarkAsRead,
-      className: "text-yellow-600 hover:text-yellow-900",
+      className: `text-green-600 hover:text-green-800`, // Use a subtle green for read status
       title: "Marquer comme lu"
     },
     {
       key: "view",
       icon: Eye,
       href: (item) => `/admin/messages/${item.id}`,
-      className: "text-blue-600 hover:text-blue-900",
+      className: `text-gray-600 hover:text-[${ACCENT}]`,
       title: "Voir détails"
     },
     {
       key: "delete",
       icon: Trash2,
       onClick: handleDelete,
-      className: "text-red-600 hover:text-red-900",
+      className: "text-red-600 hover:text-red-800",
       title: "Supprimer"
     },
   ];
 
   return (
-    <div className="p-4 md:p-8">
-      <AdminPageHeader title="Messages" />
+    // Main canvas background
+    <main className={`bg-[${BACKGROUND}] min-h-screen py-10 px-4 md:px-8`}>
+      <div className="max-w-7xl mx-auto">
+        <AdminPageHeader title="Gestion des Messages" />
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-        <AdminStatsCard
-          title="Total"
-          value={stats.total}
-          type="total"
-        />
-        <AdminStatsCard
-          title="Non lus"
-          value={stats.unread}
-          type="unread"
-        />
-        <AdminStatsCard
-          title="Lus"
-          value={stats.read}
-          type="read"
-        />
+        {/* Stats Cards - Blueprint responsive grid pattern with ScrollReveal */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 scroll-reveal">
+          <AdminStatsCard
+            title="Total"
+            value={stats.total}
+            type="total"
+          />
+          <AdminStatsCard
+            title="Non lus"
+            value={stats.unread}
+            type="unread"
+          />
+          <AdminStatsCard
+            title="Lus"
+            value={stats.read}
+            type="read"
+          />
+        </div>
+
+        <div className="scroll-reveal">
+          <AdminTable
+            columns={columns}
+            data={messages}
+            renderActions={(item) => (
+              <AdminActionButtons item={item} actions={actionButtons} />
+            )}
+            loading={loading}
+          />
+        </div>
       </div>
-
-      <AdminTable
-        columns={columns}
-        data={messages}
-        renderActions={(item) => (
-          <AdminActionButtons item={item} actions={actionButtons} />
-        )}
-      />
-    </div>
+    </main>
   );
 }

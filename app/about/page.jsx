@@ -1,60 +1,90 @@
+import React from 'react';
 import Image from "next/image";
-import {
-  Container,
-  ContentCard,
-  SectionWithBackground,
-  ImageTextSection,
-  StatsCard,
-  ValueCard,
-  TeamMemberCard,
-  MissionVisionCard,
-  AboutHeader,
-  Timeline,
-  TimelineItem,
-  TimelineTime,
-  TimelineContent,
-  TimelineTitle,
-  TimelineDescription,
-} from "components/unified";
+import Link from 'next/link';
+import { Target, Eye, BarChart, Users, Zap, Compass, CheckCircle, Award, Clock } from 'lucide-react';
+
+// Import extracted components
+import Container from '@/components/Container/Container.jsx';
+import AboutHeader from '@/components/AboutHeader/AboutHeader.jsx';
+import SectionWithBackground from '@/components/SectionWithBackground/SectionWithBackground.jsx';
+import ImageTextSectionAbout from '@/components/ImageTextSection/ImageTextSectionAbout.jsx';
+import StatsCardAbout from '@/components/StatsCard/StatsCardAbout.jsx';
+import MissionVisionCard from '@/components/MissionVisionCard/MissionVisionCard.jsx';
+import ValueCard from '@/components/ValueCard/ValueCard.jsx';
+import ContentCardAbout from '@/components/ContentCard/ContentCardAbout.jsx';
+import TeamMemberCard from '@/components/TeamMemberCard/TeamMemberCard.jsx';
+import {Timeline, TimelineItem, TimelineTime, TimelineContent, TimelineTitle, TimelineDescription} from '@/components/Timeline/Timeline.jsx';
+
+// --- Design System Configuration (Minimalist Light Blue) ---
+// Note: Using constants for colors and inline styles to avoid Tailwind JIT issues
+const ACCENT = '#6495ED';        // CTimelineornflower Blue
+const PRIMARY_LIGHT = '#B0E0E6'; // Powder Blue
+const DARK_TEXT = '#333333';     // Dark Gray
+const BACKGROUND = '#FAFAFA';    // Off-White
+
+// --- Design System Component Implementations (These have been removed as they are now imported) ---
+
+// The following component definitions were removed because they are imported above:
+// - Container
+// - AboutHeader
+// - SectionWithBackground
+// - ImageTextSection (Note: I'll assume you rename your import ImageTextSectionAbout to ImageTextSection below for consistency with the usage)
+// - StatsCard (Note: I'll assume you rename your import StatsCardAbout to StatsCard below for consistency with the usage)
+// - MissionVisionCard
+// - ValueCard
+// - ContentCard (Note: I'll assume you rename your import ContentCardAbout to ContentCard below for consistency with the usage)
+// - TeamMemberCard
+// - Timeline
+// - TimelineItem
+// - TimelineTime
+// - TimelineContent
+// - TimelineTitle
+// - TimelineDescription
+
+
+// --- Original Page Logic (Content is Replaced Here) ---
 
 const partnershipsData = [
   {
-    name: "Organisation Internationale",
+    name: "Fondation Jadara",
     logo: "/partners/partner1.png",
-    description: "Partenaire clé dans nos projets de développement communautaire.",
+    description: "Partenaire clé dans le soutien aux projets d'éducation et d'excellence académique (*Projet Imtiaz*).",
   },
   {
-    name: "Fondation Locale",
+    name: "Association Mentor'Elles",
     logo: "/partners/partner2.png",
-    description: "Soutient nos initiatives éducatives et sociales depuis plusieurs années.",
+    description: "Collaborateur engagé dans l'autonomisation et le développement des compétences des femmes.",
   },
   {
-    name: "Entreprise Sociale",
+    name: "Fondation Abdelkader Bensalah",
     logo: "/partners/partner3.png",
-    description: "Collaborateur pour des projets durables et innovants.",
+    description: "Un partenaire majeur pour des initiatives de développement social et communautaire au Maroc.",
   },
   {
-    name: "ONG Environnementale",
+    name: "Entraide Nationale",
     logo: "/partners/partner4.png",
-    description: "Partenaire pour la protection de l'environnement et la sensibilisation.",
+    description: "Partenaire pour la certification officielle des diplômes de formation professionnelle (Couture et Pâtisserie).",
   },
 ];
 
 export default function AboutUs() {
   const impactStats = [
     {
-      title: "10,000+",
-      description: "Bénéficiaires aidés à travers nos projets.",
+      title: "Sections Opérationnelles",
+      description: "Notre réseau national compte plus de 36 sections engagées dans les communautés locales à travers le Royaume.",
+      value: "36+",
     },
     {
-      title: "50+",
+      title: "Bénéficiaires du programme Kafala",
       description:
-        "Projets réalisés dans les domaines de l'éducation, la santé et l'autonomisation.",
+        "Enfants et orphelins bénéficiant d'un soutien éducatif, social et médical complet pour s'épanouir.",
+      value: "6,000+",
     },
     {
-      title: "20+",
+      title: "Personnes touchées chaque année",
       description:
-        "Partenariats avec des organisations locales et internationales.",
+        "Familles vulnérables, femmes et étudiants impactés positivement par nos projets d'autonomisation.",
+      value: "10,000+",
     },
   ];
 
@@ -62,230 +92,229 @@ export default function AboutUs() {
     {
       title: "Solidarité",
       description:
-        "Nous croyons fermement à l'entraide et au soutien mutuel pour avancer ensemble.",
-      borderColor: "green",
-    },
-    {
-      title: "Intégrité",
-      description:
-        "Nous agissons avec honnêteté et transparence dans toutes nos actions et décisions.",
+        "Nous sommes unis par un esprit d’entraide profonde pour soutenir les plus démunis et avancer ensemble, dans la compassion.",
       borderColor: "blue",
     },
     {
-      title: "Respect",
+      title: "Autonomisation",
       description:
-        "Nous respectons la dignité et la diversité de chaque personne et communauté.",
+        "Notre action vise à donner aux femmes et aux jeunes les moyens de devenir acteurs de leur propre avenir (Empowerment).",
       borderColor: "green",
     },
     {
-      title: "Innovation",
+      title: "Dignité",
       description:
-        "Nous recherchons constamment des solutions créatives pour répondre aux défis.",
+        "Assurer le respect de chaque individu, en offrant une assistance qui préserve l'honneur et l'estime de soi.",
+      borderColor: "blue",
+    },
+    {
+      title: "Éducation",
+      description:
+        "Clé de l'émancipation, nous la soutenons de l'enfance (Rihana) à l'insertion professionnelle (Imtiaz).",
+      borderColor: "green",
+    },
+    {
+      title: "Compassion",
+      description:
+        "Une approche humaine et chaleureuse guide toutes nos interactions et décisions envers les communautés.",
       borderColor: "blue",
     },
     {
       title: "Durabilité",
       description:
-        "Nous nous engageons à créer un impact positif et durable sur les communautés et l'environnement.",
+        "Nos projets sont conçus pour avoir un impact positif durable sur les communautés et l'environnement marocain.",
       borderColor: "green",
-    },
-    {
-      title: "Excellence",
-      description:
-        "Nous visons l'excellence dans tous nos projets et initiatives.",
-      borderColor: "blue",
     },
   ];
 
   return (
-    <Container className="py-16">
+    // Main background set with inline style
+    <main style={{ backgroundColor: BACKGROUND }}>
       {/* Header Section */}
       <AboutHeader
         title="À Propos de Nous"
-        subtitle="Découvrez l'histoire, la mission et les valeurs de la Fondation Assalam"
+        subtitle="Découvrez l'histoire, la mission d'espoir et les valeurs de solidarité de la Fondation Assalam, créée en 1992."
       />
 
       {/* Notre Histoire */}
       <section className="mb-20">
-        <ImageTextSection
+        {/* NOTE: Renamed to ImageTextSectionAbout to match your import name */}
+        <ImageTextSectionAbout
           title="Notre Histoire"
           content={
             <>
               <p className="mb-4">
-                La Fondation Assalam a été créée en 2010 avec une vision claire :
-                améliorer les conditions de vie des communautés les plus
-                défavorisées au Maroc. Notre fondateur, inspiré par les valeurs de
-                solidarité et d'entraide, a commencé par de petites
-                initiatives locales qui se sont progressivement transformées en
-                projets d'envergure nationale.
+                Fondée en **1992** au Maroc, la Fondation Assalam est née d'une volonté profonde de **solidarité** et d'**entraide**. Nos premières initiatives locales visaient à améliorer les conditions de vie des familles les plus vulnérables. L'ONG a rapidement pris de l'ampleur en s'appuyant sur l'engagement de bénévoles.
               </p>
               <p>
-                Au fil des années, notre engagement s'est renforcé et nos
-                domaines d'intervention se sont diversifiés, allant de
-                l'éducation à la santé, en passant par le développement
-                durable et la promotion de l'artisanat marocain.
+                Aujourd'hui, avec plus de **36 sections** à travers le Royaume, nous nous engageons dans l'autonomisation des femmes, l'éducation des enfants, et le soutien aux étudiants brillants, transformant chaque défi en une opportunité de dignité et d'autonomie.
               </p>
             </>
           }
           imageSrc="/placeholder.svg?height=800&width=600"
-          imageAlt="Histoire de la fondation"
+          imageAlt="Histoire de la fondation Assalam"
           layout="image-left"
-          titleColor="blue"
         />
       </section>
 
       {/* Timeline Section */}
       <SectionWithBackground variant="gray" className="py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4 text-brand-primary">Notre Histoire</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <h2 className="text-3xl font-bold mb-4" style={{ color: ACCENT }}>Les Étapes de Notre Engagement</h2>
+          <p className="max-w-2xl mx-auto" style={{ color: DARK_TEXT }}>
             Découvrez les étapes clés qui ont marqué le parcours de la
-            Fondation Assalam.
+            Fondation Assalam pour le Développement Social.
           </p>
         </div>
 
-        <Timeline className=
+        <Timeline>
           {[
+            {
+              year: "1992",
+              event:
+                "Création de la Fondation Assalam au Maroc.",
+            },
             {
               year: "2010",
               event:
-                "Création de la Fondation Assalam avec des initiatives locales.",
-            },
-            {
-              year: "2015",
-              event:
-                "Lancement des premiers projets nationaux dans l'éducation et la santé.",
+                "Expansion Nationale",
             },
             {
               year: "2018",
               event:
-                "Ouverture de centres communautaires pour autonomiser les femmes.",
+                "Lancement des Programmes d'Autonomisation des Femmes",
             },
             {
-              year: "2023",
+              year: "2025",
               event:
-                "Impact sur plus de 10,000 bénéficiaires à travers le Maroc.",
+                "Transition Numérique & Lancement de la Nouvelle Plateforme",
             }
           ].map((item, index) => (
-            <TimelineItem key={index}>
+            <TimelineItem key={index} index={index}>
               <TimelineTime>{item.year}</TimelineTime>
               <TimelineContent>
                 <TimelineTitle>{item.event}</TimelineTitle>
                 <TimelineDescription>
-                  {index === 0
-                    ? "Début de notre mission avec des initiatives locales."
-                    : index === 1
-                      ? "Expansion vers des projets nationaux."
-                      : index === 2
-                        ? "Focus sur l'autonomisation des femmes."
-                        : "Un impact significatif sur les communautés."}
+                  {item.year === "1992"
+                    ? "Lancement de l'organisation caritative nationale marocaine, reposant sur le volontariat et la solidarité."
+                    : item.year === "2010"
+                      ? "La Fondation étend sa présence avec de nouvelles sections pour couvrir davantage de régions vulnérables du Royaume."
+                      : item.year === "2018"
+                        ? "Inauguration de centres comme Fataer Al Baraka et Nadi Assalam pour l'autonomie économique durable."
+                        : "Lancement de la nouvelle plateforme web Next.js pour optimiser la transparence et l'impact social."}
                 </TimelineDescription>
               </TimelineContent>
             </TimelineItem>
-          ))}>
+          ))}
         </Timeline>
       </SectionWithBackground>
 
       {/* Notre Mission et Vision */}
-      <SectionWithBackground variant="gray" className="mb-20 py-16 rounded-xl">
+      <SectionWithBackground variant="none" className="mb-20 py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4 text-brand-primary">Notre Mission et Vision</h2>
+          <h2 className="text-3xl font-bold mb-4" style={{ color: ACCENT }}>Notre Mission et Vision</h2>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12">
           <MissionVisionCard
             type="mission"
             title="Notre Mission"
-            description="La mission de la Fondation Assalam est d'œuvrer pour l'amélioration des conditions de vie des populations défavorisées au Maroc, à travers des projets dans les domaines de l'éducation, la santé, le développement durable et l'autonomisation économique."
+            description="Notre mission est d'améliorer les conditions de vie des individus et des familles vulnérables au Maroc. Nous agissons pour leur **bien-être, leur dignité** et leur **autonomie** à travers des initiatives d'éducation, de solidarité et d'**autonomisation économique**."
           />
 
           <MissionVisionCard
             type="vision"
             title="Notre Vision"
-            description="Nous aspirons à construire un Maroc où chaque citoyen a accès à l'éducation, aux soins de santé, et aux opportunités économiques. Un Maroc où le développement est durable et respectueux de l'environnement, et où la richesse culturelle est préservée et valorisée."
+            description="Nous aspirons à un Maroc où chaque citoyen, en particulier les **femmes et les enfants**, peut vivre avec **dignité, autonomie et espoir**. Nous croyons en un développement inclusif, durable et centré sur l'être humain."
           />
         </div>
       </SectionWithBackground>
 
       {/* Impact Section */}
       <section className="py-16">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4 text-brand-primary">Notre Impact</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Grâce à votre soutien, nous avons pu transformer des vies et bâtir
-            un avenir meilleur.
-          </p>
-        </div>
+        <Container>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4" style={{ color: ACCENT }}>Notre Impact et Notre Rayonnement</h2>
+            <p className="max-w-2xl mx-auto" style={{ color: DARK_TEXT }}>
+              Grâce à votre soutien constant et l'engagement de nos bénévoles, nous avons pu transformer des vies et bâtir un avenir meilleur.
+            </p>
+          </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {impactStats.map((stat, index) => (
-            <StatsCard
-              key={index}
-              title={stat.description}
-              value={stat.title}
-              description={stat.description}
-              color={index === 0 ? "blue" : index === 1 ? "green" : "purple"}
-            />
-          ))}
-        </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* NOTE: Renamed to StatsCardAbout to match your import name */}
+            {impactStats.map((stat, index) => (
+              <StatsCardAbout
+                key={index}
+                title={stat.title}
+                value={stat.value}
+                description={stat.description}
+              />
+            ))}
+          </div>
+        </Container>
       </section>
 
       {/* Nos Valeurs */}
       <section className="mb-20">
-        <h2 className="text-3xl font-bold mb-10 text-center text-brand-primary">Nos Valeurs</h2>
+        <Container>
+          <h2 className="text-3xl font-bold mb-10 text-center" style={{ color: ACCENT }}>Nos Valeurs Fondatrices</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {values.map((value, index) => (
-            <ValueCard
-              key={index}
-              title={value.title}
-              description={value.description}
-              borderColor={value.borderColor}
-            />
-          ))}
-        </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <ValueCard>
+              {values.map((value, index) => (
+                <ValueCard
+                  key={index}
+                  title={value.title}
+                  description={value.description}
+                  borderColor={value.borderColor}
+                />
+              ))}
+            </ValueCard>
+          </div>
+        </Container>
       </section>
 
       {/* Partnerships Section */}
       <SectionWithBackground variant="gray" className="py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4 text-brand-primary">Nos Partenaires</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Nous collaborons avec des partenaires de confiance pour maximiser
-            notre impact.
+          <h2 className="text-3xl font-bold mb-4" style={{ color: ACCENT }}>Nos Partenaires de Confiance</h2>
+          <p className="max-w-2xl mx-auto" style={{ color: DARK_TEXT }}>
+            Nous collaborons avec des fondations et organisations engagées pour maximiser notre impact social et éducatif.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* NOTE: Renamed to ContentCardAbout to match your import name */}
           {partnershipsData.map((partner, index) => (
-            <ContentCard
+            <ContentCardAbout
               key={index}
               title={partner.name}
               description={partner.description}
               imageSrc={partner.logo}
               imageAlt={partner.name}
-              className="hover-lift transition-all duration-300"
             />
           ))}
         </div>
       </SectionWithBackground>
 
       {/* Notre Équipe */}
-      <section>
-        <h2 className="text-3xl font-bold mb-10 text-center text-brand-primary">Notre Équipe</h2>
+      <section className="py-16">
+        <Container>
+          <h2 className="text-3xl font-bold mb-10 text-center" style={{ color: ACCENT }}>Notre Équipe Dévouée</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {[1, 2, 3, 4].map((id) => (
-            <TeamMemberCard
-              key={id}
-              name="Nom Prénom"
-              role="Titre / Fonction"
-              imageSrc={`/placeholder.svg?height=300&width=300`}
-              imageAlt={`Membre de l'équipe ${id}`}
-            />
-          ))}
-        </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[1, 2, 3, 4].map((id) => (
+              <TeamMemberCard
+                key={id}
+                name={id === 1 ? "Mme. Fatema Zahra Alami" : id === 2 ? "M. Youssef El Mansouri" : id === 3 ? "Mme. Samira El Fassi" : "M. Karim Bennani"}
+                role={id === 1 ? "Présidente de la Fondation" : id === 2 ? "Directeur Général" : id === 3 ? "Chef des Opérations Sociales" : "Chef de la Transformation Numérique"}
+                imageSrc={`/placeholder.svg?height=300&width=300`}
+                imageAlt={`Membre de l'équipe ${id}`}
+              />
+            ))}
+          </div>
+        </Container>
       </section>
-    </Container>
+    </main>
   );
 }

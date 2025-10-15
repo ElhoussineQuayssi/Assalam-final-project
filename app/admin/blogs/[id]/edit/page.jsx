@@ -3,8 +3,22 @@
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { getBlogById, updateBlog } from "lib/actions";
-import { ShareIcon, AlertTriangle } from "lucide-react";
+import { ShareIcon, AlertTriangle, Loader2 } from "lucide-react";
 import { Editor } from "@tinymce/tinymce-react";
+
+// Import extracted component
+import Alert from '@/components/Alert/Alert.jsx';
+
+// --- Design System Configuration (Minimalist Light Blue) ---
+const ACCENT = '#6495ED';        // Cornflower Blue
+const PRIMARY_LIGHT = '#B0E0E6'; // Powder Blue
+const DARK_TEXT = '#333333';     // Dark Gray
+const BACKGROUND = '#FAFAFA';    // Off-White
+
+// Calculated transparent background for the social box
+const PRIMARY_LIGHT_TRANS = `${PRIMARY_LIGHT}4D`; // PRIMARY_LIGHT with ~30% opacity
+
+
 
 export default function EditBlog() {
   const router = useRouter();
@@ -17,48 +31,50 @@ export default function EditBlog() {
   const [blog, setBlog] = useState(null);
   const [content, setContent] = useState("");
 
+  // --- Original Data Fetching Logic Preserved ---
   useEffect(() => {
     async function fetchBlog() {
       try {
         const result = await getBlogById(id);
         if (result.success) {
           setBlog(result.data);
-          setContent(result.data.content);
-          setFormState({
-            ...formState,
-            shareOnSocial: result.data.shareOnSocial,
-          });
+          setContent(result.data.content || "");
+          setFormState(prev => ({
+            ...prev,
+            shareOnSocial: result.data.shareOnSocial || false,
+          }));
         } else {
-          setFormState({
-            ...formState,
+          setFormState(prev => ({
+            ...prev,
             status: "error",
             message: "Erreur lors de la récupération de l'article.",
-          });
+          }));
         }
       } catch (error) {
         console.error("Error fetching blog:", error);
-        setFormState({
-          ...formState,
+        setFormState(prev => ({
+          ...prev,
           status: "error",
           message: "Une erreur s'est produite.",
-        });
+        }));
       }
     }
     fetchBlog();
-  }, [id, formState]);
+  }, [id]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setFormState({ ...formState, status: "submitting", message: "" });
+    setFormState({ ...formState, status: "submitting", message: "Mise à jour en cours..." });
 
     const formData = new FormData(event.target);
     // Ensure content is properly set in formData
     formData.set("content", content);
-    formData.set("shareOnSocial", formState.shareOnSocial);
+    formData.set("shareOnSocial", formState.shareOnSocial ? "true" : "false");
 
     try {
       const result = await updateBlog(id, formData);
       if (result.success) {
+        // Redirect on success
         router.push("/admin/blogs");
       } else {
         setFormState({
@@ -79,200 +95,251 @@ export default function EditBlog() {
   };
 
   if (!blog) {
+    // Transformed Loading State: Centered Accent Spinner using inline styles
     return (
-      <div className="flex justify-center items-center">Chargement...</div>
+      <div className="min-h-screen flex justify-center items-center" style={{ backgroundColor: BACKGROUND }}>
+        <Loader2 className="h-8 w-8 animate-spin" style={{ color: ACCENT }} />
+        <p className="ml-3 text-lg" style={{ color: DARK_TEXT }}>Chargement de l'article...</p>
+      </div>
     );
   }
 
+  // Helper function to apply color styles to form elements
+  const inputStyle = {
+    color: DARK_TEXT,
+    // Using CSS variables to dynamically set focus ring and border color for Tailwind classes
+    '--tw-ring-color': ACCENT,
+    '--tw-focus-ring-color': ACCENT,
+    '--tw-border-color': ACCENT,
+  };
+
+  // --- Transformed JSX (Minimalist Light Blue Design) ---
   return (
-    <div className="p-8">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Modifier l&apos;article</h1>
-      </div>
+    // Set main canvas background color using inline style
+    <main
+      className="min-h-screen py-10 px-4 md:px-8"
+      style={{ backgroundColor: BACKGROUND }}
+    >
+      <div className="max-w-7xl mx-auto">
+        {/* H1 Typography Pattern: Bold, Dark Text */}
+        <h1 className="text-3xl font-bold mb-8" style={{ color: DARK_TEXT }}>
+          Modifier l'article
+        </h1>
 
-      {formState.status === "error" && (
-        <div className="bg-red-50 border border-red-200 text-red-800 rounded-lg p-4 mb-6 flex items-start">
-          <AlertTriangle className="h-5 w-5 mr-2 mt-0.5 flex-shrink-0" />
-          <p>{formState.message}</p>
-        </div>
-      )}
+        <Alert type={formState.status} message={formState.message} />
 
-      <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow p-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Main Content - Left Side */}
-          <div className="md:col-span-2 space-y-6">
-            <div>
-              <label
-                className="block text-sm font-medium text-gray-700 mb-1"
-                htmlFor="title"
-              >
-                Titre *
-              </label>
-              <input
-                type="text"
-                id="title"
-                name="title"
-                defaultValue={blog.title}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-            </div>
-
-            <div>
-              <label
-                className="block text-sm font-medium text-gray-700 mb-1"
-                htmlFor="excerpt"
-              >
-                Extrait *
-              </label>
-              <textarea
-                id="excerpt"
-                name="excerpt"
-                rows="3"
-                defaultValue={blog.excerpt}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              ></textarea>
-            </div>
-
-            <div>
-              <label
-                className="block text-sm font-medium text-gray-700 mb-1"
-                htmlFor="content"
-              >
-                Contenu *
-              </label>
-              <Editor
-                apiKey="b9hzj91zfljasoi4yevv8eo0wxbwybhl0lad41fp45f5pozf"
-                value={content}
-                onEditorChange={(newContent) => setContent(newContent)}
-                init={{
-                  height: 500,
-                  menubar: false,
-                  plugins: [
-                    "advlist autolink lists link image charmap print preview anchor",
-                    "searchreplace visualblocks code fullscreen",
-                    "insertdatetime media table paste code help wordcount",
-                  ],
-                  toolbar:
-                    "undo redo | formatselect | bold italic backcolor | \
-                    alignleft aligncenter alignright alignjustify | \
-                    bullist numlist outdent indent | removeformat | help",
-                }}
-              />
-            </div>
-          </div>
-
-          {/* Sidebar - Right Side */}
-          <div className="space-y-6">
-            <div>
-              <label
-                className="block text-sm font-medium text-gray-700 mb-1"
-                htmlFor="category"
-              >
-                Catégorie *
-              </label>
-              <select
-                id="category"
-                name="category"
-                defaultValue={blog.category}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              >
-                <option value="">Sélectionner une catégorie</option>
-                <option value="Education">Éducation</option>
-                <option value="Sante">Santé</option>
-                <option value="Environnement">Environnement</option>
-                <option value="Culture">Culture</option>
-                <option value="Solidarite">Solidarité</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">
-                Status
-              </label>
-              <div className="flex items-center space-x-4">
-                <div className="flex items-center">
-                  <input
-                    id="status-published"
-                    name="status"
-                    type="radio"
-                    value="published"
-                    defaultChecked={blog.status === "published"}
-                    className="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500"
-                  />
-                  <label
-                    htmlFor="status-published"
-                    className="ml-2 block text-sm text-gray-700"
-                  >
-                    Publié
-                  </label>
-                </div>
-                <div className="flex items-center">
-                  <input
-                    id="status-draft"
-                    name="status"
-                    type="radio"
-                    value="draft"
-                    defaultChecked={blog.status === "draft"}
-                    className="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500"
-                  />
-                  <label
-                    htmlFor="status-draft"
-                    className="ml-2 block text-sm text-gray-700"
-                  >
-                    Brouillon
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-blue-50 p-4 rounded-lg">
-              <div className="flex items-center mb-4">
-                <input
-                  id="share-social"
-                  type="checkbox"
-                  checked={formState.shareOnSocial}
-                  onChange={() =>
-                    setFormState({
-                      ...formState,
-                      shareOnSocial: !formState.shareOnSocial,
-                    })
-                  }
-                  className="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500"
-                />
+        {/* Form as Content Card Pattern with Scroll Reveal */}
+        <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl p-8 scroll-reveal">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Main Content - Left Side (2/3 width) */}
+            <div className="lg:col-span-2 space-y-6">
+              {/* Title Field */}
+              <div>
+                {/* Label Typography Pattern: Body Text, Dark Text */}
                 <label
-                  htmlFor="share-social"
-                  className="ml-2 block text-sm text-gray-700 font-medium"
+                  className="block text-lg font-semibold mb-2"
+                  htmlFor="title"
+                  style={{ color: DARK_TEXT }}
                 >
-                  Partager sur les réseaux sociaux
+                  Titre *
                 </label>
+                {/* Input Styling: Accent Focus Ring, generous padding */}
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  defaultValue={blog.title}
+                  required
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition duration-150 text-lg shadow-sm"
+                  style={inputStyle}
+                />
               </div>
 
-              <div className="text-sm text-gray-600 flex items-start">
-                <ShareIcon className="h-5 w-5 mr-2 text-blue-600 flex-shrink-0" />
-                <p>
-                  Lorsque vous publiez cet article, il sera automatiquement
-                  partagé sur vos comptes sociaux liés.
-                </p>
+              {/* Excerpt Field */}
+              <div>
+                <label
+                  className="block text-lg font-semibold mb-2"
+                  htmlFor="excerpt"
+                  style={{ color: DARK_TEXT }}
+                >
+                  Extrait *
+                </label>
+                <textarea
+                  id="excerpt"
+                  name="excerpt"
+                  rows="3"
+                  defaultValue={blog.excerpt}
+                  required
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition duration-150 text-lg shadow-sm"
+                  style={inputStyle}
+                ></textarea>
+              </div>
+
+              {/* Content Editor */}
+              <div>
+                <label
+                  className="block text-lg font-semibold mb-2"
+                  htmlFor="content"
+                  style={{ color: DARK_TEXT }}
+                >
+                  Contenu *
+                </label>
+                <Editor
+                  apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
+                  value={content}
+                  onEditorChange={(newContent) => setContent(newContent)}
+                  init={{
+                    height: 500,
+                    menubar: false,
+                    plugins: [
+                      "advlist", "autolink", "lists", "link", "image", "charmap",
+                      "preview", "anchor", "searchreplace", "visualblocks", "code",
+                      "fullscreen", "insertdatetime", "media", "table", "help", "wordcount",
+                    ],
+                    toolbar:
+                      "undo redo | formatselect | bold italic backcolor | \
+                      alignleft aligncenter alignright alignjustify | \
+                      bullist numlist outdent indent | removeformat | help",
+                  }}
+                />
               </div>
             </div>
 
-            <div className="pt-4">
-              <button
-                type="submit"
-                disabled={formState.status === "submitting"}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-300 disabled:opacity-70"
+            {/* Sidebar - Right Side (1/3 width) */}
+            <div className="space-y-6">
+              {/* Category Field */}
+              <div>
+                <label
+                  className="block text-lg font-semibold mb-2"
+                  htmlFor="category"
+                  style={{ color: DARK_TEXT }}
+                >
+                  Catégorie *
+                </label>
+                <select
+                  id="category"
+                  name="category"
+                  defaultValue={blog.category}
+                  required
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition duration-150 text-lg shadow-sm appearance-none bg-white"
+                  style={inputStyle}
+                >
+                  <option value="">Sélectionner une catégorie</option>
+                  <option value="Education">Éducation</option>
+                  <option value="Sante">Santé</option>
+                  <option value="Environnement">Environnement</option>
+                  <option value="Culture">Culture</option>
+                  <option value="Solidarite">Solidarité</option>
+                </select>
+              </div>
+
+              {/* Status Radio Buttons */}
+              <div>
+                <label className="block text-lg font-semibold mb-3" style={{ color: DARK_TEXT }}>
+                  Status
+                </label>
+                <div className="flex items-center space-x-6">
+                  <div className="flex items-center">
+                    <input
+                      id="status-published"
+                      name="status"
+                      type="radio"
+                      value="published"
+                      defaultChecked={blog.status === "published"}
+                      // Accent focus/checked color
+                      className="h-5 w-5 border-gray-300 focus:ring-accent"
+                      style={{ color: ACCENT }}
+                    />
+                    <label
+                      htmlFor="status-published"
+                      className="ml-3 block text-base"
+                      style={{ color: DARK_TEXT }}
+                    >
+                      Publié
+                    </label>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      id="status-draft"
+                      name="status"
+                      type="radio"
+                      value="draft"
+                      defaultChecked={blog.status === "draft"}
+                      // Accent focus/checked color
+                      className="h-5 w-5 border-gray-300 focus:ring-accent"
+                      style={{ color: ACCENT }}
+                    />
+                    <label
+                      htmlFor="status-draft"
+                      className="ml-3 block text-base"
+                      style={{ color: DARK_TEXT }}
+                    >
+                      Brouillon
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              {/* Social Sharing Box - Subtle Background Pattern */}
+              <div
+                className="p-6 rounded-xl border"
+                style={{ backgroundColor: PRIMARY_LIGHT_TRANS, borderColor: PRIMARY_LIGHT }}
               >
-                {formState.status === "submitting"
-                  ? "Mise à jour..."
-                  : "Mettre à jour l'article"}
-              </button>
+                <div className="flex items-center mb-4">
+                  <input
+                    id="share-social"
+                    type="checkbox"
+                    checked={formState.shareOnSocial}
+                    onChange={() =>
+                      setFormState({
+                        ...formState,
+                        shareOnSocial: !formState.shareOnSocial,
+                      })
+                    }
+                    // Accent checked color
+                    className="h-5 w-5 border-gray-300 rounded focus:ring-accent"
+                    style={{ color: ACCENT }}
+                  />
+                  <label
+                    htmlFor="share-social"
+                    className="ml-3 block text-base font-semibold"
+                    style={{ color: DARK_TEXT }}
+                  >
+                    Partager sur les réseaux sociaux
+                  </label>
+                </div>
+
+                <div className="text-sm text-gray-700 flex items-start mt-2">
+                  <ShareIcon className="h-5 w-5 mr-3 flex-shrink-0" style={{ color: ACCENT }} />
+                  <p>
+                    L'article sera automatiquement partagé sur vos comptes sociaux liés lors de la publication.
+                  </p>
+                </div>
+              </div>
+
+              {/* Submit Button - Primary Button Pattern (Rounded-full, Accent, Hover Lift) */}
+              <div className="pt-4">
+                <button
+                  type="submit"
+                  disabled={formState.status === "submitting"}
+                  className="w-full text-white font-bold py-4 px-8 rounded-full transition-all duration-300 transform shadow-xl hover:scale-[1.01] hover:shadow-2xl disabled:opacity-70 disabled:cursor-not-allowed"
+                  style={{ backgroundColor: ACCENT }}
+                >
+                  {formState.status === "submitting"
+                    ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <Loader2 className="h-5 w-5 animate-spin" />
+                        Mise à jour...
+                      </span>
+                    )
+                    : "Mettre à jour l'article"
+                  }
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </form>
-    </div>
+        </form>
+      </div>
+    </main>
   );
 }

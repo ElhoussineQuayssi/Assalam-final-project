@@ -1,0 +1,212 @@
+## 🧠 ASSALAM FOUNDATION — KNOWLEDGE BASE
+
+**Last updated:** 2025
+
+---
+
+### 1. General Overview
+
+The **Fondation Assalam pour le Développement Social** is a **Moroccan national non-governmental organization (NGO)** created in **1992**.
+It operates through **around 35 branches** across various regions of Morocco.
+Its mission is to **improve and enhance the living conditions of individuals and families in vulnerable situations**, focusing on empowerment, education, and social solidarity.
+
+**Website:** [www.assalam.org](https://assalam.org) (project under development)
+**Head Office:**
+22 Bd Hassan II, Immeuble 83, 2ème étage, Rabat, Morocco
+📞 05377-02346
+📧 [bn.assalam@gmail.com](mailto:bn.assalam@gmail.com)
+
+**Digital Presence:**
+- Facebook: Section Anfa with over 6,000 followers
+- Web Platform: Next.js-based website showcasing projects, blogs, and contact forms
+- Design System: Moroccan-inspired color palette (Foundation Blue, Assalam Green, Compassion Red)
+
+---
+
+### 2. Mission & Vision
+
+**Mission:**
+To contribute to the well-being and dignity of people living in precarious conditions through social, educational, and economic empowerment.
+
+**Vision:**
+A Morocco where every person—especially women and children—can live with dignity, autonomy, and hope.
+
+**Core Values:**
+
+* Solidarity and compassion
+* Empowerment through education and work
+* Social inclusion and equal opportunity
+* Sustainability and community-driven change
+
+---
+
+### 3. Main Areas of Action
+
+#### a. Support for Vulnerable Families
+
+Improving living conditions through direct assistance and **income-generating projects** that encourage autonomy.
+
+#### b. Orphan Sponsorship (Kafala)
+
+Provides ongoing **schooling and material support** to orphans within their families.
+Example initiative: **"Sac de l'Espoir"** — a back-to-school aid program.
+
+#### c. Education & Training
+
+Promotes education and professional training for disadvantaged youth.
+Encourages reintegration into the school system and technical skill development.
+
+#### d. Women's Empowerment
+
+Focuses on **economic and social empowerment of women**, especially widows.
+Programs include **vocational training, coaching, and project incubation** (ex: "Fatair Al Baraka" for pastry-making, "Club de couture" for sewing skills).
+
+#### e. Fighting Social Exclusion
+
+Provides material, moral, and educational assistance to vulnerable groups.
+Supports community integration through solidarity initiatives and awareness campaigns.
+
+---
+
+### 4. Programs & Initiatives
+
+| Program              | Description                             | Target              |
+| -------------------- | --------------------------------------- | ------------------- |
+| **Kafalat Atalib**   | Scholarships for disadvantaged students | University youth    |
+| **Fatair Al Baraka** | Moroccan pastry training workshops      | Women in difficulty |
+| **Club de couture**  | Sewing learning club                    | Women & young girls |
+| **Sac de l'Espoir**  | School kits for orphans                 | Children & orphans  |
+| **Rayhana Assalam**  | Women support and empowerment program   | Women in need       |
+| **Nadi Assalam**     | Tailoring training center               | Women & youth       |
+| **Centre Himaya**    | Multi-disciplinary support center        | Women & children    |
+| **Imtiaz Program**   | Academic excellence support             | Students            |
+
+---
+
+### 5. Activities & Events
+
+* **Educational & Cultural Activities:**
+  School support clubs, personal development workshops, cultural outings (e.g., visits to the *Salon International du Livre pour l'Enfant et la Jeunesse*).
+
+* **Solidarity Campaigns:**
+  Food and clothing distribution, emergency aid during disasters (e.g., *Al Haouz earthquake relief*).
+
+* **Partnerships:**
+  Collaborates with organizations such as *Association Mentor'Elles*, *Fondation Jadara*, and *Fondation Abdelkader Bensalah* to promote youth employability and women's empowerment.
+
+* **Digital Initiatives:**
+  - Online project documentation and showcase
+  - Blog content management system for sharing success stories
+  - Contact management system for donations and volunteering
+  - Admin dashboard for content management and user administration
+
+---
+
+### 6. Presence & Impact
+
+* **Reach:** ~35 sections across Morocco, including Casablanca (Anfa, Aïn Chock, Moulay Rachid) and Rabat.
+* **Social Media:** Section Anfa has over 6,000 Facebook followers.
+* **Impact:** Recognized for supporting women's autonomy and improving community resilience through grassroots projects.
+* **Digital Impact:** Modern Next.js website with comprehensive project showcase, blog system, and contact management. Features responsive design, accessibility compliance, and Moroccan cultural design elements.
+
+### 6.5. Technology & Development
+
+* **Website Technology:** Next.js 15, React 19, Tailwind CSS, SQLite database
+* **Design System:** Custom Moroccan-inspired color palette with accessibility features
+* **Content Management:** Integrated blog system and project documentation
+* **Security:** Authentication system with role-based access for admin functions
+* **Performance:** Server-side rendering with optimized images and responsive design
+
+---
+
+### 7. Communication Style
+
+* **Tone:** Warm, compassionate, and dignified.
+* **Style:** Simple, direct, and community-oriented, blending professionalism with empathy.
+* **Language:** Often bilingual (Arabic/French), with emphasis on inclusion and positivity.
+* **Core Message:** Helping others is a shared responsibility — Assalam Foundation embodies peace, hope, and solidarity.
+
+---
+
+### 8. Challenges & Transparency
+
+* Limited public data due to non-public reports.
+* Impact often measured qualitatively rather than statistically.
+* Future improvement: increase transparency through digital reports and storytelling of beneficiaries.
+
+---
+
+### 9. Recommendations for Digital Presence
+
+1. Use storytelling to highlight individual impact (before/after narratives).
+2. Include more visual content: community photos, event galleries, and training success stories.
+3. Provide clear "Call to Action" on pages (Donate, Volunteer, Join, Learn More).
+4. Maintain consistent tone: human, hopeful, professional.
+
+### 9.5. Current Digital Implementation Status
+
+**Implemented Features:**
+- Responsive Next.js website with modern design system
+- Project showcase with detailed information pages
+- Blog content management system
+- Contact forms with message handling
+- Admin dashboard for content management
+- Multi-language support (French/Arabic potential)
+- SEO optimization and accessibility compliance
+
+**Technical Architecture:**
+- Frontend: Next.js 15 with App Router, React 19
+- Styling: Tailwind CSS with custom Moroccan color palette
+- Database: SQLite with better-sqlite3
+- Authentication: NextAuth.js with secure sessions
+- Forms: React Hook Form with Zod validation
+- UI Components: Radix UI primitives with shadcn/ui
+
+**Development Status:**
+- ✅ Unified component system across all pages
+- ✅ Admin authentication and user management
+- ✅ Blog creation and editing capabilities
+- ✅ Contact form message handling
+- ✅ Project documentation system
+- ✅ Responsive design implementation
+
+---
+
+### 10. Keywords for Content Implementation
+
+`Solidarity`, `Education`, `Empowerment`, `Autonomy`, `Hope`, `Humanity`, `Social Inclusion`, `Community Support`, `Women's Rights`, `Children's Welfare`, `Sustainable Development`, `Moroccan Culture`, `Next.js`, `React`, `Digital Transformation`, `NGO`, `Charity`, `Social Impact`, `Community Development`.
+
+---
+
+### 11. Project Development Timeline
+
+**Foundation Establishment:** 1992
+**Website Development:** 2025 (Current project)
+**Key Milestones:**
+- 2010: Expanded national presence
+- 2015: Launched major educational programs
+- 2018: Women's empowerment initiatives
+- 2023: Digital transformation begins
+- 2025: Modern Next.js platform launch
+
+**Future Goals:**
+- Enhanced digital storytelling capabilities
+- Multi-language expansion (Arabic/French/English)
+- Advanced analytics and impact measurement
+- Mobile application development
+- International partnerships expansion
+
+---
+
+### 12. Contact & Support
+
+**For Technical Support:** Contact development team
+**For Content Updates:** Admin dashboard access
+**For Partnership Inquiries:** Contact through website forms
+**For Donations:** Multiple channels available through website
+
+---
+
+**File Status:** Enhanced knowledge base for Fondation Assalam
+**Last Updated:** 2025-10-15
+**Version:** 2.0 (Enhanced with technical and digital implementation details)

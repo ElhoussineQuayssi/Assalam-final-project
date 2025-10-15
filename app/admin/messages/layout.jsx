@@ -1,6 +1,13 @@
 import { redirect } from "next/navigation";
 import { getSession } from "lib/auth";
-import AdminSidebar from "components/AdminSidebar";
+import AdminSidebar from '@/components/AdminSidebar/AdminSidebar.jsx';
+
+// --- Design System Configuration (Minimalist Light Blue) ---
+const ACCENT = '#6495ED';        // Cornflower Blue
+const DARK_TEXT = '#333333';     // Dark Gray
+const BACKGROUND = '#FAFAFA';    // Off-White
+
+
 
 export default async function AdminMessagesLayout({ children }) {
   const session = await getSession();
@@ -11,12 +18,18 @@ export default async function AdminMessagesLayout({ children }) {
   }
 
   return (
-    <div className="flex min-h-screen bg-[var(--bg)]">
+    <div
+      className="flex min-h-screen"
+      style={{ backgroundColor: BACKGROUND }} // Apply BACKGROUND color from DS
+    >
       {/* Sidebar */}
+      {/* The component is now available in this file */}
       <AdminSidebar user={session} />
 
       {/* Main Content */}
-      <main className="flex-1 p-8">{children}</main>
+      <main className="flex-1 p-8 overflow-y-auto">
+        {children}
+      </main>
     </div>
   );
 }

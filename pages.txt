@@ -1,0 +1,29 @@
+=== ALL PAGES IN FONDATION ASSALAM WEBSITE ===
+
+PUBLIC PAGES:
+app/about/page.jsx ✅
+app/blogs/page.jsx ✅
+app/blogs/[slug]/page.jsx ✅
+app/contact/page.jsx ✅
+app/page.jsx ✅
+app/palette-preview/page.jsx ✅
+app/projects/page.jsx ✅
+app/projects/[slug]/page.jsx ✅
+
+ADMIN PAGES:
+app/admin/admins/[id]/edit/page.jsx v
+app/admin/admins/new/page.jsx v
+app/admin/admins/page.jsx v
+app/admin/blogs/[id]/edit/page.jsx 
+app/admin/blogs/[id]/page.jsx 
+app/admin/blogs/new/page.jsx 
+app/admin/blogs/page.jsx
+app/admin/dashboard/page.jsx
+app/admin/login/page.jsx
+app/admin/messages/[id]/page.jsx
+app/admin/messages/page.jsx
+app/admin/projects/[id]/edit/page.jsx
+app/admin/projects/new/page.jsx
+app/admin/projects/page.jsx
+
+TOTAL PAGES FOUND: 22
