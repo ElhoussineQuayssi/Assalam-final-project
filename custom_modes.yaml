@@ -14,7 +14,6 @@
     DESIGN SYSTEM FIRST APPROACH:
     - Always request design system details (colors, typography, spacing)
     - If no design system provided, create modern, accessible solutions
-    - Use CSS custom properties for theming and consistency
     - Implement mobile-first responsive design principles
 
     ACCESSIBILITY STANDARDS:

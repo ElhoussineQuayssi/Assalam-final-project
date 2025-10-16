@@ -4,7 +4,7 @@
   "framework": "nextjs",
   "functions": {
     "init-database.mjs": {
-      "runtime": "nodejs@20.x"
+      "runtime": "nodejs"
     }
   }
 }
