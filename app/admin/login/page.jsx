@@ -12,11 +12,9 @@ import Button from "@/components/Button/Button";
 import AdminLoginForm from "@/components/AdminLoginForm/AdminLoginForm";
 
 // --- Design System Configuration ---
-const ACCENT = '#6495ED';        // Cornflower Blue
-const DARK_TEXT = '#333333';     // Dark Gray
-const BACKGROUND = '#FAFAFA';    // Off-White
-
-
+const ACCENT = "#6495ED"; // Cornflower Blue
+const DARK_TEXT = "#333333"; // Dark Gray
+const BACKGROUND = "#FAFAFA"; // Off-White
 
 // --- Main Component ---
 export default function AdminLogin() {
@@ -64,7 +62,9 @@ export default function AdminLogin() {
         });
         router.push("/admin/dashboard");
       } else {
-        setError(result.message || "Erreur de connexion. Vérifiez vos identifiants.");
+        setError(
+          result.message || "Erreur de connexion. Vérifiez vos identifiants.",
+        );
       }
     } catch (error) {
       console.error("Login error:", error);

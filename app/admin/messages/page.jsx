@@ -3,21 +3,28 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { getMessages, deleteMessage, markMessageAsRead } from "lib/actions";
-import { Mail, Star, Trash2, Inbox, CheckCircle, Eye, Loader2, AlertTriangle } from "lucide-react";
+import {
+  Mail,
+  Star,
+  Trash2,
+  Inbox,
+  CheckCircle,
+  Eye,
+  Loader2,
+  AlertTriangle,
+} from "lucide-react";
 
 // Import extracted components
-import AdminPageHeader from '@/components/AdminPageHeader/AdminPageHeader.jsx';
-import AdminStatsCard from '@/components/AdminStatsCard/AdminStatsCard.jsx';
-import AdminActionButtons from '@/components/AdminActionButtons/AdminActionButtons.jsx';
-import AdminTable from '@/components/AdminTable/AdminTable.jsx';
+import AdminPageHeader from "@/components/AdminPageHeader/AdminPageHeader.jsx";
+import AdminStatsCard from "@/components/AdminStatsCard/AdminStatsCard.jsx";
+import AdminActionButtons from "@/components/AdminActionButtons/AdminActionButtons.jsx";
+import AdminTable from "@/components/AdminTable/AdminTable.jsx";
 
 // --- Design System Configuration ---
-const ACCENT = '#6495ED';        // Cornflower Blue
-const PRIMARY_LIGHT = '#B0E0E6'; // Powder Blue
-const DARK_TEXT = '#333333';     // Dark Gray
-const BACKGROUND = '#FAFAFA';    // Off-White
-
-
+const ACCENT = "#6495ED"; // Cornflower Blue
+const PRIMARY_LIGHT = "#B0E0E6"; // Powder Blue
+const DARK_TEXT = "#333333"; // Dark Gray
+const BACKGROUND = "#FAFAFA"; // Off-White
 
 // --- Main Component ---
 export default function MessagesAdmin() {
@@ -49,7 +56,12 @@ export default function MessagesAdmin() {
   }, []);
 
   const handleDelete = async (id) => {
-    if (!confirm("Êtes-vous sûr de vouloir supprimer ce message ? Cette action est irréversible.")) return;
+    if (
+      !confirm(
+        "Êtes-vous sûr de vouloir supprimer ce message ? Cette action est irréversible.",
+      )
+    )
+      return;
 
     const result = await deleteMessage(id);
     if (result.success) {
@@ -91,7 +103,11 @@ export default function MessagesAdmin() {
       label: "Expéditeur",
       render: (value, item) => (
         <div>
-          <p className={`font-semibold ${item.status === 'unread' ? `text-[${ACCENT}]` : `text-[${DARK_TEXT}]`}`}>{value}</p>
+          <p
+            className={`font-semibold ${item.status === "unread" ? `text-[${ACCENT}]` : `text-[${DARK_TEXT}]`}`}
+          >
+            {value}
+          </p>
           <p className="text-sm text-gray-500">{item.email}</p>
         </div>
       ),
@@ -99,16 +115,16 @@ export default function MessagesAdmin() {
     {
       key: "phone",
       label: "Téléphone",
-      render: (value) => value || "N/A"
+      render: (value) => value || "N/A",
     },
     {
       key: "type",
       label: "Type",
       render: (value) => {
         let typeText = value;
-        if (value === 'donation') typeText = 'Don';
-        if (value === 'volunteer') typeText = 'Bénévole';
-        if (value === 'contact') typeText = 'Contact';
+        if (value === "donation") typeText = "Don";
+        if (value === "volunteer") typeText = "Bénévole";
+        if (value === "contact") typeText = "Contact";
 
         return (
           // Unified Accent Badge Style
@@ -117,22 +133,20 @@ export default function MessagesAdmin() {
           >
             {typeText}
           </span>
-        )
+        );
       },
     },
     {
       key: "message",
       label: "Message",
       render: (value) => (
-        <p className="text-sm text-gray-600 truncate max-w-xs">
-          {value}
-        </p>
+        <p className="text-sm text-gray-600 truncate max-w-xs">{value}</p>
       ),
     },
     {
       key: "createdAt",
       label: "Date",
-      render: (value) => new Date(value).toLocaleDateString('fr-FR')
+      render: (value) => new Date(value).toLocaleDateString("fr-FR"),
     },
   ];
 
@@ -142,21 +156,21 @@ export default function MessagesAdmin() {
       icon: CheckCircle, // Changed icon for 'Mark as Read' to be clearer
       onClick: handleMarkAsRead,
       className: `text-green-600 hover:text-green-800`, // Use a subtle green for read status
-      title: "Marquer comme lu"
+      title: "Marquer comme lu",
     },
     {
       key: "view",
       icon: Eye,
       href: (item) => `/admin/messages/${item.id}`,
       className: `text-gray-600 hover:text-[${ACCENT}]`,
-      title: "Voir détails"
+      title: "Voir détails",
     },
     {
       key: "delete",
       icon: Trash2,
       onClick: handleDelete,
       className: "text-red-600 hover:text-red-800",
-      title: "Supprimer"
+      title: "Supprimer",
     },
   ];
 
@@ -168,21 +182,9 @@ export default function MessagesAdmin() {
 
         {/* Stats Cards - Blueprint responsive grid pattern with ScrollReveal */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 scroll-reveal">
-          <AdminStatsCard
-            title="Total"
-            value={stats.total}
-            type="total"
-          />
-          <AdminStatsCard
-            title="Non lus"
-            value={stats.unread}
-            type="unread"
-          />
-          <AdminStatsCard
-            title="Lus"
-            value={stats.read}
-            type="read"
-          />
+          <AdminStatsCard title="Total" value={stats.total} type="total" />
+          <AdminStatsCard title="Non lus" value={stats.unread} type="unread" />
+          <AdminStatsCard title="Lus" value={stats.read} type="read" />
         </div>
 
         <div className="scroll-reveal">

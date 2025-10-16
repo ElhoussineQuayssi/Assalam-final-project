@@ -1,13 +1,17 @@
 "use client";
 
-import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
+
+const motion = dynamic(() =>
+  import("framer-motion").then((mod) => mod.motion)
+);
 
 // --- DESIGN SYSTEM MAPPING ---
 // Accent: #6495ED (Cornflower Blue)
 // Dark-Text: #333333 (Dark Gray)
 
-const ACCENT_BLUE = '#6495ED';
-const DARK_TEXT = '#333333';
+const ACCENT_BLUE = "#6495ED";
+const DARK_TEXT = "#333333";
 
 /**
  * Signature Component
@@ -24,7 +28,7 @@ export default function Signature() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       // Animation System: Transition duration aligned with design system's easeOut
-      transition={{ duration: 0.8, ease: 'easeOut' }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
     >
       <motion.span
         className="tracking-wide"
@@ -32,7 +36,7 @@ export default function Signature() {
           // Color Application: Hover on main text uses the Accent Blue from design system
           color: ACCENT_BLUE,
           scale: 1.05,
-          transition: { duration: 0.3, ease: 'easeOut' },
+          transition: { duration: 0.3, ease: "easeOut" },
         }}
       >
         Developed with ❤️ by{" "}
@@ -42,7 +46,7 @@ export default function Signature() {
           whileHover={{
             // Color Transition: Maintain Accent Blue but add scale effect for emphasis
             scale: 1.08,
-            transition: { duration: 0.3, ease: 'easeOut' },
+            transition: { duration: 0.3, ease: "easeOut" },
           }}
           whileTap={{
             scale: 0.95, // Subtle tap feedback

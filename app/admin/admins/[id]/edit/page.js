@@ -6,16 +6,16 @@ import { getAdmins, updateAdmin } from "lib/actions";
 import { Loader2, AlertTriangle, CheckCircle } from "lucide-react";
 
 // Import extracted components
-import Container from '@/components/Container/Container.jsx';
-import Alert from '@/components/Alert/Alert.jsx';
-import Button from '@/components/Button/Button.jsx';
+import Container from "@/components/Container/Container.jsx";
+import Alert from "@/components/Alert/Alert.jsx";
+import Button from "@/components/Button/Button.jsx";
 
 // --- Design System Configuration (Minimalist Light Blue) ---
 // Defined explicitly here to ensure consistency and self-containment.
-const ACCENT = '#6495ED';        // Cornflower Blue
-const PRIMARY_LIGHT = '#B0E0E6'; // Powder Blue
-const DARK_TEXT = '#333333';     // Dark Gray
-const BACKGROUND = '#FAFAFA';    // Off-White
+const ACCENT = "#6495ED"; // Cornflower Blue
+const PRIMARY_LIGHT = "#B0E0E6"; // Powder Blue
+const DARK_TEXT = "#333333"; // Dark Gray
+const BACKGROUND = "#FAFAFA"; // Off-White
 
 export default function EditAdmin() {
   const router = useRouter();
@@ -116,10 +116,7 @@ export default function EditAdmin() {
     >
       <Container>
         {/* H1 Typography Pattern: Bold, Dark Text */}
-        <h1
-          className="text-3xl font-bold mb-8"
-          style={{ color: DARK_TEXT }}
-        >
+        <h1 className="text-3xl font-bold mb-8" style={{ color: DARK_TEXT }}>
           Modifier l&apos;administrateur
         </h1>
 
@@ -223,15 +220,14 @@ export default function EditAdmin() {
             className="w-full text-white font-bold py-4 px-8 rounded-full transition-all duration-300 transform shadow-xl hover:scale-[1.01] hover:shadow-2xl disabled:opacity-70 disabled:cursor-not-allowed"
             style={{ backgroundColor: ACCENT }}
           >
-            {formState.status === "submitting"
-              ? (
-                <span className="flex items-center justify-center gap-2">
-                  <Loader2 className="h-5 w-5 animate-spin" />
-                  Mise à jour...
-                </span>
-              )
-              : "Mettre à jour"
-            }
+            {formState.status === "submitting" ? (
+              <span className="flex items-center justify-center gap-2">
+                <Loader2 className="h-5 w-5 animate-spin" />
+                Mise à jour...
+              </span>
+            ) : (
+              "Mettre à jour"
+            )}
           </button>
         </form>
       </Container>

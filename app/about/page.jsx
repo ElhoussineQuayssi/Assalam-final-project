@@ -1,26 +1,43 @@
-import React from 'react';
+import React from "react";
 import Image from "next/image";
-import Link from 'next/link';
-import { Target, Eye, BarChart, Users, Zap, Compass, CheckCircle, Award, Clock } from 'lucide-react';
+import Link from "next/link";
+import {
+  Target,
+  Eye,
+  BarChart,
+  Users,
+  Zap,
+  Compass,
+  CheckCircle,
+  Award,
+  Clock,
+} from "lucide-react";
 
 // Import extracted components
-import Container from '@/components/Container/Container.jsx';
-import AboutHeader from '@/components/AboutHeader/AboutHeader.jsx';
-import SectionWithBackground from '@/components/SectionWithBackground/SectionWithBackground.jsx';
-import ImageTextSectionAbout from '@/components/ImageTextSection/ImageTextSectionAbout.jsx';
-import StatsCardAbout from '@/components/StatsCard/StatsCardAbout.jsx';
-import MissionVisionCard from '@/components/MissionVisionCard/MissionVisionCard.jsx';
-import ValueCard from '@/components/ValueCard/ValueCard.jsx';
-import ContentCardAbout from '@/components/ContentCard/ContentCardAbout.jsx';
-import TeamMemberCard from '@/components/TeamMemberCard/TeamMemberCard.jsx';
-import {Timeline, TimelineItem, TimelineTime, TimelineContent, TimelineTitle, TimelineDescription} from '@/components/Timeline/Timeline.jsx';
+import Container from "@/components/Container/Container.jsx";
+import AboutHeader from "@/components/AboutHeader/AboutHeader.jsx";
+import SectionWithBackground from "@/components/SectionWithBackground/SectionWithBackground.jsx";
+import ImageTextSectionAbout from "@/components/ImageTextSection/ImageTextSectionAbout.jsx";
+import StatsCardAbout from "@/components/StatsCard/StatsCardAbout.jsx";
+import MissionVisionCard from "@/components/MissionVisionCard/MissionVisionCard.jsx";
+import ValueCard from "@/components/ValueCard/ValueCard.jsx";
+import ContentCardAbout from "@/components/ContentCard/ContentCardAbout.jsx";
+import TeamMemberCard from "@/components/TeamMemberCard/TeamMemberCard.jsx";
+import {
+  Timeline,
+  TimelineItem,
+  TimelineTime,
+  TimelineContent,
+  TimelineTitle,
+  TimelineDescription,
+} from "@/components/Timeline/Timeline.jsx";
 
 // --- Design System Configuration (Minimalist Light Blue) ---
 // Note: Using constants for colors and inline styles to avoid Tailwind JIT issues
-const ACCENT = '#6495ED';        // CTimelineornflower Blue
-const PRIMARY_LIGHT = '#B0E0E6'; // Powder Blue
-const DARK_TEXT = '#333333';     // Dark Gray
-const BACKGROUND = '#FAFAFA';    // Off-White
+const ACCENT = "#6495ED"; // CTimelineornflower Blue
+const PRIMARY_LIGHT = "#B0E0E6"; // Powder Blue
+const DARK_TEXT = "#333333"; // Dark Gray
+const BACKGROUND = "#FAFAFA"; // Off-White
 
 // --- Design System Component Implementations (These have been removed as they are now imported) ---
 
@@ -41,29 +58,32 @@ const BACKGROUND = '#FAFAFA';    // Off-White
 // - TimelineTitle
 // - TimelineDescription
 
-
 // --- Original Page Logic (Content is Replaced Here) ---
 
 const partnershipsData = [
   {
     name: "Fondation Jadara",
     logo: "/partners/partner1.png",
-    description: "Partenaire clé dans le soutien aux projets d'éducation et d'excellence académique (*Projet Imtiaz*).",
+    description:
+      "Partenaire clé dans le soutien aux projets d'éducation et d'excellence académique (*Projet Imtiaz*).",
   },
   {
     name: "Association Mentor'Elles",
     logo: "/partners/partner2.png",
-    description: "Collaborateur engagé dans l'autonomisation et le développement des compétences des femmes.",
+    description:
+      "Collaborateur engagé dans l'autonomisation et le développement des compétences des femmes.",
   },
   {
     name: "Fondation Abdelkader Bensalah",
     logo: "/partners/partner3.png",
-    description: "Un partenaire majeur pour des initiatives de développement social et communautaire au Maroc.",
+    description:
+      "Un partenaire majeur pour des initiatives de développement social et communautaire au Maroc.",
   },
   {
     name: "Entraide Nationale",
     logo: "/partners/partner4.png",
-    description: "Partenaire pour la certification officielle des diplômes de formation professionnelle (Couture et Pâtisserie).",
+    description:
+      "Partenaire pour la certification officielle des diplômes de formation professionnelle (Couture et Pâtisserie).",
   },
 ];
 
@@ -71,7 +91,8 @@ export default function AboutUs() {
   const impactStats = [
     {
       title: "Sections Opérationnelles",
-      description: "Notre réseau national compte plus de 36 sections engagées dans les communautés locales à travers le Royaume.",
+      description:
+        "Notre réseau national compte plus de 36 sections engagées dans les communautés locales à travers le Royaume.",
       value: "36+",
     },
     {
@@ -144,10 +165,19 @@ export default function AboutUs() {
           content={
             <>
               <p className="mb-4">
-                Fondée en **1992** au Maroc, la Fondation Assalam est née d'une volonté profonde de **solidarité** et d'**entraide**. Nos premières initiatives locales visaient à améliorer les conditions de vie des familles les plus vulnérables. L'ONG a rapidement pris de l'ampleur en s'appuyant sur l'engagement de bénévoles.
+                Fondée en **1992** au Maroc, la Fondation Assalam est née d'une
+                volonté profonde de **solidarité** et d'**entraide**. Nos
+                premières initiatives locales visaient à améliorer les
+                conditions de vie des familles les plus vulnérables. L'ONG a
+                rapidement pris de l'ampleur en s'appuyant sur l'engagement de
+                bénévoles.
               </p>
               <p>
-                Aujourd'hui, avec plus de **36 sections** à travers le Royaume, nous nous engageons dans l'autonomisation des femmes, l'éducation des enfants, et le soutien aux étudiants brillants, transformant chaque défi en une opportunité de dignité et d'autonomie.
+                Aujourd'hui, avec plus de **36 sections** à travers le Royaume,
+                nous nous engageons dans l'autonomisation des femmes,
+                l'éducation des enfants, et le soutien aux étudiants brillants,
+                transformant chaque défi en une opportunité de dignité et
+                d'autonomie.
               </p>
             </>
           }
@@ -160,10 +190,12 @@ export default function AboutUs() {
       {/* Timeline Section */}
       <SectionWithBackground variant="gray" className="py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4" style={{ color: ACCENT }}>Les Étapes de Notre Engagement</h2>
+          <h2 className="text-3xl font-bold mb-4" style={{ color: ACCENT }}>
+            Les Étapes de Notre Engagement
+          </h2>
           <p className="max-w-2xl mx-auto" style={{ color: DARK_TEXT }}>
-            Découvrez les étapes clés qui ont marqué le parcours de la
-            Fondation Assalam pour le Développement Social.
+            Découvrez les étapes clés qui ont marqué le parcours de la Fondation
+            Assalam pour le Développement Social.
           </p>
         </div>
 
@@ -171,24 +203,21 @@ export default function AboutUs() {
           {[
             {
               year: "1992",
-              event:
-                "Création de la Fondation Assalam au Maroc.",
+              event: "Création de la Fondation Assalam au Maroc.",
             },
             {
               year: "2010",
-              event:
-                "Expansion Nationale",
+              event: "Expansion Nationale",
             },
             {
               year: "2018",
-              event:
-                "Lancement des Programmes d'Autonomisation des Femmes",
+              event: "Lancement des Programmes d'Autonomisation des Femmes",
             },
             {
               year: "2025",
               event:
                 "Transition Numérique & Lancement de la Nouvelle Plateforme",
-            }
+            },
           ].map((item, index) => (
             <TimelineItem key={index} index={index}>
               <TimelineTime>{item.year}</TimelineTime>
@@ -212,7 +241,9 @@ export default function AboutUs() {
       {/* Notre Mission et Vision */}
       <SectionWithBackground variant="none" className="mb-20 py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4" style={{ color: ACCENT }}>Notre Mission et Vision</h2>
+          <h2 className="text-3xl font-bold mb-4" style={{ color: ACCENT }}>
+            Notre Mission et Vision
+          </h2>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12">
@@ -234,9 +265,12 @@ export default function AboutUs() {
       <section className="py-16">
         <Container>
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4" style={{ color: ACCENT }}>Notre Impact et Notre Rayonnement</h2>
+            <h2 className="text-3xl font-bold mb-4" style={{ color: ACCENT }}>
+              Notre Impact et Notre Rayonnement
+            </h2>
             <p className="max-w-2xl mx-auto" style={{ color: DARK_TEXT }}>
-              Grâce à votre soutien constant et l'engagement de nos bénévoles, nous avons pu transformer des vies et bâtir un avenir meilleur.
+              Grâce à votre soutien constant et l'engagement de nos bénévoles,
+              nous avons pu transformer des vies et bâtir un avenir meilleur.
             </p>
           </div>
 
@@ -257,7 +291,12 @@ export default function AboutUs() {
       {/* Nos Valeurs */}
       <section className="mb-20">
         <Container>
-          <h2 className="text-3xl font-bold mb-10 text-center" style={{ color: ACCENT }}>Nos Valeurs Fondatrices</h2>
+          <h2
+            className="text-3xl font-bold mb-10 text-center"
+            style={{ color: ACCENT }}
+          >
+            Nos Valeurs Fondatrices
+          </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <ValueCard>
@@ -277,9 +316,12 @@ export default function AboutUs() {
       {/* Partnerships Section */}
       <SectionWithBackground variant="gray" className="py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4" style={{ color: ACCENT }}>Nos Partenaires de Confiance</h2>
+          <h2 className="text-3xl font-bold mb-4" style={{ color: ACCENT }}>
+            Nos Partenaires de Confiance
+          </h2>
           <p className="max-w-2xl mx-auto" style={{ color: DARK_TEXT }}>
-            Nous collaborons avec des fondations et organisations engagées pour maximiser notre impact social et éducatif.
+            Nous collaborons avec des fondations et organisations engagées pour
+            maximiser notre impact social et éducatif.
           </p>
         </div>
 
@@ -300,14 +342,35 @@ export default function AboutUs() {
       {/* Notre Équipe */}
       <section className="py-16">
         <Container>
-          <h2 className="text-3xl font-bold mb-10 text-center" style={{ color: ACCENT }}>Notre Équipe Dévouée</h2>
+          <h2
+            className="text-3xl font-bold mb-10 text-center"
+            style={{ color: ACCENT }}
+          >
+            Notre Équipe Dévouée
+          </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[1, 2, 3, 4].map((id) => (
               <TeamMemberCard
                 key={id}
-                name={id === 1 ? "Mme. Fatema Zahra Alami" : id === 2 ? "M. Youssef El Mansouri" : id === 3 ? "Mme. Samira El Fassi" : "M. Karim Bennani"}
-                role={id === 1 ? "Présidente de la Fondation" : id === 2 ? "Directeur Général" : id === 3 ? "Chef des Opérations Sociales" : "Chef de la Transformation Numérique"}
+                name={
+                  id === 1
+                    ? "Mme. Fatema Zahra Alami"
+                    : id === 2
+                      ? "M. Youssef El Mansouri"
+                      : id === 3
+                        ? "Mme. Samira El Fassi"
+                        : "M. Karim Bennani"
+                }
+                role={
+                  id === 1
+                    ? "Présidente de la Fondation"
+                    : id === 2
+                      ? "Directeur Général"
+                      : id === 3
+                        ? "Chef des Opérations Sociales"
+                        : "Chef de la Transformation Numérique"
+                }
                 imageSrc={`/placeholder.svg?height=300&width=300`}
                 imageAlt={`Membre de l'équipe ${id}`}
               />

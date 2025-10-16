@@ -56,7 +56,10 @@ export default function AdminProjectsPage() {
         title="Gestion des Projets"
         subtitle="Gérer vos projets et initiatives"
         actionButton={
-          <Link href="/admin/projects/new" className="px-8 py-4 rounded-full bg-accent text-white font-bold text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center">
+          <Link
+            href="/admin/projects/new"
+            className="px-8 py-4 rounded-full bg-accent text-white font-bold text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center"
+          >
             <Plus className="h-5 w-5 mr-2" />
             Nouveau Projet
           </Link>
@@ -68,9 +71,12 @@ export default function AdminProjectsPage() {
           <div className="text-accent mb-4">
             <Plus className="h-24 w-24 mx-auto" />
           </div>
-          <h2 className="text-2xl font-bold text-dark-text mb-2">Aucun projet trouvé</h2>
+          <h2 className="text-2xl font-bold text-dark-text mb-2">
+            Aucun projet trouvé
+          </h2>
           <p className="text-dark-text/70 mb-6">
-            Commencez par créer votre premier projet en utilisant le bouton ci-dessus.
+            Commencez par créer votre premier projet en utilisant le bouton
+            ci-dessus.
           </p>
           <Link
             href="/admin/projects/new"
@@ -128,7 +134,11 @@ export default function AdminProjectsPage() {
                       className="p-2 text-dark-text/50 hover:text-accent transition-colors"
                       title="Supprimer"
                       onClick={async () => {
-                        if (confirm("Êtes-vous sûr de vouloir supprimer ce projet ?")) {
+                        if (
+                          confirm(
+                            "Êtes-vous sûr de vouloir supprimer ce projet ?",
+                          )
+                        ) {
                           try {
                             const result = await deleteProject(project.id);
                             if (result.success) {
@@ -136,7 +146,10 @@ export default function AdminProjectsPage() {
                               loadProjects();
                               alert("Projet supprimé avec succès!");
                             } else {
-                              alert(result.message || "Erreur lors de la suppression du projet");
+                              alert(
+                                result.message ||
+                                  "Erreur lors de la suppression du projet",
+                              );
                             }
                           } catch (error) {
                             console.error("Error deleting project:", error);
@@ -180,7 +193,8 @@ export default function AdminProjectsPage() {
                       </span>
                       {project.goals?.length > 0 && (
                         <span className="text-dark-text/70">
-                          {project.goals.length} objectif{project.goals.length > 1 ? "s" : ""}
+                          {project.goals.length} objectif
+                          {project.goals.length > 1 ? "s" : ""}
                         </span>
                       )}
                     </div>
@@ -205,24 +219,31 @@ export default function AdminProjectsPage() {
               type="total"
             />
           </div>
-          <div className="scroll-reveal" style={{ animationDelay: '0.1s' }}>
+          <div className="scroll-reveal" style={{ animationDelay: "0.1s" }}>
             <AdminStatsCard
               title="Projets Actifs"
-              value={projects.filter(p => p.status === "Actif").length}
+              value={projects.filter((p) => p.status === "Actif").length}
               type="total"
             />
           </div>
-          <div className="scroll-reveal" style={{ animationDelay: '0.2s' }}>
+          <div className="scroll-reveal" style={{ animationDelay: "0.2s" }}>
             <AdminStatsCard
               title="Bénéficiaires Total"
-              value={projects.reduce((acc, p) => acc + (p.peopleHelped ? parseInt(p.peopleHelped) || 0 : 0), 0)}
+              value={projects.reduce(
+                (acc, p) =>
+                  acc + (p.peopleHelped ? parseInt(p.peopleHelped) || 0 : 0),
+                0,
+              )}
               type="users"
             />
           </div>
-          <div className="scroll-reveal" style={{ animationDelay: '0.3s' }}>
+          <div className="scroll-reveal" style={{ animationDelay: "0.3s" }}>
             <AdminStatsCard
               title="Sections de Contenu"
-              value={projects.reduce((acc, p) => acc + (p.content?.length || 0), 0)}
+              value={projects.reduce(
+                (acc, p) => acc + (p.content?.length || 0),
+                0,
+              )}
               type="blogs"
             />
           </div>

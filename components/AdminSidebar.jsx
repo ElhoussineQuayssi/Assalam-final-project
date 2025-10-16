@@ -7,8 +7,8 @@
  */
 "use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Newspaper,
   MessageSquare,
@@ -16,57 +16,57 @@ import {
   LayoutDashboard,
   FolderOpen,
   Home,
-} from 'lucide-react';
+} from "lucide-react";
 
 export default function AdminSidebar({ user }) {
   const pathname = usePathname();
 
   const navItems = [
     {
-      name: 'Tableau de Bord',
-      href: '/admin/dashboard',
+      name: "Tableau de Bord",
+      href: "/admin/dashboard",
       icon: <LayoutDashboard className="h-5 w-5" />,
-      permission: ['super_admin', 'content_manager', 'message_manager'],
+      permission: ["super_admin", "content_manager", "message_manager"],
     },
     {
-      name: 'Articles',
-      href: '/admin/blogs',
+      name: "Articles",
+      href: "/admin/blogs",
       icon: <Newspaper className="h-5 w-5" />,
-      permission: ['super_admin', 'content_manager'],
+      permission: ["super_admin", "content_manager"],
     },
     {
-      name: 'Projets',
-      href: '/admin/projects',
+      name: "Projets",
+      href: "/admin/projects",
       icon: <FolderOpen className="h-5 w-5" />,
-      permission: ['super_admin', 'content_manager'],
+      permission: ["super_admin", "content_manager"],
     },
     {
-      name: 'Messages',
-      href: '/admin/messages',
+      name: "Messages",
+      href: "/admin/messages",
       icon: <MessageSquare className="h-5 w-5" />,
-      permission: ['super_admin', 'message_manager'],
+      permission: ["super_admin", "message_manager"],
     },
     {
-      name: 'Administrateurs',
-      href: '/admin/admins',
+      name: "Administrateurs",
+      href: "/admin/admins",
       icon: <Users className="h-5 w-5" />,
-      permission: ['super_admin'],
+      permission: ["super_admin"],
     },
   ];
 
   // Functionality Preservation: Filter nav items based on user role
   const filteredNavItems = navItems.filter((item) => {
-    if (user?.role === 'content_manager') {
+    if (user?.role === "content_manager") {
       // content_manager: show dashboard, articles, and projects
       return (
-        item.name === 'Tableau de Bord' ||
-        item.name === 'Articles' ||
-        item.name === 'Projets'
+        item.name === "Tableau de Bord" ||
+        item.name === "Articles" ||
+        item.name === "Projets"
       );
-    } else if (user?.role === 'message_manager') {
+    } else if (user?.role === "message_manager") {
       // messages_manager: show dashboard and messages only
-      return item.name === 'Tableau de Bord' || item.name === 'Messages';
-    } else if (user?.role === 'super_admin') {
+      return item.name === "Tableau de Bord" || item.name === "Messages";
+    } else if (user?.role === "super_admin") {
       // super_admin: show all
       return true;
     }
@@ -98,9 +98,9 @@ export default function AdminSidebar({ user }) {
                   ${
                     // Active State: Accent background with white text, enhanced shadow
                     pathname === item.href
-                      ? 'bg-accent text-white shadow-lg transform translate-x-1'
+                      ? "bg-accent text-white shadow-lg transform translate-x-1"
                       : // Default/Hover State: Dark text, hover with primary-light background and card-lift effect
-                        'text-dark-text hover:bg-primary-light/70 hover:shadow-md hover:translate-x-1 card-lift'
+                        "text-dark-text hover:bg-primary-light/70 hover:shadow-md hover:translate-x-1 card-lift"
                   }
                   scroll-reveal`}
                 style={{ animationDelay: `${index * 0.1}s` }}
@@ -109,8 +109,8 @@ export default function AdminSidebar({ user }) {
                 <span
                   className={`mr-4 transition-all duration-300 ${
                     pathname === item.href
-                      ? 'text-white'
-                      : 'text-accent group-hover:scale-110'
+                      ? "text-white"
+                      : "text-accent group-hover:scale-110"
                   }`}
                 >
                   {item.icon}

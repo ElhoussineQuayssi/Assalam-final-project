@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import Image from 'next/image';
+import Link from "next/link";
+import Image from "next/image";
 import {
   Phone,
   Mail,
@@ -9,35 +9,40 @@ import {
   Instagram,
   Linkedin,
   ArrowRight,
-} from 'lucide-react';
-import Signature from './Signature';
+} from "lucide-react";
+import Signature from "./Signature";
 
 // --- DESIGN SYSTEM MAPPING ---
 // Accent: #6495ED (Cornflower Blue)
 // Primary-Light: #B0E0E6 (Powder Blue)
 // Dark-Text: #333333 (Dark Gray) - Used as the Footer Background Color
 
-const ACCENT_BLUE = '#6495ED';
-const FOOTER_BG = '#333333';
-const WHITE_TEXT_MUTED = 'rgba(255, 255, 255, 0.7)'; // text-white/70
-const WHITE_TEXT_FADE = 'rgba(255, 255, 255, 0.5)'; // text-white/50
-const WHITE_TEXT_FULL = '#FFFFFF';
+const ACCENT_BLUE = "#6495ED";
+const FOOTER_BG = "#333333";
+const WHITE_TEXT_MUTED = "rgba(255, 255, 255, 0.7)"; // text-white/70
+const WHITE_TEXT_FADE = "rgba(255, 255, 255, 0.5)"; // text-white/50
+const WHITE_TEXT_FULL = "#FFFFFF";
 
 /**
  * Helper component for links to use inline styles for hover
  */
-const FooterLink = ({ href, children, defaultColor = WHITE_TEXT_MUTED, hoverColor = WHITE_TEXT_FULL, className = '' }) => (
+const FooterLink = ({
+  href,
+  children,
+  defaultColor = WHITE_TEXT_MUTED,
+  hoverColor = WHITE_TEXT_FULL,
+  className = "",
+}) => (
   <Link
     href={href}
     className={`hover:pl-1 transition-all duration-200 ease-in-out block ${className}`}
     style={{ color: defaultColor }}
-    onMouseEnter={e => e.target.style.color = hoverColor}
-    onMouseLeave={e => e.target.style.color = defaultColor}
+    onMouseEnter={(e) => (e.target.style.color = hoverColor)}
+    onMouseLeave={(e) => (e.target.style.color = defaultColor)}
   >
     {children}
   </Link>
 );
-
 
 /**
  * Footer Component
@@ -46,49 +51,50 @@ const FooterLink = ({ href, children, defaultColor = WHITE_TEXT_MUTED, hoverColo
  */
 export default function Footer() {
   const footerLinks = [
-    { name: 'Accueil', href: '/' },
-    { name: 'À Propos', href: '/about' },
-    { name: 'Nos Projets', href: '/projects' },
-    { name: 'Blog & Actualités', href: '/blogs' },
-    { name: 'Contact', href: '/contact' },
+    { name: "Accueil", href: "/" },
+    { name: "À Propos", href: "/about" },
+    { name: "Nos Projets", href: "/projects" },
+    { name: "Blog & Actualités", href: "/blogs" },
+    { name: "Contact", href: "/contact" },
   ];
 
   const projectLinks = [
-    { name: 'Rayhana Assalam', slug: 'rayhana-assalam' },
-    { name: 'Centre Himaya', slug: 'centre-himaya' },
-    { name: 'Fatair Al Baraka', slug: 'fatair-al-baraka' },
-    { name: 'Imtiaz Program', slug: 'projet-imtiaz' },
-    { name: 'Parrainage des Orphelins (Kafala)', slug: 'kafala' },
-    { name: 'Nadi Assalam', slug: 'nadi-assalam' },
+    { name: "Rayhana Assalam", slug: "rayhana-assalam" },
+    { name: "Centre Himaya", slug: "centre-himaya" },
+    { name: "Fatair Al Baraka", slug: "fatair-al-baraka" },
+    { name: "Imtiaz Program", slug: "projet-imtiaz" },
+    { name: "Parrainage des Orphelins (Kafala)", slug: "kafala" },
+    { name: "Nadi Assalam", slug: "nadi-assalam" },
   ];
 
   const IconStyle = {
     color: ACCENT_BLUE,
-    marginRight: '0.75rem', // mr-3
-    height: '1.25rem', // h-5
-    width: '1.25rem', // w-5
+    marginRight: "0.75rem", // mr-3
+    height: "1.25rem", // h-5
+    width: "1.25rem", // w-5
     flexShrink: 0,
   };
 
   const SocialIconBaseStyle = {
     color: WHITE_TEXT_MUTED,
-    transition: 'color 0.2s, background-color 0.2s',
-  };
-  
-  const SocialIconHoverStyle = {
-    color: ACCENT_BLUE,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)', // hover:bg-white/10
+    transition: "color 0.2s, background-color 0.2s",
   };
 
+  const SocialIconHoverStyle = {
+    color: ACCENT_BLUE,
+    backgroundColor: "rgba(255, 255, 255, 0.1)", // hover:bg-white/10
+  };
 
   return (
     // FIX: Use inline style for guaranteed background color and text contrast
-    <footer style={{ backgroundColor: FOOTER_BG, color: WHITE_TEXT_FULL }} className="shadow-2xl">
+    <footer
+      style={{ backgroundColor: FOOTER_BG, color: WHITE_TEXT_FULL }}
+      className="shadow-2xl"
+    >
       {/* Layout Architecture: Container System with Enhanced Spacing */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
         {/* Grid Patterns: Responsive columns with improved gap and visual hierarchy */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          
           {/* Column 1: Logo and Intro with Enhanced Branding */}
           <div>
             <Link href="/" className="flex items-center mb-6 group">
@@ -103,18 +109,24 @@ export default function Footer() {
                 />
               </div>
               {/* FIX: Use inline style for text color and hover */}
-              <span 
+              <span
                 className="font-bold text-2xl transition duration-300"
                 style={{ color: WHITE_TEXT_FULL }}
-                onMouseEnter={e => e.target.style.color = ACCENT_BLUE}
-                onMouseLeave={e => e.target.style.color = WHITE_TEXT_FULL}
+                onMouseEnter={(e) => (e.target.style.color = ACCENT_BLUE)}
+                onMouseLeave={(e) => (e.target.style.color = WHITE_TEXT_FULL)}
               >
                 Assalam
               </span>
             </Link>
             {/* Body Text: Enhanced readability */}
-            <p style={{ color: WHITE_TEXT_MUTED }} className="text-base mb-6 leading-relaxed">
-              La **Fondation Assalam pour le Développement Social** œuvre au Maroc **depuis 1992** pour **améliorer et renforcer les conditions de vie des individus et familles vulnérables**, en se concentrant sur l'**autonomisation, l'éducation, et la solidarité sociale.**
+            <p
+              style={{ color: WHITE_TEXT_MUTED }}
+              className="text-base mb-6 leading-relaxed"
+            >
+              La **Fondation Assalam pour le Développement Social** œuvre au
+              Maroc **depuis 1992** pour **améliorer et renforcer les conditions
+              de vie des individus et familles vulnérables**, en se concentrant
+              sur l'**autonomisation, l'éducation, et la solidarité sociale.**
             </p>
             {/* Social Icons: Enhanced hover states and accessibility */}
             <div className="flex space-x-4">
@@ -124,13 +136,14 @@ export default function Footer() {
                   href="#"
                   className="p-2 rounded-full"
                   style={SocialIconBaseStyle}
-                  onMouseEnter={e => {
+                  onMouseEnter={(e) => {
                     e.currentTarget.style.color = SocialIconHoverStyle.color;
-                    e.currentTarget.style.backgroundColor = SocialIconHoverStyle.backgroundColor;
+                    e.currentTarget.style.backgroundColor =
+                      SocialIconHoverStyle.backgroundColor;
                   }}
-                  onMouseLeave={e => {
+                  onMouseLeave={(e) => {
                     e.currentTarget.style.color = SocialIconBaseStyle.color;
-                    e.currentTarget.style.backgroundColor = 'transparent';
+                    e.currentTarget.style.backgroundColor = "transparent";
                   }}
                   aria-label={Icon.name}
                 >
@@ -143,7 +156,10 @@ export default function Footer() {
           {/* Column 2: Quick Links with Enhanced Typography */}
           <div>
             {/* H3 Title: Enhanced styling */}
-            <h3 className="text-xl font-semibold mb-6 pb-2" style={{ borderBottom: `2px solid ${ACCENT_BLUE}4D` }}>
+            <h3
+              className="text-xl font-semibold mb-6 pb-2"
+              style={{ borderBottom: `2px solid ${ACCENT_BLUE}4D` }}
+            >
               Liens Rapides
             </h3>
             <ul className="space-y-3">
@@ -158,7 +174,10 @@ export default function Footer() {
           {/* Column 3: Projects with Enhanced Layout */}
           <div>
             {/* H3 Title: Enhanced styling */}
-            <h3 className="text-xl font-semibold mb-6 pb-2" style={{ borderBottom: `2px solid ${ACCENT_BLUE}4D` }}>
+            <h3
+              className="text-xl font-semibold mb-6 pb-2"
+              style={{ borderBottom: `2px solid ${ACCENT_BLUE}4D` }}
+            >
               Nos Projets
             </h3>
             <ul className="space-y-3">
@@ -175,14 +194,20 @@ export default function Footer() {
           {/* Column 4: Contact with Enhanced Interactive Elements */}
           <div>
             {/* H3 Title: Enhanced styling */}
-            <h3 className="text-xl font-semibold mb-6 pb-2" style={{ borderBottom: `2px solid ${ACCENT_BLUE}4D` }}>
+            <h3
+              className="text-xl font-semibold mb-6 pb-2"
+              style={{ borderBottom: `2px solid ${ACCENT_BLUE}4D` }}
+            >
               Contact
             </h3>
             <ul className="space-y-4">
               {/* Contact Info: Enhanced with better spacing and hover effects */}
               <li className="flex items-start group">
                 <MapPin style={IconStyle} />
-                <span style={{ color: WHITE_TEXT_MUTED }} className="group-hover:text-white transition duration-200 text-base leading-relaxed">
+                <span
+                  style={{ color: WHITE_TEXT_MUTED }}
+                  className="group-hover:text-white transition duration-200 text-base leading-relaxed"
+                >
                   **22 Bd Hassan II, Immeuble 83, 2ème étage, Rabat, Maroc**
                 </span>
               </li>
@@ -192,8 +217,10 @@ export default function Footer() {
                   href="tel:0537702346"
                   style={{ color: WHITE_TEXT_MUTED }}
                   className="transition-colors text-base group-hover:text-white"
-                  onMouseEnter={e => e.target.style.color = ACCENT_BLUE}
-                  onMouseLeave={e => e.target.style.color = WHITE_TEXT_MUTED}
+                  onMouseEnter={(e) => (e.target.style.color = ACCENT_BLUE)}
+                  onMouseLeave={(e) =>
+                    (e.target.style.color = WHITE_TEXT_MUTED)
+                  }
                 >
                   **05377-02346**
                 </a>
@@ -204,8 +231,10 @@ export default function Footer() {
                   href="mailto:bn.assalam@gmail.com"
                   style={{ color: WHITE_TEXT_MUTED }}
                   className="transition-colors text-base group-hover:text-white"
-                  onMouseEnter={e => e.target.style.color = ACCENT_BLUE}
-                  onMouseLeave={e => e.target.style.color = WHITE_TEXT_MUTED}
+                  onMouseEnter={(e) => (e.target.style.color = ACCENT_BLUE)}
+                  onMouseLeave={(e) =>
+                    (e.target.style.color = WHITE_TEXT_MUTED)
+                  }
                 >
                   **bn.assalam@gmail.com**
                 </a>

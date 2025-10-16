@@ -36,81 +36,108 @@ import {
 } from "lucide-react";
 
 // --- Design System Configuration ---
-const ACCENT = '#6495ED';        // Cornflower Blue
-const PRIMARY_LIGHT = '#B0E0E6'; // Powder Blue
-const DARK_TEXT = '#333333';     // Dark Gray
-const BACKGROUND = '#FAFAFA';    // Off-White
+const ACCENT = "#6495ED"; // Cornflower Blue
+const PRIMARY_LIGHT = "#B0E0E6"; // Powder Blue
+const DARK_TEXT = "#333333"; // Dark Gray
+const BACKGROUND = "#FAFAFA"; // Off-White
 
 // Dynamically import heavy components
-const BasicInformationBlock = dynamic(() => import("@/components/blocks/BasicInformationBlock"), {
-  loading: () => <div className="bg-gray-100 p-8 rounded-xl animate-pulse"><div className="h-8 bg-gray-200 rounded mb-4"></div><div className="space-y-4"><div className="h-12 bg-gray-200 rounded"></div><div className="h-12 bg-gray-200 rounded"></div><div className="h-12 bg-gray-200 rounded"></div></div></div>
-});
+const BasicInformationBlock = dynamic(
+  () => import("@/components/blocks/BasicInformationBlock"),
+  {
+    loading: () => (
+      <div className="bg-gray-100 p-8 rounded-xl animate-pulse">
+        <div className="h-8 bg-gray-200 rounded mb-4"></div>
+        <div className="space-y-4">
+          <div className="h-12 bg-gray-200 rounded"></div>
+          <div className="h-12 bg-gray-200 rounded"></div>
+          <div className="h-12 bg-gray-200 rounded"></div>
+        </div>
+      </div>
+    ),
+  },
+);
 
-const ContentBuilderBlock = dynamic(() => import("@/components/blocks/ContentBuilderBlock"), {
-  loading: () => <div className="bg-gray-100 p-8 rounded-xl animate-pulse"><div className="h-8 bg-gray-200 rounded mb-4"></div><div className="h-32 bg-gray-200 rounded"></div></div>
-});
+const ContentBuilderBlock = dynamic(
+  () => import("@/components/blocks/ContentBuilderBlock"),
+  {
+    loading: () => (
+      <div className="bg-gray-100 p-8 rounded-xl animate-pulse">
+        <div className="h-8 bg-gray-200 rounded mb-4"></div>
+        <div className="h-32 bg-gray-200 rounded"></div>
+      </div>
+    ),
+  },
+);
 
-const SidebarBlocks = dynamic(() => import("@/components/blocks/SidebarBlocks"), {
-  loading: () => <div className="bg-gray-100 p-8 rounded-xl animate-pulse"><div className="h-8 bg-gray-200 rounded mb-4"></div><div className="space-y-4"><div className="h-12 bg-gray-200 rounded"></div><div className="h-12 bg-gray-200 rounded"></div><div className="h-32 bg-gray-200 rounded"></div></div></div>
-});
+const SidebarBlocks = dynamic(
+  () => import("@/components/blocks/SidebarBlocks"),
+  {
+    loading: () => (
+      <div className="bg-gray-100 p-8 rounded-xl animate-pulse">
+        <div className="h-8 bg-gray-200 rounded mb-4"></div>
+        <div className="space-y-4">
+          <div className="h-12 bg-gray-200 rounded"></div>
+          <div className="h-12 bg-gray-200 rounded"></div>
+          <div className="h-32 bg-gray-200 rounded"></div>
+        </div>
+      </div>
+    ),
+  },
+);
 
 const ContentBlock = dynamic(() => import("@/components/blocks/ContentBlock"), {
-  loading: () => <div className="bg-gray-50 p-4 rounded-lg animate-pulse"><div className="h-6 bg-gray-200 rounded mb-2"></div><div className="h-16 bg-gray-200 rounded"></div></div>
+  loading: () => (
+    <div className="bg-gray-50 p-4 rounded-lg animate-pulse">
+      <div className="h-6 bg-gray-200 rounded mb-2"></div>
+      <div className="h-16 bg-gray-200 rounded"></div>
+    </div>
+  ),
 });
 // --- Design System Utility Components ---
-
-
 
 /**
  * Utility: Outline Button (Secondary Action)
  */
 const OutlineButton = ({ children, className = "", icon: Icon, ...props }) => {
-    const baseClasses = "font-semibold transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed text-center flex items-center justify-center";
-    // Outline Button Pattern
-    const outlineClasses = `text-[${ACCENT}] border border-[${ACCENT}] rounded-lg px-4 py-2 hover:bg-[${ACCENT}] hover:text-white`;
+  const baseClasses =
+    "font-semibold transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed text-center flex items-center justify-center";
+  // Outline Button Pattern
+  const outlineClasses = `text-[${ACCENT}] border border-[${ACCENT}] rounded-lg px-4 py-2 hover:bg-[${ACCENT}] hover:text-white`;
 
-    return (
-        <button
-            type="button"
-            className={`${baseClasses} ${outlineClasses} ${className}`}
-            {...props}
-        >
-            {Icon && <Icon className="h-5 w-5 mr-2" />}
-            {children}
-        </button>
-    );
+  return (
+    <button
+      type="button"
+      className={`${baseClasses} ${outlineClasses} ${className}`}
+      {...props}
+    >
+      {Icon && <Icon className="h-5 w-5 mr-2" />}
+      {children}
+    </button>
+  );
 };
 
-
-
-
-
-
-
-
-
 const contentTypes = [
-    { type: "text", label: "Texte", icon: Type },
-    { type: "image", label: "Image", icon: Image },
-    { type: "list", label: "Liste", icon: List },
-    { type: "quote", label: "Citation", icon: Quote },
-    { type: "gallery", label: "Galerie", icon: Image },
-    { type: "video", label: "Vidéo", icon: Play },
-    { type: "testimonial", label: "Témoignage", icon: Users },
-    { type: "stats", label: "Statistiques", icon: BarChart3 },
-    { type: "timeline", label: "Chronologie", icon: Calendar },
-    { type: "faq", label: "FAQ", icon: HelpCircle },
-    { type: "cta", label: "Appel à l'action", icon: Target },
-    { type: "file", label: "Fichier", icon: FileText },
-    { type: "map", label: "Carte", icon: MapPin },
-    { type: "award", label: "Récompense", icon: Award },
-    { type: "programme", label: "Programme", icon: BookOpen },
-    { type: "services", label: "Services", icon: Heart },
-    { type: "sponsorship", label: "Parrainage", icon: UserCheck },
-    { type: "impact", label: "Impact", icon: TrendingUp },
-    { type: "team", label: "Équipe", icon: Briefcase },
-  ];
-
+  { type: "text", label: "Texte", icon: Type },
+  { type: "image", label: "Image", icon: Image },
+  { type: "list", label: "Liste", icon: List },
+  { type: "quote", label: "Citation", icon: Quote },
+  { type: "gallery", label: "Galerie", icon: Image },
+  { type: "video", label: "Vidéo", icon: Play },
+  { type: "testimonial", label: "Témoignage", icon: Users },
+  { type: "stats", label: "Statistiques", icon: BarChart3 },
+  { type: "timeline", label: "Chronologie", icon: Calendar },
+  { type: "faq", label: "FAQ", icon: HelpCircle },
+  { type: "cta", label: "Appel à l'action", icon: Target },
+  { type: "file", label: "Fichier", icon: FileText },
+  { type: "map", label: "Carte", icon: MapPin },
+  { type: "award", label: "Récompense", icon: Award },
+  { type: "programme", label: "Programme", icon: BookOpen },
+  { type: "services", label: "Services", icon: Heart },
+  { type: "sponsorship", label: "Parrainage", icon: UserCheck },
+  { type: "impact", label: "Impact", icon: TrendingUp },
+  { type: "team", label: "Équipe", icon: Briefcase },
+];
 
 // --- Main Component ---
 export default function NewProject() {
@@ -138,11 +165,10 @@ export default function NewProject() {
   const [newCategory, setNewCategory] = useState("");
   const [showPreview, setShowPreview] = useState(false);
 
-
   const handleInputChange = (field, value) => {
-    setProjectData(prev => ({
+    setProjectData((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   };
 
@@ -151,79 +177,87 @@ export default function NewProject() {
       id: Date.now().toString(),
       type,
       // Simplified content initialization for the demo
-      content: type === "text" ? { heading: "Nouveau titre", text: "Nouveau paragraphe..." } :
-               type === "image" ? { src: "URL de l'image", alt: "Description", caption: "Légende" } :
-               {},
+      content:
+        type === "text"
+          ? { heading: "Nouveau titre", text: "Nouveau paragraphe..." }
+          : type === "image"
+            ? { src: "URL de l'image", alt: "Description", caption: "Légende" }
+            : {},
     };
-    setProjectData(prev => ({
+    setProjectData((prev) => ({
       ...prev,
-      content: [...prev.content, newBlock]
+      content: [...prev.content, newBlock],
     }));
   };
 
   const updateContentBlock = (id, updates) => {
-    setProjectData(prev => ({
+    setProjectData((prev) => ({
       ...prev,
-      content: prev.content.map(block =>
-        block.id === id ? { ...block, content: { ...block.content, ...updates } } : block
-      )
+      content: prev.content.map((block) =>
+        block.id === id
+          ? { ...block, content: { ...block.content, ...updates } }
+          : block,
+      ),
     }));
   };
 
   const removeContentBlock = (id) => {
-    setProjectData(prev => ({
+    setProjectData((prev) => ({
       ...prev,
-      content: prev.content.filter(block => block.id !== id)
+      content: prev.content.filter((block) => block.id !== id),
     }));
   };
 
   const addGoal = () => {
     if (newGoal.trim()) {
-      setProjectData(prev => ({
+      setProjectData((prev) => ({
         ...prev,
-        goals: [...prev.goals, newGoal.trim()]
+        goals: [...prev.goals, newGoal.trim()],
       }));
       setNewGoal("");
     }
   };
 
   const removeGoal = (index) => {
-    setProjectData(prev => ({
+    setProjectData((prev) => ({
       ...prev,
-      goals: prev.goals.filter((_, i) => i !== index)
+      goals: prev.goals.filter((_, i) => i !== index),
     }));
   };
 
   const addCategory = () => {
-    if (newCategory.trim() && !projectData.categories.includes(newCategory.trim())) {
-      setProjectData(prev => ({
+    if (
+      newCategory.trim() &&
+      !projectData.categories.includes(newCategory.trim())
+    ) {
+      setProjectData((prev) => ({
         ...prev,
-        categories: [...prev.categories, newCategory.trim()]
+        categories: [...prev.categories, newCategory.trim()],
       }));
       setNewCategory("");
     }
   };
 
   const removeCategory = (category) => {
-    setProjectData(prev => ({
+    setProjectData((prev) => ({
       ...prev,
-      categories: prev.categories.filter(c => c !== category)
+      categories: prev.categories.filter((c) => c !== category),
     }));
   };
 
   const addImage = (imageUrl) => {
     if (imageUrl.trim()) {
-      setProjectData(prev => ({
+      setProjectData((prev) => ({
         ...prev,
-        gallery: [...prev.gallery, imageUrl.trim()]
+        gallery: [...prev.gallery, imageUrl.trim()],
       }));
     }
   };
 
   const removeImage = (index) => {
-    setProjectData(prev => ({
+    setProjectData((prev) => ({
       ...prev,
-      gallery: prev.gallery.filter((_, i) => i !== index)
+      gallery: prev.gallery.filter((_, i) => i !== index),
     }));
   };
 
@@ -246,9 +280,9 @@ export default function NewProject() {
     newContent.splice(draggedItem, 1);
     newContent.splice(dropIndex, 0, draggedContent);
 
-    setProjectData(prev => ({
+    setProjectData((prev) => ({
       ...prev,
-      content: newContent
+      content: newContent,
     }));
     setDraggedItem(null);
   };
@@ -259,13 +293,17 @@ export default function NewProject() {
 
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       const result = { success: true }; // Assume success for demo
 
       // const result = await saveNewProject(projectData); // Real call
 
       if (result.success) {
-        setFormState({ ...formState, status: "success", message: "Projet créé avec succès!" });
+        setFormState({
+          ...formState,
+          status: "success",
+          message: "Projet créé avec succès!",
+        });
         setTimeout(() => {
           router.push("/admin/projects");
         }, 2000);

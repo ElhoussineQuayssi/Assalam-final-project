@@ -4,13 +4,13 @@
   "type": "module",
   "private": true,
   "scripts": {
-   "dev": "next dev ",
-   "build": "next build",
-   "build:analyze": "ANALYZE=true next build",
-   "start": "next start",
-   "lint": "next lint",
-   "migrate-data": "node migrate-data.js",
-   "add-admins": "node add-admins.js"
+    "dev": "next dev ",
+    "build": "next build",
+    "build:analyze": "ANALYZE=true next build",
+    "start": "next start",
+    "lint": "next lint",
+    "migrate-data": "node migrate-data.js",
+    "add-admins": "node add-admins.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -46,6 +46,7 @@
     "vaul": "^0.9.6",
     "zod": "^3.24.1"
   },
+  "sideEffects": false,
   "devDependencies": {
     "@next/bundle-analyzer": "^15.5.5",
     "eslint": "^9.28.0",

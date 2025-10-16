@@ -1,21 +1,24 @@
 // --- Design System Configuration ---
-const ACCENT = '#6495ED';        // Cornflower Blue
-const DARK_TEXT = '#333333';     // Dark Gray
+const ACCENT = "#6495ED"; // Cornflower Blue
+const DARK_TEXT = "#333333"; // Dark Gray
 // const BACKGROUND = '#FAFAFA'; // Not needed in this component
 
 import { Settings } from "lucide-react";
 
-export default function BasicInformationBlock({ projectData, handleInputChange }) {
-
+export default function BasicInformationBlock({
+  projectData,
+  handleInputChange,
+}) {
   // Style object for inputs to apply consistent theming
   const inputStyle = {
     // Tailwind focus classes are overridden by inline styles for dynamic colors
-    '--tw-ring-color': ACCENT,
-    '--tw-border-color': ACCENT,
-    transition: 'border-color 0.15s, box-shadow 0.15s',
+    "--tw-ring-color": ACCENT,
+    "--tw-border-color": ACCENT,
+    transition: "border-color 0.15s, box-shadow 0.15s",
   };
 
-  const inputClasses = "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent";
+  const inputClasses =
+    "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent";
 
   return (
     // Content Card Pattern: bg-white, rounded-lg, shadow
@@ -30,7 +33,10 @@ export default function BasicInformationBlock({ projectData, handleInputChange }
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Titre du Projet */}
         <div>
-          <label className="block text-sm font-medium mb-1" style={{ color: DARK_TEXT }}>
+          <label
+            className="block text-sm font-medium mb-1"
+            style={{ color: DARK_TEXT }}
+          >
             Titre du Projet *
           </label>
           <input
@@ -44,7 +50,10 @@ export default function BasicInformationBlock({ projectData, handleInputChange }
         </div>
         {/* Image Principale (URL) */}
         <div>
-          <label className="block text-sm font-medium mb-1" style={{ color: DARK_TEXT }}>
+          <label
+            className="block text-sm font-medium mb-1"
+            style={{ color: DARK_TEXT }}
+          >
             Image Principale
           </label>
           <input
@@ -58,7 +67,10 @@ export default function BasicInformationBlock({ projectData, handleInputChange }
         </div>
         {/* Description Courte (Excerpt) */}
         <div className="md:col-span-2">
-          <label className="block text-sm font-medium mb-1" style={{ color: DARK_TEXT }}>
+          <label
+            className="block text-sm font-medium mb-1"
+            style={{ color: DARK_TEXT }}
+          >
             Description Courte *
           </label>
           <textarea
@@ -72,7 +84,10 @@ export default function BasicInformationBlock({ projectData, handleInputChange }
         </div>
         {/* Date de Début */}
         <div>
-          <label className="block text-sm font-medium mb-1" style={{ color: DARK_TEXT }}>
+          <label
+            className="block text-sm font-medium mb-1"
+            style={{ color: DARK_TEXT }}
+          >
             Date de Début
           </label>
           <input
@@ -86,7 +101,10 @@ export default function BasicInformationBlock({ projectData, handleInputChange }
         </div>
         {/* Lieu */}
         <div>
-          <label className="block text-sm font-medium mb-1" style={{ color: DARK_TEXT }}>
+          <label
+            className="block text-sm font-medium mb-1"
+            style={{ color: DARK_TEXT }}
+          >
             Lieu
           </label>
           <input
@@ -99,7 +117,10 @@ export default function BasicInformationBlock({ projectData, handleInputChange }
         </div>
         {/* Bénéficiaires */}
         <div>
-          <label className="block text-sm font-medium mb-1" style={{ color: DARK_TEXT }}>
+          <label
+            className="block text-sm font-medium mb-1"
+            style={{ color: DARK_TEXT }}
+          >
             Bénéficiaires
           </label>
           <input

@@ -1,25 +1,23 @@
-import React from 'react';
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 // Preservation of the original data fetching functions
 import { getBlogs } from "lib/actions";
-import Container from '@/components/Container/Container';
-import Button from '@/components/Button/Button';
-import BlogHeader from '@/components/BlogHeader/BlogHeader';
-import FeaturedPost from '@/components/FeaturedPost/FeaturedPost';
-import ContentCard from '@/components/ContentCard/ContentCard';
-import CategoryFilter from '@/components/CategoryFilter/CategoryFilter';
-import ContentGrid from '@/components/ContentGrid/ContentGrid';
-import ShareButton from '@/components/ShareButton/ShareButton';
-import Pagination from '@/components/Pagination/Pagination';
-
+import Container from "@/components/Container/Container";
+import Button from "@/components/Button/Button";
+import BlogHeader from "@/components/BlogHeader/BlogHeader";
+import FeaturedPost from "@/components/FeaturedPost/FeaturedPost";
+import ContentCard from "@/components/ContentCard/ContentCard";
+import CategoryFilter from "@/components/CategoryFilter/CategoryFilter";
+import ContentGrid from "@/components/ContentGrid/ContentGrid";
+import ShareButton from "@/components/ShareButton/ShareButton";
+import Pagination from "@/components/Pagination/Pagination";
 
 // --- Design System Configuration (Minimalist Light Blue) ---
-const ACCENT = '#6495ED';        // Cornflower Blue
-const PRIMARY_LIGHT = '#B0E0E6'; // Powder Blue
-const DARK_TEXT = '#333333';     // Dark Gray
-const BACKGROUND = '#FAFAFA';    // Off-White
-
+const ACCENT = "#6495ED"; // Cornflower Blue
+const PRIMARY_LIGHT = "#B0E0E6"; // Powder Blue
+const DARK_TEXT = "#333333"; // Dark Gray
+const BACKGROUND = "#FAFAFA"; // Off-White
 
 // --- Original Page Logic ---
 
@@ -55,9 +53,7 @@ export default async function Blogs({ searchParams }) {
         />
 
         {/* Featured Post */}
-        {paginatedBlogs[0] && (
-          <FeaturedPost post={paginatedBlogs[0]} />
-        )}
+        {paginatedBlogs[0] && <FeaturedPost post={paginatedBlogs[0]} />}
 
         {/* Categories */}
         <CategoryFilter
@@ -90,8 +86,17 @@ export default async function Blogs({ searchParams }) {
 
           {paginatedBlogs.length === 0 && (
             <div className="text-center py-12 text-gray-500 border-2 border-dashed border-gray-300 rounded-lg mx-auto max-w-xl">
-                <h3 className="text-2xl font-semibold mb-2" style={{ color: ACCENT }}>Oups, rien ici.</h3>
-                <p>Aucun récit ne correspond à cette catégorie pour le moment. Revenez bientôt !</p> {/* Enhanced Content */}
+              <h3
+                className="text-2xl font-semibold mb-2"
+                style={{ color: ACCENT }}
+              >
+                Oups, rien ici.
+              </h3>
+              <p>
+                Aucun récit ne correspond à cette catégorie pour le moment.
+                Revenez bientôt !
+              </p>{" "}
+              {/* Enhanced Content */}
             </div>
           )}
 

@@ -1,17 +1,17 @@
 import { redirect } from "next/navigation";
 import { getSession } from "lib/auth";
-import AdminSidebar from '../../components/AdminSidebar/AdminSidebar.jsx';
+import AdminSidebar from "../../components/AdminSidebar/AdminSidebar.jsx";
 
 // --- Design System Configuration (Minimalist Light Blue) ---
-const ACCENT = '#6495ED';        // Cornflower Blue
-const DARK_TEXT = '#333333';     // Dark Gray
-const BACKGROUND = '#FAFAFA';    // Off-White
+const ACCENT = "#6495ED"; // Cornflower Blue
+const DARK_TEXT = "#333333"; // Dark Gray
+const BACKGROUND = "#FAFAFA"; // Off-White
 
 // --- Integrated AdminSidebar Component ---
-"use client";
+("use client");
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Newspaper,
   MessageSquare,
@@ -21,7 +21,7 @@ import {
   Home,
   LogOut, // Added LogOut for completeness
   ChevronRight, // Added ChevronRight for active indicator
-} from 'lucide-react';
+} from "lucide-react";
 
 import AdminSidebar from "@/components/AdminSidebar.jsx";
 
@@ -43,9 +43,7 @@ export default async function AdminAdminsLayout({ children }) {
       <AdminSidebar user={session} />
 
       {/* Main Content */}
-      <main className="flex-1 p-8 overflow-y-auto">
-        {children}
-      </main>
+      <main className="flex-1 p-8 overflow-y-auto">{children}</main>
     </div>
   );
 }

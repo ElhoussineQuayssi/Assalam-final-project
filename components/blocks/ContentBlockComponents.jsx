@@ -1,20 +1,21 @@
 import { Trash2, Plus, Move } from "lucide-react";
 
 // --- Design System Configuration ---
-const ACCENT = '#6495ED';        // Cornflower Blue
-const DARK_TEXT = '#333333';     // Dark Gray
-const DELETE_COLOR = '#EF4444';  // Standard Red for error/delete
+const ACCENT = "#6495ED"; // Cornflower Blue
+const DARK_TEXT = "#333333"; // Dark Gray
+const DELETE_COLOR = "#EF4444"; // Standard Red for error/delete
 
 // --- Shared Input Styling ---
 // This style object is used to inject the ACCENT color into the Tailwind focus rings
 const focusedInputStyle = {
   // These custom properties allow the Tailwind utility classes (like focus:ring-2) to use our ACCENT color
-  '--tw-ring-color': ACCENT,
-  '--tw-border-opacity': 1,
-  'borderColor': ACCENT,
-  transition: 'border-color 0.15s, box-shadow 0.15s',
+  "--tw-ring-color": ACCENT,
+  "--tw-border-opacity": 1,
+  borderColor: ACCENT,
+  transition: "border-color 0.15s, box-shadow 0.15s",
 };
-const inputClasses = "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2";
+const inputClasses =
+  "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2";
 const checkboxClasses = "rounded border-gray-300 focus:ring-2";
 
 // --- Content Block Components (Refactorisé) ---
@@ -28,7 +29,9 @@ export function TextBlock({ block, updateContentBlock, removeContentBlock }) {
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.heading || ""}
-        onChange={(e) => updateContentBlock(block.id, { heading: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { heading: e.target.value })
+        }
       />
       <textarea
         placeholder="Rédigez le contenu chaleureux et informatif..." // Enhanced Content
@@ -67,7 +70,9 @@ export function ImageBlock({ block, updateContentBlock, removeContentBlock }) {
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.caption || ""}
-        onChange={(e) => updateContentBlock(block.id, { caption: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { caption: e.target.value })
+        }
       />
     </div>
   );
@@ -82,7 +87,9 @@ export function ListBlock({ block, updateContentBlock, removeContentBlock }) {
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.title || ""}
-        onChange={(e) => updateContentBlock(block.id, { title: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { title: e.target.value })
+        }
       />
       {block.content.items?.map((item, itemIndex) => (
         <div key={itemIndex} className="flex gap-2">
@@ -101,7 +108,9 @@ export function ListBlock({ block, updateContentBlock, removeContentBlock }) {
           <button
             type="button"
             onClick={() => {
-              const newItems = block.content.items.filter((_, i) => i !== itemIndex);
+              const newItems = block.content.items.filter(
+                (_, i) => i !== itemIndex,
+              );
               updateContentBlock(block.id, { items: newItems });
             }}
             className="px-2 hover:text-red-600 transition-colors duration-150"
@@ -120,7 +129,8 @@ export function ListBlock({ block, updateContentBlock, removeContentBlock }) {
         className="text-sm flex items-center gap-1 hover:text-blue-600 transition-colors duration-150"
         style={{ color: ACCENT }}
       >
-        <Plus className="h-4 w-4" /> Ajouter un point clé {/* Enhanced Content */}
+        <Plus className="h-4 w-4" /> Ajouter un point clé{" "}
+        {/* Enhanced Content */}
       </button>
     </div>
   );
@@ -143,13 +153,19 @@ export function QuoteBlock({ block, updateContentBlock, removeContentBlock }) {
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.author || ""}
-        onChange={(e) => updateContentBlock(block.id, { author: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { author: e.target.value })
+        }
       />
     </div>
   );
 }
 
-export function TestimonialBlock({ block, updateContentBlock, removeContentBlock }) {
+export function TestimonialBlock({
+  block,
+  updateContentBlock,
+  removeContentBlock,
+}) {
   return (
     <div className="space-y-3">
       <input
@@ -174,7 +190,9 @@ export function TestimonialBlock({ block, updateContentBlock, removeContentBlock
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.content || ""}
-        onChange={(e) => updateContentBlock(block.id, { content: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { content: e.target.value })
+        }
       />
       <input
         type="url"
@@ -182,7 +200,9 @@ export function TestimonialBlock({ block, updateContentBlock, removeContentBlock
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.image || ""}
-        onChange={(e) => updateContentBlock(block.id, { image: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { image: e.target.value })
+        }
       />
     </div>
   );
@@ -197,7 +217,9 @@ export function StatsBlock({ block, updateContentBlock, removeContentBlock }) {
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.title || ""}
-        onChange={(e) => updateContentBlock(block.id, { title: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { title: e.target.value })
+        }
       />
       {block.content.stats?.map((stat, statIndex) => (
         <div key={statIndex} className="flex gap-2">
@@ -209,7 +231,10 @@ export function StatsBlock({ block, updateContentBlock, removeContentBlock }) {
             value={stat.label || ""}
             onChange={(e) => {
               const newStats = [...block.content.stats];
-              newStats[statIndex] = { ...newStats[statIndex], label: e.target.value };
+              newStats[statIndex] = {
+                ...newStats[statIndex],
+                label: e.target.value,
+              };
               updateContentBlock(block.id, { stats: newStats });
             }}
           />
@@ -221,14 +246,19 @@ export function StatsBlock({ block, updateContentBlock, removeContentBlock }) {
             value={stat.value || ""}
             onChange={(e) => {
               const newStats = [...block.content.stats];
-              newStats[statIndex] = { ...newStats[statIndex], value: e.target.value };
+              newStats[statIndex] = {
+                ...newStats[statIndex],
+                value: e.target.value,
+              };
               updateContentBlock(block.id, { stats: newStats });
             }}
           />
           <button
             type="button"
             onClick={() => {
-              const newStats = block.content.stats.filter((_, i) => i !== statIndex);
+              const newStats = block.content.stats.filter(
+                (_, i) => i !== statIndex,
+              );
               updateContentBlock(block.id, { stats: newStats });
             }}
             className="px-2 hover:text-red-600 transition-colors duration-150"
@@ -241,19 +271,27 @@ export function StatsBlock({ block, updateContentBlock, removeContentBlock }) {
       <button
         type="button"
         onClick={() => {
-          const newStats = [...(block.content.stats || []), { label: "", value: "" }];
+          const newStats = [
+            ...(block.content.stats || []),
+            { label: "", value: "" },
+          ];
           updateContentBlock(block.id, { stats: newStats });
         }}
         className="text-sm flex items-center gap-1 hover:text-blue-600 transition-colors duration-150"
         style={{ color: ACCENT }}
       >
-        <Plus className="h-4 w-4" /> Ajouter un Indicateur d'Impact {/* Enhanced Content */}
+        <Plus className="h-4 w-4" /> Ajouter un Indicateur d'Impact{" "}
+        {/* Enhanced Content */}
       </button>
     </div>
   );
 }
 
-export function TimelineBlock({ block, updateContentBlock, removeContentBlock }) {
+export function TimelineBlock({
+  block,
+  updateContentBlock,
+  removeContentBlock,
+}) {
   return (
     <div className="space-y-3">
       <input
@@ -262,7 +300,9 @@ export function TimelineBlock({ block, updateContentBlock, removeContentBlock })
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.title || ""}
-        onChange={(e) => updateContentBlock(block.id, { title: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { title: e.target.value })
+        }
       />
       {block.content.events?.map((event, eventIndex) => (
         <div key={eventIndex} className="border border-gray-200 rounded-lg p-3">
@@ -274,7 +314,10 @@ export function TimelineBlock({ block, updateContentBlock, removeContentBlock })
             value={event.year || ""}
             onChange={(e) => {
               const newEvents = [...block.content.events];
-              newEvents[eventIndex] = { ...newEvents[eventIndex], year: e.target.value };
+              newEvents[eventIndex] = {
+                ...newEvents[eventIndex],
+                year: e.target.value,
+              };
               updateContentBlock(block.id, { events: newEvents });
             }}
           />
@@ -286,7 +329,10 @@ export function TimelineBlock({ block, updateContentBlock, removeContentBlock })
             value={event.title || ""}
             onChange={(e) => {
               const newEvents = [...block.content.events];
-              newEvents[eventIndex] = { ...newEvents[eventIndex], title: e.target.value };
+              newEvents[eventIndex] = {
+                ...newEvents[eventIndex],
+                title: e.target.value,
+              };
               updateContentBlock(block.id, { events: newEvents });
             }}
           />
@@ -298,14 +344,19 @@ export function TimelineBlock({ block, updateContentBlock, removeContentBlock })
             value={event.description || ""}
             onChange={(e) => {
               const newEvents = [...block.content.events];
-              newEvents[eventIndex] = { ...newEvents[eventIndex], description: e.target.value };
+              newEvents[eventIndex] = {
+                ...newEvents[eventIndex],
+                description: e.target.value,
+              };
               updateContentBlock(block.id, { events: newEvents });
             }}
           />
           <button
             type="button"
             onClick={() => {
-              const newEvents = block.content.events.filter((_, i) => i !== eventIndex);
+              const newEvents = block.content.events.filter(
+                (_, i) => i !== eventIndex,
+              );
               updateContentBlock(block.id, { events: newEvents });
             }}
             className="text-sm mt-2 hover:text-red-600 transition-colors duration-150"
@@ -318,13 +369,17 @@ export function TimelineBlock({ block, updateContentBlock, removeContentBlock })
       <button
         type="button"
         onClick={() => {
-          const newEvents = [...(block.content.events || []), { year: "", title: "", description: "" }];
+          const newEvents = [
+            ...(block.content.events || []),
+            { year: "", title: "", description: "" },
+          ];
           updateContentBlock(block.id, { events: newEvents });
         }}
         className="text-sm flex items-center gap-1 hover:text-blue-600 transition-colors duration-150"
         style={{ color: ACCENT }}
       >
-        <Plus className="h-4 w-4" /> Ajouter un Jalon Historique {/* Enhanced Content */}
+        <Plus className="h-4 w-4" /> Ajouter un Jalon Historique{" "}
+        {/* Enhanced Content */}
       </button>
     </div>
   );
@@ -339,10 +394,15 @@ export function FaqBlock({ block, updateContentBlock, removeContentBlock }) {
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.title || ""}
-        onChange={(e) => updateContentBlock(block.id, { title: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { title: e.target.value })
+        }
       />
       {block.content.questions?.map((question, questionIndex) => (
-        <div key={questionIndex} className="border border-gray-200 rounded-lg p-3">
+        <div
+          key={questionIndex}
+          className="border border-gray-200 rounded-lg p-3"
+        >
           <input
             type="text"
             placeholder="Question Fréquemment Posée" // Enhanced Content
@@ -351,7 +411,10 @@ export function FaqBlock({ block, updateContentBlock, removeContentBlock }) {
             value={question.question || ""}
             onChange={(e) => {
               const newQuestions = [...block.content.questions];
-              newQuestions[questionIndex] = { ...newQuestions[questionIndex], question: e.target.value };
+              newQuestions[questionIndex] = {
+                ...newQuestions[questionIndex],
+                question: e.target.value,
+              };
               updateContentBlock(block.id, { questions: newQuestions });
             }}
           />
@@ -363,14 +426,19 @@ export function FaqBlock({ block, updateContentBlock, removeContentBlock }) {
             value={question.answer || ""}
             onChange={(e) => {
               const newQuestions = [...block.content.questions];
-              newQuestions[questionIndex] = { ...newQuestions[questionIndex], answer: e.target.value };
+              newQuestions[questionIndex] = {
+                ...newQuestions[questionIndex],
+                answer: e.target.value,
+              };
               updateContentBlock(block.id, { questions: newQuestions });
             }}
           />
           <button
             type="button"
             onClick={() => {
-              const newQuestions = block.content.questions.filter((_, i) => i !== questionIndex);
+              const newQuestions = block.content.questions.filter(
+                (_, i) => i !== questionIndex,
+              );
               updateContentBlock(block.id, { questions: newQuestions });
             }}
             className="text-sm mt-2 hover:text-red-600 transition-colors duration-150"
@@ -383,13 +451,17 @@ export function FaqBlock({ block, updateContentBlock, removeContentBlock }) {
       <button
         type="button"
         onClick={() => {
-          const newQuestions = [...(block.content.questions || []), { question: "", answer: "" }];
+          const newQuestions = [
+            ...(block.content.questions || []),
+            { question: "", answer: "" },
+          ];
           updateContentBlock(block.id, { questions: newQuestions });
         }}
         className="text-sm flex items-center gap-1 hover:text-blue-600 transition-colors duration-150"
         style={{ color: ACCENT }}
       >
-        <Plus className="h-4 w-4" /> Ajouter une Question-Réponse {/* Enhanced Content */}
+        <Plus className="h-4 w-4" /> Ajouter une Question-Réponse{" "}
+        {/* Enhanced Content */}
       </button>
     </div>
   );
@@ -397,7 +469,11 @@ export function FaqBlock({ block, updateContentBlock, removeContentBlock }) {
 
 import { Trash2, Plus, Move } from "lucide-react";
 
-export function PartnerBlock({ block, updateContentBlock, removeContentBlock }) {
+export function PartnerBlock({
+  block,
+  updateContentBlock,
+  removeContentBlock,
+}) {
   return (
     <div className="space-y-4">
       <input
@@ -405,13 +481,21 @@ export function PartnerBlock({ block, updateContentBlock, removeContentBlock }) 
         placeholder="Nos Partenaires, Ensemble pour le Développement" // Enhanced Content
         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         value={block.content.title || ""}
-        onChange={(e) => updateContentBlock(block.id, { title: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { title: e.target.value })
+        }
       />
 
       <div>
-        <h4 className="text-sm font-medium mb-2">Alliés et Collaborateurs de la Fondation</h4> {/* Enhanced Content */}
+        <h4 className="text-sm font-medium mb-2">
+          Alliés et Collaborateurs de la Fondation
+        </h4>{" "}
+        {/* Enhanced Content */}
         {block.content.partners?.map((partner, partnerIndex) => (
-          <div key={partnerIndex} className="border border-gray-200 rounded-lg p-3 mb-3 space-y-2">
+          <div
+            key={partnerIndex}
+            className="border border-gray-200 rounded-lg p-3 mb-3 space-y-2"
+          >
             <input
               type="text"
               placeholder="Nom de l'organisation partenaire" // Enhanced Content
@@ -419,7 +503,10 @@ export function PartnerBlock({ block, updateContentBlock, removeContentBlock }) 
               value={partner.name || ""}
               onChange={(e) => {
                 const newPartners = [...block.content.partners];
-                newPartners[partnerIndex] = { ...newPartners[partnerIndex], name: e.target.value };
+                newPartners[partnerIndex] = {
+                  ...newPartners[partnerIndex],
+                  name: e.target.value,
+                };
                 updateContentBlock(block.id, { partners: newPartners });
               }}
             />
@@ -430,7 +517,10 @@ export function PartnerBlock({ block, updateContentBlock, removeContentBlock }) 
               value={partner.logoUrl || ""}
               onChange={(e) => {
                 const newPartners = [...block.content.partners];
-                newPartners[partnerIndex] = { ...newPartners[partnerIndex], logoUrl: e.target.value };
+                newPartners[partnerIndex] = {
+                  ...newPartners[partnerIndex],
+                  logoUrl: e.target.value,
+                };
                 updateContentBlock(block.id, { partners: newPartners });
               }}
             />
@@ -441,14 +531,19 @@ export function PartnerBlock({ block, updateContentBlock, removeContentBlock }) 
               value={partner.websiteUrl || ""}
               onChange={(e) => {
                 const newPartners = [...block.content.partners];
-                newPartners[partnerIndex] = { ...newPartners[partnerIndex], websiteUrl: e.target.value };
+                newPartners[partnerIndex] = {
+                  ...newPartners[partnerIndex],
+                  websiteUrl: e.target.value,
+                };
                 updateContentBlock(block.id, { partners: newPartners });
               }}
             />
             <button
               type="button"
               onClick={() => {
-                const newPartners = block.content.partners.filter((_, i) => i !== partnerIndex);
+                const newPartners = block.content.partners.filter(
+                  (_, i) => i !== partnerIndex,
+                );
                 updateContentBlock(block.id, { partners: newPartners });
               }}
               className="text-red-400 hover:text-red-600 text-sm mt-2"
@@ -460,12 +555,16 @@ export function PartnerBlock({ block, updateContentBlock, removeContentBlock }) 
         <button
           type="button"
           onClick={() => {
-            const newPartners = [...(block.content.partners || []), { name: "", logoUrl: "", websiteUrl: "" }];
+            const newPartners = [
+              ...(block.content.partners || []),
+              { name: "", logoUrl: "", websiteUrl: "" },
+            ];
             updateContentBlock(block.id, { partners: newPartners });
           }}
           className="text-blue-500 hover:text-blue-600 text-sm flex items-center gap-1"
         >
-          <Plus className="h-4 w-4" /> Ajouter un Nouvel Allié {/* Enhanced Content */}
+          <Plus className="h-4 w-4" /> Ajouter un Nouvel Allié{" "}
+          {/* Enhanced Content */}
         </button>
       </div>
     </div>
@@ -481,7 +580,9 @@ export function CtaBlock({ block, updateContentBlock, removeContentBlock }) {
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.title || ""}
-        onChange={(e) => updateContentBlock(block.id, { title: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { title: e.target.value })
+        }
       />
       <textarea
         placeholder="Message impactant et motivant..." // Enhanced Content
@@ -489,7 +590,9 @@ export function CtaBlock({ block, updateContentBlock, removeContentBlock }) {
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.description || ""}
-        onChange={(e) => updateContentBlock(block.id, { description: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { description: e.target.value })
+        }
       />
       <input
         type="text"
@@ -497,7 +600,9 @@ export function CtaBlock({ block, updateContentBlock, removeContentBlock }) {
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.buttonText || ""}
-        onChange={(e) => updateContentBlock(block.id, { buttonText: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { buttonText: e.target.value })
+        }
       />
       <input
         type="url"
@@ -505,7 +610,9 @@ export function CtaBlock({ block, updateContentBlock, removeContentBlock }) {
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.buttonUrl || ""}
-        onChange={(e) => updateContentBlock(block.id, { buttonUrl: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { buttonUrl: e.target.value })
+        }
       />
     </div>
   );
@@ -520,7 +627,9 @@ export function FileBlock({ block, updateContentBlock, removeContentBlock }) {
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.title || ""}
-        onChange={(e) => updateContentBlock(block.id, { title: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { title: e.target.value })
+        }
       />
       <textarea
         placeholder="Brève description du contenu du document..." // Enhanced Content
@@ -528,7 +637,9 @@ export function FileBlock({ block, updateContentBlock, removeContentBlock }) {
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.description || ""}
-        onChange={(e) => updateContentBlock(block.id, { description: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { description: e.target.value })
+        }
       />
       <input
         type="url"
@@ -536,7 +647,9 @@ export function FileBlock({ block, updateContentBlock, removeContentBlock }) {
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.fileUrl || ""}
-        onChange={(e) => updateContentBlock(block.id, { fileUrl: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { fileUrl: e.target.value })
+        }
       />
       <input
         type="text"
@@ -544,7 +657,9 @@ export function FileBlock({ block, updateContentBlock, removeContentBlock }) {
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.fileName || ""}
-        onChange={(e) => updateContentBlock(block.id, { fileName: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { fileName: e.target.value })
+        }
       />
     </div>
   );
@@ -559,7 +674,9 @@ export function MapBlock({ block, updateContentBlock, removeContentBlock }) {
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.title || ""}
-        onChange={(e) => updateContentBlock(block.id, { title: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { title: e.target.value })
+        }
       />
       <input
         type="text"
@@ -567,7 +684,9 @@ export function MapBlock({ block, updateContentBlock, removeContentBlock }) {
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.address || ""}
-        onChange={(e) => updateContentBlock(block.id, { address: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { address: e.target.value })
+        }
       />
       <input
         type="url"
@@ -575,7 +694,9 @@ export function MapBlock({ block, updateContentBlock, removeContentBlock }) {
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.embedUrl || ""}
-        onChange={(e) => updateContentBlock(block.id, { embedUrl: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { embedUrl: e.target.value })
+        }
       />
     </div>
   );
@@ -585,7 +706,7 @@ export function VideoBlock({ block, updateContentBlock, removeContentBlock }) {
   // Checkbox input style for ACCENT color
   const checkboxStyle = {
     color: ACCENT,
-    '--tw-ring-color': ACCENT,
+    "--tw-ring-color": ACCENT,
   };
 
   return (
@@ -604,7 +725,9 @@ export function VideoBlock({ block, updateContentBlock, removeContentBlock }) {
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.title || ""}
-        onChange={(e) => updateContentBlock(block.id, { title: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { title: e.target.value })
+        }
       />
       <textarea
         placeholder="Résumé du contenu de la vidéo..." // Enhanced Content
@@ -612,18 +735,25 @@ export function VideoBlock({ block, updateContentBlock, removeContentBlock }) {
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.description || ""}
-        onChange={(e) => updateContentBlock(block.id, { description: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { description: e.target.value })
+        }
       />
       <div className="flex items-center gap-2">
         <input
           type="checkbox"
           id={`autoplay-${block.id}`}
           checked={block.content.autoplay || false}
-          onChange={(e) => updateContentBlock(block.id, { autoplay: e.target.checked })}
+          onChange={(e) =>
+            updateContentBlock(block.id, { autoplay: e.target.checked })
+          }
           className={checkboxClasses}
           style={checkboxStyle}
         />
-        <label htmlFor={`autoplay-${block.id}`} className="text-sm text-gray-700">
+        <label
+          htmlFor={`autoplay-${block.id}`}
+          className="text-sm text-gray-700"
+        >
           Lecture automatique du contenu {/* Enhanced Content */}
         </label>
       </div>
@@ -632,11 +762,16 @@ export function VideoBlock({ block, updateContentBlock, removeContentBlock }) {
           type="checkbox"
           id={`controls-${block.id}`}
           checked={block.content.showControls !== false}
-          onChange={(e) => updateContentBlock(block.id, { showControls: e.target.checked })}
+          onChange={(e) =>
+            updateContentBlock(block.id, { showControls: e.target.checked })
+          }
           className={checkboxClasses}
           style={checkboxStyle}
         />
-        <label htmlFor={`controls-${block.id}`} className="text-sm text-gray-700">
+        <label
+          htmlFor={`controls-${block.id}`}
+          className="text-sm text-gray-700"
+        >
           Afficher les commandes de lecture {/* Enhanced Content */}
         </label>
       </div>
@@ -653,7 +788,9 @@ export function AwardBlock({ block, updateContentBlock, removeContentBlock }) {
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.title || ""}
-        onChange={(e) => updateContentBlock(block.id, { title: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { title: e.target.value })
+        }
       />
       <textarea
         placeholder="Détail de la reconnaissance et de sa signification..." // Enhanced Content
@@ -661,7 +798,9 @@ export function AwardBlock({ block, updateContentBlock, removeContentBlock }) {
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.description || ""}
-        onChange={(e) => updateContentBlock(block.id, { description: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { description: e.target.value })
+        }
       />
       <input
         type="text"
@@ -669,7 +808,9 @@ export function AwardBlock({ block, updateContentBlock, removeContentBlock }) {
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.issuer || ""}
-        onChange={(e) => updateContentBlock(block.id, { issuer: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { issuer: e.target.value })
+        }
       />
       <input
         type="text"
@@ -685,13 +826,19 @@ export function AwardBlock({ block, updateContentBlock, removeContentBlock }) {
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.image || ""}
-        onChange={(e) => updateContentBlock(block.id, { image: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { image: e.target.value })
+        }
       />
     </div>
   );
 }
 
-export function ProgrammeBlock({ block, updateContentBlock, removeContentBlock }) {
+export function ProgrammeBlock({
+  block,
+  updateContentBlock,
+  removeContentBlock,
+}) {
   return (
     <div className="space-y-4">
       <input
@@ -700,7 +847,9 @@ export function ProgrammeBlock({ block, updateContentBlock, removeContentBlock }
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.title || ""}
-        onChange={(e) => updateContentBlock(block.id, { title: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { title: e.target.value })
+        }
       />
       <input
         type="text"
@@ -708,13 +857,21 @@ export function ProgrammeBlock({ block, updateContentBlock, removeContentBlock }
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.duration || ""}
-        onChange={(e) => updateContentBlock(block.id, { duration: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { duration: e.target.value })
+        }
       />
 
       <div>
-        <h4 className="text-sm font-medium mb-2" style={{ color: DARK_TEXT }}>Axes de Formation et Modules</h4> {/* Enhanced Content */}
+        <h4 className="text-sm font-medium mb-2" style={{ color: DARK_TEXT }}>
+          Axes de Formation et Modules
+        </h4>{" "}
+        {/* Enhanced Content */}
         {block.content.modules?.map((module, moduleIndex) => (
-          <div key={moduleIndex} className="border border-gray-200 rounded-lg p-3 mb-3">
+          <div
+            key={moduleIndex}
+            className="border border-gray-200 rounded-lg p-3 mb-3"
+          >
             <input
               type="text"
               placeholder="Nom du Module / Thème" // Enhanced Content
@@ -723,7 +880,10 @@ export function ProgrammeBlock({ block, updateContentBlock, removeContentBlock }
               value={module.title || ""}
               onChange={(e) => {
                 const newModules = [...block.content.modules];
-                newModules[moduleIndex] = { ...newModules[moduleIndex], title: e.target.value };
+                newModules[moduleIndex] = {
+                  ...newModules[moduleIndex],
+                  title: e.target.value,
+                };
                 updateContentBlock(block.id, { modules: newModules });
               }}
             />
@@ -735,7 +895,10 @@ export function ProgrammeBlock({ block, updateContentBlock, removeContentBlock }
               value={module.description || ""}
               onChange={(e) => {
                 const newModules = [...block.content.modules];
-                newModules[moduleIndex] = { ...newModules[moduleIndex], description: e.target.value };
+                newModules[moduleIndex] = {
+                  ...newModules[moduleIndex],
+                  description: e.target.value,
+                };
                 updateContentBlock(block.id, { modules: newModules });
               }}
             />
@@ -747,14 +910,19 @@ export function ProgrammeBlock({ block, updateContentBlock, removeContentBlock }
               value={module.duration || ""}
               onChange={(e) => {
                 const newModules = [...block.content.modules];
-                newModules[moduleIndex] = { ...newModules[moduleIndex], duration: e.target.value };
+                newModules[moduleIndex] = {
+                  ...newModules[moduleIndex],
+                  duration: e.target.value,
+                };
                 updateContentBlock(block.id, { modules: newModules });
               }}
             />
             <button
               type="button"
               onClick={() => {
-                const newModules = block.content.modules.filter((_, i) => i !== moduleIndex);
+                const newModules = block.content.modules.filter(
+                  (_, i) => i !== moduleIndex,
+                );
                 updateContentBlock(block.id, { modules: newModules });
               }}
               className="text-sm mt-2 hover:text-red-600 transition-colors duration-150"
@@ -767,13 +935,17 @@ export function ProgrammeBlock({ block, updateContentBlock, removeContentBlock }
         <button
           type="button"
           onClick={() => {
-            const newModules = [...(block.content.modules || []), { title: "", description: "", duration: "" }];
+            const newModules = [
+              ...(block.content.modules || []),
+              { title: "", description: "", duration: "" },
+            ];
             updateContentBlock(block.id, { modules: newModules });
           }}
           className="text-sm flex items-center gap-1 hover:text-blue-600 transition-colors duration-150"
           style={{ color: ACCENT }}
         >
-          <Plus className="h-4 w-4" /> Ajouter un Module de Formation {/* Enhanced Content */}
+          <Plus className="h-4 w-4" /> Ajouter un Module de Formation{" "}
+          {/* Enhanced Content */}
         </button>
       </div>
 
@@ -783,13 +955,19 @@ export function ProgrammeBlock({ block, updateContentBlock, removeContentBlock }
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.certification || ""}
-        onChange={(e) => updateContentBlock(block.id, { certification: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { certification: e.target.value })
+        }
       />
     </div>
   );
 }
 
-export function ServicesBlock({ block, updateContentBlock, removeContentBlock }) {
+export function ServicesBlock({
+  block,
+  updateContentBlock,
+  removeContentBlock,
+}) {
   return (
     <div className="space-y-4">
       <input
@@ -798,13 +976,21 @@ export function ServicesBlock({ block, updateContentBlock, removeContentBlock })
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.title || ""}
-        onChange={(e) => updateContentBlock(block.id, { title: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { title: e.target.value })
+        }
       />
 
       <div>
-        <h4 className="text-sm font-medium mb-2" style={{ color: DARK_TEXT }}>Domaines d'Intervention Clés</h4> {/* Enhanced Content */}
+        <h4 className="text-sm font-medium mb-2" style={{ color: DARK_TEXT }}>
+          Domaines d'Intervention Clés
+        </h4>{" "}
+        {/* Enhanced Content */}
         {block.content.categories?.map((category, categoryIndex) => (
-          <div key={categoryIndex} className="border border-gray-200 rounded-lg p-3 mb-3">
+          <div
+            key={categoryIndex}
+            className="border border-gray-200 rounded-lg p-3 mb-3"
+          >
             <input
               type="text"
               placeholder="Nom du Domaine (Ex: Aide Éducative)" // Enhanced Content
@@ -813,13 +999,22 @@ export function ServicesBlock({ block, updateContentBlock, removeContentBlock })
               value={category.name || ""}
               onChange={(e) => {
                 const newCategories = [...block.content.categories];
-                newCategories[categoryIndex] = { ...newCategories[categoryIndex], name: e.target.value };
+                newCategories[categoryIndex] = {
+                  ...newCategories[categoryIndex],
+                  name: e.target.value,
+                };
                 updateContentBlock(block.id, { categories: newCategories });
               }}
             />
 
             <div className="ml-4">
-              <h5 className="text-xs font-medium mb-1" style={{ color: DARK_TEXT }}>Actions Spécifiques Associées</h5> {/* Enhanced Content */}
+              <h5
+                className="text-xs font-medium mb-1"
+                style={{ color: DARK_TEXT }}
+              >
+                Actions Spécifiques Associées
+              </h5>{" "}
+              {/* Enhanced Content */}
               {category.services?.map((service, serviceIndex) => (
                 <div key={serviceIndex} className="flex gap-2 mb-2">
                   <input
@@ -830,10 +1025,20 @@ export function ServicesBlock({ block, updateContentBlock, removeContentBlock })
                     value={service.name || ""}
                     onChange={(e) => {
                       const newCategories = [...block.content.categories];
-                      const newServices = [...newCategories[categoryIndex].services];
-                      newServices[serviceIndex] = { ...newServices[serviceIndex], name: e.target.value };
-                      newCategories[categoryIndex] = { ...newCategories[categoryIndex], services: newServices };
-                      updateContentBlock(block.id, { categories: newCategories });
+                      const newServices = [
+                        ...newCategories[categoryIndex].services,
+                      ];
+                      newServices[serviceIndex] = {
+                        ...newServices[serviceIndex],
+                        name: e.target.value,
+                      };
+                      newCategories[categoryIndex] = {
+                        ...newCategories[categoryIndex],
+                        services: newServices,
+                      };
+                      updateContentBlock(block.id, {
+                        categories: newCategories,
+                      });
                     }}
                   />
                   <input
@@ -844,19 +1049,36 @@ export function ServicesBlock({ block, updateContentBlock, removeContentBlock })
                     value={service.description || ""}
                     onChange={(e) => {
                       const newCategories = [...block.content.categories];
-                      const newServices = [...newCategories[categoryIndex].services];
-                      newServices[serviceIndex] = { ...newServices[serviceIndex], description: e.target.value };
-                      newCategories[categoryIndex] = { ...newCategories[categoryIndex], services: newServices };
-                      updateContentBlock(block.id, { categories: newCategories });
+                      const newServices = [
+                        ...newCategories[categoryIndex].services,
+                      ];
+                      newServices[serviceIndex] = {
+                        ...newServices[serviceIndex],
+                        description: e.target.value,
+                      };
+                      newCategories[categoryIndex] = {
+                        ...newCategories[categoryIndex],
+                        services: newServices,
+                      };
+                      updateContentBlock(block.id, {
+                        categories: newCategories,
+                      });
                     }}
                   />
                   <button
                     type="button"
                     onClick={() => {
                       const newCategories = [...block.content.categories];
-                      const newServices = newCategories[categoryIndex].services.filter((_, i) => i !== serviceIndex);
-                      newCategories[categoryIndex] = { ...newCategories[categoryIndex], services: newServices };
-                      updateContentBlock(block.id, { categories: newCategories });
+                      const newServices = newCategories[
+                        categoryIndex
+                      ].services.filter((_, i) => i !== serviceIndex);
+                      newCategories[categoryIndex] = {
+                        ...newCategories[categoryIndex],
+                        services: newServices,
+                      };
+                      updateContentBlock(block.id, {
+                        categories: newCategories,
+                      });
                     }}
                     className="px-1 hover:text-red-600 transition-colors duration-150"
                     style={{ color: DELETE_COLOR }}
@@ -869,21 +1091,30 @@ export function ServicesBlock({ block, updateContentBlock, removeContentBlock })
                 type="button"
                 onClick={() => {
                   const newCategories = [...block.content.categories];
-                  const newServices = [...(newCategories[categoryIndex].services || []), { name: "", description: "" }];
-                  newCategories[categoryIndex] = { ...newCategories[categoryIndex], services: newServices };
+                  const newServices = [
+                    ...(newCategories[categoryIndex].services || []),
+                    { name: "", description: "" },
+                  ];
+                  newCategories[categoryIndex] = {
+                    ...newCategories[categoryIndex],
+                    services: newServices,
+                  };
                   updateContentBlock(block.id, { categories: newCategories });
                 }}
                 className="text-xs flex items-center gap-1 hover:text-blue-600 transition-colors duration-150"
                 style={{ color: ACCENT }}
               >
-                <Plus className="h-3 w-3" /> Ajouter une Action Spécifique {/* Enhanced Content */}
+                <Plus className="h-3 w-3" /> Ajouter une Action Spécifique{" "}
+                {/* Enhanced Content */}
               </button>
             </div>
 
             <button
               type="button"
               onClick={() => {
-                const newCategories = block.content.categories.filter((_, i) => i !== categoryIndex);
+                const newCategories = block.content.categories.filter(
+                  (_, i) => i !== categoryIndex,
+                );
                 updateContentBlock(block.id, { categories: newCategories });
               }}
               className="text-sm mt-2 hover:text-red-600 transition-colors duration-150"
@@ -896,20 +1127,28 @@ export function ServicesBlock({ block, updateContentBlock, removeContentBlock })
         <button
           type="button"
           onClick={() => {
-            const newCategories = [...(block.content.categories || []), { name: "", services: [] }];
+            const newCategories = [
+              ...(block.content.categories || []),
+              { name: "", services: [] },
+            ];
             updateContentBlock(block.id, { categories: newCategories });
           }}
           className="text-sm flex items-center gap-1 hover:text-blue-600 transition-colors duration-150"
           style={{ color: ACCENT }}
         >
-          <Plus className="h-4 w-4" /> Ajouter un Domaine d'Intervention {/* Enhanced Content */}
+          <Plus className="h-4 w-4" /> Ajouter un Domaine d'Intervention{" "}
+          {/* Enhanced Content */}
         </button>
       </div>
     </div>
   );
 }
 
-export function SponsorshipBlock({ block, updateContentBlock, removeContentBlock }) {
+export function SponsorshipBlock({
+  block,
+  updateContentBlock,
+  removeContentBlock,
+}) {
   return (
     <div className="space-y-4">
       <input
@@ -918,7 +1157,9 @@ export function SponsorshipBlock({ block, updateContentBlock, removeContentBlock
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.title || ""}
-        onChange={(e) => updateContentBlock(block.id, { title: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { title: e.target.value })
+        }
       />
       <input
         type="text"
@@ -926,13 +1167,21 @@ export function SponsorshipBlock({ block, updateContentBlock, removeContentBlock
         className={inputClasses}
         style={focusedInputStyle}
         value={block.content.description || ""}
-        onChange={(e) => updateContentBlock(block.id, { description: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { description: e.target.value })
+        }
       />
 
       <div>
-        <h4 className="text-sm font-medium mb-2" style={{ color: DARK_TEXT }}>Nos Chemins de Solidarité</h4> {/* Enhanced Content */}
+        <h4 className="text-sm font-medium mb-2" style={{ color: DARK_TEXT }}>
+          Nos Chemins de Solidarité
+        </h4>{" "}
+        {/* Enhanced Content */}
         {block.content.formulas?.map((formula, formulaIndex) => (
-          <div key={formulaIndex} className="border border-gray-200 rounded-lg p-3 mb-3">
+          <div
+            key={formulaIndex}
+            className="border border-gray-200 rounded-lg p-3 mb-3"
+          >
             <input
               type="text"
               placeholder="Nom de la Formule de Soutien" // Enhanced Content
@@ -941,7 +1190,10 @@ export function SponsorshipBlock({ block, updateContentBlock, removeContentBlock
               value={formula.name || ""}
               onChange={(e) => {
                 const newFormulas = [...block.content.formulas];
-                newFormulas[formulaIndex] = { ...newFormulas[formulaIndex], name: e.target.value };
+                newFormulas[formulaIndex] = {
+                  ...newFormulas[formulaIndex],
+                  name: e.target.value,
+                };
                 updateContentBlock(block.id, { formulas: newFormulas });
               }}
             />
@@ -953,7 +1205,10 @@ export function SponsorshipBlock({ block, updateContentBlock, removeContentBlock
               value={formula.amount || ""}
               onChange={(e) => {
                 const newFormulas = [...block.content.formulas];
-                newFormulas[formulaIndex] = { ...newFormulas[formulaIndex], amount: e.target.value };
+                newFormulas[formulaIndex] = {
+                  ...newFormulas[formulaIndex],
+                  amount: e.target.value,
+                };
                 updateContentBlock(block.id, { formulas: newFormulas });
               }}
             />
@@ -965,14 +1220,19 @@ export function SponsorshipBlock({ block, updateContentBlock, removeContentBlock
               value={formula.description || ""}
               onChange={(e) => {
                 const newFormulas = [...block.content.formulas];
-                newFormulas[formulaIndex] = { ...newFormulas[formulaIndex], description: e.target.value };
+                newFormulas[formulaIndex] = {
+                  ...newFormulas[formulaIndex],
+                  description: e.target.value,
+                };
                 updateContentBlock(block.id, { formulas: newFormulas });
               }}
             />
             <button
               type="button"
               onClick={() => {
-                const newFormulas = block.content.formulas.filter((_, i) => i !== formulaIndex);
+                const newFormulas = block.content.formulas.filter(
+                  (_, i) => i !== formulaIndex,
+                );
                 updateContentBlock(block.id, { formulas: newFormulas });
               }}
               className="text-sm mt-2 hover:text-red-600 transition-colors duration-150"
@@ -985,20 +1245,28 @@ export function SponsorshipBlock({ block, updateContentBlock, removeContentBlock
         <button
           type="button"
           onClick={() => {
-            const newFormulas = [...(block.content.formulas || []), { name: "", amount: "", description: "" }];
+            const newFormulas = [
+              ...(block.content.formulas || []),
+              { name: "", amount: "", description: "" },
+            ];
             updateContentBlock(block.id, { formulas: newFormulas });
           }}
           className="text-sm flex items-center gap-1 hover:text-blue-600 transition-colors duration-150"
           style={{ color: ACCENT }}
         >
-          <Plus className="h-4 w-4" /> Ajouter une Formule de Soutien {/* Enhanced Content */}
+          <Plus className="h-4 w-4" /> Ajouter une Formule de Soutien{" "}
+          {/* Enhanced Content */}
         </button>
       </div>
     </div>
   );
 }
 
-export function GalleryBlock({ block, updateContentBlock, removeContentBlock }) {
+export function GalleryBlock({
+  block,
+  updateContentBlock,
+  removeContentBlock,
+}) {
   return (
     <div className="space-y-3">
       <input
@@ -1006,7 +1274,9 @@ export function GalleryBlock({ block, updateContentBlock, removeContentBlock }) 
         placeholder="Galerie Photo : Nos Actions sur le Terrain" // Enhanced Content
         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         value={block.content.title || ""}
-        onChange={(e) => updateContentBlock(block.id, { title: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { title: e.target.value })
+        }
       />
       {block.content.images?.map((image, imageIndex) => (
         <div key={imageIndex} className="flex gap-2">
@@ -1024,7 +1294,9 @@ export function GalleryBlock({ block, updateContentBlock, removeContentBlock }) 
           <button
             type="button"
             onClick={() => {
-              const newImages = block.content.images.filter((_, i) => i !== imageIndex);
+              const newImages = block.content.images.filter(
+                (_, i) => i !== imageIndex,
+              );
               updateContentBlock(block.id, { images: newImages });
             }}
             className="text-red-400 hover:text-red-600 px-2"
@@ -1041,7 +1313,8 @@ export function GalleryBlock({ block, updateContentBlock, removeContentBlock }) 
         }}
         className="text-blue-500 hover:text-blue-600 text-sm flex items-center gap-1"
       >
-        <Plus className="h-4 w-4" /> Ajouter une photo d'impact {/* Enhanced Content */}
+        <Plus className="h-4 w-4" /> Ajouter une photo d'impact{" "}
+        {/* Enhanced Content */}
       </button>
     </div>
   );
@@ -1055,7 +1328,9 @@ export function ImpactBlock({ block, updateContentBlock, removeContentBlock }) {
         placeholder="Titre de la Section (Ex: Témoigner de notre Impact)" // Enhanced Content
         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         value={block.content.title || ""}
-        onChange={(e) => updateContentBlock(block.id, { title: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { title: e.target.value })
+        }
       />
       {block.content.impacts?.map((impact, impactIndex) => (
         <div key={impactIndex} className="flex gap-2">
@@ -1066,7 +1341,10 @@ export function ImpactBlock({ block, updateContentBlock, removeContentBlock }) {
             value={impact.description || ""}
             onChange={(e) => {
               const newImpacts = [...block.content.impacts];
-              newImpacts[impactIndex] = { ...newImpacts[impactIndex], description: e.target.value };
+              newImpacts[impactIndex] = {
+                ...newImpacts[impactIndex],
+                description: e.target.value,
+              };
               updateContentBlock(block.id, { impacts: newImpacts });
             }}
           />
@@ -1077,14 +1355,19 @@ export function ImpactBlock({ block, updateContentBlock, removeContentBlock }) {
             value={impact.value || ""}
             onChange={(e) => {
               const newImpacts = [...block.content.impacts];
-              newImpacts[impactIndex] = { ...newImpacts[impactIndex], value: e.target.value };
+              newImpacts[impactIndex] = {
+                ...newImpacts[impactIndex],
+                value: e.target.value,
+              };
               updateContentBlock(block.id, { impacts: newImpacts });
             }}
           />
           <button
             type="button"
             onClick={() => {
-              const newImpacts = block.content.impacts.filter((_, i) => i !== impactIndex);
+              const newImpacts = block.content.impacts.filter(
+                (_, i) => i !== impactIndex,
+              );
               updateContentBlock(block.id, { impacts: newImpacts });
             }}
             className="text-red-400 hover:text-red-600 px-2"
@@ -1096,12 +1379,16 @@ export function ImpactBlock({ block, updateContentBlock, removeContentBlock }) {
       <button
         type="button"
         onClick={() => {
-          const newImpacts = [...(block.content.impacts || []), { description: "", value: "" }];
+          const newImpacts = [
+            ...(block.content.impacts || []),
+            { description: "", value: "" },
+          ];
           updateContentBlock(block.id, { impacts: newImpacts });
         }}
         className="text-blue-500 hover:text-blue-600 text-sm flex items-center gap-1"
       >
-        <Plus className="h-4 w-4" /> Ajouter un Résultat d'Impact {/* Enhanced Content */}
+        <Plus className="h-4 w-4" /> Ajouter un Résultat d'Impact{" "}
+        {/* Enhanced Content */}
       </button>
     </div>
   );
@@ -1115,13 +1402,19 @@ export function TeamBlock({ block, updateContentBlock, removeContentBlock }) {
         placeholder="Notre Équipe Dévouée" // Enhanced Content
         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         value={block.content.title || ""}
-        onChange={(e) => updateContentBlock(block.id, { title: e.target.value })}
+        onChange={(e) =>
+          updateContentBlock(block.id, { title: e.target.value })
+        }
       />
 
       <div>
-        <h4 className="text-sm font-medium mb-2">Nos Artisans de l'Espoir</h4> {/* Enhanced Content */}
+        <h4 className="text-sm font-medium mb-2">Nos Artisans de l'Espoir</h4>{" "}
+        {/* Enhanced Content */}
         {block.content.members?.map((member, memberIndex) => (
-          <div key={memberIndex} className="border border-gray-200 rounded-lg p-3 mb-3">
+          <div
+            key={memberIndex}
+            className="border border-gray-200 rounded-lg p-3 mb-3"
+          >
             <input
               type="text"
               placeholder="Rôle au sein de la Fondation" // Enhanced Content
@@ -1129,13 +1422,19 @@ export function TeamBlock({ block, updateContentBlock, removeContentBlock }) {
               value={member.role || ""}
               onChange={(e) => {
                 const newMembers = [...block.content.members];
-                newMembers[memberIndex] = { ...newMembers[memberIndex], role: e.target.value };
+                newMembers[memberIndex] = {
+                  ...newMembers[memberIndex],
+                  role: e.target.value,
+                };
                 updateContentBlock(block.id, { members: newMembers });
               }}
             />
 
             <div className="ml-4">
-              <h5 className="text-xs font-medium mb-1">Missions Clés et Contributions</h5> {/* Enhanced Content */}
+              <h5 className="text-xs font-medium mb-1">
+                Missions Clés et Contributions
+              </h5>{" "}
+              {/* Enhanced Content */}
               {member.responsibilities?.map((responsibility, respIndex) => (
                 <div key={respIndex} className="flex gap-2 mb-1">
                   <input
@@ -1145,9 +1444,14 @@ export function TeamBlock({ block, updateContentBlock, removeContentBlock }) {
                     value={responsibility}
                     onChange={(e) => {
                       const newMembers = [...block.content.members];
-                      const newResponsibilities = [...newMembers[memberIndex].responsibilities];
+                      const newResponsibilities = [
+                        ...newMembers[memberIndex].responsibilities,
+                      ];
                       newResponsibilities[respIndex] = e.target.value;
-                      newMembers[memberIndex] = { ...newMembers[memberIndex], responsibilities: newResponsibilities };
+                      newMembers[memberIndex] = {
+                        ...newMembers[memberIndex],
+                        responsibilities: newResponsibilities,
+                      };
                       updateContentBlock(block.id, { members: newMembers });
                     }}
                   />
@@ -1155,8 +1459,13 @@ export function TeamBlock({ block, updateContentBlock, removeContentBlock }) {
                     type="button"
                     onClick={() => {
                       const newMembers = [...block.content.members];
-                      const newResponsibilities = newMembers[memberIndex].responsibilities.filter((_, i) => i !== respIndex);
-                      newMembers[memberIndex] = { ...newMembers[memberIndex], responsibilities: newResponsibilities };
+                      const newResponsibilities = newMembers[
+                        memberIndex
+                      ].responsibilities.filter((_, i) => i !== respIndex);
+                      newMembers[memberIndex] = {
+                        ...newMembers[memberIndex],
+                        responsibilities: newResponsibilities,
+                      };
                       updateContentBlock(block.id, { members: newMembers });
                     }}
                     className="text-red-400 hover:text-red-600 px-1"
@@ -1169,20 +1478,29 @@ export function TeamBlock({ block, updateContentBlock, removeContentBlock }) {
                 type="button"
                 onClick={() => {
                   const newMembers = [...block.content.members];
-                  const newResponsibilities = [...(newMembers[memberIndex].responsibilities || []), ""];
-                  newMembers[memberIndex] = { ...newMembers[memberIndex], responsibilities: newResponsibilities };
+                  const newResponsibilities = [
+                    ...(newMembers[memberIndex].responsibilities || []),
+                    "",
+                  ];
+                  newMembers[memberIndex] = {
+                    ...newMembers[memberIndex],
+                    responsibilities: newResponsibilities,
+                  };
                   updateContentBlock(block.id, { members: newMembers });
                 }}
                 className="text-blue-500 hover:text-blue-600 text-xs flex items-center gap-1"
               >
-                <Plus className="h-3 w-3" /> Ajouter une Mission {/* Enhanced Content */}
+                <Plus className="h-3 w-3" /> Ajouter une Mission{" "}
+                {/* Enhanced Content */}
               </button>
             </div>
 
             <button
               type="button"
               onClick={() => {
-                const newMembers = block.content.members.filter((_, i) => i !== memberIndex);
+                const newMembers = block.content.members.filter(
+                  (_, i) => i !== memberIndex,
+                );
                 updateContentBlock(block.id, { members: newMembers });
               }}
               className="text-red-400 hover:text-red-600 text-sm mt-2"
@@ -1194,12 +1512,16 @@ export function TeamBlock({ block, updateContentBlock, removeContentBlock }) {
         <button
           type="button"
           onClick={() => {
-            const newMembers = [...(block.content.members || []), { role: "", responsibilities: [] }];
+            const newMembers = [
+              ...(block.content.members || []),
+              { role: "", responsibilities: [] },
+            ];
             updateContentBlock(block.id, { members: newMembers });
           }}
           className="text-blue-500 hover:text-blue-600 text-sm flex items-center gap-1"
         >
-          <Plus className="h-4 w-4" /> Ajouter un Membre d'Équipe {/* Enhanced Content */}
+          <Plus className="h-4 w-4" /> Ajouter un Membre d'Équipe{" "}
+          {/* Enhanced Content */}
         </button>
       </div>
     </div>

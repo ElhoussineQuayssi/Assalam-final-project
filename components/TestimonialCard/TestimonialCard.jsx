@@ -1,6 +1,11 @@
 const TestimonialCard = ({ name, role, quote }) => (
-  <div className="card-lift bg-white rounded-xl p-6 shadow-lg border-l-4 scroll-reveal" style={{ borderColor: '#6495ED' }}>
-    <blockquote className="text-lg text-gray-700 mb-4 italic">"{quote}"</blockquote>
+  <div
+    className="card-lift bg-white rounded-xl p-6 shadow-lg border-l-4 scroll-reveal"
+    style={{ borderColor: "#6495ED" }}
+  >
+    <blockquote className="text-lg text-gray-700 mb-4 italic">
+      "{quote}"
+    </blockquote>
     <div className="flex items-center">
       <div className="ml-3">
         <div className="font-semibold text-gray-900">{name}</div>

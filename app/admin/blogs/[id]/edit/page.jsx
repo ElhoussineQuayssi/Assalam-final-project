@@ -7,24 +7,33 @@ import { getBlogById, updateBlog } from "lib/actions";
 import { ShareIcon, AlertTriangle, Loader2 } from "lucide-react";
 
 // Import extracted component
-import Alert from '@/components/Alert/Alert.jsx';
+import Alert from "@/components/Alert/Alert.jsx";
 
 // Dynamically import TinyMCE editor with loading spinner
-const Editor = dynamic(() => import("@tinymce/tinymce-react").then(mod => mod.Editor), {
-  loading: () => <div className="flex justify-center items-center h-64 bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg"><Loader2 className="h-8 w-8 animate-spin mr-2" style={{ color: '#6495ED' }} /><span className="text-gray-600">Chargement de l'éditeur...</span></div>,
-  ssr: false
-});
+const Editor = dynamic(
+  () => import("@tinymce/tinymce-react").then((mod) => mod.Editor),
+  {
+    loading: () => (
+      <div className="flex justify-center items-center h-64 bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg">
+        <Loader2
+          className="h-8 w-8 animate-spin mr-2"
+          style={{ color: "#6495ED" }}
+        />
+        <span className="text-gray-600">Chargement de l'éditeur...</span>
+      </div>
+    ),
+    ssr: false,
+  },
+);
 
 // --- Design System Configuration (Minimalist Light Blue) ---
-const ACCENT = '#6495ED';        // Cornflower Blue
-const PRIMARY_LIGHT = '#B0E0E6'; // Powder Blue
-const DARK_TEXT = '#333333';     // Dark Gray
-const BACKGROUND = '#FAFAFA';    // Off-White
+const ACCENT = "#6495ED"; // Cornflower Blue
+const PRIMARY_LIGHT = "#B0E0E6"; // Powder Blue
+const DARK_TEXT = "#333333"; // Dark Gray
+const BACKGROUND = "#FAFAFA"; // Off-White
 
 // Calculated transparent background for the social box
 const PRIMARY_LIGHT_TRANS = `${PRIMARY_LIGHT}4D`; // PRIMARY_LIGHT with ~30% opacity
-
-
 
 export default function EditBlog() {
   const router = useRouter();
@@ -45,12 +54,12 @@ export default function EditBlog() {
         if (result.success) {
           setBlog(result.data);
           setContent(result.data.content || "");
-          setFormState(prev => ({
+          setFormState((prev) => ({
             ...prev,
             shareOnSocial: result.data.shareOnSocial || false,
           }));
         } else {
-          setFormState(prev => ({
+          setFormState((prev) => ({
             ...prev,
             status: "error",
             message: "Erreur lors de la récupération de l'article.",
@@ -58,7 +67,7 @@ export default function EditBlog() {
         }
       } catch (error) {
         console.error("Error fetching blog:", error);
-        setFormState(prev => ({
+        setFormState((prev) => ({
           ...prev,
           status: "error",
           message: "Une erreur s'est produite.",
@@ -70,7 +79,11 @@ export default function EditBlog() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setFormState({ ...formState, status: "submitting", message: "Mise à jour en cours..." });
+    setFormState({
+      ...formState,
+      status: "submitting",
+      message: "Mise à jour en cours...",
+    });
 
     const formData = new FormData(event.target);
     // Ensure content is properly set in formData
@@ -103,9 +116,14 @@ export default function EditBlog() {
   if (!blog) {
     // Transformed Loading State: Centered Accent Spinner using inline styles
     return (
-      <div className="min-h-screen flex justify-center items-center" style={{ backgroundColor: BACKGROUND }}>
+      <div
+        className="min-h-screen flex justify-center items-center"
+        style={{ backgroundColor: BACKGROUND }}
+      >
         <Loader2 className="h-8 w-8 animate-spin" style={{ color: ACCENT }} />
-        <p className="ml-3 text-lg" style={{ color: DARK_TEXT }}>Chargement de l'article...</p>
+        <p className="ml-3 text-lg" style={{ color: DARK_TEXT }}>
+          Chargement de l'article...
+        </p>
       </div>
     );
   }
@@ -114,9 +132,9 @@ export default function EditBlog() {
   const inputStyle = {
     color: DARK_TEXT,
     // Using CSS variables to dynamically set focus ring and border color for Tailwind classes
-    '--tw-ring-color': ACCENT,
-    '--tw-focus-ring-color': ACCENT,
-    '--tw-border-color': ACCENT,
+    "--tw-ring-color": ACCENT,
+    "--tw-focus-ring-color": ACCENT,
+    "--tw-border-color": ACCENT,
   };
 
   // --- Transformed JSX (Minimalist Light Blue Design) ---
@@ -135,7 +153,10 @@ export default function EditBlog() {
         <Alert type={formState.status} message={formState.message} />
 
         {/* Form as Content Card Pattern with Scroll Reveal */}
-        <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl p-8 scroll-reveal">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white rounded-2xl shadow-xl p-8 scroll-reveal"
+        >
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main Content - Left Side (2/3 width) */}
             <div className="lg:col-span-2 space-y-6">
@@ -198,9 +219,23 @@ export default function EditBlog() {
                     height: 500,
                     menubar: false,
                     plugins: [
-                      "advlist", "autolink", "lists", "link", "image", "charmap",
-                      "preview", "anchor", "searchreplace", "visualblocks", "code",
-                      "fullscreen", "insertdatetime", "media", "table", "help", "wordcount",
+                      "advlist",
+                      "autolink",
+                      "lists",
+                      "link",
+                      "image",
+                      "charmap",
+                      "preview",
+                      "anchor",
+                      "searchreplace",
+                      "visualblocks",
+                      "code",
+                      "fullscreen",
+                      "insertdatetime",
+                      "media",
+                      "table",
+                      "help",
+                      "wordcount",
                     ],
                     toolbar:
                       "undo redo | formatselect | bold italic backcolor | \
@@ -241,7 +276,10 @@ export default function EditBlog() {
 
               {/* Status Radio Buttons */}
               <div>
-                <label className="block text-lg font-semibold mb-3" style={{ color: DARK_TEXT }}>
+                <label
+                  className="block text-lg font-semibold mb-3"
+                  style={{ color: DARK_TEXT }}
+                >
                   Status
                 </label>
                 <div className="flex items-center space-x-6">
@@ -289,7 +327,10 @@ export default function EditBlog() {
               {/* Social Sharing Box - Subtle Background Pattern */}
               <div
                 className="p-6 rounded-xl border"
-                style={{ backgroundColor: PRIMARY_LIGHT_TRANS, borderColor: PRIMARY_LIGHT }}
+                style={{
+                  backgroundColor: PRIMARY_LIGHT_TRANS,
+                  borderColor: PRIMARY_LIGHT,
+                }}
               >
                 <div className="flex items-center mb-4">
                   <input
@@ -316,9 +357,13 @@ export default function EditBlog() {
                 </div>
 
                 <div className="text-sm text-gray-700 flex items-start mt-2">
-                  <ShareIcon className="h-5 w-5 mr-3 flex-shrink-0" style={{ color: ACCENT }} />
+                  <ShareIcon
+                    className="h-5 w-5 mr-3 flex-shrink-0"
+                    style={{ color: ACCENT }}
+                  />
                   <p>
-                    L'article sera automatiquement partagé sur vos comptes sociaux liés lors de la publication.
+                    L'article sera automatiquement partagé sur vos comptes
+                    sociaux liés lors de la publication.
                   </p>
                 </div>
               </div>
@@ -331,15 +376,14 @@ export default function EditBlog() {
                   className="w-full text-white font-bold py-4 px-8 rounded-full transition-all duration-300 transform shadow-xl hover:scale-[1.01] hover:shadow-2xl disabled:opacity-70 disabled:cursor-not-allowed"
                   style={{ backgroundColor: ACCENT }}
                 >
-                  {formState.status === "submitting"
-                    ? (
-                      <span className="flex items-center justify-center gap-2">
-                        <Loader2 className="h-5 w-5 animate-spin" />
-                        Mise à jour...
-                      </span>
-                    )
-                    : "Mettre à jour l'article"
-                  }
+                  {formState.status === "submitting" ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <Loader2 className="h-5 w-5 animate-spin" />
+                      Mise à jour...
+                    </span>
+                  ) : (
+                    "Mettre à jour l'article"
+                  )}
                 </button>
               </div>
             </div>

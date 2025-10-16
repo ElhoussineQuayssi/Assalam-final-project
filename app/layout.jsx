@@ -12,9 +12,7 @@ export default function RootLayout({ children }) {
     // FIX: Set language to French for semantic correctness
     <html lang="fr">
       <body className="font-sans">
-        <ClientWrapper>
-          {children}
-        </ClientWrapper>
+        <ClientWrapper>{children}</ClientWrapper>
       </body>
     </html>
   );

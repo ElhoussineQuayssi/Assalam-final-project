@@ -1,12 +1,12 @@
 const ContentGrid = ({ items, columns, renderItem, className = "" }) => {
   const columnClasses = `grid grid-cols-${columns.default} ${
-    columns.md ? `md:grid-cols-${columns.md}` : ''
-  } ${columns.lg ? `lg:grid-cols-${columns.lg}` : ''} gap-8`;
+    columns.md ? `md:grid-cols-${columns.md}` : ""
+  } ${columns.lg ? `lg:grid-cols-${columns.lg}` : ""} gap-8`;
 
   return (
     <div className={`${columnClasses} ${className}`}>
       {items.map((item, index) =>
-        renderItem ? renderItem(item, index) : null
+        renderItem ? renderItem(item, index) : null,
       )}
     </div>
   );

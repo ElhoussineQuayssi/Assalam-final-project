@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
-import Link from 'next/link'; // Import Link for navigation
+import Link from "next/link"; // Import Link for navigation
 // Assuming the path to the server action is correct
 import { saveMessage } from "lib/actions";
 import {
@@ -21,11 +21,10 @@ import Input from "@/components/Input/Input";
 import Textarea from "@/components/Textarea/Textarea";
 import Alert from "@/components/Alert/Alert";
 // --- Design System Configuration (Minimalist Light Blue) ---
-const ACCENT = '#6495ED';        // Cornflower Blue
-const PRIMARY_LIGHT = '#B0E0E6'; // Powder Blue
-const DARK_TEXT = '#333333';     // Dark Gray
-const BACKGROUND = '#FAFAFA';    // Off-White
-
+const ACCENT = "#6495ED"; // Cornflower Blue
+const PRIMARY_LIGHT = "#B0E0E6"; // Powder Blue
+const DARK_TEXT = "#333333"; // Dark Gray
+const BACKGROUND = "#FAFAFA"; // Off-White
 
 export default function Contact() {
   const searchParams = useSearchParams();
@@ -58,23 +57,28 @@ export default function Contact() {
           ...formState,
           status: "error",
           message:
-            result.message || "Un problème est survenu lors de l'envoi. Veuillez vérifier les informations et réessayer.", // Enhanced Error Message
+            result.message ||
+            "Un problème est survenu lors de l'envoi. Veuillez vérifier les informations et réessayer.", // Enhanced Error Message
         });
       }
     } catch (e) {
       setFormState({
         ...formState,
         status: "error",
-        message: "Une erreur technique s'est produite. Veuillez réessayer plus tard ou nous contacter par téléphone.", // Enhanced Catch Error Message
+        message:
+          "Une erreur technique s'est produite. Veuillez réessayer plus tard ou nous contacter par téléphone.", // Enhanced Catch Error Message
       });
     }
   };
 
-  const contactOptions = useMemo(() => ([
-    { value: "contact", label: "Demande Générale" }, // Enhanced Tab Label
-    { value: "donation", label: "Soutenir un Projet (Don)" }, // Enhanced Tab Label
-    { value: "volunteer", label: "Rejoindre l'Équipe (Bénévole)" }, // Enhanced Tab Label
-  ]), []);
+  const contactOptions = useMemo(
+    () => [
+      { value: "contact", label: "Demande Générale" }, // Enhanced Tab Label
+      { value: "donation", label: "Soutenir un Projet (Don)" }, // Enhanced Tab Label
+      { value: "volunteer", label: "Rejoindre l'Équipe (Bénévole)" }, // Enhanced Tab Label
+    ],
+    [],
+  );
 
   const buttonText = useMemo(() => {
     if (formState.status === "submitting") return "Envoi de votre intention..."; // Enhanced Loading Text
@@ -91,39 +95,48 @@ export default function Contact() {
     return "Nous sommes là pour répondre à vos questions sur nos actions, partenariats ou toute autre demande. Votre engagement commence ici."; // Enhanced Intro Text
   }, [type]);
 
-
   // Fixed hex colors for social platforms (avoiding Tailwind classes)
-  const socialColors = useMemo(() => ({
-    facebook: '#1877F2',
-    twitter: '#1DA1F2',
-    linkedin: '#0A66C2',
-    instagram: '#E4405F',
-  }), []);
-
+  const socialColors = useMemo(
+    () => ({
+      facebook: "#1877F2",
+      twitter: "#1DA1F2",
+      linkedin: "#0A66C2",
+      instagram: "#E4405F",
+    }),
+    [],
+  );
 
   return (
     // Layout Architecture: Max-width container and generous vertical spacing (py-24)
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24" style={{ backgroundColor: BACKGROUND }}>
-        
-        {/* GLOBAL STYLE INJECTION FOR INPUT FOCUS */}
-        <style jsx global>{`
-          .contact-form-input:focus {
-              /* Ensure border and shadow/ring use ACCENT color */
-              border-color: ${ACCENT} !important;
-              box-shadow: 0 0 0 2px ${ACCENT}40; /* Simulate focus ring with opacity */
-          }
-        `}</style>
-        
+    <div
+      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24"
+      style={{ backgroundColor: BACKGROUND }}
+    >
+      {/* GLOBAL STYLE INJECTION FOR INPUT FOCUS */}
+      <style jsx global>{`
+        .contact-form-input:focus {
+          /* Ensure border and shadow/ring use ACCENT color */
+          border-color: ${ACCENT} !important;
+          box-shadow: 0 0 0 2px ${ACCENT}40; /* Simulate focus ring with opacity */
+        }
+      `}</style>
 
       <div className="text-center mb-16">
         {/* Typography System: H2 (Section Title) pattern */}
-        <h2 className="text-4xl font-bold mb-4" style={{ color: DARK_TEXT }}>L'Espace de Communication et d'Engagement</h2> {/* Enhanced Title */}
+        <h2 className="text-4xl font-bold mb-4" style={{ color: DARK_TEXT }}>
+          L'Espace de Communication et d'Engagement
+        </h2>{" "}
+        {/* Enhanced Title */}
         {/* Typography System: Body text (text-lg) and Dark Text color */}
-        <p className="text-lg max-w-3xl mx-auto" style={{ color: `${DARK_TEXT}D9` }}>{introText}</p>
+        <p
+          className="text-lg max-w-3xl mx-auto"
+          style={{ color: `${DARK_TEXT}D9` }}
+        >
+          {introText}
+        </p>
       </div>
 
       <div className="grid md:grid-cols-2 gap-16 max-w-6xl mx-auto">
-
         {/* Contact Form - Component Pattern: ContentCard with Scroll Reveal */}
         <div
           className="bg-white rounded-2xl shadow-xl p-8 scroll-reveal card-lift"
@@ -149,15 +162,21 @@ export default function Contact() {
           )}
 
           {/* Form Tabs - Typography and Color System Application */}
-          <div className="flex border-b mb-8" style={{ borderColor: PRIMARY_LIGHT }}>
+          <div
+            className="flex border-b mb-8"
+            style={{ borderColor: PRIMARY_LIGHT }}
+          >
             {contactOptions.map((option) => (
               <Link
                 key={option.value}
                 href={`/contact?type=${option.value}`}
                 className={`px-4 py-3 text-sm font-semibold transition-colors duration-200 focus:outline-none`}
                 style={{
-                  color: type === option.value ? ACCENT : '#6B7280', // Gray-500
-                  borderBottom: type === option.value ? `2px solid ${ACCENT}` : '2px solid transparent'
+                  color: type === option.value ? ACCENT : "#6B7280", // Gray-500
+                  borderBottom:
+                    type === option.value
+                      ? `2px solid ${ACCENT}`
+                      : "2px solid transparent",
                 }}
               >
                 {option.label}
@@ -228,14 +247,20 @@ export default function Contact() {
             <button
               type="submit"
               className={`w-full text-white font-bold rounded-full px-8 py-4 text-lg shadow-xl transition-all duration-300 transform flex items-center justify-center space-x-2
-              ${formState.status === "submitting"
+              ${
+                formState.status === "submitting"
                   ? "disabled:cursor-not-allowed"
                   : "hover:scale-[1.02] hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-opacity-50"
-                }`}
+              }`}
               style={{
-                  backgroundColor: formState.status === "submitting" ? `${ACCENT}B3` : ACCENT, // 70% opacity for disabled state
-                  cursor: formState.status === "submitting" ? 'not-allowed' : 'pointer',
-                  boxShadow: formState.status === "submitting" ? 'none' : '0 10px 15px -3px rgba(100, 149, 237, 0.5), 0 4px 6px -2px rgba(100, 149, 237, 0.05)', // Accent-based shadow
+                backgroundColor:
+                  formState.status === "submitting" ? `${ACCENT}B3` : ACCENT, // 70% opacity for disabled state
+                cursor:
+                  formState.status === "submitting" ? "not-allowed" : "pointer",
+                boxShadow:
+                  formState.status === "submitting"
+                    ? "none"
+                    : "0 10px 15px -3px rgba(100, 149, 237, 0.5), 0 4px 6px -2px rgba(100, 149, 237, 0.05)", // Accent-based shadow
               }}
               disabled={formState.status === "submitting"}
             >
@@ -248,28 +273,74 @@ export default function Contact() {
         </div>
 
         {/* Contact Info Section - Staggered Scroll Reveal */}
-        <div className="space-y-8 scroll-reveal" style={{ animationDelay: "0.3s" }}>
-
+        <div
+          className="space-y-8 scroll-reveal"
+          style={{ animationDelay: "0.3s" }}
+        >
           {/* Contact Info Card - Subtle Background, Accent Styling */}
-          <div className="rounded-2xl p-8 border shadow-lg" style={{ backgroundColor: PRIMARY_LIGHT, borderColor: `${ACCENT}40` }}>
+          <div
+            className="rounded-2xl p-8 border shadow-lg"
+            style={{
+              backgroundColor: PRIMARY_LIGHT,
+              borderColor: `${ACCENT}40`,
+            }}
+          >
             {/* Typography: H3 Card Title pattern */}
-            <h3 className="text-xl font-semibold mb-6" style={{ color: ACCENT }}>
+            <h3
+              className="text-xl font-semibold mb-6"
+              style={{ color: ACCENT }}
+            >
               Notre Siège Social au Maroc
-            </h3> {/* Enhanced Title */}
-
+            </h3>{" "}
+            {/* Enhanced Title */}
             <div className="space-y-6">
               {[
-                { icon: MapPin, title: "Adresse du Siège:", details: "123 Rue des Oliviers, Quartier Hassan, Rabat, Maroc", isLink: false }, // Enhanced Title
-                { icon: Mail, title: "Email de Contact:", details: "contact@fondation-assalam.org", href: "mailto:contact@fondation-assalam.org", isLink: true }, // Enhanced Title
-                { icon: Phone, title: "Ligne Directe:", details: "+212 5 22 33 44 55", href: "tel:+212522334455", isLink: true }, // Enhanced Title
-                { icon: () => <div className="h-6 w-6 text-accent flex-shrink-0" style={{ color: ACCENT }}>🕒</div>, title: "Horaires d'Accueil:", details: "Lundi - Vendredi: 9h00 - 17h00 (Heure Marocaine)", isLink: false }, // Enhanced Title & Detail
+                {
+                  icon: MapPin,
+                  title: "Adresse du Siège:",
+                  details:
+                    "123 Rue des Oliviers, Quartier Hassan, Rabat, Maroc",
+                  isLink: false,
+                }, // Enhanced Title
+                {
+                  icon: Mail,
+                  title: "Email de Contact:",
+                  details: "contact@fondation-assalam.org",
+                  href: "mailto:contact@fondation-assalam.org",
+                  isLink: true,
+                }, // Enhanced Title
+                {
+                  icon: Phone,
+                  title: "Ligne Directe:",
+                  details: "+212 5 22 33 44 55",
+                  href: "tel:+212522334455",
+                  isLink: true,
+                }, // Enhanced Title
+                {
+                  icon: () => (
+                    <div
+                      className="h-6 w-6 text-accent flex-shrink-0"
+                      style={{ color: ACCENT }}
+                    >
+                      🕒
+                    </div>
+                  ),
+                  title: "Horaires d'Accueil:",
+                  details: "Lundi - Vendredi: 9h00 - 17h00 (Heure Marocaine)",
+                  isLink: false,
+                }, // Enhanced Title & Detail
               ].map((item, index) => {
                 const IconComponent = item.icon;
                 return (
                   <div key={index} className="flex items-start gap-4">
-                    <IconComponent className="h-6 w-6 mt-1 flex-shrink-0" style={{ color: ACCENT }} />
+                    <IconComponent
+                      className="h-6 w-6 mt-1 flex-shrink-0"
+                      style={{ color: ACCENT }}
+                    />
                     <div className="text-lg">
-                      <p className="font-semibold" style={{ color: DARK_TEXT }}>{item.title}</p>
+                      <p className="font-semibold" style={{ color: DARK_TEXT }}>
+                        {item.title}
+                      </p>
                       {item.isLink ? (
                         <a
                           href={item.href}
@@ -279,7 +350,9 @@ export default function Contact() {
                           {item.details}
                         </a>
                       ) : (
-                        <p style={{ color: `${DARK_TEXT}B3` }}>{item.details}</p>
+                        <p style={{ color: `${DARK_TEXT}B3` }}>
+                          {item.details}
+                        </p>
                       )}
                     </div>
                   </div>
@@ -289,21 +362,39 @@ export default function Contact() {
           </div>
 
           {/* Map Placeholder */}
-          <div className="rounded-2xl overflow-hidden h-80 relative shadow-inner border" style={{ backgroundColor: PRIMARY_LIGHT, borderColor: `${ACCENT}40` }}>
+          <div
+            className="rounded-2xl overflow-hidden h-80 relative shadow-inner border"
+            style={{
+              backgroundColor: PRIMARY_LIGHT,
+              borderColor: `${ACCENT}40`,
+            }}
+          >
             <div className="absolute inset-0 flex items-center justify-center">
-              <p className="font-semibold text-lg" style={{ color: `${DARK_TEXT}70` }}>Localisation du Siège sur la carte</p> {/* Enhanced Placeholder */}
+              <p
+                className="font-semibold text-lg"
+                style={{ color: `${DARK_TEXT}70` }}
+              >
+                Localisation du Siège sur la carte
+              </p>{" "}
+              {/* Enhanced Placeholder */}
             </div>
           </div>
 
           {/* Social Media - Use platform specific colors via inline styles */}
           <div className="mt-6">
-            <h3 className="text-xl font-semibold mb-4" style={{ color: DARK_TEXT }}>Suivez nos Actions de Solidarité</h3> {/* Enhanced Title */}
+            <h3
+              className="text-xl font-semibold mb-4"
+              style={{ color: DARK_TEXT }}
+            >
+              Suivez nos Actions de Solidarité
+            </h3>{" "}
+            {/* Enhanced Title */}
             <div className="flex gap-4">
               {[
-                { icon: Facebook, href: "#f", platform: 'facebook' },
-                { icon: Twitter, href: "#t", platform: 'twitter' },
-                { icon: Linkedin, href: "#l", platform: 'linkedin' },
-                { icon: Instagram, href: "#", platform: 'instagram' },
+                { icon: Facebook, href: "#f", platform: "facebook" },
+                { icon: Twitter, href: "#t", platform: "twitter" },
+                { icon: Linkedin, href: "#l", platform: "linkedin" },
+                { icon: Instagram, href: "#", platform: "instagram" },
               ].map(({ icon: Icon, href, platform }, index) => (
                 <a
                   key={href}

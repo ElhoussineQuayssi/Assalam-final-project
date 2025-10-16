@@ -22,9 +22,9 @@ export default function Navbar() {
   const pathname = usePathname();
 
   // Color System Constants (for explicit Tailwind usage)
-  const ACCENT_BLUE = '#6495ED'; // --color-accent
-  const DARK_TEXT = '#333333'; // --color-text
-  const PRIMARY_LIGHT = '#B0E0E6'; // --color-primary (used for light background)
+  const ACCENT_BLUE = "#6495ED"; // --color-accent
+  const DARK_TEXT = "#333333"; // --color-text
+  const PRIMARY_LIGHT = "#B0E0E6"; // --color-primary (used for light background)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -87,7 +87,7 @@ export default function Navbar() {
                 ${
                   pathname === item.href
                     ? `text-[${ACCENT_BLUE}] bg-[${PRIMARY_LIGHT}]/30 font-semibold shadow-sm`
-                    : ''
+                    : ""
                 }
               `}
             >

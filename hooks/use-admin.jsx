@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from "react";
 
 // Hook for dashboard statistics with real-time updates
 export function useStats() {
@@ -20,8 +20,8 @@ export function useStats() {
     setError(null);
 
     try {
-      const response = await fetch('/api/stats');
-      if (!response.ok) throw new Error('Failed to fetch stats');
+      const response = await fetch("/api/stats");
+      if (!response.ok) throw new Error("Failed to fetch stats");
 
       const data = await response.json();
       setStats(data);
@@ -60,8 +60,8 @@ export function useAdmins() {
     setError(null);
 
     try {
-      const response = await fetch('/api/admins');
-      if (!response.ok) throw new Error('Failed to fetch admins');
+      const response = await fetch("/api/admins");
+      if (!response.ok) throw new Error("Failed to fetch admins");
 
       const data = await response.json();
       setAdmins(data);
@@ -72,57 +72,66 @@ export function useAdmins() {
     }
   }, []);
 
-  const createAdmin = useCallback(async (adminData) => {
-    try {
-      const response = await fetch('/api/admins', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(adminData),
-      });
+  const createAdmin = useCallback(
+    async (adminData) => {
+      try {
+        const response = await fetch("/api/admins", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(adminData),
+        });
 
-      if (response.ok) {
-        await fetchAdmins();
-        return { success: true };
+        if (response.ok) {
+          await fetchAdmins();
+          return { success: true };
+        }
+        return { success: false, error: "Failed to create admin" };
+      } catch (error) {
+        return { success: false, error: "Network error" };
       }
-      return { success: false, error: 'Failed to create admin' };
-    } catch (error) {
-      return { success: false, error: 'Network error' };
-    }
-  }, [fetchAdmins]);
+    },
+    [fetchAdmins],
+  );
 
-  const updateAdmin = useCallback(async (id, adminData) => {
-    try {
-      const response = await fetch(`/api/admins/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(adminData),
-      });
+  const updateAdmin = useCallback(
+    async (id, adminData) => {
+      try {
+        const response = await fetch(`/api/admins/${id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(adminData),
+        });
 
-      if (response.ok) {
-        await fetchAdmins();
-        return { success: true };
+        if (response.ok) {
+          await fetchAdmins();
+          return { success: true };
+        }
+        return { success: false, error: "Failed to update admin" };
+      } catch (error) {
+        return { success: false, error: "Network error" };
       }
-      return { success: false, error: 'Failed to update admin' };
-    } catch (error) {
-      return { success: false, error: 'Network error' };
-    }
-  }, [fetchAdmins]);
+    },
+    [fetchAdmins],
+  );
 
-  const deleteAdmin = useCallback(async (id) => {
-    try {
-      const response = await fetch(`/api/admins/${id}`, {
-        method: 'DELETE',
-      });
+  const deleteAdmin = useCallback(
+    async (id) => {
+      try {
+        const response = await fetch(`/api/admins/${id}`, {
+          method: "DELETE",
+        });
 
-      if (response.ok) {
-        await fetchAdmins();
-        return { success: true };
+        if (response.ok) {
+          await fetchAdmins();
+          return { success: true };
+        }
+        return { success: false, error: "Failed to delete admin" };
+      } catch (error) {
+        return { success: false, error: "Network error" };
       }
-      return { success: false, error: 'Failed to delete admin' };
-    } catch (error) {
-      return { success: false, error: 'Network error' };
-    }
-  }, [fetchAdmins]);
+    },
+    [fetchAdmins],
+  );
 
   useEffect(() => {
     fetchAdmins();
@@ -147,10 +156,13 @@ export function usePagination(totalItems, itemsPerPage = 10) {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
-  const goToPage = useCallback((page) => {
-    const pageNumber = Math.max(1, Math.min(page, totalPages));
-    setCurrentPage(pageNumber);
-  }, [totalPages]);
+  const goToPage = useCallback(
+    (page) => {
+      const pageNumber = Math.max(1, Math.min(page, totalPages));
+      setCurrentPage(pageNumber);
+    },
+    [totalPages],
+  );
 
   const nextPage = useCallback(() => {
     goToPage(currentPage + 1);
@@ -174,7 +186,7 @@ export function usePagination(totalItems, itemsPerPage = 10) {
     }
 
     if (currentPage - delta > 2) {
-      rangeWithDots.push(1, '...');
+      rangeWithDots.push(1, "...");
     } else {
       rangeWithDots.push(1);
     }
@@ -182,7 +194,7 @@ export function usePagination(totalItems, itemsPerPage = 10) {
     rangeWithDots.push(...range);
 
     if (currentPage + delta < totalPages - 1) {
-      rangeWithDots.push('...', totalPages);
+      rangeWithDots.push("...", totalPages);
     } else if (totalPages > 1) {
       rangeWithDots.push(totalPages);
     }
@@ -206,7 +218,7 @@ export function usePagination(totalItems, itemsPerPage = 10) {
 }
 
 // Hook for search functionality with debouncing
-export function useSearch(initialQuery = '', delay = 300) {
+export function useSearch(initialQuery = "", delay = 300) {
   const [query, setQuery] = useState(initialQuery);
   const [debouncedQuery, setDebouncedQuery] = useState(initialQuery);
 
@@ -219,8 +231,8 @@ export function useSearch(initialQuery = '', delay = 300) {
   }, [query, delay]);
 
   const clearSearch = useCallback(() => {
-    setQuery('');
-    setDebouncedQuery('');
+    setQuery("");
+    setDebouncedQuery("");
   }, []);
 
   return {
@@ -235,25 +247,27 @@ export function useSearch(initialQuery = '', delay = 300) {
 // Hook for theme management
 export function useTheme() {
   const [theme, setTheme] = useState(() => {
-    if (typeof window === 'undefined') return 'light';
+    if (typeof window === "undefined") return "light";
 
-    const saved = localStorage.getItem('theme');
-    if (saved === 'dark' || saved === 'light') return saved;
+    const saved = localStorage.getItem("theme");
+    if (saved === "dark" || saved === "light") return saved;
 
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
   });
 
   useEffect(() => {
     const root = window.document.documentElement;
 
-    root.classList.remove('light', 'dark');
+    root.classList.remove("light", "dark");
     root.classList.add(theme);
 
-    localStorage.setItem('theme', theme);
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
   const toggleTheme = useCallback(() => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
   }, []);
 
   return { theme, setTheme, toggleTheme };

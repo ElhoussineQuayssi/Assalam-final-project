@@ -7,7 +7,7 @@ export async function GET(request, { params }) {
     if (!id) {
       return Response.json(
         { success: false, message: "ID du projet requis" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -16,7 +16,7 @@ export async function GET(request, { params }) {
     if (!result) {
       return Response.json(
         { success: false, message: "Projet non trouvé" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -24,7 +24,7 @@ export async function GET(request, { params }) {
   } catch {
     return Response.json(
       { success: false, message: "Erreur serveur" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

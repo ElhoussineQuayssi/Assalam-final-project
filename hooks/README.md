@@ -7,12 +7,13 @@ This document outlines the custom hooks available in the Fondation Assalam proje
 ### Core Utility Hooks (`use-enhanced.tsx`)
 
 #### `useLocalStorage(key, initialValue)`
+
 Persistent state management with localStorage and SSR support.
 
 ```tsx
 function UserPreferences() {
-  const [preferences, setPreferences] = useLocalStorage('userPrefs', {
-    language: 'fr',
+  const [preferences, setPreferences] = useLocalStorage("userPrefs", {
+    language: "fr",
     notifications: true,
   });
 
@@ -22,10 +23,12 @@ function UserPreferences() {
         Language:
         <select
           value={preferences.language}
-          onChange={(e) => setPreferences({
-            ...preferences,
-            language: e.target.value
-          })}
+          onChange={(e) =>
+            setPreferences({
+              ...preferences,
+              language: e.target.value,
+            })
+          }
         >
           <option value="fr">Français</option>
           <option value="ar">العربية</option>
@@ -37,18 +40,19 @@ function UserPreferences() {
 ```
 
 #### `useApi(url, options?)`
+
 Simplified API calls with loading states and error handling.
 
 ```tsx
 function ProjectList() {
-  const { data: projects, loading, error, refetch } = useApi('/api/projects');
+  const { data: projects, loading, error, refetch } = useApi("/api/projects");
 
   if (loading) return <LoadingSpinner />;
   if (error) return <Alert type="error" message={error} />;
 
   return (
     <div>
-      {projects?.map(project => (
+      {projects?.map((project) => (
         <ProjectCard key={project.id} project={project} />
       ))}
       <Button onClick={refetch}>Refresh</Button>
@@ -58,11 +62,12 @@ function ProjectList() {
 ```
 
 #### `useDebounce(value, delay)`
+
 Debounce values for search inputs and API calls.
 
 ```tsx
 function SearchComponent() {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearch = useDebounce(searchTerm, 500);
 
   const { data: results } = useApi(`/api/search?q=${debouncedSearch}`);
@@ -82,23 +87,24 @@ function SearchComponent() {
 ```
 
 #### `useForm(initialValues, validate?)`
+
 Complete form state management with validation.
 
 ```tsx
 function ContactForm() {
   const { values, errors, handleChange, handleSubmit, isSubmitting } = useForm(
-    { name: '', email: '', message: '' },
+    { name: "", email: "", message: "" },
     (values) => {
       const errors = {};
-      if (!values.name) errors.name = 'Name is required';
-      if (!values.email) errors.email = 'Email is required';
+      if (!values.name) errors.name = "Name is required";
+      if (!values.email) errors.email = "Email is required";
       return errors;
-    }
+    },
   );
 
   const onSubmit = async (formData) => {
-    const response = await fetch('/api/contact', {
-      method: 'POST',
+    const response = await fetch("/api/contact", {
+      method: "POST",
       body: JSON.stringify(formData),
     });
     // Handle response
@@ -109,20 +115,20 @@ function ContactForm() {
       <Input
         label="Name"
         value={values.name}
-        onChange={(e) => handleChange('name', e.target.value)}
+        onChange={(e) => handleChange("name", e.target.value)}
         error={errors.name}
       />
       <Input
         label="Email"
         type="email"
         value={values.email}
-        onChange={(e) => handleChange('email', e.target.value)}
+        onChange={(e) => handleChange("email", e.target.value)}
         error={errors.email}
       />
       <Textarea
         label="Message"
         value={values.message}
-        onChange={(e) => handleChange('message', e.target.value)}
+        onChange={(e) => handleChange("message", e.target.value)}
       />
       <Button type="submit" loading={isSubmitting}>
         Send Message
@@ -133,6 +139,7 @@ function ContactForm() {
 ```
 
 #### `useIntersectionObserver(ref, options?)`
+
 Detect when elements enter the viewport for animations and lazy loading.
 
 ```tsx
@@ -144,7 +151,7 @@ function AnimatedSection({ children }) {
     <section
       ref={ref}
       className={`transition-all duration-1000 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       }`}
     >
       {children}
@@ -154,19 +161,22 @@ function AnimatedSection({ children }) {
 ```
 
 #### `useMediaQuery(query)`
+
 Responsive design beyond mobile detection.
 
 ```tsx
 function ResponsiveComponent() {
-  const isLargeScreen = useMediaQuery('(min-width: 1024px)');
-  const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1023px)');
+  const isLargeScreen = useMediaQuery("(min-width: 1024px)");
+  const isTablet = useMediaQuery("(min-width: 768px) and (max-width: 1023px)");
 
   return (
-    <div className={`
-      ${isLargeScreen ? 'grid-cols-4' : ''}
-      ${isTablet ? 'grid-cols-2' : ''}
-      ${!isTablet && !isLargeScreen ? 'grid-cols-1' : ''}
-    `}>
+    <div
+      className={`
+      ${isLargeScreen ? "grid-cols-4" : ""}
+      ${isTablet ? "grid-cols-2" : ""}
+      ${!isTablet && !isLargeScreen ? "grid-cols-1" : ""}
+    `}
+    >
       {/* Content */}
     </div>
   );
@@ -174,6 +184,7 @@ function ResponsiveComponent() {
 ```
 
 #### `usePrevious(value)`
+
 Compare current and previous values.
 
 ```tsx
@@ -191,13 +202,14 @@ function ValueChangeDetector({ value }) {
 ```
 
 #### `useAsync(asyncFunction, dependencies?)`
+
 Handle async operations with proper cleanup.
 
 ```tsx
 function DataFetcher() {
   const { data, loading, error } = useAsync(
-    () => fetch('/api/data').then(res => res.json()),
-    [] // Dependencies
+    () => fetch("/api/data").then((res) => res.json()),
+    [], // Dependencies
   );
 
   if (loading) return <LoadingSpinner />;
@@ -210,6 +222,7 @@ function DataFetcher() {
 ### Project-Specific Hooks (`use-project.tsx`)
 
 #### `useAuth()`
+
 Authentication state management.
 
 ```tsx
@@ -224,19 +237,20 @@ function ProtectedComponent() {
 
   return (
     <div>
-      Welcome, {user.name}!
-      <Button onClick={logout}>Logout</Button>
+      Welcome, {user.name}!<Button onClick={logout}>Logout</Button>
     </div>
   );
 }
 ```
 
 #### `useProjects()`
+
 Complete CRUD operations for projects.
 
 ```tsx
 function ProjectManager() {
-  const { projects, loading, createProject, updateProject, deleteProject } = useProjects();
+  const { projects, loading, createProject, updateProject, deleteProject } =
+    useProjects();
   const [editingProject, setEditingProject] = useState(null);
 
   const handleCreate = async (projectData) => {
@@ -260,12 +274,13 @@ function ProjectManager() {
 ```
 
 #### `useBlogs()`
+
 Blog management with filtering and pagination.
 
 ```tsx
 function BlogManager() {
   const { blogs, loading, fetchBlogs } = useBlogs();
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   useEffect(() => {
     fetchBlogs(selectedCategory);
@@ -284,6 +299,7 @@ function BlogManager() {
 ```
 
 #### `useMessages()`
+
 Message management with real-time updates.
 
 ```tsx
@@ -299,9 +315,7 @@ function Inbox() {
         onSelect={setSelectedMessage}
         onMarkRead={markAsRead}
       />
-      {selectedMessage && (
-        <MessageDetail message={selectedMessage} />
-      )}
+      {selectedMessage && <MessageDetail message={selectedMessage} />}
     </div>
   );
 }
@@ -310,6 +324,7 @@ function Inbox() {
 ### Admin Hooks (`use-admin.tsx`)
 
 #### `useStats()`
+
 Dashboard statistics with real-time updates.
 
 ```tsx
@@ -328,6 +343,7 @@ function Dashboard() {
 ```
 
 #### `useAdmins()`
+
 Admin user management.
 
 ```tsx
@@ -355,6 +371,7 @@ function AdminManager() {
 ```
 
 #### `usePagination(totalItems, itemsPerPage?)`
+
 Pagination logic and controls.
 
 ```tsx
@@ -370,10 +387,7 @@ function PaginatedList({ items }) {
     getVisiblePages,
   } = usePagination(items.length, 10);
 
-  const paginatedItems = items.slice(
-    (currentPage - 1) * 10,
-    currentPage * 10
-  );
+  const paginatedItems = items.slice((currentPage - 1) * 10, currentPage * 10);
 
   return (
     <div>
@@ -390,23 +404,20 @@ function PaginatedList({ items }) {
 ```
 
 #### `useSearch(initialQuery?, delay?)`
+
 Search functionality with debouncing.
 
 ```tsx
 function SearchableList() {
   const { query, debouncedQuery, setQuery, clearSearch } = useSearch();
 
-  const filteredItems = items.filter(item =>
-    item.title.toLowerCase().includes(debouncedQuery.toLowerCase())
+  const filteredItems = items.filter((item) =>
+    item.title.toLowerCase().includes(debouncedQuery.toLowerCase()),
   );
 
   return (
     <div>
-      <SearchInput
-        value={query}
-        onChange={setQuery}
-        onClear={clearSearch}
-      />
+      <SearchInput value={query} onChange={setQuery} onClear={clearSearch} />
       <ItemList items={filteredItems} />
     </div>
   );
@@ -414,6 +425,7 @@ function SearchableList() {
 ```
 
 #### `useTheme()`
+
 Theme management with persistence.
 
 ```tsx
@@ -421,9 +433,7 @@ function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <Button onClick={toggleTheme}>
-      {theme === 'light' ? '🌙' : '☀️'}
-    </Button>
+    <Button onClick={toggleTheme}>{theme === "light" ? "🌙" : "☀️"}</Button>
   );
 }
 ```
@@ -431,6 +441,7 @@ function ThemeToggle() {
 ## 🚀 Implementation Examples
 
 ### Enhanced Admin Dashboard
+
 ```tsx
 function EnhancedDashboard() {
   const { stats, loading } = useStats();
@@ -450,13 +461,14 @@ function EnhancedDashboard() {
 ```
 
 ### Enhanced Project Management
+
 ```tsx
 function EnhancedProjectManager() {
   const { projects, createProject, loading } = useProjects();
   const { query, setQuery } = useSearch();
 
-  const filteredProjects = projects.filter(project =>
-    project.title.toLowerCase().includes(query.toLowerCase())
+  const filteredProjects = projects.filter((project) =>
+    project.title.toLowerCase().includes(query.toLowerCase()),
   );
 
   return (

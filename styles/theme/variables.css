@@ -5,23 +5,23 @@
 
 :root {
   /* Brand tokens (Serene Azure Palette) */
-  --color-primary: #5D8FBD;        /* Tranquil Blue */
-  --color-primary-dark: #3A6B9B;   /* Deep Comfort */
-  --color-primary-light: #A0C4E1;  /* Hazy Blue */
+  --color-primary: #5d8fbd; /* Tranquil Blue */
+  --color-primary-dark: #3a6b9b; /* Deep Comfort */
+  --color-primary-light: #a0c4e1; /* Hazy Blue */
 
-  --color-secondary: #A0C4E1;      /* Hazy Blue */
-  --color-secondary-dark: #3A6B9B; /* Deep Comfort */
-  --color-secondary-light: #E1EFF9; /* Soft Sky */
+  --color-secondary: #a0c4e1; /* Hazy Blue */
+  --color-secondary-dark: #3a6b9b; /* Deep Comfort */
+  --color-secondary-light: #e1eff9; /* Soft Sky */
 
-  --color-accent: #A11721;         /* Accent Red */
-  --color-accent-dark: #711017;    /* Dark Accent */
+  --color-accent: #a11721; /* Accent Red */
+  --color-accent-dark: #711017; /* Dark Accent */
 
   /* Serene Azure Neutrals */
-  --bg: #F5F9FC;       /* Polar Mist */
-  --surface: #E1EFF9;  /* Soft Sky */
-  --text: #4A4A4A;     /* Charcoal Gray */
-  --muted: #767676;    /* Dusty Gray */
-  --border: #A0C4E1;   /* Hazy Blue */
+  --bg: #f5f9fc; /* Polar Mist */
+  --surface: #e1eff9; /* Soft Sky */
+  --text: #4a4a4a; /* Charcoal Gray */
+  --muted: #767676; /* Dusty Gray */
+  --border: #a0c4e1; /* Hazy Blue */
 
   /* Legacy support - map old tokens to new system */
   --foundation-blue: var(--color-secondary);
@@ -33,35 +33,37 @@
   --pure-white: var(--surface);
 
   /* Typography scale */
-  --font-size-xs: 0.75rem;    /* 12px */
-  --font-size-sm: 0.875rem;   /* 14px */
-  --font-size-base: 1rem;     /* 16px */
-  --font-size-lg: 1.125rem;   /* 18px */
-  --font-size-xl: 1.25rem;    /* 20px */
-  --font-size-2xl: 1.5rem;    /* 24px */
-  --font-size-3xl: 1.875rem;  /* 30px */
-  --font-size-4xl: 2.25rem;   /* 36px */
-  --font-size-5xl: 3rem;      /* 48px */
+  --font-size-xs: 0.75rem; /* 12px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-base: 1rem; /* 16px */
+  --font-size-lg: 1.125rem; /* 18px */
+  --font-size-xl: 1.25rem; /* 20px */
+  --font-size-2xl: 1.5rem; /* 24px */
+  --font-size-3xl: 1.875rem; /* 30px */
+  --font-size-4xl: 2.25rem; /* 36px */
+  --font-size-5xl: 3rem; /* 48px */
 
   /* Spacing system */
-  --space-xs: 0.25rem;  /* 4px */
-  --space-sm: 0.5rem;   /* 8px */
-  --space-md: 1rem;     /* 16px */
-  --space-lg: 1.5rem;   /* 24px */
-  --space-xl: 2rem;     /* 32px */
-  --space-2xl: 3rem;    /* 48px */
-  --space-3xl: 4rem;    /* 64px */
+  --space-xs: 0.25rem; /* 4px */
+  --space-sm: 0.5rem; /* 8px */
+  --space-md: 1rem; /* 16px */
+  --space-lg: 1.5rem; /* 24px */
+  --space-xl: 2rem; /* 32px */
+  --space-2xl: 3rem; /* 48px */
+  --space-3xl: 4rem; /* 64px */
 
   /* Border radius */
-  --radius-sm: 0.25rem;   /* 4px */
-  --radius-md: 0.5rem;    /* 8px */
-  --radius-lg: 0.75rem;   /* 12px */
-  --radius-xl: 1rem;      /* 16px */
+  --radius-sm: 0.25rem; /* 4px */
+  --radius-md: 0.5rem; /* 8px */
+  --radius-lg: 0.75rem; /* 12px */
+  --radius-xl: 1rem; /* 16px */
 
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+  --shadow-md:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
 
   /* Transitions */
   --transition-fast: 150ms ease-in-out;

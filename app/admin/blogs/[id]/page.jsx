@@ -1,24 +1,29 @@
 import { getBlogById } from "lib/actions";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Calendar, Tag, AlertTriangle, Edit, Trash2 } from "lucide-react";
+import {
+  ArrowLeft,
+  Calendar,
+  Tag,
+  AlertTriangle,
+  Edit,
+  Trash2,
+} from "lucide-react";
 
 // Import extracted components
-import AdminPageHeader from '@/components/AdminPageHeader/AdminPageHeader.jsx';
-import Button from '@/components/Button/Button.jsx';
+import AdminPageHeader from "@/components/AdminPageHeader/AdminPageHeader.jsx";
+import Button from "@/components/Button/Button.jsx";
 
 // --- Design System Configuration ---
-const ACCENT = '#6495ED';        // Cornflower Blue
-const PRIMARY_LIGHT = '#B0E0E6'; // Powder Blue
-const DARK_TEXT = '#333333';     // Dark Gray
-const BACKGROUND = '#FAFAFA';    // Off-White
+const ACCENT = "#6495ED"; // Cornflower Blue
+const PRIMARY_LIGHT = "#B0E0E6"; // Powder Blue
+const DARK_TEXT = "#333333"; // Dark Gray
+const BACKGROUND = "#FAFAFA"; // Off-White
 
 // Calcul des couleurs transparentes pour les fonds subtils
 const PRIMARY_LIGHT_TRANS = `${PRIMARY_LIGHT}4D`; // PRIMARY_LIGHT with ~30% opacity
-const RED_600 = '#DC2626'; // Equivalent Tailwind red-600
-const RED_50 = '#FEF2F2'; // Equivalent Tailwind red-50
-
-
+const RED_600 = "#DC2626"; // Equivalent Tailwind red-600
+const RED_50 = "#FEF2F2"; // Equivalent Tailwind red-50
 
 export default async function BlogPost({ params }) {
   const { id } = await params;
@@ -27,12 +32,18 @@ export default async function BlogPost({ params }) {
   if (!result.success) {
     // Error State Transformed using inline styles
     return (
-      <div className="min-h-screen p-10 flex justify-center items-center" style={{ backgroundColor: BACKGROUND }}>
-        <div className="border-l-4 border-red-500 text-red-800 p-6 rounded-xl shadow-md flex items-center gap-3" style={{ backgroundColor: RED_50 }}>
-            <AlertTriangle className="h-6 w-6 flex-shrink-0" />
-            <p className="text-lg font-medium">
-              Erreur: {result.message || "Article introuvable."}
-            </p>
+      <div
+        className="min-h-screen p-10 flex justify-center items-center"
+        style={{ backgroundColor: BACKGROUND }}
+      >
+        <div
+          className="border-l-4 border-red-500 text-red-800 p-6 rounded-xl shadow-md flex items-center gap-3"
+          style={{ backgroundColor: RED_50 }}
+        >
+          <AlertTriangle className="h-6 w-6 flex-shrink-0" />
+          <p className="text-lg font-medium">
+            Erreur: {result.message || "Article introuvable."}
+          </p>
         </div>
       </div>
     );
@@ -48,7 +59,6 @@ export default async function BlogPost({ params }) {
       style={{ backgroundColor: BACKGROUND }}
     >
       <div className="max-w-4xl mx-auto">
-
         {/* Header with back button */}
         <div className="mb-10">
           <AdminPageHeader
@@ -57,7 +67,11 @@ export default async function BlogPost({ params }) {
           />
           <div className="mt-6 scroll-reveal">
             {/* Outline Button Pattern (uses refactored Button) */}
-            <Button href="/admin/blogs" variant="outlineLight" className="inline-flex items-center">
+            <Button
+              href="/admin/blogs"
+              variant="outlineLight"
+              className="inline-flex items-center"
+            >
               <ArrowLeft className="w-5 h-5 mr-2" />
               Retour à la liste des articles
             </Button>
@@ -66,11 +80,13 @@ export default async function BlogPost({ params }) {
 
         {/* Article Content - Content Card Pattern */}
         <article className="bg-white rounded-2xl shadow-xl overflow-hidden scroll-reveal">
-
           {/* Article Header */}
           <div className="p-8 border-b border-gray-100">
             {/* Title - H2 Typography style used for article title */}
-            <h1 className="text-4xl font-bold mb-5 leading-snug" style={{ color: DARK_TEXT }}>
+            <h1
+              className="text-4xl font-bold mb-5 leading-snug"
+              style={{ color: DARK_TEXT }}
+            >
               {blog.title}
             </h1>
 
@@ -79,10 +95,11 @@ export default async function BlogPost({ params }) {
               <div className="flex items-center">
                 <Calendar className="w-5 h-5 mr-2" style={{ color: ACCENT }} />
                 <span className="text-base">
-                  Publié le {new Date(blog.createdAt).toLocaleDateString('fr-FR', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
+                  Publié le{" "}
+                  {new Date(blog.createdAt).toLocaleDateString("fr-FR", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
                   })}
                 </span>
               </div>
@@ -92,7 +109,10 @@ export default async function BlogPost({ params }) {
                   {/* Category Badge - Uses PRIMARY_LIGHT_TRANS for subtle background */}
                   <span
                     className="text-sm font-semibold px-3 py-1 rounded-full"
-                    style={{ backgroundColor: PRIMARY_LIGHT_TRANS, color: ACCENT }}
+                    style={{
+                      backgroundColor: PRIMARY_LIGHT_TRANS,
+                      color: ACCENT,
+                    }}
                   >
                     {blog.category}
                   </span>
@@ -120,9 +140,9 @@ export default async function BlogPost({ params }) {
               // Use Tailwind Prose plugin's CSS variables to apply Design System colors
               className="prose prose-lg max-w-none prose-p:text-gray-700 prose-ul:text-gray-700 prose-ol:text-gray-700"
               style={{
-                '--tw-prose-headings': DARK_TEXT,
-                '--tw-prose-links': ACCENT,
-                '--tw-prose-bold': DARK_TEXT,
+                "--tw-prose-headings": DARK_TEXT,
+                "--tw-prose-links": ACCENT,
+                "--tw-prose-bold": DARK_TEXT,
               }}
               dangerouslySetInnerHTML={{ __html: blog.content }}
             />
@@ -133,12 +153,20 @@ export default async function BlogPost({ params }) {
         {blog.excerpt && (
           <div
             className="mt-8 border rounded-xl p-6 shadow-md scroll-reveal"
-            style={{ backgroundColor: PRIMARY_LIGHT_TRANS, borderColor: PRIMARY_LIGHT }}
+            style={{
+              backgroundColor: PRIMARY_LIGHT_TRANS,
+              borderColor: PRIMARY_LIGHT,
+            }}
           >
-            <h3 className="text-xl font-semibold mb-2" style={{ color: DARK_TEXT }}>
+            <h3
+              className="text-xl font-semibold mb-2"
+              style={{ color: DARK_TEXT }}
+            >
               Résumé (Extrait)
             </h3>
-            <p className="text-gray-700 text-lg leading-relaxed">{blog.excerpt}</p>
+            <p className="text-gray-700 text-lg leading-relaxed">
+              {blog.excerpt}
+            </p>
           </div>
         )}
 

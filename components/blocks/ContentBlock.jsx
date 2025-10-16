@@ -1,4 +1,26 @@
-import { Move, Trash2, Type, Image, List, Quote, Play, Users, BarChart3, Calendar, HelpCircle, Target, FileText, MapPin, Award, BookOpen, Heart, Users as UsersIcon, UserCheck, TrendingUp, Briefcase } from "lucide-react";
+import {
+  Move,
+  Trash2,
+  Type,
+  Image,
+  List,
+  Quote,
+  Play,
+  Users,
+  BarChart3,
+  Calendar,
+  HelpCircle,
+  Target,
+  FileText,
+  MapPin,
+  Award,
+  BookOpen,
+  Heart,
+  Users as UsersIcon,
+  UserCheck,
+  TrendingUp,
+  Briefcase,
+} from "lucide-react";
 import {
   TextBlock,
   ImageBlock,
@@ -21,51 +43,169 @@ import {
 } from "./ContentBlockComponents.jsx";
 
 // --- Design System Configuration ---
-const ACCENT = '#6495ED';        // Cornflower Blue
-const DARK_TEXT = '#333333';     // Dark Gray
-const DELETE_COLOR = '#EF4444';  // Standard Red for error/delete
+const ACCENT = "#6495ED"; // Cornflower Blue
+const DARK_TEXT = "#333333"; // Dark Gray
+const DELETE_COLOR = "#EF4444"; // Standard Red for error/delete
 
-export default function ContentBlock({ block, index, contentTypes, updateContentBlock, removeContentBlock, handleDragStart, handleDragOver, handleDrop }) {
-  const Icon = contentTypes.find(type => type.type === block.type)?.icon || Type;
+export default function ContentBlock({
+  block,
+  index,
+  contentTypes,
+  updateContentBlock,
+  removeContentBlock,
+  handleDragStart,
+  handleDragOver,
+  handleDrop,
+}) {
+  const Icon =
+    contentTypes.find((type) => type.type === block.type)?.icon || Type;
 
   const renderBlockContent = () => {
     switch (block.type) {
       case "text":
-        return <TextBlock block={block} updateContentBlock={updateContentBlock} removeContentBlock={removeContentBlock} />;
+        return (
+          <TextBlock
+            block={block}
+            updateContentBlock={updateContentBlock}
+            removeContentBlock={removeContentBlock}
+          />
+        );
       case "image":
-        return <ImageBlock block={block} updateContentBlock={updateContentBlock} removeContentBlock={removeContentBlock} />;
+        return (
+          <ImageBlock
+            block={block}
+            updateContentBlock={updateContentBlock}
+            removeContentBlock={removeContentBlock}
+          />
+        );
       case "list":
-        return <ListBlock block={block} updateContentBlock={updateContentBlock} removeContentBlock={removeContentBlock} />;
+        return (
+          <ListBlock
+            block={block}
+            updateContentBlock={updateContentBlock}
+            removeContentBlock={removeContentBlock}
+          />
+        );
       case "quote":
-        return <QuoteBlock block={block} updateContentBlock={updateContentBlock} removeContentBlock={removeContentBlock} />;
+        return (
+          <QuoteBlock
+            block={block}
+            updateContentBlock={updateContentBlock}
+            removeContentBlock={removeContentBlock}
+          />
+        );
       case "video":
-        return <VideoBlock block={block} updateContentBlock={updateContentBlock} removeContentBlock={removeContentBlock} />;
+        return (
+          <VideoBlock
+            block={block}
+            updateContentBlock={updateContentBlock}
+            removeContentBlock={removeContentBlock}
+          />
+        );
       case "testimonial":
-        return <TestimonialBlock block={block} updateContentBlock={updateContentBlock} removeContentBlock={removeContentBlock} />;
+        return (
+          <TestimonialBlock
+            block={block}
+            updateContentBlock={updateContentBlock}
+            removeContentBlock={removeContentBlock}
+          />
+        );
       case "stats":
-        return <StatsBlock block={block} updateContentBlock={updateContentBlock} removeContentBlock={removeContentBlock} />;
+        return (
+          <StatsBlock
+            block={block}
+            updateContentBlock={updateContentBlock}
+            removeContentBlock={removeContentBlock}
+          />
+        );
       case "timeline":
-        return <TimelineBlock block={block} updateContentBlock={updateContentBlock} removeContentBlock={removeContentBlock} />;
+        return (
+          <TimelineBlock
+            block={block}
+            updateContentBlock={updateContentBlock}
+            removeContentBlock={removeContentBlock}
+          />
+        );
       case "faq":
-        return <FaqBlock block={block} updateContentBlock={updateContentBlock} removeContentBlock={removeContentBlock} />;
+        return (
+          <FaqBlock
+            block={block}
+            updateContentBlock={updateContentBlock}
+            removeContentBlock={removeContentBlock}
+          />
+        );
       case "cta":
-        return <CtaBlock block={block} updateContentBlock={updateContentBlock} removeContentBlock={removeContentBlock} />;
+        return (
+          <CtaBlock
+            block={block}
+            updateContentBlock={updateContentBlock}
+            removeContentBlock={removeContentBlock}
+          />
+        );
       case "file":
-        return <FileBlock block={block} updateContentBlock={updateContentBlock} removeContentBlock={removeContentBlock} />;
+        return (
+          <FileBlock
+            block={block}
+            updateContentBlock={updateContentBlock}
+            removeContentBlock={removeContentBlock}
+          />
+        );
       case "map":
-        return <MapBlock block={block} updateContentBlock={updateContentBlock} removeContentBlock={removeContentBlock} />;
+        return (
+          <MapBlock
+            block={block}
+            updateContentBlock={updateContentBlock}
+            removeContentBlock={removeContentBlock}
+          />
+        );
       case "award":
-        return <AwardBlock block={block} updateContentBlock={updateContentBlock} removeContentBlock={removeContentBlock} />;
+        return (
+          <AwardBlock
+            block={block}
+            updateContentBlock={updateContentBlock}
+            removeContentBlock={removeContentBlock}
+          />
+        );
       case "programme":
-        return <ProgrammeBlock block={block} updateContentBlock={updateContentBlock} removeContentBlock={removeContentBlock} />;
+        return (
+          <ProgrammeBlock
+            block={block}
+            updateContentBlock={updateContentBlock}
+            removeContentBlock={removeContentBlock}
+          />
+        );
       case "services":
-        return <ServicesBlock block={block} updateContentBlock={updateContentBlock} removeContentBlock={removeContentBlock} />;
+        return (
+          <ServicesBlock
+            block={block}
+            updateContentBlock={updateContentBlock}
+            removeContentBlock={removeContentBlock}
+          />
+        );
       case "sponsorship":
-        return <SponsorshipBlock block={block} updateContentBlock={updateContentBlock} removeContentBlock={removeContentBlock} />;
+        return (
+          <SponsorshipBlock
+            block={block}
+            updateContentBlock={updateContentBlock}
+            removeContentBlock={removeContentBlock}
+          />
+        );
       case "impact":
-        return <ImpactBlock block={block} updateContentBlock={updateContentBlock} removeContentBlock={removeContentBlock} />;
+        return (
+          <ImpactBlock
+            block={block}
+            updateContentBlock={updateContentBlock}
+            removeContentBlock={removeContentBlock}
+          />
+        );
       case "team":
-        return <TeamBlock block={block} updateContentBlock={updateContentBlock} removeContentBlock={removeContentBlock} />;
+        return (
+          <TeamBlock
+            block={block}
+            updateContentBlock={updateContentBlock}
+            removeContentBlock={removeContentBlock}
+          />
+        );
       default:
         return <div>Type de bloc non supporté</div>;
     }
@@ -85,7 +225,8 @@ export default function ContentBlock({ block, index, contentTypes, updateContent
           <Icon className="h-5 w-5" style={{ color: ACCENT }} />
           {/* Block Label: Use DARK_TEXT color */}
           <span className="font-medium capitalize" style={{ color: DARK_TEXT }}>
-            {contentTypes.find(type => type.type === block.type)?.label || block.type}
+            {contentTypes.find((type) => type.type === block.type)?.label ||
+              block.type}
           </span>
         </div>
         <div className="flex items-center gap-2">
@@ -93,7 +234,7 @@ export default function ContentBlock({ block, index, contentTypes, updateContent
           <button
             type="button"
             className="text-gray-500 hover:text-accent transition-colors duration-150"
-            style={{ '--tw-text-opacity': 1, color: ACCENT }} // Apply ACCENT color for prominence
+            style={{ "--tw-text-opacity": 1, color: ACCENT }} // Apply ACCENT color for prominence
             title="Déplacer"
           >
             <Move className="h-4 w-4" />

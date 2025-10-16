@@ -9,14 +9,14 @@ export async function GET() {
     } else {
       return Response.json(
         { success: false, message: result.message },
-        { status: 500 }
+        { status: 500 },
       );
     }
   } catch (error) {
-    console.error('Error in stats API:', error);
+    console.error("Error in stats API:", error);
     return Response.json(
-      { success: false, message: 'Internal server error' },
-      { status: 500 }
+      { success: false, message: "Internal server error" },
+      { status: 500 },
     );
   }
 }

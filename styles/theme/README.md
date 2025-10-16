@@ -11,16 +11,19 @@ This directory contains the design tokens and theme configuration for the Fondat
 The primary brand colors reflect the foundation's values and create visual consistency across all touchpoints.
 
 #### Primary (Green) - Growth & Hope
+
 - **`brand-primary`** (#5DA453) - Main brand color for headings and accents
 - **`brand-primary-dark`** (#41733A) - Primary CTA buttons (WCAG AA compliant with white text)
 - **`brand-primary-light`** (#6EC262) - Subtle accents and hover states
 
 #### Secondary (Blue) - Trust & Stability
+
 - **`brand-secondary`** (#0561A1) - Focus states, links, and secondary actions
 - **`brand-secondary-dark`** (#044471) - Darker variant for emphasis
 - **`brand-secondary-light`** (#0780BC) - Lighter variant for subtle elements
 
 #### Accent (Red) - Urgency & Attention
+
 - **`brand-accent`** (#A11721) - Error states, warnings, and urgent actions
 - **`brand-accent-dark`** (#711017) - Darker variant for stronger emphasis
 
@@ -65,9 +68,9 @@ All colors are defined as CSS custom properties in `styles/theme/variables.css`:
 
 ```css
 :root {
-  --color-primary: #5DA453;
-  --color-primary-dark: #41733A;
-  --color-secondary: #0561A1;
+  --color-primary: #5da453;
+  --color-primary-dark: #41733a;
+  --color-secondary: #0561a1;
   /* ... */
 }
 ```
@@ -121,13 +124,13 @@ app/palette-preview/
 
 ### From Old Colors
 
-| Old Color | New Token | Usage |
-|-----------|-----------|-------|
-| `#1e40af` (blue) | `brand-secondary` | Primary navigation, focus states |
-| `#16a34a` (green) | `brand-primary` | Headings, accents |
-| `#dc2626` (red) | `brand-accent` | Errors, warnings |
-| `#f8fafc` (gray) | `ui-bg` | Page backgrounds |
-| `#ffffff` (white) | `ui-surface` | Component backgrounds |
+| Old Color         | New Token         | Usage                            |
+| ----------------- | ----------------- | -------------------------------- |
+| `#1e40af` (blue)  | `brand-secondary` | Primary navigation, focus states |
+| `#16a34a` (green) | `brand-primary`   | Headings, accents                |
+| `#dc2626` (red)   | `brand-accent`    | Errors, warnings                 |
+| `#f8fafc` (gray)  | `ui-bg`           | Page backgrounds                 |
+| `#ffffff` (white) | `ui-surface`      | Component backgrounds            |
 
 ### Component Updates
 

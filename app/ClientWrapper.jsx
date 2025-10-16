@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 // --- Design System Configuration (Minimalist Light Blue) ---
-const BACKGROUND = '#FAFAFA';    // Off-White (used for UI background)
+const BACKGROUND = "#FAFAFA"; // Off-White (used for UI background)
 
 export default function ClientWrapper({ children }) {
   const pathname = usePathname();

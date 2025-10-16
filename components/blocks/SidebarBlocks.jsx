@@ -14,13 +14,16 @@ export default function SidebarBlocks({
   submitButtonText,
   onSubmit,
   addImage,
-  removeImage
+  removeImage,
 }) {
   return (
     <div className="space-y-6">
       {/* Categories */}
       <div className="bg-white rounded-lg shadow p-6">
-        <h3 className="text-lg font-semibold mb-4">Domaines d'Action et Catégories</h3> {/* Enhanced Content */}
+        <h3 className="text-lg font-semibold mb-4">
+          Domaines d'Action et Catégories
+        </h3>{" "}
+        {/* Enhanced Content */}
         <div className="mb-3">
           <div className="flex gap-2">
             <input
@@ -29,7 +32,9 @@ export default function SidebarBlocks({
               placeholder="Nouveau domaine d'intervention (Ex: Éducation)" // Enhanced Content
               value={newCategory}
               onChange={(e) => setNewCategory(e.target.value)}
-              onKeyPress={(e) => e.key === "Enter" && (e.preventDefault(), addCategory())}
+              onKeyPress={(e) =>
+                e.key === "Enter" && (e.preventDefault(), addCategory())
+              }
             />
             <button
               type="button"
@@ -63,7 +68,10 @@ export default function SidebarBlocks({
 
       {/* Goals */}
       <div className="bg-white rounded-lg shadow p-6">
-        <h3 className="text-lg font-semibold mb-4">Objectifs et Résultats Souhaités</h3> {/* Enhanced Content */}
+        <h3 className="text-lg font-semibold mb-4">
+          Objectifs et Résultats Souhaités
+        </h3>{" "}
+        {/* Enhanced Content */}
         <div className="mb-3">
           <div className="flex gap-2">
             <input
@@ -72,7 +80,9 @@ export default function SidebarBlocks({
               placeholder="Nouveau résultat attendu" // Enhanced Content
               value={newGoal}
               onChange={(e) => setNewGoal(e.target.value)}
-              onKeyPress={(e) => e.key === "Enter" && (e.preventDefault(), addGoal())}
+              onKeyPress={(e) =>
+                e.key === "Enter" && (e.preventDefault(), addGoal())
+              }
             />
             <button
               type="button"
@@ -86,7 +96,10 @@ export default function SidebarBlocks({
         </div>
         <div className="space-y-2">
           {projectData.goals.map((goal, index) => (
-            <div key={index} className="flex items-center justify-between bg-green-50 p-2 rounded">
+            <div
+              key={index}
+              className="flex items-center justify-between bg-green-50 p-2 rounded"
+            >
               <span className="text-sm text-green-800">{goal}</span>
               <button
                 type="button"
@@ -127,7 +140,9 @@ export default function SidebarBlocks({
             <button
               type="button"
               onClick={() => {
-                const input = document.querySelector('input[placeholder="URL de la photo d\'impact"]'); // Corrected selector to match new placeholder
+                const input = document.querySelector(
+                  'input[placeholder="URL de la photo d\'impact"]',
+                ); // Corrected selector to match new placeholder
                 const url = input?.value.trim();
                 if (url && addImage) {
                   addImage(url);
@@ -175,7 +190,10 @@ export default function SidebarBlocks({
           className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-md transition-colors duration-300 disabled:opacity-70 flex items-center justify-center gap-2"
         >
           <Save className="h-4 w-4" />
-          {formState.status === "submitting" ? "Enregistrement de notre œuvre..." : submitButtonText} {/* Enhanced Content */}
+          {formState.status === "submitting"
+            ? "Enregistrement de notre œuvre..."
+            : submitButtonText}{" "}
+          {/* Enhanced Content */}
         </button>
       </div>
     </div>

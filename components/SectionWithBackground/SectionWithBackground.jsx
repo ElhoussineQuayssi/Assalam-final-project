@@ -1,5 +1,9 @@
-const SectionWithBackground = ({ children, variant = "none", className = "" }) => {
-  const bgColor = variant === 'gray' ? '#B0E0E6' : '#FAFAFA';
+const SectionWithBackground = ({
+  children,
+  variant = "none",
+  className = "",
+}) => {
+  const bgColor = variant === "gray" ? "#B0E0E6" : "#FAFAFA";
   return (
     <section
       className={`py-16 ${className}`}

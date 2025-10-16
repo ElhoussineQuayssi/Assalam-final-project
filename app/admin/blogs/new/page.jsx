@@ -7,24 +7,33 @@ import { saveNewBlog } from "lib/actions";
 import { ShareIcon, AlertTriangle, Loader2 } from "lucide-react";
 
 // Import extracted component
-import Alert from '@/components/Alert/Alert.jsx';
+import Alert from "@/components/Alert/Alert.jsx";
 
 // Dynamically import TinyMCE editor with loading spinner
-const Editor = dynamic(() => import("@tinymce/tinymce-react").then(mod => mod.Editor), {
-  loading: () => <div className="flex justify-center items-center h-64 bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg"><Loader2 className="h-8 w-8 animate-spin mr-2" style={{ color: '#6495ED' }} /><span className="text-gray-600">Chargement de l'éditeur...</span></div>,
-  ssr: false
-});
+const Editor = dynamic(
+  () => import("@tinymce/tinymce-react").then((mod) => mod.Editor),
+  {
+    loading: () => (
+      <div className="flex justify-center items-center h-64 bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg">
+        <Loader2
+          className="h-8 w-8 animate-spin mr-2"
+          style={{ color: "#6495ED" }}
+        />
+        <span className="text-gray-600">Chargement de l'éditeur...</span>
+      </div>
+    ),
+    ssr: false,
+  },
+);
 
 // --- Design System Configuration (Minimalist Light Blue) ---
-const ACCENT = '#6495ED';        // Cornflower Blue
-const PRIMARY_LIGHT = '#B0E0E6'; // Powder Blue
-const DARK_TEXT = '#333333';     // Dark Gray
-const BACKGROUND = '#FAFAFA';    // Off-White
+const ACCENT = "#6495ED"; // Cornflower Blue
+const PRIMARY_LIGHT = "#B0E0E6"; // Powder Blue
+const DARK_TEXT = "#333333"; // Dark Gray
+const BACKGROUND = "#FAFAFA"; // Off-White
 const PRIMARY_LIGHT_TRANS = `${PRIMARY_LIGHT}4D`; // PRIMARY_LIGHT with ~30% opacity
-const RED_500 = '#EF4444';       // Red for error
-const RED_50 = '#FEF2F2';        // Light red background
-
-
+const RED_500 = "#EF4444"; // Red for error
+const RED_50 = "#FEF2F2"; // Light red background
 
 export default function NewBlog() {
   const router = useRouter();
@@ -39,15 +48,19 @@ export default function NewBlog() {
   const inputStyle = {
     color: DARK_TEXT,
     // Using CSS variables to dynamically set focus ring and border color for Tailwind classes
-    '--tw-ring-color': ACCENT,
-    '--tw-focus-ring-color': ACCENT,
-    '--tw-border-color': ACCENT,
+    "--tw-ring-color": ACCENT,
+    "--tw-focus-ring-color": ACCENT,
+    "--tw-border-color": ACCENT,
   };
 
   // --- Original Form Submission Logic Preserved ---
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setFormState({ ...formState, status: "submitting", message: "Chargement de l'article..." });
+    setFormState({
+      ...formState,
+      status: "submitting",
+      message: "Chargement de l'article...",
+    });
 
     const formData = new FormData(event.target);
 
@@ -58,7 +71,10 @@ export default function NewBlog() {
       uploadFormData.append("image", imageFile);
 
       try {
-        setFormState(prev => ({ ...prev, message: "Téléchargement de l'image..." }));
+        setFormState((prev) => ({
+          ...prev,
+          message: "Téléchargement de l'image...",
+        }));
 
         const uploadResponse = await fetch("/api/upload", {
           method: "POST",
@@ -87,10 +103,16 @@ export default function NewBlog() {
     }
 
     formData.append("content", content);
-    formData.append("shareOnSocial", formState.shareOnSocial ? "true" : "false");
+    formData.append(
+      "shareOnSocial",
+      formState.shareOnSocial ? "true" : "false",
+    );
 
     try {
-      setFormState(prev => ({ ...prev, message: "Sauvegarde de l'article..." }));
+      setFormState((prev) => ({
+        ...prev,
+        message: "Sauvegarde de l'article...",
+      }));
 
       const result = await saveNewBlog(formData);
       if (result.success) {
@@ -129,7 +151,10 @@ export default function NewBlog() {
         <Alert type={formState.status} message={formState.message} />
 
         {/* Form as Content Card Pattern with Scroll Reveal */}
-        <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl p-8 scroll-reveal">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white rounded-2xl shadow-xl p-8 scroll-reveal"
+        >
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main Content - Left Side (2/3 width) */}
             <div className="lg:col-span-2 space-y-6">
@@ -191,9 +216,23 @@ export default function NewBlog() {
                     height: 500,
                     menubar: false,
                     plugins: [
-                      "advlist", "autolink", "lists", "link", "image", "charmap",
-                      "preview", "anchor", "searchreplace", "visualblocks", "code",
-                      "fullscreen", "insertdatetime", "media", "table", "help", "wordcount",
+                      "advlist",
+                      "autolink",
+                      "lists",
+                      "link",
+                      "image",
+                      "charmap",
+                      "preview",
+                      "anchor",
+                      "searchreplace",
+                      "visualblocks",
+                      "code",
+                      "fullscreen",
+                      "insertdatetime",
+                      "media",
+                      "table",
+                      "help",
+                      "wordcount",
                     ],
                     toolbar:
                       "undo redo | formatselect | bold italic backcolor | \
@@ -249,7 +288,7 @@ export default function NewBlog() {
                   className="w-full file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gray-100 hover:file:bg-gray-200 p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition duration-150 shadow-sm"
                   style={{
                     ...inputStyle,
-                    '--tw-file-text': DARK_TEXT, // Custom property for file text color
+                    "--tw-file-text": DARK_TEXT, // Custom property for file text color
                   }}
                 />
               </div>
@@ -275,7 +314,10 @@ export default function NewBlog() {
 
               {/* Status Radio Buttons */}
               <div>
-                <label className="block text-lg font-semibold mb-3" style={{ color: DARK_TEXT }}>
+                <label
+                  className="block text-lg font-semibold mb-3"
+                  style={{ color: DARK_TEXT }}
+                >
                   Status
                 </label>
                 <div className="flex items-center space-x-6">
@@ -322,7 +364,10 @@ export default function NewBlog() {
               {/* Social Sharing Box - Subtle Background Pattern */}
               <div
                 className="p-6 rounded-xl border"
-                style={{ backgroundColor: PRIMARY_LIGHT_TRANS, borderColor: PRIMARY_LIGHT }}
+                style={{
+                  backgroundColor: PRIMARY_LIGHT_TRANS,
+                  borderColor: PRIMARY_LIGHT,
+                }}
               >
                 <div className="flex items-center mb-4">
                   <input
@@ -349,9 +394,13 @@ export default function NewBlog() {
                 </div>
 
                 <div className="text-sm text-gray-700 flex items-start mt-2">
-                  <ShareIcon className="h-5 w-5 mr-3 flex-shrink-0" style={{ color: ACCENT }} />
+                  <ShareIcon
+                    className="h-5 w-5 mr-3 flex-shrink-0"
+                    style={{ color: ACCENT }}
+                  />
                   <p>
-                    L'article sera automatiquement partagé sur vos comptes sociaux liés lors de la publication.
+                    L'article sera automatiquement partagé sur vos comptes
+                    sociaux liés lors de la publication.
                   </p>
                 </div>
               </div>
@@ -364,15 +413,14 @@ export default function NewBlog() {
                   className="w-full text-white font-bold py-4 px-8 rounded-full transition-all duration-300 transform shadow-xl hover:scale-[1.01] hover:shadow-2xl disabled:opacity-70 disabled:cursor-not-allowed"
                   style={{ backgroundColor: ACCENT }}
                 >
-                  {formState.status === "submitting"
-                    ? (
-                      <span className="flex items-center justify-center gap-2">
-                        <Loader2 className="h-5 w-5 animate-spin" />
-                        {formState.message || "Publication..."}
-                      </span>
-                    )
-                    : "Publier l'article"
-                  }
+                  {formState.status === "submitting" ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <Loader2 className="h-5 w-5 animate-spin" />
+                      {formState.message || "Publication..."}
+                    </span>
+                  ) : (
+                    "Publier l'article"
+                  )}
                 </button>
               </div>
             </div>

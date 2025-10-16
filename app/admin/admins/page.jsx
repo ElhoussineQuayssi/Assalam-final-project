@@ -4,27 +4,34 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link"; // Required for Link component used in refactored Button
 import { getAdmins, deleteAdmin } from "lib/actions";
-import { Users, AlertTriangle, Edit, Trash2, Search, Loader2, CheckCircle } from "lucide-react";
+import {
+  Users,
+  AlertTriangle,
+  Edit,
+  Trash2,
+  Search,
+  Loader2,
+  CheckCircle,
+} from "lucide-react";
 // Components are now self-contained, so these imports are removed:
 // import { AdminPageHeader, AdminTable, AdminActionButtons, Alert, Button } from "components/unified";
 import { usePagination, useSearch } from "hooks/use-admin";
 import { useToast } from "hooks/use-toast";
 
 // Import extracted components
-import Container from '@/components/Container/Container.jsx';
-import Button from '@/components/Button/Button.jsx';
-import Alert from '@/components/Alert/Alert.jsx';
-import AdminPageHeader from '@/components/AdminPageHeader/AdminPageHeader.jsx';
-import AdminActionButtons from '@/components/AdminActionButtons/AdminActionButtons.jsx';
-import AdminTable from '@/components/AdminTable/AdminTable.jsx';
+import Container from "@/components/Container/Container.jsx";
+import Button from "@/components/Button/Button.jsx";
+import Alert from "@/components/Alert/Alert.jsx";
+import AdminPageHeader from "@/components/AdminPageHeader/AdminPageHeader.jsx";
+import AdminActionButtons from "@/components/AdminActionButtons/AdminActionButtons.jsx";
+import AdminTable from "@/components/AdminTable/AdminTable.jsx";
 
 // --- Design System Configuration (Minimalist Light Blue) ---
-const ACCENT = '#6495ED';        // Cornflower Blue
-const PRIMARY_LIGHT = '#B0E0E6'; // Powder Blue
-const DARK_TEXT = '#333333';     // Dark Gray
-const BACKGROUND = '#FAFAFA';    // Off-White
+const ACCENT = "#6495ED"; // Cornflower Blue
+const PRIMARY_LIGHT = "#B0E0E6"; // Powder Blue
+const DARK_TEXT = "#333333"; // Dark Gray
+const BACKGROUND = "#FAFAFA"; // Off-White
 const ACCENT_10 = `${ACCENT}1A`; // 10% opacity of ACCENT for subtle backgrounds
-
 
 // --- Original Page Logic (with integrated components) ---
 
@@ -37,7 +44,7 @@ export default function AdminsPage() {
   const [filteredAdmins, setFilteredAdmins] = useState([]);
 
   // Use search hook for filtering admins
-  const { query, debouncedQuery, setQuery, clearSearch } = useSearch('', 300);
+  const { query, debouncedQuery, setQuery, clearSearch } = useSearch("", 300);
 
   // Use pagination hook
   const {
@@ -78,10 +85,11 @@ export default function AdminsPage() {
     if (!debouncedQuery.trim()) {
       setFilteredAdmins(admins);
     } else {
-      const filtered = admins.filter(admin =>
-        admin.name.toLowerCase().includes(debouncedQuery.toLowerCase()) ||
-        admin.email.toLowerCase().includes(debouncedQuery.toLowerCase()) ||
-        admin.role.toLowerCase().includes(debouncedQuery.toLowerCase())
+      const filtered = admins.filter(
+        (admin) =>
+          admin.name.toLowerCase().includes(debouncedQuery.toLowerCase()) ||
+          admin.email.toLowerCase().includes(debouncedQuery.toLowerCase()) ||
+          admin.role.toLowerCase().includes(debouncedQuery.toLowerCase()),
       );
       setFilteredAdmins(filtered);
     }
@@ -140,7 +148,8 @@ export default function AdminsPage() {
       label: "Rôle",
       render: (value) => {
         let style = {};
-        let classes = "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium";
+        let classes =
+          "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium";
         let label = value;
 
         if (value === "super_admin") {
@@ -151,10 +160,10 @@ export default function AdminsPage() {
           style = { backgroundColor: PRIMARY_LIGHT, color: DARK_TEXT };
           label = "Gestionnaire Contenu";
         } else if (value === "messages_manager") {
-          style = { backgroundColor: '#F3F4F6', color: '#4B5563' }; // bg-gray-100, text-gray-800
+          style = { backgroundColor: "#F3F4F6", color: "#4B5563" }; // bg-gray-100, text-gray-800
           label = "Gestionnaire Messages";
         } else {
-          style = { backgroundColor: '#F3F4F6', color: '#4B5563' };
+          style = { backgroundColor: "#F3F4F6", color: "#4B5563" };
         }
 
         return (
@@ -167,14 +176,19 @@ export default function AdminsPage() {
     {
       key: "createdAt",
       label: "Date de création",
-      render: (value) => new Date(value).toLocaleDateString('fr-FR')
+      render: (value) => new Date(value).toLocaleDateString("fr-FR"),
     },
     {
       key: "status",
       label: "Statut",
       render: (value) => (
-        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium`}
-          style={value === "active" ? { backgroundColor: ACCENT_10, color: ACCENT } : { backgroundColor: '#F3F4F6', color: '#4B5563' }}
+        <span
+          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium`}
+          style={
+            value === "active"
+              ? { backgroundColor: ACCENT_10, color: ACCENT }
+              : { backgroundColor: "#F3F4F6", color: "#4B5563" }
+          }
         >
           {value === "active" ? "Actif" : "Inactif"}
         </span>
@@ -189,14 +203,14 @@ export default function AdminsPage() {
       href: (item) => `/admin/admins/${item.id}/edit`,
       className: "text-accent hover:text-accent/80",
       title: "Modifier",
-      style: { color: ACCENT } // Explicit color definition
+      style: { color: ACCENT }, // Explicit color definition
     },
     {
       key: "delete",
       icon: Trash2,
       onClick: handleDelete,
       className: "text-red-600 hover:text-red-900",
-      title: "Supprimer"
+      title: "Supprimer",
     },
   ];
 
@@ -229,7 +243,10 @@ export default function AdminsPage() {
               onChange={(e) => setQuery(e.target.value)}
               // Input Styling: Accent Focus Ring
               className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:border-transparent transition duration-150 shadow-sm"
-              style={{ '--tw-ring-color': ACCENT, '--tw-focus-ring-color': ACCENT }} // Explicitly setting focus ring color
+              style={{
+                "--tw-ring-color": ACCENT,
+                "--tw-focus-ring-color": ACCENT,
+              }} // Explicitly setting focus ring color
             />
             {query && (
               <button
@@ -243,18 +260,13 @@ export default function AdminsPage() {
           </div>
           {debouncedQuery && (
             <p className="text-sm text-gray-600 mt-3 ml-2">
-              {filteredAdmins.length} résultat{filteredAdmins.length > 1 ? 's' : ''} pour "{debouncedQuery}"
+              {filteredAdmins.length} résultat
+              {filteredAdmins.length > 1 ? "s" : ""} pour "{debouncedQuery}"
             </p>
           )}
         </div>
 
-        {error && (
-          <Alert
-            type="error"
-            message={error}
-            className="mb-8"
-          />
-        )}
+        {error && <Alert type="error" message={error} className="mb-8" />}
 
         {/* Admin Table - Content Card Pattern */}
         <AdminTable
@@ -269,7 +281,9 @@ export default function AdminsPage() {
         {filteredAdmins.length > 0 && (
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 py-4 bg-white rounded-xl shadow-lg px-6 scroll-reveal">
             <div className="text-sm text-gray-700 font-medium">
-              Affichage de {startIndex + 1} à {Math.min(endIndex, filteredAdmins.length)} sur {filteredAdmins.length} administrateurs
+              Affichage de {startIndex + 1} à{" "}
+              {Math.min(endIndex, filteredAdmins.length)} sur{" "}
+              {filteredAdmins.length} administrateurs
             </div>
 
             <div className="flex items-center gap-2">
@@ -285,16 +299,20 @@ export default function AdminsPage() {
                 {getVisiblePages().map((page, index) => (
                   <button
                     key={index}
-                    onClick={() => typeof page === 'number' ? goToPage(page) : null}
-                    disabled={page === '...'}
+                    onClick={() =>
+                      typeof page === "number" ? goToPage(page) : null
+                    }
+                    disabled={page === "..."}
                     className={`px-3 py-2 text-sm font-semibold rounded-lg transition-colors duration-150 ${
                       page === currentPage
-                        ? 'text-white shadow-md'
-                        : page === '...'
-                          ? 'text-gray-500 cursor-default'
-                          : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-100'
+                        ? "text-white shadow-md"
+                        : page === "..."
+                          ? "text-gray-500 cursor-default"
+                          : "text-gray-700 bg-white border border-gray-300 hover:bg-gray-100"
                     }`}
-                    style={page === currentPage ? { backgroundColor: ACCENT } : {}}
+                    style={
+                      page === currentPage ? { backgroundColor: ACCENT } : {}
+                    }
                   >
                     {page}
                   </button>

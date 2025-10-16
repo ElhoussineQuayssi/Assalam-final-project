@@ -6,20 +6,57 @@ import { useRouter, useParams } from "next/navigation";
 import { updateProject } from "lib/actions";
 
 // Dynamically import heavy components
-const BasicInformationBlock = dynamic(() => import("@/components/blocks/BasicInformationBlock"), {
-  loading: () => <div className="bg-gray-100 p-8 rounded-xl animate-pulse"><div className="h-8 bg-gray-200 rounded mb-4"></div><div className="space-y-4"><div className="h-12 bg-gray-200 rounded"></div><div className="h-12 bg-gray-200 rounded"></div><div className="h-12 bg-gray-200 rounded"></div></div></div>
-});
+const BasicInformationBlock = dynamic(
+  () => import("@/components/blocks/BasicInformationBlock"),
+  {
+    loading: () => (
+      <div className="bg-gray-100 p-8 rounded-xl animate-pulse">
+        <div className="h-8 bg-gray-200 rounded mb-4"></div>
+        <div className="space-y-4">
+          <div className="h-12 bg-gray-200 rounded"></div>
+          <div className="h-12 bg-gray-200 rounded"></div>
+          <div className="h-12 bg-gray-200 rounded"></div>
+        </div>
+      </div>
+    ),
+  },
+);
 
-const ContentBuilderBlock = dynamic(() => import("@/components/blocks/ContentBuilderBlock"), {
-  loading: () => <div className="bg-gray-100 p-8 rounded-xl animate-pulse"><div className="h-8 bg-gray-200 rounded mb-4"></div><div className="h-32 bg-gray-200 rounded"></div></div>
-});
+const ContentBuilderBlock = dynamic(
+  () => import("@/components/blocks/ContentBuilderBlock"),
+  {
+    loading: () => (
+      <div className="bg-gray-100 p-8 rounded-xl animate-pulse">
+        <div className="h-8 bg-gray-200 rounded mb-4"></div>
+        <div className="h-32 bg-gray-200 rounded"></div>
+      </div>
+    ),
+  },
+);
 
-const SidebarBlocks = dynamic(() => import("@/components/blocks/SidebarBlocks"), {
-  loading: () => <div className="bg-gray-100 p-8 rounded-xl animate-pulse"><div className="h-8 bg-gray-200 rounded mb-4"></div><div className="space-y-4"><div className="h-12 bg-gray-200 rounded"></div><div className="h-12 bg-gray-200 rounded"></div><div className="h-32 bg-gray-200 rounded"></div></div></div>
-});
+const SidebarBlocks = dynamic(
+  () => import("@/components/blocks/SidebarBlocks"),
+  {
+    loading: () => (
+      <div className="bg-gray-100 p-8 rounded-xl animate-pulse">
+        <div className="h-8 bg-gray-200 rounded mb-4"></div>
+        <div className="space-y-4">
+          <div className="h-12 bg-gray-200 rounded"></div>
+          <div className="h-12 bg-gray-200 rounded"></div>
+          <div className="h-32 bg-gray-200 rounded"></div>
+        </div>
+      </div>
+    ),
+  },
+);
 
 const ContentBlock = dynamic(() => import("@/components/blocks/ContentBlock"), {
-  loading: () => <div className="bg-gray-50 p-4 rounded-lg animate-pulse"><div className="h-6 bg-gray-200 rounded mb-2"></div><div className="h-16 bg-gray-200 rounded"></div></div>
+  loading: () => (
+    <div className="bg-gray-50 p-4 rounded-lg animate-pulse">
+      <div className="h-6 bg-gray-200 rounded mb-2"></div>
+      <div className="h-16 bg-gray-200 rounded"></div>
+    </div>
+  ),
 });
 import {
   Plus,
@@ -107,9 +144,9 @@ export default function EditProject() {
   useEffect(() => {
     const loadProject = async () => {
       try {
-        console.log('Fetching project with ID:', id);
+        console.log("Fetching project with ID:", id);
         const response = await fetch(`/api/projects/${id}`);
-        console.log('Response status:', response.status);
+        console.log("Response status:", response.status);
 
         if (response.ok) {
           const project = await response.json();
@@ -118,7 +155,9 @@ export default function EditProject() {
             title: project.title || "",
             excerpt: project.excerpt || "",
             image: project.image || "",
-            categories: Array.isArray(project.categories) ? project.categories : [],
+            categories: Array.isArray(project.categories)
+              ? project.categories
+              : [],
             startDate: project.startDate || "",
             location: project.location || "",
             peopleHelped: project.peopleHelped || "",
@@ -128,7 +167,11 @@ export default function EditProject() {
             gallery: Array.isArray(project.gallery) ? project.gallery : [],
           }); // Debug log
         } else {
-          console.error("Failed to load project:", response.status, response.statusText);
+          console.error(
+            "Failed to load project:",
+            response.status,
+            response.statusText,
+          );
           const errorText = await response.text();
           console.error("Error response:", errorText);
           setFormState({
@@ -153,9 +196,9 @@ export default function EditProject() {
   }, [id]);
 
   const handleInputChange = (field, value) => {
-    setProjectData(prev => ({
+    setProjectData((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   };
 
@@ -163,95 +206,154 @@ export default function EditProject() {
     const newBlock = {
       id: Date.now().toString(),
       type,
-      content: type === "text" ? { heading: "", text: "" } :
-               type === "image" ? { src: "", alt: "", caption: "" } :
-               type === "list" ? { title: "", items: [""] } :
-               type === "quote" ? { text: "", author: "" } :
-               type === "gallery" ? { title: "", images: [""] } :
-               type === "video" ? { url: "", title: "", description: "" } :
-               type === "testimonial" ? { name: "", role: "", content: "", image: "" } :
-               type === "stats" ? { title: "", stats: [{ label: "", value: "" }] } :
-               type === "timeline" ? { title: "", events: [{ year: "", title: "", description: "" }] } :
-               type === "faq" ? { title: "", questions: [{ question: "", answer: "" }] } :
-               type === "cta" ? { title: "", description: "", buttonText: "", buttonUrl: "" } :
-               type === "file" ? { title: "", description: "", fileUrl: "", fileName: "" } :
-               type === "map" ? { title: "", address: "", embedUrl: "" } :
-               type === "award" ? { title: "", description: "", issuer: "", year: "", image: "" } :
-               type === "programme" ? { title: "", duration: "", modules: [], certification: "" } :
-               type === "services" ? { title: "", categories: [] } :
-               type === "sponsorship" ? { title: "", options: [] } :
-               type === "impact" ? { title: "", impacts: [], sdgs: [] } :
-               type === "team" ? { title: "", members: [] } : {},
+      content:
+        type === "text"
+          ? { heading: "", text: "" }
+          : type === "image"
+            ? { src: "", alt: "", caption: "" }
+            : type === "list"
+              ? { title: "", items: [""] }
+              : type === "quote"
+                ? { text: "", author: "" }
+                : type === "gallery"
+                  ? { title: "", images: [""] }
+                  : type === "video"
+                    ? { url: "", title: "", description: "" }
+                    : type === "testimonial"
+                      ? { name: "", role: "", content: "", image: "" }
+                      : type === "stats"
+                        ? { title: "", stats: [{ label: "", value: "" }] }
+                        : type === "timeline"
+                          ? {
+                              title: "",
+                              events: [
+                                { year: "", title: "", description: "" },
+                              ],
+                            }
+                          : type === "faq"
+                            ? {
+                                title: "",
+                                questions: [{ question: "", answer: "" }],
+                              }
+                            : type === "cta"
+                              ? {
+                                  title: "",
+                                  description: "",
+                                  buttonText: "",
+                                  buttonUrl: "",
+                                }
+                              : type === "file"
+                                ? {
+                                    title: "",
+                                    description: "",
+                                    fileUrl: "",
+                                    fileName: "",
+                                  }
+                                : type === "map"
+                                  ? { title: "", address: "", embedUrl: "" }
+                                  : type === "award"
+                                    ? {
+                                        title: "",
+                                        description: "",
+                                        issuer: "",
+                                        year: "",
+                                        image: "",
+                                      }
+                                    : type === "programme"
+                                      ? {
+                                          title: "",
+                                          duration: "",
+                                          modules: [],
+                                          certification: "",
+                                        }
+                                      : type === "services"
+                                        ? { title: "", categories: [] }
+                                        : type === "sponsorship"
+                                          ? { title: "", options: [] }
+                                          : type === "impact"
+                                            ? {
+                                                title: "",
+                                                impacts: [],
+                                                sdgs: [],
+                                              }
+                                            : type === "team"
+                                              ? { title: "", members: [] }
+                                              : {},
     };
-    setProjectData(prev => ({
+    setProjectData((prev) => ({
       ...prev,
-      content: [...prev.content, newBlock]
+      content: [...prev.content, newBlock],
     }));
   };
 
   const updateContentBlock = (id, updates) => {
-    setProjectData(prev => ({
+    setProjectData((prev) => ({
       ...prev,
-      content: prev.content.map(block =>
-        block.id === id ? { ...block, content: { ...block.content, ...updates } } : block
-      )
+      content: prev.content.map((block) =>
+        block.id === id
+          ? { ...block, content: { ...block.content, ...updates } }
+          : block,
+      ),
     }));
   };
 
   const removeContentBlock = (id) => {
-    setProjectData(prev => ({
+    setProjectData((prev) => ({
       ...prev,
-      content: prev.content.filter(block => block.id !== id)
+      content: prev.content.filter((block) => block.id !== id),
     }));
   };
 
   const addGoal = () => {
     if (newGoal.trim()) {
-      setProjectData(prev => ({
+      setProjectData((prev) => ({
         ...prev,
-        goals: [...prev.goals, newGoal.trim()]
+        goals: [...prev.goals, newGoal.trim()],
       }));
       setNewGoal("");
     }
   };
 
   const removeGoal = (index) => {
-    setProjectData(prev => ({
+    setProjectData((prev) => ({
       ...prev,
-      goals: prev.goals.filter((_, i) => i !== index)
+      goals: prev.goals.filter((_, i) => i !== index),
     }));
   };
 
   const addCategory = () => {
-    if (newCategory.trim() && !projectData.categories.includes(newCategory.trim())) {
-      setProjectData(prev => ({
+    if (
+      newCategory.trim() &&
+      !projectData.categories.includes(newCategory.trim())
+    ) {
+      setProjectData((prev) => ({
         ...prev,
-        categories: [...prev.categories, newCategory.trim()]
+        categories: [...prev.categories, newCategory.trim()],
       }));
       setNewCategory("");
     }
   };
 
   const removeCategory = (category) => {
-    setProjectData(prev => ({
+    setProjectData((prev) => ({
       ...prev,
-      categories: prev.categories.filter(c => c !== category)
+      categories: prev.categories.filter((c) => c !== category),
     }));
   };
 
   const addImage = (imageUrl) => {
     if (imageUrl.trim()) {
-      setProjectData(prev => ({
+      setProjectData((prev) => ({
         ...prev,
-        gallery: [...prev.gallery, imageUrl.trim()]
+        gallery: [...prev.gallery, imageUrl.trim()],
       }));
     }
   };
 
   const removeImage = (index) => {
-    setProjectData(prev => ({
+    setProjectData((prev) => ({
       ...prev,
-      gallery: prev.gallery.filter((_, i) => i !== index)
+      gallery: prev.gallery.filter((_, i) => i !== index),
     }));
   };
 
@@ -274,9 +376,9 @@ export default function EditProject() {
     newContent.splice(draggedItem, 1);
     newContent.splice(dropIndex, 0, draggedContent);
 
-    setProjectData(prev => ({
+    setProjectData((prev) => ({
       ...prev,
-      content: newContent
+      content: newContent,
     }));
     setDraggedItem(null);
   };
@@ -288,7 +390,11 @@ export default function EditProject() {
     try {
       const result = await updateProject(id, projectData);
       if (result.success) {
-        setFormState({ ...formState, status: "success", message: "Projet mis à jour avec succès!" });
+        setFormState({
+          ...formState,
+          status: "success",
+          message: "Projet mis à jour avec succès!",
+        });
         setTimeout(() => {
           router.push("/admin/projects");
         }, 2000);
@@ -296,7 +402,8 @@ export default function EditProject() {
         setFormState({
           ...formState,
           status: "error",
-          message: result.message || "Une erreur s'est produite. Veuillez réessayer.",
+          message:
+            result.message || "Une erreur s'est produite. Veuillez réessayer.",
         });
       }
     } catch (error) {
@@ -342,7 +449,7 @@ export default function EditProject() {
           {/* H2 Typography Style for Title */}
           <h1
             className="text-4xl font-bold text-dark-text pb-2 mb-1"
-            style={{ borderBottom: '3px solid var(--color-accent)' }}
+            style={{ borderBottom: "3px solid var(--color-accent)" }}
           >
             Modifier le Projet
           </h1>

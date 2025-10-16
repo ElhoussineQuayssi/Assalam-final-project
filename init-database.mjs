@@ -1,8 +1,8 @@
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import Database from 'better-sqlite3';
-import bcrypt from 'bcryptjs';
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+import Database from "better-sqlite3";
+import bcrypt from "bcryptjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -86,11 +86,11 @@ async function hashPassword(password) {
 }
 
 // Read projects data
-const projectsPath = path.join(__dirname, 'data', 'projects.json');
-const projectsData = JSON.parse(fs.readFileSync(projectsPath, 'utf8'));
+const projectsPath = path.join(__dirname, "data", "projects.json");
+const projectsData = JSON.parse(fs.readFileSync(projectsPath, "utf8"));
 
 // Initialize database
-const dbPath = path.join(__dirname, 'data.sqlite');
+const dbPath = path.join(__dirname, "data.sqlite");
 const db = new Database(dbPath);
 
 // Run schema
@@ -124,17 +124,17 @@ for (const project of projectsData) {
       project.slug,
       project.title,
       project.excerpt,
-      project.image || '',
+      project.image || "",
       JSON.stringify(project.categories || []),
-      project.startDate || '',
-      project.location || '',
-      project.peopleHelped || '',
-      project.status || 'Actif',
+      project.startDate || "",
+      project.location || "",
+      project.peopleHelped || "",
+      project.status || "Actif",
       JSON.stringify(project.content || []),
       JSON.stringify(project.goals || []),
       JSON.stringify(project.gallery || []),
       project.createdAt || new Date().toISOString(),
-      project.updatedAt || new Date().toISOString()
+      project.updatedAt || new Date().toISOString(),
     );
     insertedCount++;
   } catch (error) {

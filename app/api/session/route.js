@@ -13,9 +13,15 @@ export async function POST() {
     if (result.success) {
       return NextResponse.json({ success: true });
     } else {
-      return NextResponse.json({ success: false, message: "Logout failed" }, { status: 500 });
+      return NextResponse.json(
+        { success: false, message: "Logout failed" },
+        { status: 500 },
+      );
     }
   } catch {
-    return NextResponse.json({ success: false, message: "Logout failed" }, { status: 500 });
+    return NextResponse.json(
+      { success: false, message: "Logout failed" },
+      { status: 500 },
+    );
   }
 }

@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback } from 'react';
-import { getSession } from '../lib/auth';
+import { useState, useEffect, useCallback } from "react";
+import { getSession } from "../lib/auth";
 
 // Hook for authentication state management
 export function useAuth() {
@@ -23,14 +23,14 @@ export function useAuth() {
 
   const logout = useCallback(async () => {
     try {
-      const response = await fetch('/api/session', { method: 'POST' });
+      const response = await fetch("/api/session", { method: "POST" });
       if (response.ok) {
         setUser(null);
         return true;
       }
       return false;
     } catch (error) {
-      console.error('Logout error:', error);
+      console.error("Logout error:", error);
       return false;
     }
   }, []);
@@ -60,8 +60,8 @@ export function useProjects() {
     setError(null);
 
     try {
-      const response = await fetch('/api/projects');
-      if (!response.ok) throw new Error('Failed to fetch projects');
+      const response = await fetch("/api/projects");
+      if (!response.ok) throw new Error("Failed to fetch projects");
 
       const data = await response.json();
       setProjects(data);
@@ -72,57 +72,66 @@ export function useProjects() {
     }
   }, []);
 
-  const createProject = useCallback(async (projectData) => {
-    try {
-      const response = await fetch('/api/projects', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(projectData),
-      });
+  const createProject = useCallback(
+    async (projectData) => {
+      try {
+        const response = await fetch("/api/projects", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(projectData),
+        });
 
-      if (response.ok) {
-        await fetchProjects(); // Refresh the list
-        return { success: true };
+        if (response.ok) {
+          await fetchProjects(); // Refresh the list
+          return { success: true };
+        }
+        return { success: false, error: "Failed to create project" };
+      } catch (error) {
+        return { success: false, error: "Network error" };
       }
-      return { success: false, error: 'Failed to create project' };
-    } catch (error) {
-      return { success: false, error: 'Network error' };
-    }
-  }, [fetchProjects]);
+    },
+    [fetchProjects],
+  );
 
-  const updateProject = useCallback(async (id, projectData) => {
-    try {
-      const response = await fetch(`/api/projects/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(projectData),
-      });
+  const updateProject = useCallback(
+    async (id, projectData) => {
+      try {
+        const response = await fetch(`/api/projects/${id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(projectData),
+        });
 
-      if (response.ok) {
-        await fetchProjects(); // Refresh the list
-        return { success: true };
+        if (response.ok) {
+          await fetchProjects(); // Refresh the list
+          return { success: true };
+        }
+        return { success: false, error: "Failed to update project" };
+      } catch (error) {
+        return { success: false, error: "Network error" };
       }
-      return { success: false, error: 'Failed to update project' };
-    } catch (error) {
-      return { success: false, error: 'Network error' };
-    }
-  }, [fetchProjects]);
+    },
+    [fetchProjects],
+  );
 
-  const deleteProject = useCallback(async (id) => {
-    try {
-      const response = await fetch(`/api/projects/${id}`, {
-        method: 'DELETE',
-      });
+  const deleteProject = useCallback(
+    async (id) => {
+      try {
+        const response = await fetch(`/api/projects/${id}`, {
+          method: "DELETE",
+        });
 
-      if (response.ok) {
-        await fetchProjects(); // Refresh the list
-        return { success: true };
+        if (response.ok) {
+          await fetchProjects(); // Refresh the list
+          return { success: true };
+        }
+        return { success: false, error: "Failed to delete project" };
+      } catch (error) {
+        return { success: false, error: "Network error" };
       }
-      return { success: false, error: 'Failed to delete project' };
-    } catch (error) {
-      return { success: false, error: 'Network error' };
-    }
-  }, [fetchProjects]);
+    },
+    [fetchProjects],
+  );
 
   useEffect(() => {
     fetchProjects();
@@ -150,9 +159,9 @@ export function useBlogs() {
     setError(null);
 
     try {
-      const params = category ? `?category=${category}` : '';
+      const params = category ? `?category=${category}` : "";
       const response = await fetch(`/api/blogs${params}`);
-      if (!response.ok) throw new Error('Failed to fetch blogs');
+      if (!response.ok) throw new Error("Failed to fetch blogs");
 
       const data = await response.json();
       setBlogs(data);
@@ -183,9 +192,9 @@ export function useMessages() {
     setError(null);
 
     try {
-      const params = type ? `?type=${type}` : '';
+      const params = type ? `?type=${type}` : "";
       const response = await fetch(`/api/messages${params}`);
-      if (!response.ok) throw new Error('Failed to fetch messages');
+      if (!response.ok) throw new Error("Failed to fetch messages");
 
       const data = await response.json();
       setMessages(data.messages);
@@ -200,19 +209,17 @@ export function useMessages() {
   const markAsRead = useCallback(async (id) => {
     try {
       const response = await fetch(`/api/messages/${id}/read`, {
-        method: 'POST',
+        method: "POST",
       });
 
       if (response.ok) {
-        setMessages(prev =>
-          prev.map(msg =>
-            msg.id === id ? { ...msg, read: true } : msg
-          )
+        setMessages((prev) =>
+          prev.map((msg) => (msg.id === id ? { ...msg, read: true } : msg)),
         );
-        setUnreadCount(prev => Math.max(0, prev - 1));
+        setUnreadCount((prev) => Math.max(0, prev - 1));
       }
     } catch (error) {
-      console.error('Error marking message as read:', error);
+      console.error("Error marking message as read:", error);
     }
   }, []);
 

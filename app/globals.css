@@ -1,17 +1,17 @@
-@import '../styles/design-tokens.css';
+@import "../styles/design-tokens.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* Design System Variables: Minimalist Light Blue */
 :root {
-  --color-primary: #B0E0E6; /* Powder Blue - Primary color */
-  --color-accent: #6495ED; /* Cornflower Blue - Accent color */
+  --color-primary: #b0e0e6; /* Powder Blue - Primary color */
+  --color-accent: #6495ed; /* Cornflower Blue - Accent color */
   --color-text: #333333; /* Dark Gray - Text color */
-  --color-background: #FAFAFA; /* Off-White - Background color */
-  --color-primary-light: #B0E0E6; /* Light primary for backgrounds */
-  --color-surface: #FFFFFF; /* White for card surfaces */
-  --color-border: #E5E7EB; /* Light border color */
+  --color-background: #fafafa; /* Off-White - Background color */
+  --color-primary-light: #b0e0e6; /* Light primary for backgrounds */
+  --color-surface: #ffffff; /* White for card surfaces */
+  --color-border: #e5e7eb; /* Light border color */
   --font-poppins: "Poppins", sans-serif;
 }
 
@@ -32,7 +32,7 @@ body {
 /* Styles pour sections avec pattern de fond - Updated for Minimalist Light Blue consistency */
 .moroccan-pattern {
   /* FIX: Use design system color for background */
-  background-color: var(--color-primary-light); 
+  background-color: var(--color-primary-light);
   /* FIX: Use ACCENT color (#6495ED) at low opacity for the SVG fill */
   background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236495ED' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
@@ -51,7 +51,10 @@ body {
 .btn-secondary {
   background-color: white; /* bg-white */
   color: var(--color-accent); /* text-accent */
-  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+  transition:
+    background-color 0.3s,
+    color 0.3s,
+    box-shadow 0.3s;
   border: 2px solid transparent; /* Ensure border compatibility */
 }
 

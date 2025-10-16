@@ -17,23 +17,29 @@ import { Loader2 } from "lucide-react";
  */
 const AdminLayout = ({ children }) => {
   // Design system colors from foundation-blueprint.html
-  const ACCENT = '#6495ED'; // Cornflower Blue - Vibrant Accent (--color-accent)
-  const BACKGROUND = '#FAFAFA'; // Off-White/Light Gray Background (--color-background)
+  const ACCENT = "#6495ED"; // Cornflower Blue - Vibrant Accent (--color-accent)
+  const BACKGROUND = "#FAFAFA"; // Off-White/Light Gray Background (--color-background)
 
   const { user, loading, isAuthenticated } = useAuth();
   const { toast } = useToast();
   const router = useRouter();
 
   // User preferences with localStorage persistence
-  const [theme, setTheme] = useLocalStorage('adminTheme', 'light');
+  const [theme, setTheme] = useLocalStorage("adminTheme", "light");
 
   // Redirect to login if not authenticated (but only if we're not already on login page)
   useEffect(() => {
-    if (!loading && !isAuthenticated && typeof window !== 'undefined' && !window.location.pathname.includes('/login')) {
+    if (
+      !loading &&
+      !isAuthenticated &&
+      typeof window !== "undefined" &&
+      !window.location.pathname.includes("/login")
+    ) {
       // Design system reference: destructive toast variant for errors
       toast({
         title: "Accès refusé",
-        description: "Vous devez vous connecter pour accéder à l'administration.",
+        description:
+          "Vous devez vous connecter pour accéder à l'administration.",
         variant: "destructive",
       });
       router.push("/admin/login");
@@ -42,17 +48,21 @@ const AdminLayout = ({ children }) => {
 
   // Apply theme to document
   useEffect(() => {
-    document.documentElement.classList.remove('light', 'dark');
+    document.documentElement.classList.remove("light", "dark");
     document.documentElement.classList.add(theme);
   }, [theme]);
 
   // Check if we're on the login page
-  const isLoginPage = typeof window !== 'undefined' && window.location.pathname === '/admin/login';
+  const isLoginPage =
+    typeof window !== "undefined" &&
+    window.location.pathname === "/admin/login";
 
   if (loading) {
     return (
       // Design system reference: background color and accent spinner
-      <div className={`flex items-center justify-center min-h-screen bg-background scroll-reveal`}>
+      <div
+        className={`flex items-center justify-center min-h-screen bg-background scroll-reveal`}
+      >
         {/* Spinner using Accent Blue color from design system */}
         <Loader2
           className={`h-12 w-12 animate-spin text-accent`}

@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from "react";
 
 // Hook for localStorage with SSR support
 export function useLocalStorage(key, initialValue) {
   const [storedValue, setStoredValue] = useState(() => {
-    if (typeof window === 'undefined') return initialValue;
+    if (typeof window === "undefined") return initialValue;
 
     try {
       const item = window.localStorage.getItem(key);
@@ -14,16 +14,19 @@ export function useLocalStorage(key, initialValue) {
     }
   });
 
-  const setValue = useCallback((value) => {
-    try {
-      setStoredValue(value);
-      if (typeof window !== 'undefined') {
-        window.localStorage.setItem(key, JSON.stringify(value));
+  const setValue = useCallback(
+    (value) => {
+      try {
+        setStoredValue(value);
+        if (typeof window !== "undefined") {
+          window.localStorage.setItem(key, JSON.stringify(value));
+        }
+      } catch (error) {
+        console.warn(`Error setting localStorage key "${key}":`, error);
       }
-    } catch (error) {
-      console.warn(`Error setting localStorage key "${key}":`, error);
-    }
-  }, [key]);
+    },
+    [key],
+  );
 
   return [storedValue, setValue];
 }
@@ -40,7 +43,7 @@ export function useApi(url, options) {
 
     try {
       const response = await fetch(url, options);
-      if (!response.ok) throw new Error('API request failed');
+      if (!response.ok) throw new Error("API request failed");
 
       const result = await response.json();
       setData(result);
@@ -80,38 +83,44 @@ export function useForm(initialValues, validate) {
   const [touched, setTouched] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleChange = useCallback((field, value) => {
-    setValues(prev => ({ ...prev, [field]: value }));
-    if (errors[field]) {
-      setErrors(prev => ({ ...prev, [field]: null }));
-    }
-  }, [errors]);
+  const handleChange = useCallback(
+    (field, value) => {
+      setValues((prev) => ({ ...prev, [field]: value }));
+      if (errors[field]) {
+        setErrors((prev) => ({ ...prev, [field]: null }));
+      }
+    },
+    [errors],
+  );
 
   const handleBlur = useCallback((field) => {
-    setTouched(prev => ({ ...prev, [field]: true }));
+    setTouched((prev) => ({ ...prev, [field]: true }));
   }, []);
 
-  const handleSubmit = useCallback(async (onSubmit) => {
-    setIsSubmitting(true);
+  const handleSubmit = useCallback(
+    async (onSubmit) => {
+      setIsSubmitting(true);
 
-    if (validate) {
-      const validationErrors = validate(values);
-      setErrors(validationErrors);
+      if (validate) {
+        const validationErrors = validate(values);
+        setErrors(validationErrors);
 
-      if (Object.keys(validationErrors).length > 0) {
-        setIsSubmitting(false);
-        return;
+        if (Object.keys(validationErrors).length > 0) {
+          setIsSubmitting(false);
+          return;
+        }
       }
-    }
 
-    try {
-      await onSubmit(values);
-    } catch (error) {
-      console.error('Form submission error:', error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  }, [values, validate]);
+      try {
+        await onSubmit(values);
+      } catch (error) {
+        console.error("Form submission error:", error);
+      } finally {
+        setIsSubmitting(false);
+      }
+    },
+    [values, validate],
+  );
 
   return {
     values,
@@ -140,9 +149,9 @@ export function useIntersectionObserver(ref, options) {
       },
       {
         threshold: 0.1,
-        rootMargin: '50px',
+        rootMargin: "50px",
         ...options,
-      }
+      },
     );
 
     observer.observe(element);
@@ -160,7 +169,7 @@ export function useMediaQuery(query) {
   const [matches, setMatches] = useState(false);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     const media = window.matchMedia(query);
     setMatches(media.matches);
@@ -169,8 +178,8 @@ export function useMediaQuery(query) {
       setMatches(event.matches);
     };
 
-    media.addEventListener('change', listener);
-    return () => media.removeEventListener('change', listener);
+    media.addEventListener("change", listener);
+    return () => media.removeEventListener("change", listener);
   }, [query]);
 
   return matches;

@@ -2,7 +2,7 @@ const AdminLoginForm = ({ error, isLoading, onSubmit }) => (
   <div className="min-h-screen flex items-center justify-center p-4">
     <div className="bg-white rounded-2xl shadow-2xl p-10 w-full max-w-sm scroll-reveal">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold mb-1" style={{ color: '#333333' }}>
+        <h1 className="text-3xl font-bold mb-1" style={{ color: "#333333" }}>
           Accès Administration
         </h1>
         <p className="text-gray-600">Connectez-vous pour continuer</p>
@@ -13,7 +13,7 @@ const AdminLoginForm = ({ error, isLoading, onSubmit }) => (
           <label
             className="block text-sm font-medium mb-1"
             htmlFor="email"
-            style={{ color: '#333333' }}
+            style={{ color: "#333333" }}
           >
             Email
           </label>
@@ -31,7 +31,7 @@ const AdminLoginForm = ({ error, isLoading, onSubmit }) => (
           <label
             className="block text-sm font-medium mb-1"
             htmlFor="password"
-            style={{ color: '#333333' }}
+            style={{ color: "#333333" }}
           >
             Mot de passe
           </label>
@@ -50,14 +50,16 @@ const AdminLoginForm = ({ error, isLoading, onSubmit }) => (
             type="submit"
             disabled={isLoading}
             className="w-full text-white font-bold py-4 px-8 rounded-full transition-all duration-300 transform shadow-xl hover:scale-[1.01] hover:shadow-2xl disabled:opacity-70 disabled:cursor-not-allowed"
-            style={{ backgroundColor: '#6495ED' }}
+            style={{ backgroundColor: "#6495ED" }}
           >
             {isLoading ? (
               <span className="flex items-center justify-center gap-2">
                 <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
                 Connexion...
               </span>
-            ) : "Se connecter"}
+            ) : (
+              "Se connecter"
+            )}
           </button>
         </div>
       </form>

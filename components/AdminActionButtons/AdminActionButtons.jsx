@@ -1,23 +1,21 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 const AdminActionButtons = ({ item, actions }) => (
   <div className="flex justify-end space-x-2">
     {actions.map((action) => {
       const Icon = action.icon;
-      const handleClick = action.onClick
-        ? () => action.onClick(item.id)
-        : null;
+      const handleClick = action.onClick ? () => action.onClick(item.id) : null;
 
       const linkProps = action.href ? { href: action.href(item) } : {};
-      const Tag = action.href ? Link : 'button';
+      const Tag = action.href ? Link : "button";
 
       let iconStyle = {};
-      if (action.key === 'view') {
-        iconStyle.color = 'gray';
-      } else if (action.key === 'edit') {
-        iconStyle.color = '#6495ED';
-      } else if (action.key === 'delete') {
-        iconStyle.color = '#DC2626';
+      if (action.key === "view") {
+        iconStyle.color = "gray";
+      } else if (action.key === "edit") {
+        iconStyle.color = "#6495ED";
+      } else if (action.key === "delete") {
+        iconStyle.color = "#DC2626";
       }
 
       return (

@@ -20,36 +20,69 @@ import { useToast } from "hooks/use-toast";
 import Alert from "@/components/Alert/Alert";
 
 // Dynamically import heavy components with loading spinners
-const LoadingSpinner = dynamic(() => import("@/components/LoadingSpinner/LoadingSpinner"), {
-  loading: () => <div className="flex justify-center items-center h-32"><Loader2 className="h-8 w-8 animate-spin" style={{ color: '#6495ED' }} /></div>
-});
+const LoadingSpinner = dynamic(
+  () => import("@/components/LoadingSpinner/LoadingSpinner"),
+  {
+    loading: () => (
+      <div className="flex justify-center items-center h-32">
+        <Loader2
+          className="h-8 w-8 animate-spin"
+          style={{ color: "#6495ED" }}
+        />
+      </div>
+    ),
+  },
+);
 
-const AdminPageHeader = dynamic(() => import("@/components/AdminPageHeader/AdminPageHeader"), {
-  loading: () => <div className="flex justify-center py-8"><Loader2 className="h-8 w-8 animate-spin" style={{ color: '#6495ED' }} /></div>
-});
+const AdminPageHeader = dynamic(
+  () => import("@/components/AdminPageHeader/AdminPageHeader"),
+  {
+    loading: () => (
+      <div className="flex justify-center py-8">
+        <Loader2
+          className="h-8 w-8 animate-spin"
+          style={{ color: "#6495ED" }}
+        />
+      </div>
+    ),
+  },
+);
 
-const ScrollReveal = dynamic(() => import("@/components/ScrollReveal/ScrollReveal"), {
-  loading: () => null
-});
+const ScrollReveal = dynamic(
+  () => import("@/components/ScrollReveal/ScrollReveal"),
+  {
+    loading: () => null,
+  },
+);
 
-const AdminStatsCard = dynamic(() => import("@/components/AdminStatsCard/AdminStatsCard"), {
-  loading: () => <div className="bg-gray-100 p-6 rounded-2xl shadow-xl animate-pulse"><div className="h-16 bg-gray-200 rounded mb-4"></div><div className="h-8 bg-gray-200 rounded"></div></div>
-});
+const AdminStatsCard = dynamic(
+  () => import("@/components/AdminStatsCard/AdminStatsCard"),
+  {
+    loading: () => (
+      <div className="bg-gray-100 p-6 rounded-2xl shadow-xl animate-pulse">
+        <div className="h-16 bg-gray-200 rounded mb-4"></div>
+        <div className="h-8 bg-gray-200 rounded"></div>
+      </div>
+    ),
+  },
+);
 // --- Design System Configuration ---
-const ACCENT = '#6495ED';        // Cornflower Blue
-const PRIMARY_LIGHT = '#B0E0E6'; // Powder Blue
-const DARK_TEXT = '#333333';     // Dark Gray
-const BACKGROUND = '#FAFAFA';    // Off-White
-
-
-
+const ACCENT = "#6495ED"; // Cornflower Blue
+const PRIMARY_LIGHT = "#B0E0E6"; // Powder Blue
+const DARK_TEXT = "#333333"; // Dark Gray
+const BACKGROUND = "#FAFAFA"; // Off-White
 
 export default function Dashboard() {
   const router = useRouter();
   const { toast } = useToast();
 
   const { user, loading: authLoading, logout, isAuthenticated } = useAuth();
-  const { stats, loading: statsLoading, error: statsError, refresh: refreshStats } = useStats();
+  const {
+    stats,
+    loading: statsLoading,
+    error: statsError,
+    refresh: refreshStats,
+  } = useStats();
 
   if (!authLoading && !isAuthenticated) {
     router.push("/admin/login");
@@ -83,7 +116,9 @@ export default function Dashboard() {
 
   if (statsError) {
     return (
-      <div className={`bg-[${BACKGROUND}] min-h-screen flex justify-center items-start pt-20`}>
+      <div
+        className={`bg-[${BACKGROUND}] min-h-screen flex justify-center items-start pt-20`}
+      >
         <Alert message={statsError} />
       </div>
     );
@@ -91,7 +126,9 @@ export default function Dashboard() {
 
   if (authLoading || statsLoading || !stats || !user) {
     return (
-      <div className={`bg-[${BACKGROUND}] min-h-screen flex justify-center items-center`}>
+      <div
+        className={`bg-[${BACKGROUND}] min-h-screen flex justify-center items-center`}
+      >
         <LoadingSpinner size="large" />
       </div>
     );
@@ -215,7 +252,9 @@ export default function Dashboard() {
                       >
                         Articles récents
                       </h2>
-                      <p className="text-lg text-gray-600 mt-4">Dernières publications</p>
+                      <p className="text-lg text-gray-600 mt-4">
+                        Dernières publications
+                      </p>
                     </div>
                     <Link
                       href="/admin/blogs"
@@ -232,16 +271,26 @@ export default function Dashboard() {
                         {/* Hover Lift Card for List Item */}
                         <div className="card-lift bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:scale-[1.01]">
                           <div className="flex items-center">
-                            <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: PRIMARY_LIGHT }}>
-                              <FileText className="h-6 w-6" style={{ color: ACCENT }} />
+                            <div
+                              className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                              style={{ backgroundColor: PRIMARY_LIGHT }}
+                            >
+                              <FileText
+                                className="h-6 w-6"
+                                style={{ color: ACCENT }}
+                              />
                             </div>
                             <div className="ml-5 flex-1">
-                              <h3 className={`font-semibold text-[${DARK_TEXT}] mb-1`}>
+                              <h3
+                                className={`font-semibold text-[${DARK_TEXT}] mb-1`}
+                              >
                                 {blog.title}
                               </h3>
                               <div className="flex justify-between items-center text-sm">
                                 <p className="text-gray-600">{blog.date}</p>
-                                <div className={`flex items-center text-gray-700 bg-[${PRIMARY_LIGHT}/50] px-3 py-1 rounded-full`}>
+                                <div
+                                  className={`flex items-center text-gray-700 bg-[${PRIMARY_LIGHT}/50] px-3 py-1 rounded-full`}
+                                >
                                   <Eye className="h-4 w-4 mr-1" />
                                   {blog.views}
                                 </div>
@@ -267,7 +316,9 @@ export default function Dashboard() {
                       >
                         Projets récents
                       </h2>
-                      <p className="text-lg text-gray-600 mt-4">Derniers projets ajoutés</p>
+                      <p className="text-lg text-gray-600 mt-4">
+                        Derniers projets ajoutés
+                      </p>
                     </div>
                     <Link
                       href="/admin/projects"
@@ -280,24 +331,31 @@ export default function Dashboard() {
 
                   <div className="space-y-6">
                     {stats.recentProjects?.map((project, index) => (
-                      <ScrollReveal
-                        key={project.id}
-                        delay={index * 0.1}
-                      >
+                      <ScrollReveal key={project.id} delay={index * 0.1}>
                         {/* Hover Lift Card for List Item */}
                         <div className="card-lift bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:scale-[1.01]">
                           <div className="flex items-center">
-                            <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: PRIMARY_LIGHT }}>
-                              <FolderOpen className="h-6 w-6" style={{ color: ACCENT }} />
+                            <div
+                              className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                              style={{ backgroundColor: PRIMARY_LIGHT }}
+                            >
+                              <FolderOpen
+                                className="h-6 w-6"
+                                style={{ color: ACCENT }}
+                              />
                             </div>
                             <div className="ml-5 flex-1">
-                              <h3 className={`font-semibold text-[${DARK_TEXT}] mb-1`}>
+                              <h3
+                                className={`font-semibold text-[${DARK_TEXT}] mb-1`}
+                              >
                                 {project.title}
                               </h3>
                               <div className="flex justify-between items-center text-sm">
                                 <p className="text-gray-600">{project.date}</p>
                                 {project.peopleHelped && (
-                                  <div className={`flex items-center text-gray-700 bg-[${PRIMARY_LIGHT}/50] px-3 py-1 rounded-full`}>
+                                  <div
+                                    className={`flex items-center text-gray-700 bg-[${PRIMARY_LIGHT}/50] px-3 py-1 rounded-full`}
+                                  >
                                     <Users className="h-4 w-4 mr-1" />
                                     {project.peopleHelped}
                                   </div>
@@ -331,7 +389,9 @@ export default function Dashboard() {
                     >
                       Messages récents
                     </h2>
-                    <p className="text-lg text-gray-600 mt-4">Derniers messages reçus</p>
+                    <p className="text-lg text-gray-600 mt-4">
+                      Derniers messages reçus
+                    </p>
                   </div>
                   <Link
                     href="/admin/messages"
@@ -344,25 +404,36 @@ export default function Dashboard() {
 
                 <div className="space-y-6">
                   {stats.recentMessages.map((message, index) => (
-                    <ScrollReveal
-                      key={message.id}
-                      delay={index * 0.1}
-                    >
+                    <ScrollReveal key={message.id} delay={index * 0.1}>
                       {/* Hover Lift Card for List Item */}
                       <div className="card-lift bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:scale-[1.01]">
                         <div className="flex items-start">
-                          <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: PRIMARY_LIGHT }}>
+                          <div
+                            className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                            style={{ backgroundColor: PRIMARY_LIGHT }}
+                          >
                             {/* Icon based on message type */}
                             {message.type === "donation" ? (
-                              <ThumbsUp className="h-6 w-6" style={{ color: ACCENT }} />
+                              <ThumbsUp
+                                className="h-6 w-6"
+                                style={{ color: ACCENT }}
+                              />
                             ) : message.type === "volunteer" ? (
-                              <Users className="h-6 w-6" style={{ color: ACCENT }} />
+                              <Users
+                                className="h-6 w-6"
+                                style={{ color: ACCENT }}
+                              />
                             ) : (
-                              <Mail className="h-6 w-6" style={{ color: ACCENT }} />
+                              <Mail
+                                className="h-6 w-6"
+                                style={{ color: ACCENT }}
+                              />
                             )}
                           </div>
                           <div className="ml-5 flex-1">
-                            <h3 className={`font-semibold text-[${DARK_TEXT}] mb-1`}>
+                            <h3
+                              className={`font-semibold text-[${DARK_TEXT}] mb-1`}
+                            >
                               {message.name}
                             </h3>
                             <p className="text-sm text-gray-600 line-clamp-1 mb-3">
@@ -371,7 +442,9 @@ export default function Dashboard() {
                             <div className="flex justify-between items-center text-sm">
                               <p className="text-gray-600">{message.date}</p>
                               {/* Accent Badge */}
-                              <span className={`text-xs px-3 py-1 rounded-full font-medium bg-[${PRIMARY_LIGHT}/70] text-[${ACCENT}]`}>
+                              <span
+                                className={`text-xs px-3 py-1 rounded-full font-medium bg-[${PRIMARY_LIGHT}/70] text-[${ACCENT}]`}
+                              >
                                 {message.type === "donation"
                                   ? "Don"
                                   : message.type === "volunteer"
