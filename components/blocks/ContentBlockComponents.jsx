@@ -467,8 +467,6 @@ export function FaqBlock({ block, updateContentBlock, removeContentBlock }) {
   );
 }
 
-import { Trash2, Plus, Move } from "lucide-react";
-
 export function PartnerBlock({
   block,
   updateContentBlock,

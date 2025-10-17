@@ -43,6 +43,7 @@ export default function NewBlog() {
     shareOnSocial: true,
   });
   const [content, setContent] = useState("");
+  const [imagePreview, setImagePreview] = useState(null);
 
   // Helper style object for inputs to apply consistent theming
   const inputStyle = {
@@ -51,6 +52,16 @@ export default function NewBlog() {
     "--tw-ring-color": ACCENT,
     "--tw-focus-ring-color": ACCENT,
     "--tw-border-color": ACCENT,
+  };
+
+  // Handle image selection and preview
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => setImagePreview(e.target.result);
+      reader.readAsDataURL(file);
+    }
   };
 
   // --- Original Form Submission Logic Preserved ---
@@ -279,11 +290,23 @@ export default function NewBlog() {
                 >
                   Image principale
                 </label>
+                {/* Image Preview */}
+                {imagePreview && (
+                  <div className="mb-4">
+                    <img
+                      src={imagePreview}
+                      alt="Aperçu de l'image"
+                      className="w-full h-32 object-cover rounded-lg border-2 border-gray-200"
+                    />
+                    <p className="text-sm text-gray-600 mt-1">Aperçu de l'image</p>
+                  </div>
+                )}
                 <input
                   type="file"
                   id="image"
                   name="image"
                   accept="image/*"
+                  onChange={handleImageChange}
                   // Tailwind file input styling is tricky, using default but ensuring focus style is correct
                   className="w-full file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gray-100 hover:file:bg-gray-200 p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition duration-150 shadow-sm"
                   style={{

@@ -1,10 +1,6 @@
 "use client";
 
-import dynamic from "next/dynamic";
-
-const motion = dynamic(() =>
-  import("framer-motion").then((mod) => mod.motion)
-);
+import { motion } from "framer-motion";
 
 // --- DESIGN SYSTEM MAPPING ---
 // Accent: #6495ED (Cornflower Blue)

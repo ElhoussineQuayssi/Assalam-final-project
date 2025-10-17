@@ -37,6 +37,7 @@ import {
   TimelineTitle,
   TimelineDescription,
 } from "components/Timeline/Timeline.jsx";
+import { Search, Lightbulb, Wrench, BarChart } from "lucide-react";
 
 // Check if HeroSection component exists, if not create import
 // Based on memory, HeroSection doesn't exist, so we need to create it
@@ -125,23 +126,23 @@ export default function Home() {
   // Original project data maintained
   const projects = [
     {
-      title: "Rayhana assalam",
+      title: "Rihana As Salam",
       excerpt: "Programme de soutien pour les femmes en difficulté.",
       image: "/projects/rayhana.jpg",
-      link: "/projects/rayhanat-assalam",
+      link: "/projects/rihana-as-salam",
     },
     {
-      title: "Kafala",
+      title: "Programme Kafala",
       excerpt: "Programme de parrainage pour les orphelins.",
       image: "/projects/kafala.jpg",
-      link: "/projects/kafala",
+      link: "/projects/programme-kafala",
     },
     {
-      title: "Imtiaz",
+      title: "Programme Imtiaz",
       excerpt:
         "Parrainage des étudiants brillants issus de milieux défavorisés.",
       image: "/projects/imtiaz.jpg",
-      link: "/projects/projet-imtiaz",
+      link: "/projects/programme-imtiaz",
     },
     {
       title: "Fataer Al Baraka",
@@ -352,32 +353,31 @@ export default function Home() {
           />
 
           <Timeline>
-            <TimelineItem>
+            <TimelineItem icon={Search} index={0}>
               <TimelineTitle>1. Évaluation des Besoins</TimelineTitle>
               <TimelineDescription>
-                Analyse approfondie des besoins réels de la communauté cible.
+                Analyse approfondie des besoins réels de la communauté cible pour identifier les problématiques majeures.
               </TimelineDescription>
             </TimelineItem>
 
-            <TimelineItem>
+            <TimelineItem icon={Lightbulb} index={1}>
               <TimelineTitle>2. Conception du Projet</TimelineTitle>
               <TimelineDescription>
-                Développement d'une stratégie adaptée et durable.
+                Développement d'une stratégie adaptée et durable avec l'expertise locale et les partenaires concernés.
               </TimelineDescription>
             </TimelineItem>
 
-            <TimelineItem>
+            <TimelineItem icon={Wrench} index={2}>
               <TimelineTitle>3. Mise en Œuvre</TimelineTitle>
-              {/* ENHANCEMENT: Added 'et transparente' */}
               <TimelineDescription>
-                Exécution rigoureuse et transparente sur le terrain.
+                Exécution rigoureuse et transparente sur le terrain avec suivi continu des progrès.
               </TimelineDescription>
             </TimelineItem>
 
-            <TimelineItem>
+            <TimelineItem icon={BarChart} index={3}>
               <TimelineTitle>4. Évaluation & Impact</TimelineTitle>
               <TimelineDescription>
-                Mesure de l'impact et ajustements pour optimisation.
+                Mesure de l'impact effectif et ajustements stratégiques pour une optimisation continue.
               </TimelineDescription>
             </TimelineItem>
           </Timeline>

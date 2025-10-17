@@ -22,8 +22,9 @@ const BACKGROUND = "#FAFAFA"; // Off-White
 // --- Original Page Logic ---
 
 export default async function Blogs({ searchParams }) {
-  const category = searchParams?.category || null;
-  const page = parseInt(searchParams?.page || "1", 10);
+  const params = await searchParams;
+  const category = params?.category || null;
+  const page = parseInt(params?.page || "1", 10);
   const blogsPerPage = 6;
 
   const result = await getBlogs();

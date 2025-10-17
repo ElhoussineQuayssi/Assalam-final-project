@@ -3,6 +3,7 @@ import Button from "@/components/Button/Button.jsx";
 import ContentCard from "@/components/ContentCard/ContentCardAbout.jsx";
 import ContentGrid from "@/components/ContentGrid/ContentGrid.jsx";
 import SectionHeader from "@/components/SectionHeader/SectionHeader.jsx";
+import { getProjects } from "@/lib/projects.js";
 
 export default async function ProjectsPage() {
   const projectsData = await getProjects();
@@ -38,10 +39,10 @@ export default async function ProjectsPage() {
             <ContentCard
               key={index}
               title={project.title}
-              excerpt={project.excerpt}
-              image={project.image}
+              description={project.excerpt}
+              imageSrc={project.image}
+              imageAlt={project.title}
               link={project.link}
-              variant="project"
             />
           )}
         />
@@ -70,54 +71,94 @@ export default async function ProjectsPage() {
       </div>
 
       {/* Transforming Lives Section */}
-      <div className="bg-blue-50 py-16 rounded-xl">
+      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 py-20 rounded-xl shadow-lg">
         <Container className="text-center">
-          <h2 className="text-3xl font-bold mb-8 text-blue-600">
+          <h2 className="text-4xl font-bold mb-4 text-blue-600 hover:text-blue-700 transition-colors duration-300">
             Transformer des Vies, Construire des Avenirs
           </h2>
+          <p className="text-lg text-gray-600 mb-12 max-w-2xl mx-auto">
+            Nos initiatives majeures pour un développement durable et inclusif au Maroc
+          </p>
 
-          <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
-            <div>
+          <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                </svg>
+              </div>
               <h3 className="text-2xl font-bold mb-4 text-blue-600">
                 Forage de Puits : L'Eau, Source de Vie
               </h3>
-              <p className="text-gray-700 mb-4">
+              <p className="text-gray-700 mb-6 leading-relaxed">
                 Objectif : Briser la barrière de l'inaccessibilité à l'eau
                 potable dans les zones rurales isolées.
               </p>
-              <ul className="list-disc list-inside text-gray-700 space-y-2 text-left">
-                <li>
-                  Études géologiques approfondies pour localiser les nappes
-                  phréatiques.
+              <ul className="text-gray-700 space-y-3 text-left">
+                <li className="flex items-start">
+                  <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                  Études géologiques approfondies pour localiser les nappes phréatiques.
                 </li>
-                <li>
+                <li className="flex items-start">
+                  <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
                   Construction de puits équipés de systèmes de pompage modernes.
                 </li>
-                <li>
-                  Formation des habitants pour assurer l'entretien et la
-                  pérennité des installations.
+                <li className="flex items-start">
+                  <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                  Formation des habitants pour assurer l'entretien et la pérennité des installations.
                 </li>
               </ul>
             </div>
-            <div>
-              <h3 className="text-2xl font-bold mb-4 text-blue-600">
+
+            <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path>
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-green-600">
                 Construction d'Écoles : L'Éducation, un Droit pour Tous
               </h3>
-              <p className="text-gray-700 mb-4">
+              <p className="text-gray-700 mb-6 leading-relaxed">
                 Objectif : Offrir aux enfants des zones rurales un accès à une
                 éducation de qualité.
               </p>
-              <ul className="list-disc list-inside text-gray-700 space-y-2 text-left">
-                <li>
-                  Écoles primaires modernes, équipées en matériel pédagogique
-                  adapté.
+              <ul className="text-gray-700 space-y-3 text-left">
+                <li className="flex items-start">
+                  <span className="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                  Écoles primaires modernes, équipées en matériel pédagogique adapté.
                 </li>
-                <li>
-                  Programmes de sensibilisation pour encourager la
-                  scolarisation,
+                <li className="flex items-start">
+                  <span className="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                  Programmes de sensibilisation pour encourager la scolarisation,
                 </li>
-                <li>en particulier des filles.</li>
+                <li className="flex items-start">
+                  <span className="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                  en particulier des filles.
+                </li>
               </ul>
+            </div>
+          </div>
+
+          {/* Additional Statistics */}
+          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+            <div className="text-center">
+              <div className="text-3xl font-bold text-blue-600 mb-2">50+</div>
+              <div className="text-gray-600">Puits forés</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-green-600 mb-2">25+</div>
+              <div className="text-gray-600">Écoles construites</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-purple-600 mb-2">10,000+</div>
+              <div className="text-gray-600">Enfants scolarisés</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-orange-600 mb-2">15</div>
+              <div className="text-gray-600">Communautés rurales</div>
             </div>
           </div>
         </Container>

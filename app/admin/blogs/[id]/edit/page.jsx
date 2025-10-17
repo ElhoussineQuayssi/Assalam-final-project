@@ -45,6 +45,8 @@ export default function EditBlog() {
   });
   const [blog, setBlog] = useState(null);
   const [content, setContent] = useState("");
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
 
   // --- Original Data Fetching Logic Preserved ---
   useEffect(() => {
@@ -56,8 +58,9 @@ export default function EditBlog() {
           setContent(result.data.content || "");
           setFormState((prev) => ({
             ...prev,
-            shareOnSocial: result.data.shareOnSocial || false,
+            shareOnSocial: result.data.share_on_social || false,
           }));
+          setImagePreview(result.data.image || null);
         } else {
           setFormState((prev) => ({
             ...prev,
@@ -77,6 +80,17 @@ export default function EditBlog() {
     fetchBlog();
   }, [id]);
 
+  // Handle image selection and preview
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedImage(file);
+      const reader = new FileReader();
+      reader.onload = (e) => setImagePreview(e.target.result);
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setFormState({
@@ -90,7 +104,52 @@ export default function EditBlog() {
     formData.set("content", content);
     formData.set("shareOnSocial", formState.shareOnSocial ? "true" : "false");
 
+    // Handle image upload if a new image was selected
+    if (selectedImage) {
+      try {
+        setFormState((prev) => ({
+          ...prev,
+          message: "Téléchargement de l'image...",
+        }));
+
+        const uploadFormData = new FormData();
+        uploadFormData.append("image", selectedImage);
+
+        const uploadResponse = await fetch("/api/upload", {
+          method: "POST",
+          body: uploadFormData,
+        });
+
+        if (!uploadResponse.ok) {
+          const errorData = await uploadResponse.json();
+          console.error("Image upload error:", errorData);
+          throw new Error(errorData.error || "Image upload failed!");
+        }
+
+        const uploadResult = await uploadResponse.json();
+        formData.set("image", uploadResult.filePath); // Set the uploaded image path
+      } catch (error) {
+        console.error("Image upload failed:", error);
+        setFormState({
+          ...formState,
+          status: "error",
+          message:
+            error.message ||
+            "Une erreur s'est produite lors du téléchargement de l'image.",
+        });
+        return;
+      }
+    } else if (blog.image) {
+      // Keep existing image if no new image was selected
+      formData.set("image", blog.image);
+    }
+
     try {
+      setFormState((prev) => ({
+        ...prev,
+        message: "Sauvegarde de l'article...",
+      }));
+
       const result = await updateBlog(id, formData);
       if (result.success) {
         // Redirect on success
@@ -272,6 +331,43 @@ export default function EditBlog() {
                   <option value="Culture">Culture</option>
                   <option value="Solidarite">Solidarité</option>
                 </select>
+              </div>
+
+              {/* Image Upload Field */}
+              <div>
+                <label
+                  className="block text-lg font-semibold mb-2"
+                  htmlFor="image"
+                  style={{ color: DARK_TEXT }}
+                >
+                  Image principale
+                </label>
+                {/* Current Image Display */}
+                {imagePreview && (
+                  <div className="mb-4">
+                    <img
+                      src={imagePreview}
+                      alt="Image actuelle"
+                      className="w-full h-32 object-cover rounded-lg border-2 border-gray-200"
+                    />
+                    <p className="text-sm text-gray-600 mt-1">Image actuelle</p>
+                  </div>
+                )}
+                <input
+                  type="file"
+                  id="image"
+                  name="image"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className="w-full file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gray-100 hover:file:bg-gray-200 p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition duration-150 shadow-sm"
+                  style={{
+                    ...inputStyle,
+                    "--tw-file-text": DARK_TEXT,
+                  }}
+                />
+                <p className="text-sm text-gray-600 mt-1">
+                  Laissez vide pour conserver l'image actuelle
+                </p>
               </div>
 
               {/* Status Radio Buttons */}

@@ -20,7 +20,7 @@ export default function ClientWrapper({ children }) {
         {!isAdmin && <Navbar />}
         {children}
         {!isAdmin && <Footer />}
-        <script src="/js-scroll-reveal.js"></script>
+        {/* Removed missing script reference */}
       </div>
     </>
   );

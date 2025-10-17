@@ -1,6 +1,8 @@
+"use client";
+
 import { redirect } from "next/navigation";
 import { getSession } from "lib/auth";
-import AdminSidebar from "../../components/AdminSidebar/AdminSidebar.jsx";
+import AdminSidebar from "@/components/AdminSidebar";
 
 // --- Design System Configuration (Minimalist Light Blue) ---
 const ACCENT = "#6495ED"; // Cornflower Blue
@@ -8,7 +10,6 @@ const DARK_TEXT = "#333333"; // Dark Gray
 const BACKGROUND = "#FAFAFA"; // Off-White
 
 // --- Integrated AdminSidebar Component ---
-("use client");
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -22,8 +23,6 @@ import {
   LogOut, // Added LogOut for completeness
   ChevronRight, // Added ChevronRight for active indicator
 } from "lucide-react";
-
-import AdminSidebar from "@/components/AdminSidebar.jsx";
 
 export default async function AdminAdminsLayout({ children }) {
   const session = await getSession();

@@ -177,38 +177,16 @@ export default async function BlogPost({ params }) {
                   </div>
                 </div>
               </div>
-            </div>
-
             {/* Main Content */}
             <div className="md:col-span-2">
               <div className="bg-white rounded-xl shadow-2xl p-8 border border-gray-100 relative overflow-hidden card-lift">
                 <div className="relative z-10">
-                  {/* Prose replacement to ensure color hierarchy */}
-                  <div className="break-words">
-                    <style jsx global>{`
-                      .blog-content h1,
-                      .blog-content h2,
-                      .blog-content h3,
-                      .blog-content h4 {
-                        color: ${ACCENT} !important;
-                      }
-                      .blog-content p,
-                      .blog-content li,
-                      .blog-content blockquote {
-                        color: ${DARK_TEXT} !important;
-                        line-height: 1.75;
-                      }
-                      .blog-content a {
-                        color: ${ACCENT} !important;
-                        text-decoration: underline;
-                      }
-                    `}</style>
+                  {/* Blog content styles - Moved to globals.css */}
                     <div
                       className="blog-content mb-6 leading-relaxed"
-                      dangerouslySetInnerHTML={{ __html: blog.content }}
+                      dangerouslySetInnerHTML={{ __html: blog.content?.replace(/<p>/g, '<p class="mb-6">') }}
                     />
                   </div>
-
                   {/* Tags */}
                   {blog.tags && (
                     <div className="mt-12 flex flex-wrap gap-2">

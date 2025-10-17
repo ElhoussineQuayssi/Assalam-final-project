@@ -10,7 +10,6 @@ import {
   Linkedin,
   ArrowRight,
 } from "lucide-react";
-import Signature from "./Signature";
 
 // --- DESIGN SYSTEM MAPPING ---
 // Accent: #6495ED (Cornflower Blue)
@@ -59,11 +58,11 @@ export default function Footer() {
   ];
 
   const projectLinks = [
-    { name: "Rayhana Assalam", slug: "rayhana-assalam" },
+    { name: "Rayhana Assalam", slug: "rihana-as-salam" },
     { name: "Centre Himaya", slug: "centre-himaya" },
-    { name: "Fatair Al Baraka", slug: "fatair-al-baraka" },
-    { name: "Imtiaz Program", slug: "projet-imtiaz" },
-    { name: "Parrainage des Orphelins (Kafala)", slug: "kafala" },
+    { name: "Fataer Al Baraka", slug: "fataer-al-baraka" },
+    { name: "Programme Imtiaz", slug: "programme-imtiaz" },
+    { name: "Programme Kafala", slug: "programme-kafala" },
     { name: "Nadi Assalam", slug: "nadi-assalam" },
   ];
 
@@ -102,7 +101,7 @@ export default function Footer() {
               <div className="relative w-12 h-12 mr-2">
                 {/* Image has been inverted for visibility on dark background */}
                 <Image
-                  src="/logo.png"
+                  src="https://hpymvpexiunftdgeobiw.supabase.co/storage/v1/object/public/Assalam/logo.png"
                   alt="Logo Fondation Assalam"
                   fill
                   className="object-contain transition duration-300 invert group-hover:scale-105"
@@ -269,7 +268,6 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Fondation Assalam. Tous droits
             réservés.
           </p>
-          <Signature />
         </div>
       </div>
     </footer>

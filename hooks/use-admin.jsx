@@ -11,6 +11,13 @@ export function useStats() {
     viewsChangePercent: 0,
     recentBlogs: [],
     recentMessages: [],
+    totalProjects: 0,
+    newProjectsPercent: 0,
+    totalBeneficiaries: 0,
+    totalAdmins: 0,
+    projectsCount: 0,
+    adminsCount: 0,
+    recentProjects: [],
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);

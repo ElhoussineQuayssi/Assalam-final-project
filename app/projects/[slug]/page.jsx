@@ -25,7 +25,6 @@ import StyledProjectInfoCard from "@/components/StyledProjectInfoCard/StyledProj
 import ProjectContentSection from "@/components/ProjectContentSection/ProjectContentSection";
 import ProjectGallery from "@/components/ProjectGallery/ProjectGallery";
 import ProjectSidebar from "@/components/ProjectSidebar/ProjectSidebar";
-import ProjectFooter from "@/components/ProjectFooter/ProjectFooter";
 
 // --- Design System Configuration (Minimalist Light Blue) ---
 const ACCENT = "#6495ED"; // Cornflower Blue
@@ -38,10 +37,13 @@ const MUTED_TEXT = "#767676"; // Dusty Gray (used for secondary/muted text)
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
+  console.log('generateMetadata - slug from params:', { slug, type: typeof slug, params: Object.keys(params) });
+
   // NOTE: getProject is assumed to be a server-side function
   const project = await getProject(slug);
 
   if (!project) {
+    console.log('generateMetadata - no project found for slug:', slug);
     return {
       title: "Projet non trouvé", // Fixed Content
     };
@@ -55,9 +57,12 @@ export async function generateMetadata({ params }) {
 
 export default async function ProjectPage({ params }) {
   const { slug } = await params;
+  console.log('ProjectPage - slug from params:', { slug, type: typeof slug, params: Object.keys(params) });
+
   const project = await getProject(slug);
 
   if (!project) {
+    console.log('ProjectPage - no project found for slug:', slug);
     notFound();
   }
 

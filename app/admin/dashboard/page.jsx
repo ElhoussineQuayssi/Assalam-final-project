@@ -70,7 +70,6 @@ const AdminStatsCard = dynamic(
 const ACCENT = "#6495ED"; // Cornflower Blue
 const PRIMARY_LIGHT = "#B0E0E6"; // Powder Blue
 const DARK_TEXT = "#333333"; // Dark Gray
-const BACKGROUND = "#FAFAFA"; // Off-White
 
 export default function Dashboard() {
   const router = useRouter();
@@ -116,9 +115,7 @@ export default function Dashboard() {
 
   if (statsError) {
     return (
-      <div
-        className={`bg-[${BACKGROUND}] min-h-screen flex justify-center items-start pt-20`}
-      >
+      <div className="bg-gray-50 min-h-screen flex justify-center items-start pt-20">
         <Alert message={statsError} />
       </div>
     );
@@ -126,9 +123,7 @@ export default function Dashboard() {
 
   if (authLoading || statsLoading || !stats || !user) {
     return (
-      <div
-        className={`bg-[${BACKGROUND}] min-h-screen flex justify-center items-center`}
-      >
+      <div className="bg-gray-50 min-h-screen flex justify-center items-center">
         <LoadingSpinner size="large" />
       </div>
     );
@@ -149,8 +144,8 @@ export default function Dashboard() {
   const getRandomCards = (userRole) => {
     const availableCards = [];
 
-    // Articles card
-    if (userRole === "super_admin" || userRole === "content_manager") {
+    // Always add articles if data exists
+    if (totalBlogs !== undefined && totalBlogs !== null) {
       availableCards.push({
         key: "articles",
         title: "Total des articles",
@@ -158,17 +153,17 @@ export default function Dashboard() {
       });
     }
 
-    // Projects card
-    if (userRole === "super_admin" || userRole === "content_manager") {
+    // Always add projects if data exists
+    if (stats.totalProjects !== undefined && stats.totalProjects !== null) {
       availableCards.push({
         key: "projects",
         title: "Projets actifs",
-        value: stats.projectsCount || 0,
+        value: stats.totalProjects,
       });
     }
 
-    // Messages card
-    if (userRole === "super_admin" || userRole === "messages_manager") {
+    // Always add messages if data exists
+    if (totalMessages !== undefined && totalMessages !== null) {
       availableCards.push({
         key: "messages",
         title: "Messages",
@@ -176,8 +171,8 @@ export default function Dashboard() {
       });
     }
 
-    // Views card
-    if (userRole === "super_admin") {
+    // Always add views if data exists
+    if (totalViews !== undefined && totalViews !== null) {
       availableCards.push({
         key: "views",
         title: "Vues",
@@ -185,28 +180,27 @@ export default function Dashboard() {
       });
     }
 
-    // Administrators card
-    if (userRole === "super_admin") {
+    // Always add admins if data exists
+    if (stats.totalAdmins !== undefined && stats.totalAdmins !== null) {
       availableCards.push({
         key: "admins",
         title: "Administrateurs",
-        value: stats.adminsCount || 0,
+        value: stats.totalAdmins,
       });
     }
 
-    if (availableCards.length <= 4) {
-      return availableCards;
-    }
-
-    const shuffled = [...availableCards].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, 4);
+    return availableCards;
   };
 
   const randomCards = getRandomCards(userRole);
 
+  // Debug log to see what cards are being generated
+  console.log("Available stats cards:", randomCards);
+  console.log("Stats data:", stats);
+
   return (
     // Main canvas background
-    <main className={`bg-[${BACKGROUND}] min-h-screen py-10 px-4 md:px-8`}>
+    <main className="bg-gray-50 min-h-screen py-10 px-4 md:px-8">
       <div className="max-w-7xl mx-auto">
         <AdminPageHeader
           title="Tableau de bord"
@@ -225,15 +219,21 @@ export default function Dashboard() {
 
         {/* Stats Cards - Blueprint responsive grid pattern with ScrollReveal */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
-          {randomCards.map((card, index) => (
-            <ScrollReveal key={`${card.key}-${index}`} delay={index * 0.1}>
-              <AdminStatsCard
-                title={card.title}
-                value={card.value}
-                type={card.key}
-              />
-            </ScrollReveal>
-          ))}
+          {randomCards.length > 0 ? (
+            randomCards.map((card, index) => (
+              <ScrollReveal key={`${card.key}-${index}`} delay={index * 0.1}>
+                <AdminStatsCard
+                  title={card.title}
+                  value={card.value}
+                  type={card.key}
+                />
+              </ScrollReveal>
+            ))
+          ) : (
+            <div className="col-span-full text-center py-10 text-gray-500">
+              <p>Chargement des statistiques...</p>
+            </div>
+          )}
         </div>
 
         {/* Recent Activity and Messages - Blueprint content sections with ScrollReveal */}
@@ -266,40 +266,46 @@ export default function Dashboard() {
                   </div>
 
                   <div className="space-y-6">
-                    {recentBlogs.map((blog, index) => (
-                      <ScrollReveal key={blog.id} delay={index * 0.1}>
-                        {/* Hover Lift Card for List Item */}
-                        <div className="card-lift bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:scale-[1.01]">
-                          <div className="flex items-center">
-                            <div
-                              className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-                              style={{ backgroundColor: PRIMARY_LIGHT }}
-                            >
-                              <FileText
-                                className="h-6 w-6"
-                                style={{ color: ACCENT }}
-                              />
-                            </div>
-                            <div className="ml-5 flex-1">
-                              <h3
-                                className={`font-semibold text-[${DARK_TEXT}] mb-1`}
+                    {recentBlogs && recentBlogs.length > 0 ? (
+                      recentBlogs.map((blog, index) => (
+                        <ScrollReveal key={blog.id} delay={index * 0.1}>
+                          {/* Hover Lift Card for List Item */}
+                          <div className="card-lift bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:scale-[1.01]">
+                            <div className="flex items-center">
+                              <div
+                                className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                                style={{ backgroundColor: PRIMARY_LIGHT }}
                               >
-                                {blog.title}
-                              </h3>
-                              <div className="flex justify-between items-center text-sm">
-                                <p className="text-gray-600">{blog.date}</p>
-                                <div
-                                  className={`flex items-center text-gray-700 bg-[${PRIMARY_LIGHT}/50] px-3 py-1 rounded-full`}
+                                <FileText
+                                  className="h-6 w-6"
+                                  style={{ color: ACCENT }}
+                                />
+                              </div>
+                              <div className="ml-5 flex-1">
+                                <h3
+                                  className={`font-semibold text-[${DARK_TEXT}] mb-1`}
                                 >
-                                  <Eye className="h-4 w-4 mr-1" />
-                                  {blog.views}
+                                  {blog.title || "Titre non disponible"}
+                                </h3>
+                                <div className="flex justify-between items-center text-sm">
+                                  <p className="text-gray-600">{blog.date || "Date non disponible"}</p>
+                                  <div
+                                    className={`flex items-center text-gray-700 bg-[${PRIMARY_LIGHT}/50] px-3 py-1 rounded-full`}
+                                  >
+                                    <Eye className="h-4 w-4 mr-1" />
+                                    {blog.views !== undefined ? blog.views : 0}
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </ScrollReveal>
-                    ))}
+                        </ScrollReveal>
+                      ))
+                    ) : (
+                      <div className="text-center py-8 text-gray-600 font-medium">
+                        Aucun article récent
+                      </div>
+                    )}
                   </div>
                 </div>
               </ScrollReveal>
@@ -330,42 +336,44 @@ export default function Dashboard() {
                   </div>
 
                   <div className="space-y-6">
-                    {stats.recentProjects?.map((project, index) => (
-                      <ScrollReveal key={project.id} delay={index * 0.1}>
-                        {/* Hover Lift Card for List Item */}
-                        <div className="card-lift bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:scale-[1.01]">
-                          <div className="flex items-center">
-                            <div
-                              className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-                              style={{ backgroundColor: PRIMARY_LIGHT }}
-                            >
-                              <FolderOpen
-                                className="h-6 w-6"
-                                style={{ color: ACCENT }}
-                              />
-                            </div>
-                            <div className="ml-5 flex-1">
-                              <h3
-                                className={`font-semibold text-[${DARK_TEXT}] mb-1`}
+                    {stats.recentProjects && stats.recentProjects.length > 0 ? (
+                      stats.recentProjects.map((project, index) => (
+                        <ScrollReveal key={project.id} delay={index * 0.1}>
+                          {/* Hover Lift Card for List Item */}
+                          <div className="card-lift bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:scale-[1.01]">
+                            <div className="flex items-center">
+                              <div
+                                className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                                style={{ backgroundColor: PRIMARY_LIGHT }}
                               >
-                                {project.title}
-                              </h3>
-                              <div className="flex justify-between items-center text-sm">
-                                <p className="text-gray-600">{project.date}</p>
-                                {project.peopleHelped && (
-                                  <div
-                                    className={`flex items-center text-gray-700 bg-[${PRIMARY_LIGHT}/50] px-3 py-1 rounded-full`}
-                                  >
-                                    <Users className="h-4 w-4 mr-1" />
-                                    {project.peopleHelped}
-                                  </div>
-                                )}
+                                <FolderOpen
+                                  className="h-6 w-6"
+                                  style={{ color: ACCENT }}
+                                />
+                              </div>
+                              <div className="ml-5 flex-1">
+                                <h3
+                                  className={`font-semibold text-[${DARK_TEXT}] mb-1`}
+                                >
+                                  {project.title || "Titre non disponible"}
+                                </h3>
+                                <div className="flex justify-between items-center text-sm">
+                                  <p className="text-gray-600">{project.date || "Date non disponible"}</p>
+                                  {project.peopleHelped && (
+                                    <div
+                                      className={`flex items-center text-gray-700 bg-[${PRIMARY_LIGHT}/50] px-3 py-1 rounded-full`}
+                                    >
+                                      <Users className="h-4 w-4 mr-1" />
+                                      {project.peopleHelped}
+                                    </div>
+                                  )}
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </ScrollReveal>
-                    )) || (
+                        </ScrollReveal>
+                      ))
+                    ) : (
                       <div className="text-center py-8 text-gray-600 font-medium">
                         Aucun projet récent
                       </div>
@@ -403,60 +411,66 @@ export default function Dashboard() {
                 </div>
 
                 <div className="space-y-6">
-                  {stats.recentMessages.map((message, index) => (
-                    <ScrollReveal key={message.id} delay={index * 0.1}>
-                      {/* Hover Lift Card for List Item */}
-                      <div className="card-lift bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:scale-[1.01]">
-                        <div className="flex items-start">
-                          <div
-                            className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-                            style={{ backgroundColor: PRIMARY_LIGHT }}
-                          >
-                            {/* Icon based on message type */}
-                            {message.type === "donation" ? (
-                              <ThumbsUp
-                                className="h-6 w-6"
-                                style={{ color: ACCENT }}
-                              />
-                            ) : message.type === "volunteer" ? (
-                              <Users
-                                className="h-6 w-6"
-                                style={{ color: ACCENT }}
-                              />
-                            ) : (
-                              <Mail
-                                className="h-6 w-6"
-                                style={{ color: ACCENT }}
-                              />
-                            )}
-                          </div>
-                          <div className="ml-5 flex-1">
-                            <h3
-                              className={`font-semibold text-[${DARK_TEXT}] mb-1`}
+                  {stats.recentMessages && stats.recentMessages.length > 0 ? (
+                    stats.recentMessages.map((message, index) => (
+                      <ScrollReveal key={message.id} delay={index * 0.1}>
+                        {/* Hover Lift Card for List Item */}
+                        <div className="card-lift bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:scale-[1.01]">
+                          <div className="flex items-start">
+                            <div
+                              className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                              style={{ backgroundColor: PRIMARY_LIGHT }}
                             >
-                              {message.name}
-                            </h3>
-                            <p className="text-sm text-gray-600 line-clamp-1 mb-3">
-                              {message.excerpt}
-                            </p>
-                            <div className="flex justify-between items-center text-sm">
-                              <p className="text-gray-600">{message.date}</p>
-                              {/* Accent Badge */}
-                              <span
-                                className={`text-xs px-3 py-1 rounded-full font-medium bg-[${PRIMARY_LIGHT}/70] text-[${ACCENT}]`}
+                              {/* Icon based on message type */}
+                              {message.type === "donation" ? (
+                                <ThumbsUp
+                                  className="h-6 w-6"
+                                  style={{ color: ACCENT }}
+                                />
+                              ) : message.type === "volunteer" ? (
+                                <Users
+                                  className="h-6 w-6"
+                                  style={{ color: ACCENT }}
+                                />
+                              ) : (
+                                <Mail
+                                  className="h-6 w-6"
+                                  style={{ color: ACCENT }}
+                                />
+                              )}
+                            </div>
+                            <div className="ml-5 flex-1">
+                              <h3
+                                className={`font-semibold text-[${DARK_TEXT}] mb-1`}
                               >
-                                {message.type === "donation"
-                                  ? "Don"
-                                  : message.type === "volunteer"
+                                {message.name || "Nom non disponible"}
+                              </h3>
+                              <p className="text-sm text-gray-600 line-clamp-1 mb-3">
+                                {message.excerpt || "Extrait non disponible"}
+                              </p>
+                              <div className="flex justify-between items-center text-sm">
+                                <p className="text-gray-600">{message.date || "Date non disponible"}</p>
+                                {/* Accent Badge */}
+                                <span
+                                  className={`text-xs px-3 py-1 rounded-full font-medium bg-[${PRIMARY_LIGHT}/70] text-[${ACCENT}]`}
+                                >
+                                  {message.type === "donation"
+                                    ? "Don"
+                                    : message.type === "volunteer"
                                     ? "Bénévole"
                                     : "Contact"}
-                              </span>
+                                </span>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </ScrollReveal>
-                  ))}
+                      </ScrollReveal>
+                    ))
+                  ) : (
+                    <div className="text-center py-8 text-gray-600 font-medium">
+                      Aucun message récent
+                    </div>
+                  )}
                 </div>
               </div>
             </ScrollReveal>

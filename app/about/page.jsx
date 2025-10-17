@@ -27,7 +27,7 @@ import {
   Timeline,
   TimelineItem,
   TimelineTime,
-  TimelineContent,
+  TimelineCard,
   TimelineTitle,
   TimelineDescription,
 } from "@/components/Timeline/Timeline.jsx";
@@ -221,7 +221,7 @@ export default function AboutUs() {
           ].map((item, index) => (
             <TimelineItem key={index} index={index}>
               <TimelineTime>{item.year}</TimelineTime>
-              <TimelineContent>
+              <TimelineCard>
                 <TimelineTitle>{item.event}</TimelineTitle>
                 <TimelineDescription>
                   {item.year === "1992"
@@ -232,7 +232,7 @@ export default function AboutUs() {
                         ? "Inauguration de centres comme Fataer Al Baraka et Nadi Assalam pour l'autonomie économique durable."
                         : "Lancement de la nouvelle plateforme web Next.js pour optimiser la transparence et l'impact social."}
                 </TimelineDescription>
-              </TimelineContent>
+              </TimelineCard>
             </TimelineItem>
           ))}
         </Timeline>
@@ -299,16 +299,14 @@ export default function AboutUs() {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <ValueCard>
-              {values.map((value, index) => (
-                <ValueCard
-                  key={index}
-                  title={value.title}
-                  description={value.description}
-                  borderColor={value.borderColor}
-                />
-              ))}
-            </ValueCard>
+            {values.map((value, index) => (
+              <ValueCard
+                key={index}
+                title={value.title}
+                description={value.description}
+                borderColor={value.borderColor}
+              />
+            ))}
           </div>
         </Container>
       </section>

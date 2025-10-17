@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link"; // Import Link for navigation
 // Assuming the path to the server action is correct
@@ -26,16 +26,17 @@ const PRIMARY_LIGHT = "#B0E0E6"; // Powder Blue
 const DARK_TEXT = "#333333"; // Dark Gray
 const BACKGROUND = "#FAFAFA"; // Off-White
 
-export default function Contact() {
-  const searchParams = useSearchParams();
-  const type = searchParams.get("type") || "contact";
+function ContactContent() {
+   const searchParams = useSearchParams();
+   const type = searchParams.get("type") || "contact";
 
-  const [formState, setFormState] = useState({
-    status: "idle", // idle, submitting, success, error
-    message: "",
-  });
+   const [formState, setFormState] = useState({
+     status: "idle", // idle, submitting, success, error
+     message: "",
+   });
 
-  const handleSubmit = async (event) => {
+
+   const handleSubmit = async (event) => {
     event.preventDefault();
     setFormState({ status: "submitting", message: "" });
 
@@ -112,14 +113,7 @@ export default function Contact() {
       className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24"
       style={{ backgroundColor: BACKGROUND }}
     >
-      {/* GLOBAL STYLE INJECTION FOR INPUT FOCUS */}
-      <style jsx global>{`
-        .contact-form-input:focus {
-          /* Ensure border and shadow/ring use ACCENT color */
-          border-color: ${ACCENT} !important;
-          box-shadow: 0 0 0 2px ${ACCENT}40; /* Simulate focus ring with opacity */
-        }
-      `}</style>
+      {/* GLOBAL STYLE INJECTION FOR INPUT FOCUS - Moved to globals.css */}
 
       <div className="text-center mb-16">
         {/* Typography System: H2 (Section Title) pattern */}
@@ -414,5 +408,13 @@ export default function Contact() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Contact() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ContactContent />
+    </Suspense>
   );
 }
