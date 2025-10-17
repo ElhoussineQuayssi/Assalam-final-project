@@ -7,8 +7,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Plus, Edit, Trash2, Eye, Calendar, MapPin, Users } from "lucide-react";
-import { getProjects, deleteProject } from "lib/actions";
-import { formatDate } from "lib/utils";
+import { getProjects, deleteProject } from "@/lib/actions";
+import { formatDate } from "@/lib/utils";
 import AdminPageHeader from "@/components/AdminPageHeader/AdminPageHeader";
 import AdminStatsCard from "@/components/AdminStatsCard/AdminStatsCard";
 

@@ -14,13 +14,13 @@ import {
   Clock,
 } from "lucide-react";
 // Preservation of the original data fetching function
-import { getProject } from "lib/projects";
+import { getProject } from "@/lib/projects";
 import Container from "@/components/Container/Container";
 import Button from "@/components/Button/Button";
 import Input from "@/components/Input/Input";
 import Textarea from "@/components/Textarea/Textarea";
 import Alert from "@/components/Alert/Alert";
-import StyledProjectHero from "@/components/StyledProjectHero/StyledProjectHero";
+import UnifiedHero from "@/components/UnifiedHero";
 import StyledProjectInfoCard from "@/components/StyledProjectInfoCard/StyledProjectInfoCard";
 import ProjectContentSection from "@/components/ProjectContentSection/ProjectContentSection";
 import ProjectGallery from "@/components/ProjectGallery/ProjectGallery";
@@ -97,11 +97,10 @@ export default async function ProjectPage({ params }) {
     // Main background fix
     <main className="min-h-screen" style={{ backgroundColor: BACKGROUND }}>
       {/* 1. Hero Section (Styled with constants) */}
-      <StyledProjectHero
+      <UnifiedHero
         title={project.title}
-        excerpt={project.excerpt}
-        image={project.image}
-        categories={project.categories}
+        subtitle={project.excerpt}
+        images={[project.image || "/projects/foundation1.jpg", "/projects/foundation2.jpg", "/projects/foundation3.jpg"]}
       />
 
       <Container className="pb-20">

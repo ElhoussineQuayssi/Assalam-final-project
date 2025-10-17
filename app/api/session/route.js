@@ -1,5 +1,5 @@
-import { getSession } from "lib/auth";
-import { clearSession } from "lib/actions";
+import { getSession } from "@/lib/auth";
+import { clearSession } from "@/lib/actions";
 import { NextResponse } from "next/server";
 
 export async function GET() {

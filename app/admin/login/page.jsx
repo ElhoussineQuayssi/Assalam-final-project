@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { login } from "lib/actions";
-import { getSession } from "lib/auth";
+import { login } from "@/lib/actions";
+import { getSession } from "@/lib/auth";
 import { useToast } from "hooks/use-toast";
 import { Loader2, AlertTriangle } from "lucide-react";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";

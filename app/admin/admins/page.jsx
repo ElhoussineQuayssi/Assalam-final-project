@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link"; // Required for Link component used in refactored Button
-import { getAdmins, deleteAdmin } from "lib/actions";
+import { getAdmins, deleteAdmin } from "@/lib/actions";
 import {
   Users,
   AlertTriangle,

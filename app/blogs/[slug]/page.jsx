@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 // Preservation of the original data fetching functions
-import { getBlogBySlug, getBlogs, incrementBlogViews } from "lib/actions";
-import { formatDate } from "lib/utils";
+import { getBlogBySlug, getBlogs, incrementBlogViews } from "@/lib/actions";
+import { formatDate } from "@/lib/utils";
 import {
   Calendar,
   Clock,
@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import Container from "@/components/Container/Container";
 import Button from "@/components/Button/Button";
-import SectionWithBackground from "@/components/SectionWithBackground/SectionWithBackground";
+import UnifiedHero from "@/components/UnifiedHero";
 import ContentCard from "@/components/ContentCard/ContentCard";
 import ShareButton from "@/components/ShareButton/ShareButton";
 
@@ -52,61 +52,12 @@ export default async function BlogPost({ params }) {
     <main style={{ backgroundColor: BACKGROUND }}>
       <Container className="py-16">
         <article>
-          {/* Hero Section - Uses PRIMARY_LIGHT background */}
-          <SectionWithBackground
-            variant="blue"
-            className="text-center mb-12 max-w-4xl mx-auto rounded-xl shadow-lg"
-          >
-            <div className="mb-6">
-              <Button href="/blogs" variant="outline" className="mb-4">
-                Retour à l'Espace Récits et Actualités {/* Enhanced Content */}
-              </Button>
-            </div>
-            {/* Category Link - Refactored to use inline styles */}
-            <div className="mb-6">
-              <Link
-                href={`/blogs?category=${blog.category}`}
-                className="text-sm font-medium px-3 py-1 rounded-full transition-colors hover:opacity-80"
-                style={{
-                  backgroundColor: `${PRIMARY_LIGHT}B3`,
-                  color: DARK_TEXT,
-                  border: `1px solid ${ACCENT}80`,
-                }}
-              >
-                {blog.category}
-              </Link>
-            </div>
-            <h1
-              className="text-4xl md:text-5xl font-bold mb-6"
-              style={{ color: ACCENT }}
-            >
-              {blog.title}
-            </h1>
-            <p className="text-xl mb-8" style={{ color: `${DARK_TEXT}D9` }}>
-              {blog.excerpt}
-            </p>
-
-            <div
-              className="flex flex-wrap justify-center gap-6 text-sm"
-              style={{ color: `${DARK_TEXT}B3` }}
-            >
-              <div className="flex items-center">
-                <Calendar className="w-4 h-4 mr-2" style={{ color: ACCENT }} />
-                <span>Publié le {formatDate(blog.createdAt)}</span>{" "}
-                {/* Enhanced Content */}
-              </div>
-              <div className="flex items-center">
-                <Clock className="w-4 h-4 mr-2" style={{ color: ACCENT }} />
-                <span>Temps de lecture : {blog.readTime || 5} min</span>{" "}
-                {/* Enhanced Content */}
-              </div>
-              <div className="flex items-center">
-                <User className="w-4 h-4 mr-2" style={{ color: ACCENT }} />
-                <span>Par {blog.author?.name || "l'Équipe Assalam"}</span>{" "}
-                {/* Enhanced Content */}
-              </div>
-            </div>
-          </SectionWithBackground>
+          {/* Hero Section - Uses UnifiedHero */}
+          <UnifiedHero
+            title={blog.title}
+            subtitle={blog.excerpt}
+            images={[blog.image || "/projects/foundation1.jpg", "/projects/foundation2.jpg", "/projects/foundation3.jpg"]}
+          />
 
           {/* Featured Image */}
           <div className="h-96 relative rounded-xl overflow-hidden mb-12 shadow-2xl">

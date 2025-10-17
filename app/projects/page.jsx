@@ -3,6 +3,7 @@ import Button from "@/components/Button/Button.jsx";
 import ContentCard from "@/components/ContentCard/ContentCardAbout.jsx";
 import ContentGrid from "@/components/ContentGrid/ContentGrid.jsx";
 import SectionHeader from "@/components/SectionHeader/SectionHeader.jsx";
+import UnifiedHero from "@/components/UnifiedHero";
 import { getProjects } from "@/lib/projects.js";
 
 export default async function ProjectsPage() {
@@ -16,12 +17,19 @@ export default async function ProjectsPage() {
   }));
 
   return (
-    <Container className="py-16 space-y-16">
+    <div className="space-y-16">
       {/* Header Section */}
-      <SectionHeader
+      <UnifiedHero
         title="Nos Projets"
         subtitle="Découvrez nos initiatives qui transforment des vies à travers le Maroc."
+        images={[
+          "/projects/centre-himaya.jpg",
+          "/projects/programme-rayhana.jpg",
+          "/projects/programme-kafala.jpg"
+        ]}
       />
+
+      <Container className="py-16 space-y-16">
 
       {/* Main Projects Section */}
       <div className="bg-blue-50 py-16 rounded-xl">
@@ -212,6 +220,7 @@ export default async function ProjectsPage() {
           </div>
         </Container>
       </section>
-    </Container>
+      </Container>
+    </div>
   );
 }

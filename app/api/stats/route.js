@@ -1,4 +1,4 @@
-import { getStats } from "lib/actions";
+import { getStats } from "@/lib/actions";
 
 export async function GET() {
   try {

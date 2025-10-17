@@ -4,7 +4,8 @@ import React, { useState, useMemo, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link"; // Import Link for navigation
 // Assuming the path to the server action is correct
-import { saveMessage } from "lib/actions";
+import { saveMessage } from "@/lib/actions";
+import { getProjects } from "@/lib/projects";
 import {
   Check,
   AlertTriangle,
@@ -20,6 +21,7 @@ import {
 import Input from "@/components/Input/Input";
 import Textarea from "@/components/Textarea/Textarea";
 import Alert from "@/components/Alert/Alert";
+import UnifiedHero from "@/components/UnifiedHero";
 // --- Design System Configuration (Minimalist Light Blue) ---
 const ACCENT = "#6495ED"; // Cornflower Blue
 const PRIMARY_LIGHT = "#B0E0E6"; // Powder Blue
@@ -27,16 +29,30 @@ const DARK_TEXT = "#333333"; // Dark Gray
 const BACKGROUND = "#FAFAFA"; // Off-White
 
 function ContactContent() {
-   const searchParams = useSearchParams();
-   const type = searchParams.get("type") || "contact";
+    const searchParams = useSearchParams();
+    const type = searchParams.get("type") || "contact";
 
-   const [formState, setFormState] = useState({
-     status: "idle", // idle, submitting, success, error
-     message: "",
-   });
+    const [formState, setFormState] = useState({
+      status: "idle", // idle, submitting, success, error
+      message: "",
+    });
 
+    const [projects, setProjects] = useState([]);
 
-   const handleSubmit = async (event) => {
+    // Load projects on component mount
+    React.useEffect(() => {
+      const loadProjects = async () => {
+        try {
+          const projectsData = await getProjects();
+          setProjects(projectsData);
+        } catch (error) {
+          console.error("Error loading projects:", error);
+        }
+      };
+      loadProjects();
+    }, []);
+
+    const handleSubmit = async (event) => {
     event.preventDefault();
     setFormState({ status: "submitting", message: "" });
 
@@ -110,25 +126,21 @@ function ContactContent() {
   return (
     // Layout Architecture: Max-width container and generous vertical spacing (py-24)
     <div
-      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24"
       style={{ backgroundColor: BACKGROUND }}
     >
       {/* GLOBAL STYLE INJECTION FOR INPUT FOCUS - Moved to globals.css */}
 
-      <div className="text-center mb-16">
-        {/* Typography System: H2 (Section Title) pattern */}
-        <h2 className="text-4xl font-bold mb-4" style={{ color: DARK_TEXT }}>
-          L'Espace de Communication et d'Engagement
-        </h2>{" "}
-        {/* Enhanced Title */}
-        {/* Typography System: Body text (text-lg) and Dark Text color */}
-        <p
-          className="text-lg max-w-3xl mx-auto"
-          style={{ color: `${DARK_TEXT}D9` }}
-        >
-          {introText}
-        </p>
-      </div>
+      <UnifiedHero
+        title="L'Espace de Communication et d'Engagement"
+        subtitle={introText}
+        images={[
+          "/projects/foundation1.jpg",
+          "/projects/foundation2.jpg",
+          "/projects/foundation3.jpg"
+        ]}
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
       <div className="grid md:grid-cols-2 gap-16 max-w-6xl mx-auto">
         {/* Contact Form - Component Pattern: ContentCard with Scroll Reveal */}
@@ -210,14 +222,68 @@ function ContactContent() {
             />
 
             {type === "donation" && (
-              <Input
-                label="Montant de l'intention de don (MAD)" // Enhanced Label
-                type="number"
-                name="amount"
-                min="10"
-                required
-                placeholder="Ex: 500 MAD" // Enhanced Placeholder
-              />
+              <>
+                <div className="space-y-4">
+                  <label className="block text-sm font-semibold" style={{ color: DARK_TEXT }}>
+                    Type de recommandation *
+                  </label>
+                  <div className="space-y-2">
+                    <label className="flex items-center space-x-3 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="recommendationType"
+                        value="general"
+                        required
+                        className="w-4 h-4 text-accent focus:ring-accent"
+                        style={{ accentColor: ACCENT }}
+                      />
+                      <span style={{ color: DARK_TEXT }}>Message général sur les dons</span>
+                    </label>
+                    <label className="flex items-center space-x-3 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="recommendationType"
+                        value="project"
+                        required
+                        className="w-4 h-4 text-accent focus:ring-accent"
+                        style={{ accentColor: ACCENT }}
+                      />
+                      <span style={{ color: DARK_TEXT }}>Recommandation pour un projet spécifique</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <label className="block text-sm font-semibold" style={{ color: DARK_TEXT }}>
+                    Sélectionner un projet (optionnel)
+                  </label>
+                  <select
+                    name="projectId"
+                    className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors duration-200"
+                    style={{
+                      borderColor: PRIMARY_LIGHT,
+                      backgroundColor: "#FFFFFF",
+                      color: DARK_TEXT,
+                    }}
+                  >
+                    <option value="">Choisir un projet...</option>
+                    {projects.map((project) => (
+                      <option key={project.id} value={project.id}>
+                        {project.title}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <Input
+                  label="Montant de l'intention de don (MAD)" // Enhanced Label
+                  type="number"
+                  name="amount"
+                  min="10"
+                  required
+                  placeholder="Ex: 500 MAD" // Enhanced Placeholder
+                />
+              </>
             )}
 
             {type === "volunteer" && (
@@ -406,6 +472,7 @@ function ContactContent() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

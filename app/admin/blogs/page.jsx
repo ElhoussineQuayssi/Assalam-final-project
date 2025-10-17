@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Edit, Trash2, Plus, Eye, Loader2 } from "lucide-react";
-import { getBlogs, deleteBlog } from "lib/actions";
+import { getBlogs, deleteBlog } from "@/lib/actions";
 
 // Import extracted components
 import AdminPageHeader from "@/components/AdminPageHeader/AdminPageHeader.jsx";

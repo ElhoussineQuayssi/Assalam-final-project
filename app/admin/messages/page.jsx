@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { getMessages, deleteMessage, markMessageAsRead } from "lib/actions";
+import { getMessages, deleteMessage, markMessageAsRead } from "@/lib/actions";
 import {
   Mail,
   Star,

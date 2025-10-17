@@ -1,7 +1,7 @@
 "use client";
 
 import { redirect } from "next/navigation";
-import { getSession } from "lib/auth";
+import { getSession } from "@/lib/auth";
 import AdminSidebar from "@/components/AdminSidebar";
 
 // --- Design System Configuration (Minimalist Light Blue) ---

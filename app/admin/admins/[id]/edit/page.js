@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
-import { getAdmins, updateAdmin } from "lib/actions";
+import { getAdmins, updateAdmin } from "@/lib/actions";
 import { Loader2, AlertTriangle, CheckCircle } from "lucide-react";
 
 // Import extracted components

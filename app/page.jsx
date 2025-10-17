@@ -11,7 +11,7 @@ const Container = dynamic(() => import("@/components/Container/Container.jsx"));
 const SectionHeader = dynamic(() => import("@/components/SectionHeader/SectionHeader.jsx"));
 const ContentGrid = dynamic(() => import("@/components/ContentGrid/ContentGrid.jsx"));
 const ImageTextSection = dynamic(() => import("@/components/ImageTextSection/ImageTextSection.jsx"));
-const HeroSection = dynamic(() => import("@/components/HeroSection/HeroSection.jsx"));
+const UnifiedHero = dynamic(() => import("@/components/UnifiedHero"));
 const TestimonialCard = dynamic(() => import("@/components/TestimonialCard/TestimonialCard.jsx"));
 const ContentCard = dynamic(() => import("@/components/ContentCard/ContentCard.jsx"));
 const StatsCard = dynamic(() => import("@/components/StatsCard/StatsCard.jsx"));
@@ -27,6 +27,7 @@ const DESIGN_SYSTEM = {
 };
 
 // Color constants (matching the design system)
+const ACCENT_COLOR = "#6495ED"; // Cornflower Blue
 const ACCENT = "#6495ED"; // Cornflower Blue
 const PRIMARY_LIGHT = "#B0E0E6"; // Powder Blue
 const DARK_TEXT = "#333333"; // Dark Gray
@@ -202,24 +203,13 @@ export default function Home() {
     // FIX: Replace bg-background with inline style
     <div style={{ backgroundColor: "#FAFAFA" }} className="min-h-screen">
       {/* Hero Section - Blueprint pattern with primary-light background */}
-      <HeroSection
-        title={
-          <>
-            {/* FIX: Replace text-accent with inline style */}
-            <span style={{ color: "#6495ED" }}>Assalam</span> - Ensemble pour un
-            avenir meilleur
-          </>
-        }
+      <UnifiedHero
+        title="Assalam - Ensemble pour un avenir meilleur"
         subtitle="Une fondation marocaine dédiée à l'amélioration des conditions de vie, à l'éducation et au développement durable au Maroc."
-        actions={[
-          {
-            text: "Nos Projets",
-            href: "/projects",
-          },
-          {
-            text: "Faire un Don",
-            href: "/contact",
-          },
+        images={[
+          "/projects/foundation1.jpg",
+          "/projects/foundation2.jpg",
+          "/projects/foundation3.jpg"
         ]}
       />
 
@@ -340,10 +330,9 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* Timeline Section - Blueprint pattern with primary line and accent dots */}
-      {/* FIX: Replace bg-primary-light/30 with inline style (PRIMARY_LIGHT + 30% opacity) */}
+      {/* Enhanced Timeline Section - Blueprint pattern with modern styling and responsive grid */}
       <section
-        className={`${DESIGN_SYSTEM.spacing.sectionPadding}`}
+        className={`${DESIGN_SYSTEM.spacing.sectionPadding} scroll-reveal`}
         style={{ backgroundColor: `${PRIMARY_LIGHT}4D` }}
       >
         <Container>
@@ -352,35 +341,100 @@ export default function Home() {
             subtitle="Une approche claire et efficace pour réaliser nos projets"
           />
 
-          <Timeline>
-            <TimelineItem icon={Search} index={0}>
-              <TimelineTitle>1. Évaluation des Besoins</TimelineTitle>
-              <TimelineDescription>
-                Analyse approfondie des besoins réels de la communauté cible pour identifier les problématiques majeures.
-              </TimelineDescription>
-            </TimelineItem>
+          {/* Mobile-first responsive timeline - stacks vertically on mobile, horizontal on desktop */}
+          <div className="md:hidden">
+            {/* Mobile Timeline - Vertical Stack */}
+            <div className="space-y-8">
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center">
+                    <Search size={24} style={{ color: ACCENT_COLOR }} />
+                  </div>
+                </div>
+                <div>
+                  <TimelineTitle>1. Évaluation des Besoins</TimelineTitle>
+                  <TimelineDescription>
+                    Analyse approfondie des besoins réels de la communauté cible pour identifier les problématiques majeures.
+                  </TimelineDescription>
+                </div>
+              </div>
 
-            <TimelineItem icon={Lightbulb} index={1}>
-              <TimelineTitle>2. Conception du Projet</TimelineTitle>
-              <TimelineDescription>
-                Développement d'une stratégie adaptée et durable avec l'expertise locale et les partenaires concernés.
-              </TimelineDescription>
-            </TimelineItem>
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center">
+                    <Lightbulb size={24} style={{ color: ACCENT_COLOR }} />
+                  </div>
+                </div>
+                <div>
+                  <TimelineTitle>2. Conception du Projet</TimelineTitle>
+                  <TimelineDescription>
+                    Développement d'une stratégie adaptée et durable avec l'expertise locale et les partenaires concernés.
+                  </TimelineDescription>
+                </div>
+              </div>
 
-            <TimelineItem icon={Wrench} index={2}>
-              <TimelineTitle>3. Mise en Œuvre</TimelineTitle>
-              <TimelineDescription>
-                Exécution rigoureuse et transparente sur le terrain avec suivi continu des progrès.
-              </TimelineDescription>
-            </TimelineItem>
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center">
+                    <Wrench size={24} style={{ color: ACCENT_COLOR }} />
+                  </div>
+                </div>
+                <div>
+                  <TimelineTitle>3. Mise en Œuvre</TimelineTitle>
+                  <TimelineDescription>
+                    Exécution rigoureuse et transparente sur le terrain avec suivi continu des progrès.
+                  </TimelineDescription>
+                </div>
+              </div>
 
-            <TimelineItem icon={BarChart} index={3}>
-              <TimelineTitle>4. Évaluation & Impact</TimelineTitle>
-              <TimelineDescription>
-                Mesure de l'impact effectif et ajustements stratégiques pour une optimisation continue.
-              </TimelineDescription>
-            </TimelineItem>
-          </Timeline>
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center">
+                    <BarChart size={24} style={{ color: ACCENT_COLOR }} />
+                  </div>
+                </div>
+                <div>
+                  <TimelineTitle>4. Évaluation & Impact</TimelineTitle>
+                  <TimelineDescription>
+                    Mesure de l'impact effectif et ajustements stratégiques pour une optimisation continue.
+                  </TimelineDescription>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Desktop Timeline - Horizontal Blueprint Layout */}
+          <div className="hidden md:block">
+            <Timeline>
+              <TimelineItem icon={Search} index={0}>
+                <TimelineTitle>1. Évaluation des Besoins</TimelineTitle>
+                <TimelineDescription>
+                  Analyse approfondie des besoins réels de la communauté cible pour identifier les problématiques majeures.
+                </TimelineDescription>
+              </TimelineItem>
+
+              <TimelineItem icon={Lightbulb} index={1}>
+                <TimelineTitle>2. Conception du Projet</TimelineTitle>
+                <TimelineDescription>
+                  Développement d'une stratégie adaptée et durable avec l'expertise locale et les partenaires concernés.
+                </TimelineDescription>
+              </TimelineItem>
+
+              <TimelineItem icon={Wrench} index={2}>
+                <TimelineTitle>3. Mise en Œuvre</TimelineTitle>
+                <TimelineDescription>
+                  Exécution rigoureuse et transparente sur le terrain avec suivi continu des progrès.
+                </TimelineDescription>
+              </TimelineItem>
+
+              <TimelineItem icon={BarChart} index={3}>
+                <TimelineTitle>4. Évaluation & Impact</TimelineTitle>
+                <TimelineDescription>
+                  Mesure de l'impact effectif et ajustements stratégiques pour une optimisation continue.
+                </TimelineDescription>
+              </TimelineItem>
+            </Timeline>
+          </div>
         </Container>
       </section>
 

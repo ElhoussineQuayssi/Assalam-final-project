@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import dynamic from "next/dynamic";
-import { getBlogById, updateBlog } from "lib/actions";
+import { getBlogById, updateBlog } from "@/lib/actions";
 import { ShareIcon, AlertTriangle, Loader2 } from "lucide-react";
 
 // Import extracted component

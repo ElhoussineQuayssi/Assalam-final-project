@@ -2,10 +2,10 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 // Preservation of the original data fetching functions
-import { getBlogs } from "lib/actions";
+import { getBlogs } from "@/lib/actions";
 import Container from "@/components/Container/Container";
 import Button from "@/components/Button/Button";
-import BlogHeader from "@/components/BlogHeader/BlogHeader";
+import UnifiedHero from "@/components/UnifiedHero";
 import FeaturedPost from "@/components/FeaturedPost/FeaturedPost";
 import ContentCard from "@/components/ContentCard/ContentCard";
 import CategoryFilter from "@/components/CategoryFilter/CategoryFilter";
@@ -48,9 +48,14 @@ export default async function Blogs({ searchParams }) {
     <main style={{ backgroundColor: BACKGROUND }}>
       <Container className="py-16">
         {/* Header Section */}
-        <BlogHeader
-          title="Récits d'Impact et Actualités" // Enhanced Content
-          subtitle="Explorez les histoires d'espoir, les actualités et les avancées de la Fondation Assalam à travers le Maroc." // Enhanced Content
+        <UnifiedHero
+          title="Récits d'Impact et Actualités"
+          subtitle="Explorez les histoires d'espoir, les actualités et les avancées de la Fondation Assalam à travers le Maroc."
+          images={[
+            "/projects/centre-himaya.jpg",
+            "/projects/programme-rayhana.jpg",
+            "/projects/programme-kafala.jpg"
+          ]}
         />
 
         {/* Featured Post */}

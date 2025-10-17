@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { getSession } from "lib/auth";
+import { getSession } from "@/lib/auth";
 import AdminSidebar from "@/components/AdminSidebar/AdminSidebar";
 
 export default async function AdminDashboardLayout({ children }) {

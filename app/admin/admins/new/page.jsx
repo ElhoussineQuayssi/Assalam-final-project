@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { createAdmin } from "lib/actions";
+import { createAdmin } from "@/lib/actions";
 import { AlertTriangle, Loader2 } from "lucide-react";
 
 // Import extracted components

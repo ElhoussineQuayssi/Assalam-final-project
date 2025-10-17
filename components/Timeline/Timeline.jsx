@@ -3,21 +3,58 @@
 import React from "react";
 import { Calendar, Clock, ChevronRight } from "lucide-react";
 
-// --- Design System Constants ---
-const ACCENT_COLOR = "#6495ED"; // Foundation Blue (Solidarity)
-const TEXT_COLOR = "#333333";
-const SECONDARY_COLOR = "#606060"; 
+// --- Blueprint Design System Constants (Extracted from foundation-blueprint.html) ---
+const PRIMARY_COLOR = "#B0E0E6"; // Powder Blue
+const ACCENT_COLOR = "#6495ED"; // Cornflower Blue
+const TEXT_COLOR = "#333333"; // Dark Gray
+const SECONDARY_COLOR = "#606060";
 
-// Custom Keyframe for Staggered Slide-In Animation (for Next.js)
-const StaggerAnimationStyles = () => (
+// Enhanced Blueprint Keyframes and Styles (for Next.js)
+const BlueprintAnimationStyles = () => (
     <style jsx global>{`
-      @keyframes slide-in-right {
-        from { opacity: 0; transform: translateX(20px); }
-        to { opacity: 1; transform: translateX(0); }
+      /* Blueprint FadeIn Animation */
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
       }
-      .animate-slide-in-stagger { 
-        /* Base class for the animation */
-        animation: slide-in-right 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; 
+
+      /* Blueprint Card Lift Effect */
+      .card-lift {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .card-lift:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(100, 149, 237, 0.15);
+      }
+
+      /* Blueprint Timeline Styling */
+      .timeline-line {
+        background-color: ${PRIMARY_COLOR};
+      }
+
+      .timeline-dot {
+        background-color: ${ACCENT_COLOR};
+        box-shadow: 0 0 0 4px ${PRIMARY_COLOR};
+      }
+
+      /* Blueprint Scroll Reveal */
+      .scroll-reveal {
+        opacity: 0;
+      }
+
+      .animate-fade-in {
+        animation: fadeIn 0.8s ease-out forwards;
+      }
+
+      /* Staggered Animation for Timeline Items */
+      @keyframes slide-in-up {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .animate-timeline-stagger {
+        animation: slide-in-up 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
       }
     `}</style>
 );
@@ -26,36 +63,49 @@ const StaggerAnimationStyles = () => (
 // --- Main Components ---
 
 /**
- * Timeline - Container for the chronological events.
- * Uses a horizontal flex layout for mobile stacking and a responsive line effect.
+ * Timeline - Container for the chronological events with blueprint styling.
+ * Uses responsive horizontal layout with primary line and accent dots.
  */
 export const Timeline = ({ children }) => (
-    <div className="relative pt-4 pb-8">
-        <StaggerAnimationStyles />
-        {/* Decorative Vertical Line */}
-        <div 
-            className="absolute left-6 top-0 bottom-0 w-1 bg-gray-200"
-            style={{ left: '1.5rem' }} // Adjust position to align with markers
+    <div className="relative flex justify-between items-start pt-8 overflow-hidden">
+        <BlueprintAnimationStyles />
+        {/* Blueprint Timeline Line */}
+        <div
+            className="timeline-line absolute left-0 right-0 top-1/2 h-0.5 transform -translate-y-1/2 mx-auto"
+            style={{ marginLeft: '10%', marginRight: '10%' }}
             aria-hidden="true"
         />
-        <ol>{children}</ol>
+        {children}
     </div>
 );
 
 /**
- * TimelineItem - Individual event card wrapper with staggered animation.
- * @param {number} index - Index for staggered animation delay.
+ * TimelineItem - Individual event with blueprint styling and scroll reveal.
+ * @param {ReactNode} children - Content to display
+ * @param {number} index - Index for staggered animation delay
+ * @param {React.Component} icon - Lucide icon component
  */
-export const TimelineItem = ({ children, index }) => (
-    <li
-        className="mb-8 ml-6 transform transition-all duration-500 hover:scale-[1.01] animate-slide-in-stagger"
-        style={{ 
-            animationDelay: `${0.1 + index * 0.15}s`, // Staggered reveal
-            zIndex: index // Ensure higher cards overlay lower ones slightly
+export const TimelineItem = ({ children, index, icon: Icon }) => (
+    <div
+        className="TimelineItem w-1/4 text-center scroll-reveal"
+        style={{
+            animationDelay: `${index * 0.15}s`,
+            zIndex: index
         }}
     >
+        {/* Blueprint Timeline Dot */}
+        <div className="TimelineDot w-4 h-4 rounded-full mx-auto mb-4 relative z-10 timeline-dot"></div>
+
+        {Icon && (
+            <div className="flex justify-center mb-3">
+                <div className="p-2 rounded-full bg-white shadow-md">
+                    <Icon size={24} style={{ color: ACCENT_COLOR }} />
+                </div>
+            </div>
+        )}
+
         {children}
-    </li>
+    </div>
 );
 
 /**
@@ -88,14 +138,15 @@ export const TimelineMarker = () => (
  * TimelineTime - Displays the Date/Year of the event.
  * @param {string} date - The event date/year.
  * @param {string} [time] - Optional event time.
+ * @param {ReactNode} [children] - Alternative content when no date provided.
  */
-export const TimelineTime = ({ date, time }) => (
+export const TimelineTime = ({ date, time, children }) => (
   <div className="flex items-center space-x-4 mb-2">
     <TimelineMarker />
-    
+
     <div className="flex items-center space-x-1 text-sm font-semibold p-1 px-3 rounded-full bg-gray-50 border border-gray-200 shadow-sm">
         <Calendar className="w-4 h-4" style={{ color: ACCENT_COLOR }} />
-        <span style={{ color: SECONDARY_COLOR }}>{date}</span>
+        <span style={{ color: SECONDARY_COLOR }}>{date || children}</span>
     </div>
 
     {time && (
@@ -108,46 +159,43 @@ export const TimelineTime = ({ date, time }) => (
 );
 
 /**
- * TimelineTitle - Title of the event.
+ * TimelineTitle - Title of the event with blueprint styling.
  */
 export const TimelineTitle = ({ children }) => (
-  <h4
-    className={`font-bold text-xl mt-3 transition-colors duration-300`}
-    style={{ color: TEXT_COLOR }}
-  >
+  <h4 className="TimelineTitle font-bold text-lg mb-2" style={{ color: TEXT_COLOR }}>
     {children}
   </h4>
 );
 
 /**
- * TimelineDescription - Description/Body of the event.
+ * TimelineDescription - Description/Body of the event with blueprint styling.
  */
 export const TimelineDescription = ({ children }) => (
-  <p className="text-base font-normal mt-2 leading-relaxed" style={{ color: SECONDARY_COLOR }}>
+  <p className="TimelineDescription text-sm text-gray-600" style={{ color: SECONDARY_COLOR }}>
     {children}
   </p>
 );
 
-// --- Example Usage Structure ---
-
+// --- Enhanced Blueprint Timeline Usage ---
 /*
-Example usage (for reference, not part of the component file itself):
+Enhanced Timeline with blueprint design system:
 
 <Timeline>
-    <TimelineItem index={0}>
-        <TimelineCard>
-            <TimelineTime date="2025" time="Q1"/>
-            <TimelineTitle>Digital Transformation Begins</TimelineTitle>
-            <TimelineDescription>Launched modern Next.js platform to enhance donor and beneficiary engagement.</TimelineDescription>
-        </TimelineCard>
+    <TimelineItem icon={Search} index={0}>
+        <TimelineTitle>Évaluation des Besoins</TimelineTitle>
+        <TimelineDescription>Analyse approfondie des besoins...</TimelineDescription>
     </TimelineItem>
-    <TimelineItem index={1}>
-        <TimelineCard>
-            <TimelineTime date="2018"/>
-            <TimelineTitle>Women's Empowerment Initiatives</TimelineTitle>
-            <TimelineDescription>Scaled up vocational training centers (Nadi Assalam & Fataer Al Baraka) across new regions.</TimelineDescription>
-        </TimelineCard>
+    <TimelineItem icon={Lightbulb} index={1}>
+        <TimelineTitle>Conception du Projet</TimelineTitle>
+        <TimelineDescription>Développement d'une stratégie...</TimelineDescription>
+    </TimelineItem>
+    <TimelineItem icon={Wrench} index={2}>
+        <TimelineTitle>Mise en Œuvre</TimelineTitle>
+        <TimelineDescription>Exécution rigoureuse...</TimelineDescription>
+    </TimelineItem>
+    <TimelineItem icon={BarChart} index={3}>
+        <TimelineTitle>Évaluation & Impact</TimelineTitle>
+        <TimelineDescription>Mesure de l'impact...</TimelineDescription>
     </TimelineItem>
 </Timeline>
-
 */

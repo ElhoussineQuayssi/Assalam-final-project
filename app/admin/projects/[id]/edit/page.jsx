@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
-import { updateProject } from "lib/actions";
+import { updateProject } from "@/lib/actions";
 
 // Dynamically import heavy components
 const BasicInformationBlock = dynamic(
