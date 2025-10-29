@@ -5,7 +5,7 @@ import Image from "next/image";
 import { getBlogs } from "@/lib/actions";
 import Container from "@/components/Container/Container";
 import Button from "@/components/Button/Button";
-import UnifiedHero from "@/components/UnifiedHero";
+import UnifiedHeroServer from "@/components/UnifiedHero/UnifiedHeroServer";
 import FeaturedPost from "@/components/FeaturedPost/FeaturedPost";
 import ContentCard from "@/components/ContentCard/ContentCard";
 import CategoryFilter from "@/components/CategoryFilter/CategoryFilter";
@@ -45,18 +45,14 @@ export default async function Blogs({ searchParams }) {
   const categories = [...new Set(allBlogs.map((blog) => blog.category))];
 
   return (
-    <main style={{ backgroundColor: BACKGROUND }}>
+    <main style={{ backgroundColor: BACKGROUND }} className="space-y-16">
+      {/* Header Section */}
+      <UnifiedHeroServer
+        title="Récits d'Impact et Actualités"
+        subtitle="Explorez les histoires d'espoir, les actualités et les avancées de la Fondation Assalam à travers le Maroc."
+      />
+      
       <Container className="py-16">
-        {/* Header Section */}
-        <UnifiedHero
-          title="Récits d'Impact et Actualités"
-          subtitle="Explorez les histoires d'espoir, les actualités et les avancées de la Fondation Assalam à travers le Maroc."
-          images={[
-            "/projects/centre-himaya.jpg",
-            "/projects/programme-rayhana.jpg",
-            "/projects/programme-kafala.jpg"
-          ]}
-        />
 
         {/* Featured Post */}
         {paginatedBlogs[0] && <FeaturedPost post={paginatedBlogs[0]} />}

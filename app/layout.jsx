@@ -1,5 +1,7 @@
 import "./globals.css";
 import ClientWrapper from "./ClientWrapper";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 export const metadata = {
   title: "Fondation Assalam",
@@ -12,7 +14,11 @@ export default function RootLayout({ children }) {
     // FIX: Set language to French for semantic correctness
     <html lang="fr">
       <body className="font-sans">
-        <ClientWrapper>{children}</ClientWrapper>
+        <ClientWrapper>
+          <Suspense fallback={<Loading />}>
+            {children}
+          </Suspense>
+        </ClientWrapper>
       </body>
     </html>
   );

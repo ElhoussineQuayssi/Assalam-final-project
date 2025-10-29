@@ -71,8 +71,13 @@ const BackgroundSlideshow = ({ images, currentIndex }) => {
                     aria-hidden="true"
                 />
             ))}
-            {/* Overlay for better text readability */}
-            <div className="absolute inset-0 bg-black/40" />
+            {/* Overlay for better text readability with light blue background */}
+            <div 
+                className="absolute inset-0"
+                style={{
+                    background: 'linear-gradient(to bottom, rgba(176, 224, 230, 0.7), rgba(100, 149, 237, 0.7))'
+                }}
+            />
         </div>
     );
 };
@@ -91,7 +96,11 @@ const BackgroundSlideshow = ({ images, currentIndex }) => {
  */
 const UnifiedHero = ({ title, subtitle, images = [] }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const words = title.split(" ");
+    
+    // Add prop validation and default values
+    const safeTitle = title || "Assalam - Ensemble pour un avenir meilleur";
+    const safeSubtitle = subtitle || "Une fondation marocaine dédiée à l'amélioration des conditions de vie, à l'éducation et au développement durable au Maroc.";
+    const words = safeTitle.split(" ");
 
     // Preload images for smooth transitions
     useEffect(() => {
@@ -120,15 +129,15 @@ const UnifiedHero = ({ title, subtitle, images = [] }) => {
 
     return (
         <header
-            className="relative pt-32 pb-24 md:pt-40 md:pb-32 mb-16 rounded-b-[4rem] overflow-hidden shadow-2xl"
-            style={{
-                background: hasImages
-                    ? undefined // Use background images
-                    : "linear-gradient(135deg, #B0E0E6 0%, #87CEEB 50%, #6495ED 100%)",
-                minHeight: '400px'
-            }}
-            role="banner"
-        >
+                className="relative h-screen overflow-hidden shadow-2xl bg-blue-50"
+                style={{
+                    background: hasImages
+                        ? undefined // Use background images
+                        : "linear-gradient(135deg, #B0E0E6 0%, #87CEEB 50%, #6495ED 100%)",
+                    minHeight: '100vh'
+                }}
+                role="banner"
+            >
             {/* Background Slideshow or Gradient */}
             {hasImages ? (
                 <BackgroundSlideshow images={images} currentIndex={currentIndex} />
@@ -140,15 +149,15 @@ const UnifiedHero = ({ title, subtitle, images = [] }) => {
             <BackgroundPattern />
 
             {/* 2. Main Content Container */}
-            <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+            <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10 flex flex-col items-center justify-center h-full">
 
                 {/* Decorative Icons */}
                 <DecorativeIcons />
 
                 {/* Main Title (Enhanced Staggered Reveal) */}
                 <h1
-                    className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight"
-                    aria-label={title}
+                    className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight text-white"
+                    aria-label={safeTitle}
                 >
                     {words.map((word, index) => (
                         <span
@@ -168,13 +177,13 @@ const UnifiedHero = ({ title, subtitle, images = [] }) => {
                 </h1>
 
                 {/* Subtitle (Simplified and Inlined) */}
-                <div className="max-w-3xl mx-auto">
-                    <p
-                        className="text-lg md:text-xl text-blue-900 font-medium leading-relaxed opacity-0"
-                        style={{ animation: "stagger-fade-in 0.8s ease-out 1.2s forwards" }}
-                    >
-                        {subtitle}
-                    </p>
+            <div className="max-w-3xl mx-auto">
+                <p
+                    className="text-lg md:text-xl text-blue-900 font-medium leading-relaxed opacity-0"
+                    style={{ animation: "stagger-fade-in 0.8s ease-out 1.2s forwards" }}
+                >
+                    {safeSubtitle}
+                </p>
 
                     {/* Decorative separator line */}
                     <div

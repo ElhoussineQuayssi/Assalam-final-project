@@ -21,7 +21,7 @@ import {
 import Input from "@/components/Input/Input";
 import Textarea from "@/components/Textarea/Textarea";
 import Alert from "@/components/Alert/Alert";
-import UnifiedHero from "@/components/UnifiedHero";
+import UnifiedHeroServer from "@/components/UnifiedHero/UnifiedHeroServer";
 // --- Design System Configuration (Minimalist Light Blue) ---
 const ACCENT = "#6495ED"; // Cornflower Blue
 const PRIMARY_LIGHT = "#B0E0E6"; // Powder Blue
@@ -130,14 +130,9 @@ function ContactContent() {
     >
       {/* GLOBAL STYLE INJECTION FOR INPUT FOCUS - Moved to globals.css */}
 
-      <UnifiedHero
+      <UnifiedHeroServer
         title="L'Espace de Communication et d'Engagement"
         subtitle={introText}
-        images={[
-          "/projects/foundation1.jpg",
-          "/projects/foundation2.jpg",
-          "/projects/foundation3.jpg"
-        ]}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">

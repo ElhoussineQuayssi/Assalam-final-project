@@ -1,20 +1,21 @@
-"use client";
-
-import { useEffect } from "react";
 import React from "react";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import { ArrowRight } from "lucide-react";
+import { getProjects } from "@/lib/projects";
+import { getBlogs } from "@/lib/blogs";
 
-// Lazy load heavy components
-const Container = dynamic(() => import("@/components/Container/Container.jsx"));
-const SectionHeader = dynamic(() => import("@/components/SectionHeader/SectionHeader.jsx"));
-const ContentGrid = dynamic(() => import("@/components/ContentGrid/ContentGrid.jsx"));
-const ImageTextSection = dynamic(() => import("@/components/ImageTextSection/ImageTextSection.jsx"));
-const UnifiedHero = dynamic(() => import("@/components/UnifiedHero"));
-const TestimonialCard = dynamic(() => import("@/components/TestimonialCard/TestimonialCard.jsx"));
-const ContentCard = dynamic(() => import("@/components/ContentCard/ContentCard.jsx"));
-const StatsCard = dynamic(() => import("@/components/StatsCard/StatsCard.jsx"));
+// Regular imports for lightweight components
+import Container from "@/components/Container/Container.jsx";
+import SectionHeader from "@/components/SectionHeader/SectionHeader.jsx";
+import ContentGrid from "@/components/ContentGrid/ContentGrid.jsx";
+import UnifiedHeroServer from "@/components/UnifiedHeroServer";
+import TestimonialCard from "@/components/TestimonialCard/TestimonialCard.jsx";
+import ContentCard from "@/components/ContentCard/ContentCard.jsx";
+import StatsCard from "@/components/StatsCard/StatsCard.jsx";
+
+import ImageTextSection from "@/components/ImageTextSection/ImageTextSection.jsx";
+import TimelineSection from "@/components/TimelineSection/TimelineSection";
+
 // Design System Configuration
 const DESIGN_SYSTEM = {
   spacing: {
@@ -32,14 +33,6 @@ const ACCENT = "#6495ED"; // Cornflower Blue
 const PRIMARY_LIGHT = "#B0E0E6"; // Powder Blue
 const DARK_TEXT = "#333333"; // Dark Gray
 
-import {
-  Timeline,
-  TimelineItem,
-  TimelineTitle,
-  TimelineDescription,
-} from "components/Timeline/Timeline.jsx";
-import { Search, Lightbulb, Wrench, BarChart } from "lucide-react";
-
 // Check if HeroSection component exists, if not create import
 // Based on memory, HeroSection doesn't exist, so we need to create it
 // But first, let's remove the inline component definitions and use existing ones
@@ -48,169 +41,21 @@ import { Search, Lightbulb, Wrench, BarChart } from "lucide-react";
  * Enhanced Home page component with blueprint design system
  * @returns {JSX.Element} Enhanced home page
  */
-export default function Home() {
-  // Inject blueprint styles and animations on component mount (no change needed here)
-  useEffect(() => {
-    const existingStyle = document.querySelector("#blueprint-styles");
-    if (!existingStyle) {
-      const styleElement = document.createElement("style");
-      styleElement.id = "blueprint-styles";
-      styleElement.textContent = `
-        /* Blueprint Keyframes */
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
+export default async function Home() {
 
-        /* Blueprint Card Lift Effect */
-        .card-lift {
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+  // Fetch projects from Supabase
+  const projects = await getProjects();
 
-        .card-lift:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 15px 30px #6495ED26;
-        }
-
-        /* Blueprint Timeline Styling */
-        .timeline-line {
-          background-color: #B0E0E6;
-        }
-
-        .timeline-dot {
-          background-color: #6495ED;
-          box-shadow: 0 0 0 4px #B0E0E6;
-        }
-
-        /* Blueprint Scroll Reveal */
-        .scroll-reveal {
-          opacity: 0;
-        }
-
-        .animate-fade-in {
-          animation: fadeIn 0.8s ease-out forwards;
-        }
-      `;
-      document.head.appendChild(styleElement);
-    }
-
-    // Initialize scroll reveal animations with IntersectionObserver
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: "0px 0px -50px 0px",
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          // Apply staggered animation delay based on element index
-          const delay = index * 0.15;
-          setTimeout(() => {
-            entry.target.classList.add("animate-fade-in");
-            entry.target.style.opacity = 1;
-          }, delay * 1000);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    // Observe all scroll-reveal elements
-    const scrollElements = document.querySelectorAll(".scroll-reveal");
-    scrollElements.forEach((element, index) => {
-      element.style.animationDelay = `${index * 0.15}s`;
-      observer.observe(element);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  // Original project data maintained
-  const projects = [
-    {
-      title: "Rihana As Salam",
-      excerpt: "Programme de soutien pour les femmes en difficulté.",
-      image: "/projects/rayhana.jpg",
-      link: "/projects/rihana-as-salam",
-    },
-    {
-      title: "Programme Kafala",
-      excerpt: "Programme de parrainage pour les orphelins.",
-      image: "/projects/kafala.jpg",
-      link: "/projects/programme-kafala",
-    },
-    {
-      title: "Programme Imtiaz",
-      excerpt:
-        "Parrainage des étudiants brillants issus de milieux défavorisés.",
-      image: "/projects/imtiaz.jpg",
-      link: "/projects/programme-imtiaz",
-    },
-    {
-      title: "Fataer Al Baraka",
-      excerpt: "Centre de formation en pâtisserie marocaine pour femmes.",
-      image: "/projects/fataer.jpg",
-      link: "/projects/fataer-al-baraka",
-    },
-    {
-      title: "Centre Himaya",
-      excerpt: "Centre pluridisciplinaire de soutien aux femmes et enfants.",
-      image: "/projects/center.jpg",
-      link: "/projects/centre-himaya",
-    },
-    {
-      title: "Nadi Assalam",
-      excerpt: "Un avenir cousu d'espoir.",
-      image: "/projects/nadi.jpg",
-      link: "/projects/nadi-assalam",
-    },
-  ];
-
-  // Static blog data for demonstration (since this is now a client component)
-  const blogs = [
-    {
-      id: 1,
-      title: "Nouveau centre de formation ouvert à Marrakech",
-      excerpt:
-        "Découvrez notre nouveau centre de formation en pâtisserie qui vient d'ouvrir ses portes dans la médina de Marrakech.",
-      image: "/blogs/training-center.jpg",
-      slug: "centre-formation-marrakech",
-      category: "Actualités",
-      createdAt: new Date("2024-01-15"),
-    },
-    {
-      id: 2,
-      title: "Résultats du programme Imtiaz 2024",
-      excerpt:
-        "Plus de 50 étudiants ont bénéficié de notre programme de parrainage cette année avec des résultats exceptionnels.",
-      image: "/blogs/imtiaz-results.jpg",
-      slug: "resultats-imtiaz-2024",
-      category: "Impact",
-      createdAt: new Date("2024-02-01"),
-    },
-    {
-      id: 3,
-      title: "Partenariat avec l'Université Mohammed V",
-      excerpt:
-        "Nouvelle collaboration pour soutenir l'éducation supérieure et accompagner les étudiants issus de milieux défavorisés.",
-      image: "/blogs/partnership-um5.jpg",
-      slug: "partenariat-universite-mohammed-v",
-      category: "Partenariats",
-      createdAt: new Date("2024-02-15"),
-    },
-  ];
+  // Fetch blogs from Supabase
+  const blogs = await getBlogs();
 
   return (
     // FIX: Replace bg-background with inline style
     <div style={{ backgroundColor: "#FAFAFA" }} className="min-h-screen">
       {/* Hero Section - Blueprint pattern with primary-light background */}
-      <UnifiedHero
+      <UnifiedHeroServer
         title="Assalam - Ensemble pour un avenir meilleur"
         subtitle="Une fondation marocaine dédiée à l'amélioration des conditions de vie, à l'éducation et au développement durable au Maroc."
-        images={[
-          "/projects/foundation1.jpg",
-          "/projects/foundation2.jpg",
-          "/projects/foundation3.jpg"
-        ]}
       />
 
       {/* Stats Section (No background color change, only structural classes) */}
@@ -252,11 +97,11 @@ export default function Home() {
             columns={{ default: 1, md: 2, lg: 3 }}
             renderItem={(project, index) => (
               <ContentCard
-                key={index}
+                key={project.id}
                 title={project.title}
                 excerpt={project.excerpt}
                 image={project.image}
-                link={project.link}
+                link={`/projects/${project.slug}`}
                 index={index}
               />
             )}
@@ -341,100 +186,7 @@ export default function Home() {
             subtitle="Une approche claire et efficace pour réaliser nos projets"
           />
 
-          {/* Mobile-first responsive timeline - stacks vertically on mobile, horizontal on desktop */}
-          <div className="md:hidden">
-            {/* Mobile Timeline - Vertical Stack */}
-            <div className="space-y-8">
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center">
-                    <Search size={24} style={{ color: ACCENT_COLOR }} />
-                  </div>
-                </div>
-                <div>
-                  <TimelineTitle>1. Évaluation des Besoins</TimelineTitle>
-                  <TimelineDescription>
-                    Analyse approfondie des besoins réels de la communauté cible pour identifier les problématiques majeures.
-                  </TimelineDescription>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center">
-                    <Lightbulb size={24} style={{ color: ACCENT_COLOR }} />
-                  </div>
-                </div>
-                <div>
-                  <TimelineTitle>2. Conception du Projet</TimelineTitle>
-                  <TimelineDescription>
-                    Développement d'une stratégie adaptée et durable avec l'expertise locale et les partenaires concernés.
-                  </TimelineDescription>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center">
-                    <Wrench size={24} style={{ color: ACCENT_COLOR }} />
-                  </div>
-                </div>
-                <div>
-                  <TimelineTitle>3. Mise en Œuvre</TimelineTitle>
-                  <TimelineDescription>
-                    Exécution rigoureuse et transparente sur le terrain avec suivi continu des progrès.
-                  </TimelineDescription>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center">
-                    <BarChart size={24} style={{ color: ACCENT_COLOR }} />
-                  </div>
-                </div>
-                <div>
-                  <TimelineTitle>4. Évaluation & Impact</TimelineTitle>
-                  <TimelineDescription>
-                    Mesure de l'impact effectif et ajustements stratégiques pour une optimisation continue.
-                  </TimelineDescription>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Desktop Timeline - Horizontal Blueprint Layout */}
-          <div className="hidden md:block">
-            <Timeline>
-              <TimelineItem icon={Search} index={0}>
-                <TimelineTitle>1. Évaluation des Besoins</TimelineTitle>
-                <TimelineDescription>
-                  Analyse approfondie des besoins réels de la communauté cible pour identifier les problématiques majeures.
-                </TimelineDescription>
-              </TimelineItem>
-
-              <TimelineItem icon={Lightbulb} index={1}>
-                <TimelineTitle>2. Conception du Projet</TimelineTitle>
-                <TimelineDescription>
-                  Développement d'une stratégie adaptée et durable avec l'expertise locale et les partenaires concernés.
-                </TimelineDescription>
-              </TimelineItem>
-
-              <TimelineItem icon={Wrench} index={2}>
-                <TimelineTitle>3. Mise en Œuvre</TimelineTitle>
-                <TimelineDescription>
-                  Exécution rigoureuse et transparente sur le terrain avec suivi continu des progrès.
-                </TimelineDescription>
-              </TimelineItem>
-
-              <TimelineItem icon={BarChart} index={3}>
-                <TimelineTitle>4. Évaluation & Impact</TimelineTitle>
-                <TimelineDescription>
-                  Mesure de l'impact effectif et ajustements stratégiques pour une optimisation continue.
-                </TimelineDescription>
-              </TimelineItem>
-            </Timeline>
-          </div>
+          <TimelineSection />
         </Container>
       </section>
 

@@ -86,14 +86,7 @@ const SidebarBlocks = dynamic(
   },
 );
 
-const ContentBlock = dynamic(() => import("@/components/blocks/ContentBlock"), {
-  loading: () => (
-    <div className="bg-gray-50 p-4 rounded-lg animate-pulse">
-      <div className="h-6 bg-gray-200 rounded mb-2"></div>
-      <div className="h-16 bg-gray-200 rounded"></div>
-    </div>
-  ),
-});
+import ContentBlock from "@/components/blocks/ContentBlock";
 // --- Design System Utility Components ---
 
 /**

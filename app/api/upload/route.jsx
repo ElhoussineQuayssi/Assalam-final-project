@@ -1,20 +1,7 @@
 import { NextResponse } from "next/server";
 import path from "path";
 import { randomBytes } from "crypto";
-import { createClient } from "@supabase/supabase-js";
-
-// Environment variable validation
-if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
-  console.error("[UPLOAD ERROR] Missing Supabase configuration:");
-  console.error("[UPLOAD ERROR] NEXT_PUBLIC_SUPABASE_URL:", process.env.NEXT_PUBLIC_SUPABASE_URL ? "configured" : "MISSING");
-  console.error("[UPLOAD ERROR] SUPABASE_SERVICE_ROLE_KEY:", process.env.SUPABASE_SERVICE_ROLE_KEY ? "configured" : "MISSING");
-  throw new Error("Supabase configuration is incomplete. Please check environment variables.");
-}
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY
-);
+import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
 export async function POST(request) {
   console.log("[UPLOAD START] Starting upload process");
@@ -90,10 +77,10 @@ export async function POST(request) {
       );
     }
 
-    // Upload to Supabase storage
+    // Use the admin client for storage operations with service role permissions
     console.log("[UPLOAD INFO] Starting Supabase upload to 'blogs' bucket...");
     const startTime = Date.now();
-    const { data, error } = await supabase.storage
+    const { data, error } = await supabaseAdmin.storage
       .from('blogs')
       .upload(filename, buffer, {
         contentType: file.type,
@@ -143,7 +130,7 @@ export async function POST(request) {
     console.log("[UPLOAD SUCCESS] Supabase upload successful, data:", data);
 
     // Get public URL
-    const { data: publicUrlData } = supabase.storage
+    const { data: publicUrlData } = supabaseAdmin.storage
       .from('blogs')
       .getPublicUrl(data.path);
 

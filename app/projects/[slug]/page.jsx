@@ -14,7 +14,7 @@ import {
   Clock,
 } from "lucide-react";
 // Preservation of the original data fetching function
-import { getProject } from "@/lib/projects";
+import { getProject } from "@/lib/actions";
 import Container from "@/components/Container/Container";
 import Button from "@/components/Button/Button";
 import Input from "@/components/Input/Input";

@@ -15,7 +15,7 @@ import {
 
 // Import extracted components
 import Container from "@/components/Container/Container.jsx";
-import UnifiedHero from "@/components/UnifiedHero";
+import UnifiedHeroServer from "@/components/UnifiedHeroServer";
 import SectionWithBackground from "@/components/SectionWithBackground/SectionWithBackground.jsx";
 import ImageTextSectionAbout from "@/components/ImageTextSection/ImageTextSectionAbout.jsx";
 import StatsCardAbout from "@/components/StatsCard/StatsCardAbout.jsx";
@@ -152,14 +152,9 @@ export default function AboutUs() {
     // Main background set with inline style
     <main style={{ backgroundColor: BACKGROUND }}>
       {/* Header Section */}
-      <UnifiedHero
+      <UnifiedHeroServer
         title="À Propos de Nous"
         subtitle="Découvrez l'histoire, la mission d'espoir et les valeurs de solidarité de la Fondation Assalam, créée en 1992."
-        images={[
-          "/projects/foundation1.jpg",
-          "/projects/foundation2.jpg",
-          "/projects/foundation3.jpg"
-        ]}
       />
 
       {/* Notre Histoire */}
